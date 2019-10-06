@@ -1,26 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import Main from './Main/Main';
+import Home from './Home/Home';
+import Header from "./Header/header";
+import Register from './Register/register';
+
+
+const App = () => (
+    <Router basename="/">
+      <div>
+        <Header />
+        <Route exact path="/" component={Home} />
+        <Route path="/edit" component={Main} />
+        <Route path="/theater/:id" component={Main} />
+        <Route path="/register" component={Register} />
+        <div className='footer'>Icons made by <a href="https://www.flaticon.com/authors/darius-dan" title="Darius Dan">Darius Dan</a> from <a href="https://www.flaticon.com/"         title="Flaticon">www.flaticon.com</a></div>
+      </div>
+    </Router>
+)
 
 export default App;
+
+

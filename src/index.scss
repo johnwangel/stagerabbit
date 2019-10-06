@@ -1,36 +1,47 @@
-@import url("https://fonts.googleapis.com/css?family=Nanum+Gothic|Raleway&display=swap");
+
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic|Raleway&display=swap');
 body {
   margin: 0;
   font-family: 'Raleway', sans-serif;
   font-size: .6em;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; }
+  -moz-osx-font-smoothing: grayscale;
+}
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace; }
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
 
 .head1 {
   margin: 40px 0 20px;
   font-size: 1.5em;
   font-weight: bold;
-  text-transform: uppercase; }
+  text-transform: uppercase;
+}
 
 .search_result {
   margin: 10px;
   font-size: 1.2em;
-  text-align: left; }
+  text-align: left;
+}
+
 
 .body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center; }
-  .body .main {
+  align-items: center;
+
+  .main {
     margin: 25px 0;
-    width: 60%; }
-    .body .main p {
+    width: 60%;
+    p {
       font-size: 1.5em;
-      line-height: 1.8em; }
+      line-height: 1.8em;
+    }
+  }
+}
 
 .nav {
   display: flex;
@@ -39,90 +50,118 @@ code {
   align-items: center;
   width: 100%;
   height: 25px;
-  background-color: #505050;
-  padding: 20px 10px 10px; }
-  .nav .title {
+  background-color:   #505050;
+  padding: 20px 10px 10px;
+
+  .title {
     color: white;
-    font-size: 2em; }
-  .nav .subtitle {
+    font-size: 2em;
+  }
+
+  .subtitle {
     color: white;
     font-size: 1.2em;
-    margin-left: 10px; }
-  .nav ul {
-    display: inline;
+    margin-left: 10px;
+  }
+
+  ul {
+    display: inline;;
     list-style-type: none;
     font-size: 1.2em;
-    color: white; }
-    .nav ul li {
+    color: white;
+    li {
       margin-top: 20px;
       padding: 10px;
-      display: inline; }
-    .nav ul a {
+      display: inline;
+    }
+    a {
       color: white;
       font-size: 1.2em;
-      text-decoration: none; }
-      .nav ul a:link, .nav ul a:visit, .nav ul a:hover, .nav ul a:active {
+      text-decoration: none;
+      &:link, &:visit, &:hover, &:active{
         color: white;
-        text-decoration: none; }
-      .nav ul a:hover {
-        color: pink; }
-  .nav .nav-head {
+        text-decoration: none;
+      }
+      &:hover {
+        color: pink;
+      }
+    }
+  }
+
+  .nav-head {
     color: white;
-    font-size: 1.2em; }
-  .nav form {
-    margin-right: 20px; }
-  .nav input.login {
+    font-size: 1.2em;
+  }
+
+  form {
+    margin-right: 20px
+  }
+
+  input.login {
     border: unset;
     width: 75px;
     height: unset;
     padding: 5px;
-    margin-left: 10px; }
+    margin-left: 10px;
+  }
+}
+
 
 .group {
-  margin: 25px 0; }
+  margin: 25px 0;
+}
 
 .instruction {
   font-weight: 700;
   margin: 20px 0 10px;
-  font-size: 1.2em; }
+  font-size: 1.2em;
+}
 
 .add-div {
-  padding: 2px;
+  padding:2px;
   margin: 0  150px 30px;
   text-align: center;
   font-size: 1em;
-  color: white;
+  color:white;
   background-color: darkgray;
   height: 1.3em;
   width: 10em;
   border: gray solid 1px;
   border-radius: 5px;
-  cursor: pointer; }
+  cursor: pointer;
+}
 
 .artist_item {
-  margin: 20px; }
+  margin: 20px;
+}
 
 .add_a_show, .add_venue {
   padding: 20px;
   background-color: lightblue;
-  margin: 20px 0; }
+  margin: 20px 0;
+}
 
 select {
-  margin-right: 20px; }
+  margin-right: 20px;
+}
+
 
 .theater_item {
-  padding: 5px; }
+  padding: 5px;
+}
 
 .stage_rabbit {
   position: absolute;
-  top: 0;
+  top:0;
   width: 100%;
-  background-color: ivory; }
+  background-color: ivory;
+}
 
 .show_title {
   font-size: 2em;
   font-weight: 700;
-  color: darkblue; }
+  color: darkblue;
+}
 
 .submit_me {
   cursor: pointer;
@@ -133,14 +172,16 @@ select {
   background-color: darkblue;
   border-radius: 5px;
   width: 50px;
-  height: 15px; }
+  height: 15px;
+}
 
 .subbutt {
   margin-left: 20px;
   color: white;
   font-weight: 600;
   background-color: darkblue;
-  border-radius: 5px; }
+  border-radius: 5px;
+};
 
 .addbutt {
   width: 50px;
@@ -149,7 +190,8 @@ select {
   font-weight: 600;
   background-color: darkgray;
   border-radius: 5px;
-  margin-bottom: 20px; }
+  margin-bottom: 20px;
+};
 
 input[type='text'] {
   margin: 5px 0;
@@ -158,35 +200,46 @@ input[type='text'] {
   padding: 5px;
   border: none;
   border-bottom: 2px solid gray;
-  color: darkblue; }
-  input[type='text'].person {
-    width: 100px; }
+  color: darkblue;
+
+  &.person {
+    width: 100px;
+  }
+
+}
 
 .productions, .venues, .theaters, .all_shows, .add_venue {
-  padding: 50px; }
+  padding: 50px;
+}
 
 .all_shows {
-  background-color: ivory; }
+  background-color: ivory;
+}
 
 .add_show {
   padding: 50px;
-  background-color: lightblue; }
+  background-color: lightblue;
+}
 
 .production {
-  padding: 10px; }
+  padding: 10px;
+}
 
 .clickable {
-  text-decoration: underline;
-  cursor: pointer; }
-  .clickable:hover {
-    color: purple; }
+    text-decoration: underline;
+    cursor: pointer;
+    &:hover {
+      color: purple;
+    }
+}
 
 .list {
   font-style: italic;
   color: blue;
   font-size: 1em;
   font-weight: bold;
-  margin-left: 30px; }
+  margin-left: 30px;
+}
 
 .runin {
   text-transform: uppercase;
@@ -194,12 +247,14 @@ input[type='text'] {
   font-size: 1em;
   font-weight: bold;
   min-width: 200px;
-  margin-right: 10px; }
+  margin-right: 10px;
+}
 
 textarea {
   margin: 5px 0;
   width: 400px;
-  height: 100px; }
+  height: 100px;
+}
 
 .footer {
   position: fixed;
@@ -209,12 +264,16 @@ textarea {
   height: 15px;
   text-align: center;
   color: white;
-  background-color: black; }
-  .footer a {
-    color: white; }
+  background-color: black;
+  a {
+    color: white;
+  }
+
+}
 
 .logo {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between; }
+  justify-content: space-between;
+}

@@ -1,0 +1,65 @@
+ import React from 'react';
+ import {
+  ALL_SHOWS,
+  ALL_ARTISTS,
+  NEW_SHOW,
+  NEW_ARTIST,
+  EDIT_SHOW
+ } from './actions';
+ import { makeArray } from '../constants/constants';
+
+const ShowsReducers = (state = { shows: [], artists: [],  new_artist: null }, action) => {
+  switch (action.type){
+    case ALL_SHOWS:
+      return allShows(state,action);
+    case ALL_ARTISTS:
+      return allArtists(state,action);
+    case NEW_SHOW:
+      return showAdded(state,action);
+    case EDIT_SHOW:
+      return showAdded(state,action);
+    case NEW_ARTIST:
+      return artistAdded(state,action);
+    default:
+      return state;
+  }
+}
+
+function allShows(state,action){
+  return { shows: do_shows(action.payload), artists: state.artists, new_artist: null };
+}
+
+function allArtists(state,action){
+  return { shows: state.shows, artists: do_artists(action.payload), new_artist: null };
+}
+
+function showAdded(state,action){
+  return { shows: do_shows(action.payload.shows), artists: do_artists(action.payload.artists), new_artist: null };
+}
+
+function artistAdded(state,action){
+  return { shows: state.shows, artists: do_artists(action.payload.artists), new_artist: action.payload.new_artist };
+}
+
+function do_artists(artists){
+  let dropdown=[];
+  dropdown.push(<option key="artists-0" value="0">Select one...</option>);
+  dropdown.push(<option key="artists-00" value="-1">Add artist...</option>)
+  for (let i = 0; i < artists.length; i++) {
+    let _this=artists[i];
+    dropdown.push(<option key={`artist-${i}`} value={_this.id}>{_this.lname}, {_this.fname}</option>);
+  }
+  return [...dropdown ];
+}
+
+function do_shows(shows){
+  let dropdown=[];
+  dropdown.push(<option key="show-0" value="0">Select one...</option>)
+  for (let i = 0; i < shows.length; i++) {
+    let _this=shows[i];
+    dropdown.push(<option key={_this.title+'-'+_this.id} value={_this.id}>{_this.title} ({_this.genre}) [{_this.id}]</option>);
+  }
+  return [ ...dropdown ];
+}
+
+export default ShowsReducers;
