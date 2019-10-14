@@ -6,7 +6,7 @@ class This_Venue extends Component {
   render() {
     const v = this.props.ven;
     return (
-      <div className="venue" id={v.id} ><span className="runin">Venue: </span>
+      <div className="venue" id={v.id} ><span className="runin">Location: </span>
         { v.venue_name}</div>
     )
   }

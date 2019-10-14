@@ -2,7 +2,7 @@
   UPDATE_PRODS,
   NEW_PROD,
   EDIT_PROD
- } from './productionsActions';
+ } from './actions';
 
 const ProductionsReducer = (state=[], action) => {
     switch (action.type){

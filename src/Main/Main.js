@@ -5,11 +5,11 @@ import {  getStates } from './statesActions';
 
 import {  updateTheaterID,
           updateTheater,
-          alterTheater } from './theaterActions';
+          alterTheater } from '../Theater/actions';
 
 import {  updateProds,
           editProd,
-          newProd } from './productionsActions';
+          newProd } from '../Productions/actions';
 
 import {  getVenuesByTheater,
           getAllVenues,
@@ -41,7 +41,7 @@ class Main extends Component {
                   venue: { venue_id : 0 },
                   newArtistID: null,
                   clear_edit: false
-                }
+                };
     if (this.props.match.params.id) this.update_theater_details(this.props.match.params.id);
     this.props.getStates();
     this.props.getAllArtists();
@@ -80,7 +80,7 @@ class Main extends Component {
   handleIDSubmit(e) {
     e.preventDefault();
     let tid = this.props.Theater[0].currId;
-    this.update_theater_details(tid)
+    this.update_theater_details(tid);
   }
 
   alterTheaterCallback(newData) {
@@ -96,6 +96,7 @@ class Main extends Component {
   }
 
   update_theater_details(tid){
+    (tid.charAt(0)===':') ? tid=tid.substr(1) : tid=tid;
     this.props.updateTheater(tid);
     this.props.updateProds(tid);
     this.props.getVenuesByTheater(tid);
@@ -221,7 +222,7 @@ class Main extends Component {
 
     return (
       <div className="theaters">
-        { (!this.props.match.params.id)
+        { (this.props.User.level===3)
           ? <form onSubmit={this.handleIDSubmit}>
               <label>
                 <span className='runin'>Theater ID:</span>
@@ -232,39 +233,45 @@ class Main extends Component {
           : null
         }
 
-        { (d.id) ? <Theater cb={this.alterTheaterCallback} theater={ this.props.Theater[0] }/> : null }
+        { (d.id) ? <Theater cb={this.alterTheaterCallback} perm={ this.props.User.level } theater={ this.props.Theater[0] }/> : null }
+
         { (v && v.length>0)
-          ? <Venues id={ d.id } venues={ this.props.VenuesByTheater.venues} edit={ this.edit_venue_form } del={ this.deleteVenueCallback }/>
+          ? <Venues id={ d.id } perm={ this.props.User.level } venues={ this.props.VenuesByTheater.venues} edit={ this.edit_venue_form } del={ this.deleteVenueCallback }/>
           : null }
 
-        { (this.state.hide_edit_venue_form)
-          ? null
-          : <AddVenue states={ this.props.States.dropdown } show_what={ this.state } update={ this.update_venue }/>
-        }
+        { (this.props.User.level > 1 )
+          ?  <div> { (this.state.hide_edit_venue_form)
+                ? null
+                : <AddVenue states={ this.props.States.dropdown } show_what={ this.state } update={ this.update_venue }/>
+              }
 
-        { (this.state.hide_venue_form)
-          ? <span className="list clickable" onClick={() => { this.blank_venue_form() }}>Add a Venue</span>
-          : <AddVenue states={ this.props.States.dropdown } show_what={ this.state } update={ this.update_venue }/>
-        }
+              { (this.state.hide_venue_form)
+                ? <span className="list clickable" onClick={() => { this.blank_venue_form() }}>Add a Venue</span>
+                : <AddVenue states={ this.props.States.dropdown } show_what={ this.state } update={ this.update_venue }/>
+              }
 
-        { (this.state.hide_assoc_venue_form)
-          ? <span className="list clickable" onClick={() => { this.assoc_venue_form() }}>Associate a Venue</span>
-          : <AddVenue states={ this.props.States.dropdown } show_what={ this.state } update={ this.update_venue }/>
-        }
+              { (this.state.hide_assoc_venue_form)
+                ? <span className="list clickable" onClick={() => { this.assoc_venue_form() }}>Associate a Venue</span>
+                : <AddVenue states={ this.props.States.dropdown } show_what={ this.state } update={ this.update_venue }/>
+              }
 
-          { (this.state.hide_new_show_form)
-          ? <h2 className="list clickable" onClick={() => { this.add_show_form() }}>Add a Show</h2>
-          : <AddShow
-              artists={ this.props.Shows.artists }
-              addShowCB={ this.add_show }
-              addArtistCB={ this.addArtistCallback }
-              newArtist={ this.props.Shows.new_artist }
-            />
+                { (this.state.hide_new_show_form)
+                ? <h2 className="list clickable" onClick={() => { this.add_show_form() }}>Add a Show</h2>
+                : <AddShow
+                    artists={ this.props.Shows.artists }
+                    addShowCB={ this.add_show }
+                    addArtistCB={ this.addArtistCallback }
+                    newArtist={ this.props.Shows.new_artist }
+                  />
+              }
+            </div>
+          : null
         }
 
         { (p.length > 0)
-          ? p.map( ( item, index ) => {
-              return <Productions
+          ? <div className='productions'><h2>Productions</h2>
+              { p.map( ( item, index ) => {
+                    return <Productions
                         idx={ index }
                         key={ `pr-${index}` }
                         prod={ item }
@@ -275,24 +282,31 @@ class Main extends Component {
                         edit_show={ this.edit_show }
                         edit_prod={ this.edit_prod }
                         clear_edit={ this.state.clear_edit }
+                        perm={ this.props.User.level }
                       />
-            })
+                })
+              }
+            </div>
           : null
         }
 
-        { (this.state.hide_production_form)
-          ? <h2 className="list clickable" onClick={() => { this.add_prod_form() }}>Add a Production</h2>
-          : <AddProd
-              theaterid={ d.id }
-              artists={ this.props.Shows.artists }
-              addShowCB={ this.add_show }
-              newProdCB={ this.new_prod_cb }
-              addArtistCB={ this.addArtistCallback }
-              removeArtistCB={ this.removeArtistCallback }
-              newArtist={ this.props.Shows.new_artist }
-            />
+        { (this.props.User.level > 1 )
+          ? <div>
+              { (this.state.hide_production_form)
+                ? <h2 className="list clickable" onClick={() => { this.add_prod_form() }}>Add a Production</h2>
+                : <AddProd
+                    theaterid={ d.id }
+                    artists={ this.props.Shows.artists }
+                    addShowCB={ this.add_show }
+                    newProdCB={ this.new_prod_cb }
+                    addArtistCB={ this.addArtistCallback }
+                    removeArtistCB={ this.removeArtistCallback }
+                    newArtist={ this.props.Shows.new_artist }
+                  />
+              }
+            </div>
+          : null
         }
-
        </div>
     );
   }

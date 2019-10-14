@@ -1,8 +1,10 @@
+export const URL = 'http://localhost:3100/';
+
 export const GET_HEADER = {
         method: 'GET',
         mode: 'cors',
         cache: 'no-cache',
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
       };
 
 export const GET_POST_HEADER = {

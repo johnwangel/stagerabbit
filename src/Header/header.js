@@ -2,16 +2,37 @@ import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { connect } from 'react-redux';
 
+import  { login, logout } from '../Register/actions';
+import { process_submit } from '../constants/constants';
+
 class Header extends Component {
   constructor(props) {
     super(props);
-    this.state={ username: null, password: null };
+    this.state={ username: null, password: null, loggedin: false };
     this.handleChange = this.handleChange.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
+  }
+
+  componentDidUpdate() {
+    if ( this.props.User && this.props.User.loggedin !== this.state.loggedin ) {
+      this.setState({ loggedin: this.props.User.loggedin });
+    }
   }
 
   handleChange(e) {
     const n = e.target.name;
     this.setState({ [n] : e.target.value});
+  }
+
+  handleLogin(e) {
+    e.preventDefault();
+    let body = process_submit(e.target.elements);
+    this.props.login(body);
+  }
+
+  handleLogout(e) {
+    this.props.logout();
   }
 
   render() {
@@ -26,37 +47,62 @@ class Header extends Component {
           <li>
             <Link to="/">Home</Link>
           </li>
-          <li>
-            <Link to="/edit">Edit</Link>
-          </li>
+          { ( this.props.User.level>1 ) ? <li><Link to={`/theater/${ this.props.User.tid }`}>Edit</Link></li> : null }
         </ul>
-        <div class='reg'>
-          <form>
-            <span className="nav-head">Log In</span>
-            <input
-                type='text'
-                className='login'
-                id='username'
-                key='username'
-                name='username'
-                value={this.state.username}
-                onChange={this.handleChange}
-             />
-            <input
-                type='password'
-                className='login'
-                id='password'
-                key='password'
-                name='password'
-                value={this.state.password}
-                onChange={this.handleChange}
-             />
-          </form>
-          <Link to="/register">Register</Link>
-        </div>
+
+         { ( this.state.loggedin)
+            ? <div className='welcome'>Welcome {this.props.User.name }<span onClick={this.handleLogout} className='logout'>Logout</span></div>
+            : <div class='reg'><div>
+                <form onSubmit={this.handleLogin}>
+                  <span className="nav-head">Log In</span>
+                  <input
+                      type='text'
+                      className='login'
+                      id='username'
+                      key='username'
+                      name='username'
+                      value={this.state.username}
+                      onChange={this.handleChange}
+                   />
+                  <input
+                      type='password'
+                      className='login'
+                      id='password'
+                      key='password'
+                      name='password'
+                      value={this.state.password}
+                      onChange={this.handleChange}
+                   />
+                   <input className='subbutt' id='login' type="submit" value='Log In' />
+                   <Link className="link" to="/register">Register</Link>
+                </form>
+                    </div>
+              </div>
+         }
       </div>
     );
   }
 }
 
-export default Header;
+const mapStateToProps = state => {
+  return { ...state };
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    login: ( user ) => {
+      dispatch( login( user ) )
+    },
+    logout: () => {
+      dispatch( logout() )
+    }
+  }
+}
+
+export default Header = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Header);
+
+
+

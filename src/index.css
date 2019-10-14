@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Nanum+Gothic|Raleway&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Nanum+Gothic|Raleway|Libre+Baskerville&display=swap");
 body {
   margin: 0;
   font-family: 'Raleway', sans-serif;
@@ -24,7 +24,8 @@ code {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+  margin-bottom: 100px; }
   .body .main {
     margin: 25px 0;
     width: 60%; }
@@ -35,7 +36,7 @@ code {
 .nav {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   width: 100%;
   height: 25px;
@@ -57,15 +58,6 @@ code {
       margin-top: 20px;
       padding: 10px;
       display: inline; }
-    .nav ul a {
-      color: white;
-      font-size: 1.2em;
-      text-decoration: none; }
-      .nav ul a:link, .nav ul a:visit, .nav ul a:hover, .nav ul a:active {
-        color: white;
-        text-decoration: none; }
-      .nav ul a:hover {
-        color: pink; }
   .nav .nav-head {
     color: white;
     font-size: 1.2em; }
@@ -119,11 +111,6 @@ select {
   width: 100%;
   background-color: ivory; }
 
-.show_title {
-  font-size: 2em;
-  font-weight: 700;
-  color: darkblue; }
-
 .submit_me {
   cursor: pointer;
   padding: 2px;
@@ -162,7 +149,7 @@ input[type='text'] {
   input[type='text'].person {
     width: 100px; }
 
-.productions, .venues, .theaters, .all_shows, .add_venue {
+.venues, .all_shows, .add_venue {
   padding: 50px; }
 
 .all_shows {
@@ -171,9 +158,6 @@ input[type='text'] {
 .add_show {
   padding: 50px;
   background-color: lightblue; }
-
-.production {
-  padding: 10px; }
 
 .clickable {
   text-decoration: underline;
@@ -189,12 +173,12 @@ input[type='text'] {
   margin-left: 30px; }
 
 .runin {
-  text-transform: uppercase;
-  color: crimson;
+  color: darkblue;
   font-size: 1em;
   font-weight: bold;
   min-width: 200px;
-  margin-right: 10px; }
+  margin-right: 10px;
+  font-style: italic; }
 
 textarea {
   margin: 5px 0;
@@ -210,11 +194,176 @@ textarea {
   text-align: center;
   color: white;
   background-color: black; }
-  .footer a {
-    color: white; }
+
+a {
+  color: white;
+  font-size: 1.2em;
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: .25px solid white; }
+  a:link, a:visit, a:active {
+    color: white;
+    text-decoration: none; }
+  a:hover {
+    cursor: pointer;
+    color: pink; }
+  a.link {
+    margin-left: 10px; }
+  a.inline {
+    color: blue; }
 
 .logo {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between; }
+
+.welcome {
+  color: white;
+  font-size: 1.2em; }
+  .welcome .logout {
+    cursor: pointer;
+    margin-left: 20px;
+    padding-bottom: 2px;
+    border-bottom: .25px solid white; }
+    .welcome .logout:hover {
+      color: pink; }
+
+.website {
+  text-decoration: underline;
+  color: red;
+  cursor: pointer; }
+  .website:hover {
+    color: pink; }
+
+.venues {
+  position: fixed;
+  top: 75px;
+  left: 0;
+  margin: 20px;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 5px 5px 10px grey;
+  width: 20%;
+  min-width: 200px; }
+  .venues h2 {
+    font-family: 'Libre Baskerville', serif;
+    color: crimson;
+    text-weight: bold;
+    text-shadow: .25px .25px 8px white; }
+  .venues ol {
+    max-width: 350px;
+    counter-reset: my-awesome-counter;
+    list-style: none;
+    padding-left: 40px; }
+  .venues ol li {
+    margin: 0 0 0.5rem 0;
+    counter-increment: my-awesome-counter;
+    position: relative; }
+  .venues ol li::before {
+    content: counter(my-awesome-counter);
+    color: #e8d25a;
+    font-size: 1.5rem;
+    font-weight: bold;
+    position: absolute;
+    --size: 32px;
+    left: calc(-1 * var(--size) - 10px);
+    line-height: var(--size);
+    width: var(--size);
+    height: var(--size);
+    top: 0;
+    background: #242B40;
+    border-radius: 50%;
+    text-align: center;
+    box-shadow: 1px 1px 0 #999; }
+
+.theaters {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 200px; }
+  .theaters .theater_info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; }
+    .theaters .theater_info > * {
+      font-size: 1.4em; }
+    .theaters .theater_info .theater_name {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 2em;
+      color: darkblue; }
+
+.theater {
+  margin-top: 30px;
+  width: 33%;
+  min-width: 200px; }
+  .theater h2 {
+    font-family: 'Libre Baskerville', serif;
+    color: darkblue;
+    font-size: 2em; }
+
+.productions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 33%; }
+  .productions h2 {
+    align-self: center;
+    font-family: 'Libre Baskerville', serif;
+    color: darkblue;
+    font-size: 2em;
+    margin: 20px 0 0; }
+  .productions .production {
+    background-image: linear-gradient(to left, rgba(112, 128, 144, 0.2), rgba(119, 136, 153, 0.8));
+    border-radius: 10px;
+    margin: 20px 0 0;
+    box-shadow: 5px 5px 10px grey;
+    padding-bottom: 30px;
+    width: 100%; }
+  .productions .show_dates {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #242B40;
+    margin: 10px;
+    text-align: center; }
+  .productions .show_title {
+    font-family: 'Libre Baskerville', serif;
+    margin-bottom: 15px;
+    font-size: 2em;
+    font-weight: 700;
+    color: lightgray;
+    background-color: #242B40;
+    color: #e8d25a;
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+    text-align: center; }
+  .productions .genre-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 20px; }
+  .productions .genre {
+    background-color: lightgray;
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding: 5px 8px;
+    margin: 3px 3px 3px 0;
+    width: 300px;
+    text-align: center; }
+  .productions .venue {
+    margin: 10px; }
+  .productions .creatives {
+    margin: 20px;
+    line-height: 1.4em; }
+  .productions .description {
+    border-top: 1px solid darkblue;
+    margin: 0 20px;
+    padding-top: 10px;
+    line-height: 1.5em; }

@@ -1,20 +1,14 @@
-//import { connect } from 'react-redux';
-import { GET_HEADER } from '../constants/constants.js';
+import { GET_HEADER, GET_POST_HEADER, URL } from '../constants/constants.js';
 
 export const  SAVE_ARTIST = 'SAVE_ARTIST';
 export const  REMOVE_ARTIST = 'REMOVE_ARTIST';
 
 export function getArtists ( info ){
-
   return dispatch => {
-    fetch(`http://localhost:3100/artists/?type=${info.type}&id=${info.id}`, GET_HEADER)
+    fetch(`${URL}artists/?type=${info.type}&id=${info.id}`, GET_HEADER)
     .then(response => response.json())
-    .then(data => {
-      dispatch( saveArtists( { data: data, type: info.type, id: info.id } ) )
-    })
-    .catch( err => {
-      console.log(err.message);
-    });
+    .then(data => dispatch( saveArtists( { data: data, type: info.type, id: info.id } ) ) )
+    .catch( err => console.log(err.message) );
   };
 }
 
@@ -24,22 +18,12 @@ const saveArtists = ( artists, type ) => ({
 });
 
 export function removeArtist ( body ){
-  let header =  {
-      method: 'POST',
-      mode: 'cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    };
-
+  GET_POST_HEADER.body= JSON.stringify(body);
   return dispatch => {
-    fetch('http://localhost:3100/remove_artist', header )
+    fetch(`${URL}artists/remove_artist`, GET_POST_HEADER )
     .then(response => response.json())
-    .then(data => {
-      dispatch( RemoveArtist( body ) );
-    })
-    .catch( err => {
-      console.log(err.message);
-    });
+    .then(data => dispatch( RemoveArtist( body ) ) )
+    .catch( err => console.log(err.message));
   };
 }
 

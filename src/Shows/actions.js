@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { GET_HEADER } from '../constants/constants.js';
+import { GET_HEADER, GET_POST_HEADER, URL } from '../constants/constants.js';
 
 export const  ALL_SHOWS    = 'ALL_SHOWS';
 export const  ALL_ARTISTS  = 'ALL_ARTISTS';
@@ -11,14 +11,10 @@ export const  REMOVE_ARTIST ='REMOVE_ARTIST';
 
 export function getAllShows(){
   return dispatch => {
-    fetch('http://localhost:3100/?type=all_shows', GET_HEADER)
+    fetch(`${URL}?type=all_shows`, GET_HEADER)
     .then(response => response.json())
-    .then(data => {
-      dispatch(AllShows(data.data));
-    })
-    .catch( err => {
-      console.log(err.message);
-    });
+    .then(data => dispatch(AllShows(data.data)))
+    .catch( err => console.log(err.message));
   };
 }
 
@@ -29,14 +25,10 @@ const AllShows = shows => ({
 
 export function getAllArtists(){
   return dispatch => {
-    fetch('http://localhost:3100/?type=all_artists', GET_HEADER)
+    fetch(`${URL}?type=all_artists`, GET_HEADER)
     .then(response => response.json())
-    .then(data => {
-      dispatch(AllArtists(data.data));
-    })
-    .catch( err => {
-      console.log(err.message);
-    });
+    .then(data => dispatch(AllArtists(data.data)))
+    .catch( err => console.log(err.message));
   };
 }
 
@@ -46,23 +38,12 @@ const AllArtists = artists => ({
 });
 
 export function newShow(body){
-  let header =  {
-      method: 'POST',
-      mode: 'cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    };
-
+  GET_POST_HEADER.body= JSON.stringify(body);
   return dispatch => {
-    fetch('http://localhost:3100/addShow', header )
+    fetch(`${URL}shows/addShow`, GET_POST_HEADER )
     .then(response => response.json())
-    .then(data => {
-      //returns all shows
-      dispatch(NewShow(data));
-    })
-    .catch( err => {
-      console.log(err.message);
-    });
+    .then(data => dispatch(NewShow(data)))
+    .catch( err => console.log(err.message));
   };
 }
 
@@ -72,24 +53,16 @@ const NewShow = data => ({
 });
 
 export function newArtist(body){
-  let header =  {
-      method: 'POST',
-      mode: 'cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    };
-
+  GET_POST_HEADER.body= JSON.stringify(body);
   return dispatch => {
-    fetch('http://localhost:3100/addartist', header )
+    fetch(`${URL}artists/addartist`, GET_POST_HEADER )
     .then(response => response.json())
     .then(data => {
       data.new_artist=body;
       data.new_artist.nid=data.newID;
       dispatch(NewArtist(data));
     })
-    .catch( err => {
-      console.log(err.message);
-    });
+    .catch( err => console.log(err.message));
   };
 }
 
@@ -99,24 +72,12 @@ const NewArtist = data => ({
 });
 
 export function editShow(body){
-
-  let header =  {
-      method: 'POST',
-      mode: 'cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    };
-
+  GET_POST_HEADER.body= JSON.stringify(body);
   return dispatch => {
-    fetch('http://localhost:3100/editShow', header )
+    fetch(`${URL}shows/editShow`, GET_POST_HEADER )
     .then(response => response.json())
-    .then(data => {
-      //returns this show
-      dispatch(EditShow(data));
-    })
-    .catch( err => {
-      console.log(err.message);
-    });
+    .then(data => dispatch(EditShow(data)))
+    .catch( err => console.log(err.message));
   };
 }
 

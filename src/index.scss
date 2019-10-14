@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic|Raleway&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic|Raleway|Libre+Baskerville&display=swap');
 body {
   margin: 0;
   font-family: 'Raleway', sans-serif;
@@ -7,6 +7,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+$black: #242B40;
+$yellow: #e8d25a;
+$gray: #42495e;
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
@@ -33,6 +37,8 @@ code {
   justify-content: center;
   align-items: center;
 
+  margin-bottom: 100px;
+
   .main {
     margin: 25px 0;
     width: 60%;
@@ -46,7 +52,7 @@ code {
 .nav {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   width: 100%;
   height: 25px;
@@ -73,18 +79,6 @@ code {
       margin-top: 20px;
       padding: 10px;
       display: inline;
-    }
-    a {
-      color: white;
-      font-size: 1.2em;
-      text-decoration: none;
-      &:link, &:visit, &:hover, &:active{
-        color: white;
-        text-decoration: none;
-      }
-      &:hover {
-        color: pink;
-      }
     }
   }
 
@@ -157,11 +151,7 @@ select {
   background-color: ivory;
 }
 
-.show_title {
-  font-size: 2em;
-  font-weight: 700;
-  color: darkblue;
-}
+
 
 .submit_me {
   cursor: pointer;
@@ -208,7 +198,7 @@ input[type='text'] {
 
 }
 
-.productions, .venues, .theaters, .all_shows, .add_venue {
+.venues, .all_shows, .add_venue {
   padding: 50px;
 }
 
@@ -219,10 +209,6 @@ input[type='text'] {
 .add_show {
   padding: 50px;
   background-color: lightblue;
-}
-
-.production {
-  padding: 10px;
 }
 
 .clickable {
@@ -242,12 +228,13 @@ input[type='text'] {
 }
 
 .runin {
-  text-transform: uppercase;
-  color: crimson;
+  // text-transform: uppercase;
+  color: darkblue;
   font-size: 1em;
   font-weight: bold;
   min-width: 200px;
   margin-right: 10px;
+  font-style: italic;
 }
 
 textarea {
@@ -265,10 +252,28 @@ textarea {
   text-align: center;
   color: white;
   background-color: black;
-  a {
-    color: white;
-  }
+}
 
+a {
+  color: white;
+  font-size: 1.2em;
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: .25px solid white;
+  &:link, &:visit, &:active{
+    color: white;
+    text-decoration: none;
+  }
+  &:hover {
+    cursor: pointer;
+    color: pink;
+  }
+  &.link {
+    margin-left: 10px;
+  }
+  &.inline {
+    color: blue;
+  }
 }
 
 .logo {
@@ -276,4 +281,190 @@ textarea {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+}
+
+.welcome {
+  color: white;
+  font-size: 1.2em;
+
+  .logout {
+    cursor: pointer;
+    margin-left: 20px;
+    padding-bottom: 2px;
+    border-bottom: .25px solid white;
+    &:hover {
+      color: pink;
+    }
+  }
+}
+
+.website {
+  text-decoration: underline;
+  color: red;
+  cursor: pointer;
+  &:hover{
+    color: pink;
+  }
+}
+
+.venues {
+  position: fixed;
+  top: 75px;
+  left: 0;
+  //background-image: linear-gradient(to left, rgba(112,128,144,0), rgba(119,136,153,1));
+  margin: 20px;
+  border-radius: 10px;
+  padding:10px;
+  box-shadow: 5px 5px 10px grey;
+  width: 20%;
+  min-width: 200px;
+  h2 {
+    font-family: 'Libre Baskerville', serif;
+    color: crimson;
+    text-weight: bold;
+    text-shadow: .25px .25px 8px white;
+  }
+  ol {
+    max-width: 350px;
+    counter-reset: my-awesome-counter;
+    list-style: none;
+    padding-left: 40px;
+  }
+  ol li {
+    //margin-bottom: 15px;
+    margin: 0 0 0.5rem 0;
+    counter-increment: my-awesome-counter;
+    position: relative;
+  }
+
+  ol li::before {
+    content: counter(my-awesome-counter);
+    color: $yellow;
+    font-size: 1.5rem;
+    font-weight: bold;
+    position: absolute;
+    --size: 32px;
+    left: calc(-1 * var(--size) - 10px);
+    line-height: var(--size);
+    width: var(--size);
+    height: var(--size);
+    top: 0;
+    //transform: rotate(-10deg);
+    background: $black;
+    border-radius: 50%;
+    text-align: center;
+    box-shadow: 1px 1px 0 #999;
+  }
+
+}
+.theaters {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 200px;
+
+  .theater_info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    > * {
+      font-size: 1.4em;
+    }
+    .theater_name {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 2em;
+      color: darkblue;
+    }
+  }
+}
+
+.theater {
+  margin-top: 30px;
+  width: 33%;
+  min-width: 200px;
+  h2 {
+    font-family: 'Libre Baskerville', serif;
+    color: darkblue;
+    font-size: 2em;
+  }
+}
+
+.productions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 33%;
+
+  h2 {
+    align-self: center;
+    font-family: 'Libre Baskerville', serif;
+    color: darkblue;
+    font-size: 2em;
+    margin: 20px 0 0;
+  }
+  .production {
+    background-image: linear-gradient(to left, rgba(112,128,144,.2), rgba(119,136,153,.8));
+    border-radius: 10px;
+    margin: 20px 0 0;
+    box-shadow: 5px 5px 10px grey;
+    padding-bottom: 30px;
+    width: 100%;
+  }
+  .show_dates {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 1.1em;
+    color: $black;
+    margin: 10px;
+    text-align: center;
+  }
+  .show_title {
+    font-family: 'Libre Baskerville', serif;
+    margin-bottom: 15px;
+    font-size: 2em;
+    font-weight: 700;
+    color: lightgray;
+    //text-shadow: .5px .5px 35px black;
+    background-color: $black;
+    color: $yellow;
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+    //box-shadow: 1px 1px 10px $gray;
+  }
+  .genre-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 20px;
+  }
+  .genre {
+    background-color: lightgray;
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding: 5px 8px;
+    margin: 3px 3px 3px 0;
+    width: 300px;
+    text-align: center;
+  }
+  .venue {
+    margin: 10px;
+  }
+  .creatives {
+    margin: 20px;
+    line-height: 1.4em;
+  }
+  .description {
+    border-top: 1px solid darkblue;
+    margin: 0 20px;
+    padding-top: 10px;
+    line-height: 1.5em;
+  }
+
 }

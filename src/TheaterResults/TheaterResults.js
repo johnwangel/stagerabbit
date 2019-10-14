@@ -12,7 +12,7 @@ class TheaterResults extends Component {
         return   (
                   <li className="search_result" key={this.props.idx} id={this.props.thtr.id}>
                     <span className="theater_name">
-                    <Link to={`/theater/${this.props.thtr.id}`}>{this.props.thtr.name}</Link>
+                    <Link className='website' to={`/theater/${this.props.thtr.id}`}>{this.props.thtr.name}</Link>
                     </span> {this.props.thtr.city}, {this.props.thtr.abbr} ({parseInt(this.props.thtr.distance)} miles)
                   </li>
                 )

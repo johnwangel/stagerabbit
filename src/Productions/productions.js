@@ -118,52 +118,70 @@ class Productions extends Component {
 
   render() {
     let p = this.props.prod;
+    let g = p.genre.split(',');
+    let g1 = g[0], g2=g[1];
     return ( <div key={this.props.id+'-prod'} id={this.props.prod.production_id} className="production">
-                <div>
-                  <span className="show_title">{p.title}</span>
+
+                <div className="show_title">{p.title}</div>
+
+                <div className='show_dates'>
+                  {moment(p.start_date).format('MMMM D, YYYY')} to {moment(p.end_date).format('MMMM D, YYYY')}
                 </div>
-                <span className="genre">{p.genre}</span>
-                { ( this.state.venue ) ? <Venue ven={ this.state.venue }/> : null}
-                { ( this.state.book ) ? <Artists type="Book" artists={ this.state.book }/> : null }
-                { ( this.state.music ) ? <Artists type="Music" artists={ this.state.music }/> : null }
-                { ( this.state.lyrics ) ? <Artists type="Lyrics" artists={ this.state.lyrics }/> : null }
-                { ( this.state.pw ) ? <Artists type="Written" artists={ this.state.pw }/> : null }
-                { ( this.state.dir ) ? <Artists type="Directed" artists={ this.state.dir }/> : null }
-                { ( this.state.chor ) ? <Artists type= "Choreographed" artists={ this.state.chor }/> : null }
-                { ( this.state.md ) ? <Artists type="Musical Direction" artists={ this.state.md }/> : null }
-                <div>
-                  <span className="runin">Dates:</span>
-                  <span>{moment(p.start_date).format('MMMM D, YYYY')} to {moment(p.end_date).format('MMMM D, YYYY')}</span>
+
+                <div className='genre-container'><span className="genre">{g1}</span><span className="genre">{g2}</span></div>
+
+
+                <div className='venue'>
+                  { ( this.state.venue ) ? <Venue ven={ this.state.venue }/> : null}
+                </div>
+
+                <div className='creatives'>
+                  { ( this.state.book ) ? <Artists type="Book" artists={ this.state.book }/> : null }
+                  { ( this.state.music ) ? <Artists type="Music" artists={ this.state.music }/> : null }
+                  { ( this.state.lyrics ) ? <Artists type="Lyrics" artists={ this.state.lyrics }/> : null }
+                  { ( this.state.pw ) ? <Artists type="Written" artists={ this.state.pw }/> : null }
+                  { ( this.state.dir ) ? <Artists type="Directed" artists={ this.state.dir }/> : null }
+                  { ( this.state.chor ) ? <Artists type= "Choreographed" artists={ this.state.chor }/> : null }
+                  { ( this.state.md ) ? <Artists type="Musical Direction" artists={ this.state.md }/> : null }
                 </div>
                 { ( p.description !== '')
-                      ?  ( <div><span class="runin">Description:</span><span>{p.description}</span></div>)
+                      ?  ( <div className='description'><span>{p.description}</span></div>)
                       : null
                 }
-                { (!this.state.edit_show)
-                  ? <span className="list clickable" onClick={() => { this.edit_show_form() }}>Edit Show</span>
-                  : <AddShow
-                      production={ this.props.prod }
-                      creatives={ this.state }
-                      artists={ this.props.Shows.artists }
-                      addArtistCB={ this.props.addArtistCB }
-                      newArtist={ this.props.Shows.new_artist }
-                      edit_show={ this.props.edit_show }
-                      edit_show_form={ this.edit_show_form }
-                    />
+
+                { (this.props.perm > 1)
+                  ? <div>
+                      { (!this.state.edit_show)
+                          ? <span className="list clickable" onClick={() => { this.edit_show_form() }}>Edit Show</span>
+                          : <AddShow
+                              production={ this.props.prod }
+                              creatives={ this.state }
+                              artists={ this.props.Shows.artists }
+                              addArtistCB={ this.props.addArtistCB }
+                              newArtist={ this.props.Shows.new_artist }
+                              edit_show={ this.props.edit_show }
+                              edit_show_form={ this.edit_show_form }
+                            />
+                        }
+                        { (!this.state.edit_prod)
+                           ? <span className="list clickable" onClick={() => { this.edit_prod_form() }}>Edit Production</span>
+                           : <AddProd
+                              production={ this.props.prod }
+                              specs={ this.state }
+                              artists={ this.props.Shows.artists }
+                              addArtistCB={ this.props.addArtistCB }
+                              removeArtistCB={ this.props.removeArtistCB }
+                              newArtist={ this.props.Shows.new_artist }
+                              edit_prod={ this.props.edit_prod }
+                              edit_prod_form={ this.edit_prod_form }
+                            />
+                        }
+                      }
+                    </div>
+                  : null
                 }
-                { (!this.state.edit_prod)
-                   ? <span className="list clickable" onClick={() => { this.edit_prod_form() }}>Edit Production</span>
-                   : <AddProd
-                      production={ this.props.prod }
-                      specs={ this.state }
-                      artists={ this.props.Shows.artists }
-                      addArtistCB={ this.props.addArtistCB }
-                      removeArtistCB={ this.props.removeArtistCB }
-                      newArtist={ this.props.Shows.new_artist }
-                      edit_prod={ this.props.edit_prod }
-                      edit_prod_form={ this.edit_prod_form }
-                    />
-                }
+
+
               </div>
 
             )

@@ -38,11 +38,10 @@ class Theater extends Component {
     this.updateInputs(this.props.theater.id, this.state.id)
     const y = this.state;
     const keys= Object.keys( this.props.theater );
-    console.log('keys',keys)
-
     return (
-      <div key={this.props.theater.id}>
-              { keys.map((keyname, keyindex ) => {
+      <div key={this.props.theater.id} className='theater'>
+        { (this.props.perm > 1)
+          ? <div>{ keys.map((keyname, keyindex ) => {
                   const _id = `${keyname}_t1`;
                   const _name = keyname === 'website'
                                 ? <a key={ this.props.theater.id+'-i' } target="_blank" href={x[keyname]}>{x[keyname]}</a>
@@ -55,11 +54,23 @@ class Theater extends Component {
                               key={keyindex}
                               id={_id}
                               label={keyname}
-                              value={_name}
+                              value={x[keyname]}
                               edit={edit}
                               submit_it={this.submit_it}
-                              edit_it={this.edit_it}/>
-              })}
+                              edit_it={this.edit_it}
+                              perm={this.props.perm}/>
+              })}</div>
+          : <div className='theater_info'>
+              <div className='theater_name'>{this.props.theater.name}</div>
+              <div className='address'>
+                { (this.props.theater.address1) ? <div>{this.props.theater.address1}</div> : null  }
+                { (this.props.theater.address1) ? <div> {this.props.theater.address2}</div> : null }
+                <div> {this.props.theater.city}, { this.props.theater.theater_state } { this.props.theater.zip }</div>
+                <div>{this.props.theater.phone}</div>
+                <div><a href={this.props.theater.website} target='_blank' className='website'>{this.props.theater.website}</a></div>
+              </div>
+            </div>
+        }
       </div>
     );
   }

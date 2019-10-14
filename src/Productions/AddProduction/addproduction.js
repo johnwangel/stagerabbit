@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import DatePicker from "react-datepicker";
 
 import { process_submit } from '../../constants/constants';
-import { updateProds } from '../../Main/productionsActions';
+import { updateProds } from '../actions';
 import "react-datepicker/dist/react-datepicker.css";
 
 import AddArtist from "./addArtist";

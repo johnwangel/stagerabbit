@@ -80,5 +80,4 @@ function remove_artist(state,action){
 
 }
 
-
 export default ArtistsReducers;
