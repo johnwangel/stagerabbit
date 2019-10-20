@@ -40,7 +40,9 @@ class AddProd extends Component {
       mdChildren: (c && c.md && c.md.length>0) ? c.md.length : 1,
       md_items: (c && c.md && c.md.length>0) ? c.md : null,
       cast: (p && p.cast) ? p.cast : '',
-      description: (p && p.description) ? p.description : ''
+      description: (p && p.description) ? p.description : '',
+      window: null,
+      scroll: null
     };
 
     this.handleNew = this.handleNew.bind(this);
@@ -49,6 +51,13 @@ class AddProd extends Component {
     this.handleStartDateChange = this.handleStartDateChange.bind(this);
     this.handleEndDateChange = this.handleEndDateChange.bind(this);
     this.onDropdownSelected = this.onDropdownSelected.bind(this);
+  }
+
+  componentDidMount() {
+    var body = document.body,
+    html = document.documentElement;
+    var height = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight );
+    this.setState({ scroll: window.scrollY, window: height });
   }
 
   handleNew(e) {
@@ -86,141 +95,144 @@ class AddProd extends Component {
 
   render() {
     return (
-      <div className="all_shows">
-        <form id="form-1" onSubmit={this.handleSubmit}>
-          <h1>{this.state.formTitle}</h1>
+      <div className='overlay' style={{height: this.state.window + 'px'}}>
+        <div className="all_shows"  style={{marginTop: this.state.scroll + 'px'}}>
+          <div class="close" onClick={() => { this.props.prod_form() }} >&times;</div>
+          <form id="form-1" onSubmit={this.handleSubmit}>
+            <h1>{this.state.formTitle}</h1>
 
-          { ( this.props.VenuesByTheater.list)
-            ?         <div>
-                         <h2>Venue</h2>
-                         <select
-                                type="select"
-                                id="venue_by_theater"
-                                name="venue_id"
-                                value={this.state.venue_id}
-                                onChange={this.onDropdownSelected}>
-                           {this.props.VenuesByTheater.list}
-                         </select>
-                      </div>
-              : null
-            }
-          <h2>Show Title</h2>
-          <select
-                id="show_select"
-                type="select"
-                name="show_id"
-                value={this.state.show_id}
-                onChange={this.onDropdownSelected}>
-            {this.props.Shows.shows}
-          </select>
+            { ( this.props.VenuesByTheater.list)
+              ?         <div>
+                           <h2>Venue</h2>
+                           <select
+                                  type="select"
+                                  id="venue_by_theater"
+                                  name="venue_id"
+                                  value={this.state.venue_id}
+                                  onChange={this.onDropdownSelected}>
+                             {this.props.VenuesByTheater.list}
+                           </select>
+                        </div>
+                : null
+              }
+            <h2>Show Title</h2>
+            <select
+                  id="show_select"
+                  type="select"
+                  name="show_id"
+                  value={this.state.show_id}
+                  onChange={this.onDropdownSelected}>
+              {this.props.Shows.shows}
+            </select>
 
-          <div>
-            <h2>Start Date:</h2>
-            <DatePicker
-              id="start_date_1"
-              name="start_date"
-              selected={this.state.start}
-              onChange={this.handleStartDateChange}
-            />
-          </div>
+            <div>
+              <h2>Start Date:</h2>
+              <DatePicker
+                id="start_date_1"
+                name="start_date"
+                selected={this.state.start}
+                onChange={this.handleStartDateChange}
+              />
+            </div>
 
-          <div>
-            <h2>End Date:</h2>
-            <DatePicker
-              id="end_date_1"
-              name="end_date"
-              selected={this.state.end}
-              onChange={this.handleEndDateChange}
-            />
-          </div>
+            <div>
+              <h2>End Date:</h2>
+              <DatePicker
+                id="end_date_1"
+                name="end_date"
+                selected={this.state.end}
+                onChange={this.handleEndDateChange}
+              />
+            </div>
 
-          <div>
-            <h2>Description</h2>
-            <textarea
-                  id="description_1"
-                  name="description"
-                  value={this.state.description}
+            <div>
+              <h2>Description</h2>
+              <textarea
+                    id="description_1"
+                    name="description"
+                    value={this.state.description}
+                    onChange={this.handleChange} />
+            </div>
+
+            <div>
+              <h2>Cast</h2>
+              <textarea
+                  id="cast_1"
+                  name="cast"
+                  value={this.state.cast}
                   onChange={this.handleChange} />
-          </div>
+            </div>
 
-          <div>
-            <h2>Cast</h2>
-            <textarea
-                id="cast_1"
-                name="cast"
-                value={this.state.cast}
-                onChange={this.handleChange} />
-          </div>
+            <div id="dir-group">
+            <h2>Director</h2>
+              {
+                [...Array(this.state.dirChildren)].map( (m,i,a) =>{
+                  return <AddArtist
+                              key={`d-${i}`}
+                              num={i+1}
+                              pid={ this.props.production }
+                              type="dir"
+                              title="Director"
+                              editmode={this.state.editmode}
+                              item={(this.state.dir_items) ? this.state.dir_items[i] : null}
+                              sel={this.props.artists}
+                              addArtistCB={ this.props.addArtistCB }
+                              removeArtistCB={ this.props.removeArtistCB }
+                              newArtist={ this.props.newArtist }
+                            />
+                })
+              }
+            </div>
+            <div className='add-div' id="dirChildren" onClick={this.handleNew}>Another Director</div>
 
-          <div id="dir-group">
-          <h2>Director</h2>
-            {
-              [...Array(this.state.dirChildren)].map( (m,i,a) =>{
-                return <AddArtist
-                            key={`d-${i}`}
-                            num={i+1}
-                            pid={ this.props.production }
-                            type="dir"
-                            title="Director"
-                            editmode={this.state.editmode}
-                            item={(this.state.dir_items) ? this.state.dir_items[i] : null}
-                            sel={this.props.artists}
-                            addArtistCB={ this.props.addArtistCB }
-                            removeArtistCB={ this.props.removeArtistCB }
-                            newArtist={ this.props.newArtist }
-                          />
-              })
-            }
-          </div>
-          <div className='add-div' id="dirChildren" onClick={this.handleNew}>Another Director</div>
-
-          <div id="chor-group">
-            <h2>Choreographer</h2>
-            {
-              [...Array(this.state.chorChildren)].map( (m,i,a) =>{
-                return <AddArtist
-                            key={`c-${i}`}
-                            num={i+1}
-                            pid={ this.props.production }
-                            editmode={this.state.editmode}
-                            type="chor"
-                            title="Choreographer"
-                            item={(this.state.chor_items) ? this.state.chor_items[i] : null}
-                            sel={this.props.artists}
-                            addArtistCB={ this.props.addArtistCB }
-                            removeArtistCB={ this.props.removeArtistCB }
-                            newArtist={ this.props.newArtist }
-                          />
-              })
-            }
-          </div>
-          <div className='add-div' id="chorChildren" onClick={this.handleNew}>Another Choreo.</div>
+            <div id="chor-group">
+              <h2>Choreographer</h2>
+              {
+                [...Array(this.state.chorChildren)].map( (m,i,a) =>{
+                  return <AddArtist
+                              key={`c-${i}`}
+                              num={i+1}
+                              pid={ this.props.production }
+                              editmode={this.state.editmode}
+                              type="chor"
+                              title="Choreographer"
+                              item={(this.state.chor_items) ? this.state.chor_items[i] : null}
+                              sel={this.props.artists}
+                              addArtistCB={ this.props.addArtistCB }
+                              removeArtistCB={ this.props.removeArtistCB }
+                              newArtist={ this.props.newArtist }
+                            />
+                })
+              }
+            </div>
+            <div className='add-div' id="chorChildren" onClick={this.handleNew}>Another Choreo.</div>
 
 
-          <div id="md-group">
-            <h2>Music Director</h2>
-            {
-              [...Array(this.state.mdChildren)].map( (m,i,a) =>{
-                return <AddArtist
-                            key={`md-${i}`}
-                            num={i+1}
-                            pid={ this.props.production }
-                            type="md"
-                            title="Music Director"
-                            sel={this.props.artists}
-                            editmode={this.state.editmode}
-                            item={(this.state.md_items) ? this.state.md_items[i] : null}
-                            addArtistCB={ this.props.addArtistCB }
-                            removeArtistCB={ this.props.removeArtistCB }
-                            newArtist={ this.props.newArtist }
-                          />
-              })
-            }
-          </div>
-          <div className='add-div' id="mdChildren" onClick={this.handleNew}>Another MD</div>
+            <div id="md-group">
+              <h2>Music Director</h2>
+              {
+                [...Array(this.state.mdChildren)].map( (m,i,a) =>{
+                  return <AddArtist
+                              key={`md-${i}`}
+                              num={i+1}
+                              pid={ this.props.production }
+                              type="md"
+                              title="Music Director"
+                              sel={this.props.artists}
+                              editmode={this.state.editmode}
+                              item={(this.state.md_items) ? this.state.md_items[i] : null}
+                              addArtistCB={ this.props.addArtistCB }
+                              removeArtistCB={ this.props.removeArtistCB }
+                              newArtist={ this.props.newArtist }
+                            />
+                })
+              }
+            </div>
+            <div className='add-div' id="mdChildren" onClick={this.handleNew}>Another MD</div>
 
-          <input className='subbutt' id={ this.props.theaterid } type="submit" value="Submit Production" />
-        </form>
+            <input className='subbutt' id={ this.props.theaterid } type="submit" value="Submit Production" />
+          </form>
+        </div>
       </div>
     );
   }

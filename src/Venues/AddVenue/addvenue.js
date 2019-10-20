@@ -14,12 +14,26 @@ class AddVenue extends Component {
       phone: (v) ? v.venue_phone :'',
       dir: (v) ? v.venue_dir :'',
       venues_associate: 0,
-      venue_state: 0
+      venue_state: 0,
+      window: null,
+      scroll: null,
+      type: ''
      }
 
     this.handleVenueSubmit = this.handleVenueSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.onDropdownSelected = this.onDropdownSelected.bind(this);
+  }
+
+  componentDidMount() {
+    var body = document.body,
+    html = document.documentElement;
+    var height = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight );
+    this.setState({ scroll: window.scrollY, window: height });
+
+    if (this.props.hide_add_venue_form) this.setState({ type : 'add' });
+    if (this.props.hide_edit_venue_form) this.setState({ type : 'edit' });
+    if (this.props.hide_assoc_venue_form) this.setState({ type : 'associate' });
   }
 
   handleVenueSubmit(e) {
@@ -56,7 +70,9 @@ class AddVenue extends Component {
   render() {
     const title = ( !this.props.show_what.hide_edit_venue_form ) ? 'Edit Venue' : 'Add Venue';
     return (
-      <div className="add_venue">
+      <div className='overlay' style={{height: this.state.window + 'px'}}>
+        <div className="add_venue" style={{marginTop: this.state.scroll + 'px'}}>
+          <div class="close" onClick={() => { this.props.venue_form( this.state.type ) } } >&times;</div>
           <h2>Update Venues</h2>
           { (!this.props.show_what.hide_assoc_venue_form && this.props.VenuesByTheater.all)
             ?         <form onSubmit={this.handleVenueSubmit}>
@@ -74,7 +90,7 @@ class AddVenue extends Component {
               : null
             }
 
-          { (!this.props.show_what.hide_venue_form || !this.props.show_what.hide_edit_venue_form)
+          { (!this.props.show_what.hide_add_venue_form || !this.props.show_what.hide_edit_venue_form)
             ? <form onSubmit={this.handleVenueSubmit}>
                 <div><span className="runin">Name:</span>
                 <input  id="venue_name_1"
@@ -156,6 +172,7 @@ class AddVenue extends Component {
               </form>
               : null
             }
+        </div>
       </div>
     );
   }

@@ -35,8 +35,8 @@ class Productions extends Component {
                     edit_show: false,
                     edit_prod: false
                   };
-    this.edit_show_form = this.edit_show_form.bind(this);
-    this.edit_prod_form = this.edit_prod_form.bind(this);
+    this.show_form = this.show_form.bind(this);
+    this.prod_form = this.prod_form.bind(this);
   }
 
   componentDidUpdate(prevState,prevProps) {
@@ -108,11 +108,11 @@ class Productions extends Component {
     }
   }
 
-  edit_show_form(){
+  show_form(){
     this.setState({ edit_show: !this.state.edit_show, edit_prod: false});
   }
 
-  edit_prod_form(){
+  prod_form(){
     this.setState({ edit_show: false, edit_prod: !this.state.edit_prod });
   }
 
@@ -152,7 +152,7 @@ class Productions extends Component {
                 { (this.props.perm > 1)
                   ? <div>
                       { (!this.state.edit_show)
-                          ? <span className="list clickable" onClick={() => { this.edit_show_form() }}>Edit Show</span>
+                          ? <span className="list clickable" onClick={() => { this.show_form() }}>Edit Show</span>
                           : <AddShow
                               production={ this.props.prod }
                               creatives={ this.state }
@@ -160,11 +160,11 @@ class Productions extends Component {
                               addArtistCB={ this.props.addArtistCB }
                               newArtist={ this.props.Shows.new_artist }
                               edit_show={ this.props.edit_show }
-                              edit_show_form={ this.edit_show_form }
+                              show_form={ this.show_form }
                             />
                         }
                         { (!this.state.edit_prod)
-                           ? <span className="list clickable" onClick={() => { this.edit_prod_form() }}>Edit Production</span>
+                           ? <span className="list clickable" onClick={() => { this.prod_form() }}>Edit Production</span>
                            : <AddProd
                               production={ this.props.prod }
                               specs={ this.state }
@@ -173,10 +173,10 @@ class Productions extends Component {
                               removeArtistCB={ this.props.removeArtistCB }
                               newArtist={ this.props.Shows.new_artist }
                               edit_prod={ this.props.edit_prod }
-                              edit_prod_form={ this.edit_prod_form }
+                              prod_form={ this.prod_form }
                             />
                         }
-                      }
+
                     </div>
                   : null
                 }

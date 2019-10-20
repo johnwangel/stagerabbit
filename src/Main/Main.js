@@ -34,7 +34,7 @@ class Main extends Component {
   constructor(props) {
     super(props);
     this.state={  hide_production_form: true,
-                  hide_venue_form: true,
+                  hide_add_venue_form: true,
                   hide_edit_venue_form: true,
                   hide_assoc_venue_form: true,
                   hide_new_show_form: true,
@@ -49,9 +49,7 @@ class Main extends Component {
     this.handleIDSubmit = this.handleIDSubmit.bind(this);
     this.handleIDChange = this.handleIDChange.bind(this);
     this.alterTheaterCallback = this.alterTheaterCallback.bind(this);
-    this.blank_venue_form = this.blank_venue_form.bind(this);
-    this.assoc_venue_form = this.assoc_venue_form.bind(this);
-    this.edit_venue_form = this.edit_venue_form.bind(this);
+    this.venue_form = this.venue_form.bind(this);
     this.update_venue = this.update_venue.bind(this);
     this.deleteVenueCallback = this.deleteVenueCallback.bind(this);
     this.addArtistCallback = this.addArtistCallback.bind(this);
@@ -60,6 +58,8 @@ class Main extends Component {
     this.edit_show = this.edit_show.bind(this);
     this.edit_prod = this.edit_prod.bind(this);
     this.new_prod_cb = this.new_prod_cb.bind(this);
+    this.show_form = this.show_form.bind(this);
+    this.prod_form = this.prod_form.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -105,27 +105,44 @@ class Main extends Component {
     this.props.getAllVenues();
   }
 
-  blank_venue_form(){
+  venue_form(type,id){
+    let v=null,d={ venue_id: 0 },item;
+    switch (type){
+      case 'add':
+        item='hide_add_venue_form';
+        break;
+      case 'associate':
+        item='hide_assoc_venue_form';
+        break;
+      case 'edit':
+        item='hide_edit_venue_form';
+        if (id){
+          v = this.props.VenuesByTheater.venues;
+          d = v.find( item =>  (item.venue_id===id) ? item : null );
+        }
+        break;
+    }
+
     this.setState(
       {
+        hide_add_venue_form: (item==='hide_add_venue_form') ? !this.state.hide_add_venue_form : true,
+        hide_edit_venue_form: (item==='hide_edit_venue_form') ? !this.state.hide_edit_venue_form : true,
+        hide_assoc_venue_form: (item==='hide_assoc_venue_form') ? !this.state.hide_assoc_venue_form : true,
+        venue: d,
         hide_new_show_form: true,
-        hide_venue_form: false,
-        hide_edit_venue_form: true,
-        venue: {venue_id: 0},
-        hide_assoc_venue_form: true,
         hide_production_form: true
       }
     );
   }
 
-  edit_venue_form(id) {
-    const v = this.props.VenuesByTheater.venues;
-    const d = v.find( item =>  (item.venue_id===id) ? item : null )
-    this.setState({
+  update_venue(body){
+    body.tid=this.props.Theater[0].id;
+    this.props.updateVenues(body);
+    this.setState( {
         hide_new_show_form: true,
-        hide_venue_form: true,
-        hide_edit_venue_form: false,
-        venue: d,
+        hide_add_venue_form: true,
+        hide_edit_venue_form: true,
+        venue: {venue_id: 0},
         hide_assoc_venue_form: true,
         hide_production_form: true
       }
@@ -137,36 +154,10 @@ class Main extends Component {
     this.props.updateVenues(body);
   }
 
-  assoc_venue_form(){
-    this.setState( {
-        hide_new_show_form: true,
-        hide_venue_form: true,
-        hide_edit_venue_form: true,
-        venue: {venue_id: 0},
-        hide_assoc_venue_form: false,
-        hide_production_form: true
-      }
-    );
-  }
-
-  update_venue(body){
-    body.tid=this.props.Theater[0].id;
-    this.props.updateVenues(body);
-    this.setState( {
-        hide_new_show_form: true,
-        hide_venue_form: true,
-        hide_edit_venue_form: true,
-        venue: {venue_id: 0},
-        hide_assoc_venue_form: true,
-        hide_production_form: true
-      }
-    );
-  }
-
-  add_show_form(){
+  show_form(){
     this.setState({
-        hide_new_show_form: false,
-        hide_venue_form: true,
+        hide_new_show_form: !this.state.hide_new_show_form,
+        hide_add_venue_form: true,
         hide_edit_venue_form: true,
         venue: {venue_id: 0},
         hide_assoc_venue_form: true,
@@ -175,14 +166,14 @@ class Main extends Component {
     );
   }
 
-  add_prod_form(){
+  prod_form(){
     this.setState({
+        hide_production_form: !this.state.hide_production_form,
         hide_new_show_form: true,
-        hide_venue_form: true,
+        hide_add_venue_form: true,
         hide_edit_venue_form: true,
         venue: {venue_id: 0},
-        hide_assoc_venue_form: true,
-        hide_production_form: false
+        hide_assoc_venue_form: true
       }
     );
   }
@@ -205,7 +196,7 @@ class Main extends Component {
     this.setState(
       {
           hide_new_show_form: true,
-          hide_venue_form: true,
+          hide_add_venue_form: true,
           hide_edit_venue_form: true,
           venue: {venue_id: 0},
           hide_assoc_venue_form: true
@@ -236,34 +227,78 @@ class Main extends Component {
         { (d.id) ? <Theater cb={this.alterTheaterCallback} perm={ this.props.User.level } theater={ this.props.Theater[0] }/> : null }
 
         { (v && v.length>0)
-          ? <Venues id={ d.id } perm={ this.props.User.level } venues={ this.props.VenuesByTheater.venues} edit={ this.edit_venue_form } del={ this.deleteVenueCallback }/>
+          ? <Venues
+                  id={ d.id }
+                  perm={ this.props.User.level }
+                  venues={ this.props.VenuesByTheater.venues}
+                  edit={ this.venue_form }
+                  del={ this.deleteVenueCallback }
+            />
           : null }
 
+        { (this.state.hide_edit_venue_form)
+          ? null
+          : <AddVenue
+                states={ this.props.States.dropdown }
+                show_what={ this.state }
+                update={ this.update_venue }
+                venue_form={ this.venue_form }
+            />
+        }
+
+        { (this.state.hide_add_venue_form)
+          ? null
+          : <AddVenue
+                states={ this.props.States.dropdown }
+                show_what={ this.state }
+                update={ this.update_venue }
+                venue_form={ this.venue_form }
+            />
+        }
+        { (this.state.hide_assoc_venue_form)
+          ? null
+          : <AddVenue
+                states={ this.props.States.dropdown }
+                show_what={ this.state }
+                update={ this.update_venue }
+                venue_form={ this.venue_form }
+            />
+        }
+        { (this.state.hide_new_show_form)
+          ? null
+          : <AddShow
+              artists={ this.props.Shows.artists }
+              addShowCB={ this.add_show }
+              addArtistCB={ this.addArtistCallback }
+              newArtist={ this.props.Shows.new_artist }
+              show_form={ this.show_form }
+            />
+        }
+        { (this.state.hide_production_form)
+          ? null
+          : <AddProd
+              theaterid={ d.id }
+              artists={ this.props.Shows.artists }
+              addShowCB={ this.add_show }
+              newProdCB={ this.new_prod_cb }
+              addArtistCB={ this.addArtistCallback }
+              removeArtistCB={ this.removeArtistCallback }
+              newArtist={ this.props.Shows.new_artist }
+              prod_form={ this.prod_form }
+            />
+        }
+
         { (this.props.User.level > 1 )
-          ?  <div> { (this.state.hide_edit_venue_form)
-                ? null
-                : <AddVenue states={ this.props.States.dropdown } show_what={ this.state } update={ this.update_venue }/>
-              }
-
-              { (this.state.hide_venue_form)
-                ? <span className="list clickable" onClick={() => { this.blank_venue_form() }}>Add a Venue</span>
-                : <AddVenue states={ this.props.States.dropdown } show_what={ this.state } update={ this.update_venue }/>
-              }
-
-              { (this.state.hide_assoc_venue_form)
-                ? <span className="list clickable" onClick={() => { this.assoc_venue_form() }}>Associate a Venue</span>
-                : <AddVenue states={ this.props.States.dropdown } show_what={ this.state } update={ this.update_venue }/>
-              }
-
-                { (this.state.hide_new_show_form)
-                ? <h2 className="list clickable" onClick={() => { this.add_show_form() }}>Add a Show</h2>
-                : <AddShow
-                    artists={ this.props.Shows.artists }
-                    addShowCB={ this.add_show }
-                    addArtistCB={ this.addArtistCallback }
-                    newArtist={ this.props.Shows.new_artist }
-                  />
-              }
+          ?  <div className='toolbar'>
+              <h2>Tools</h2>
+              <div className="list clickable"
+                   onClick={() => { this.venue_form('add') }}>Add a Venue</div>
+              <div className="list clickable"
+                   onClick={() => { this.venue_form('associate') }}>Associate a Venue</div>
+              <div className="list clickable"
+                   onClick={() => { this.show_form() }}>Add a Show</div>
+              <div className="list clickable"
+                   onClick={() => { this.prod_form() }}>Add a Production</div>
             </div>
           : null
         }
@@ -290,23 +325,6 @@ class Main extends Component {
           : null
         }
 
-        { (this.props.User.level > 1 )
-          ? <div>
-              { (this.state.hide_production_form)
-                ? <h2 className="list clickable" onClick={() => { this.add_prod_form() }}>Add a Production</h2>
-                : <AddProd
-                    theaterid={ d.id }
-                    artists={ this.props.Shows.artists }
-                    addShowCB={ this.add_show }
-                    newProdCB={ this.new_prod_cb }
-                    addArtistCB={ this.addArtistCallback }
-                    removeArtistCB={ this.removeArtistCallback }
-                    newArtist={ this.props.Shows.new_artist }
-                  />
-              }
-            </div>
-          : null
-        }
        </div>
     );
   }

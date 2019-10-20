@@ -27,14 +27,23 @@ class AddShow extends Component {
       play: (c && this.props.production.genre_id>=5) ? true : false,
       show_select: (c) ? `${this.props.production.show_id}` :'0',
       showtitle: (c) ? false : true,
-      genre_1: (c) ? `${this.props.production.genre_id}` :'0'
+      genre_1: (c) ? `${this.props.production.genre_id}` :'0',
+      window: null,
+      scroll: null
     };
 
     this.handleNew = this.handleNew.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this)
+    this.handleChange = this.handleChange.bind(this);
     this.onDropdownSelected = this.onDropdownSelected.bind(this);
     this.showtitle = this.showtitle.bind(this);
+  }
+
+  componentDidMount() {
+    var body = document.body,
+    html = document.documentElement;
+    var height = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight );
+    this.setState({ scroll: window.scrollY, window: height });
   }
 
   handleNew(e) {
@@ -48,7 +57,7 @@ class AddShow extends Component {
     body.show_title=this.state.show_title;
     if (this.state.editmode) {
       this.props.edit_show(body);
-      this.props.edit_show_form();
+      this.props.show_form();
     } else {
       this.props.addShowCB(body);
     }
@@ -79,8 +88,9 @@ class AddShow extends Component {
   }
 
   render() {
-    return (
-            <div class="add_show">
+    return (<div className='overlay' style={{height: this.state.window + 'px'}}>
+            <div class="add_show" style={{marginTop: this.state.scroll + 'px'}}>
+            <div class="close" onClick={() => { this.props.show_form() }} >&times;</div>
             <form id="form-1" onSubmit={this.handleSubmit}>
               <h1>{this.state.formTitle}</h1>
               <h2>Title:</h2>
@@ -223,6 +233,7 @@ class AddShow extends Component {
               <input className='subbutt' type="submit" value={this.state.formTitle} />
           </form>
           </div>
+        </div>
         )
   }
 }
