@@ -86,11 +86,13 @@ class AddArtist extends Component {
                         onChange={this.onDropdownSelected}>
                       {this.props.sel}
                     </select>
-                    <span className="list clickable" onClick={() => { this.inputname() }}>{ this.state.edit_title }</span>
-                    { (this.state.edit_title === 'Edit Artist')
-                        ? <span className="list clickable" onClick={() => { this.removeArtist() }}>Remove</span>
-                        : null
-                    }
+                    <div className="edit_tools inter">
+                      <span className="list clickable" onClick={() => { this.inputname() }}>{ this.state.edit_title }</span>
+                      { (this.state.edit_title === 'Edit Artist')
+                          ? <span className="list clickable" onClick={() => { this.removeArtist() }}>Remove</span>
+                          : null
+                      }
+                    </div>
                   </div>
                 : null
               }

@@ -4,7 +4,8 @@ body {
   font-family: 'Raleway', sans-serif;
   font-size: .6em;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; }
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #EEE; }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace; }
@@ -34,14 +35,17 @@ code {
       line-height: 1.8em; }
 
 .nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  height: 25px;
-  background-color: #505050;
-  padding: 20px 10px 10px; }
+  height: 40px;
+  background-color: #505050; }
   .nav .title {
     color: white;
     font-size: 2em; }
@@ -96,7 +100,7 @@ code {
 
 .add_a_show, .add_venue {
   padding: 20px;
-  background-color: lightblue;
+  background-color: ivory;
   margin: 20px 0; }
 
 select {
@@ -141,7 +145,7 @@ select {
 input[type='text'] {
   margin: 5px 0;
   font-family: 'Raleway', sans-serif;
-  width: 300px;
+  max-width: 75%;
   padding: 5px;
   border: none;
   border-bottom: 2px solid gray;
@@ -160,26 +164,21 @@ input[type='text'] {
   background-color: lightblue; }
 
 .clickable {
-  text-decoration: underline;
-  cursor: pointer; }
+  cursor: pointer;
+  color: #e8d25a; }
   .clickable:hover {
-    color: purple; }
+    color: white; }
 
 div.list.clickable {
   width: 90px;
   text-decoration: none;
-  background-color: red;
-  padding: 4px 10px;
   border-radius: 5px;
-  margin: 5px;
   color: white;
-  background-color: darkblue;
-  border: 1px grey solid;
-  font-style: unset; }
+  font-style: unset;
+  border-right: 2px white solid; }
 
 .list {
-  font-style: italic;
-  color: blue;
+  color: #e8d25a;
   font-size: 1em;
   font-weight: bold;
   margin-left: 30px; }
@@ -194,7 +193,7 @@ div.list.clickable {
 
 textarea {
   margin: 5px 0;
-  width: 400px;
+  width: 90%;
   height: 100px; }
 
 .footer {
@@ -218,7 +217,7 @@ a {
     text-decoration: none; }
   a:hover {
     cursor: pointer;
-    color: pink; }
+    color: blueviolet; }
   a.link {
     margin-left: 10px; }
   a.inline {
@@ -239,19 +238,20 @@ a {
     padding-bottom: 2px;
     border-bottom: .25px solid white; }
     .welcome .logout:hover {
-      color: pink; }
+      color: #e8d25a; }
 
 .website {
   text-decoration: underline;
   color: red;
   cursor: pointer; }
   .website:hover {
-    color: pink; }
+    color: #e8d25a; }
 
 .venues {
   position: fixed;
   top: 75px;
-  left: 0;
+  right: 0;
+  background-color: white;
   margin: 20px;
   border-radius: 10px;
   padding: 10px;
@@ -296,7 +296,8 @@ a {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 200px; }
+  margin-bottom: 200px;
+  margin-top: 75px; }
   .theaters .theater_info {
     display: flex;
     flex-direction: column;
@@ -335,7 +336,6 @@ a {
     border-radius: 10px;
     margin: 20px 0 0;
     box-shadow: 5px 5px 10px grey;
-    padding-bottom: 30px;
     width: 100%; }
   .productions .show_dates {
     font-family: 'Libre Baskerville', serif;
@@ -412,13 +412,36 @@ a {
 
 .toolbar {
   position: fixed;
-  top: 75px;
-  right: 20px;
-  border-radius: 10px;
-  padding: 10px;
-  box-shadow: 5px 5px 10px grey;
-  width: 20%;
-  min-width: 200px; }
+  display: flex;
+  justify-content: space-around;
+  top: 40px;
+  width: 100%;
+  min-width: 200px;
+  background-color: blueviolet;
+  padding: 10px; }
+  .toolbar .head {
+    text-transform: uppercase;
+    padding: 0;
+    color: white;
+    font-weight: 900;
+    font-size: 1.2em; }
+  .toolbar .tool {
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1em; }
+    .toolbar .tool:hover {
+      color: #e8d25a; }
 
 select {
   max-width: 75%; }
+
+.edit_tools {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #242B40;
+  border-radius: 0 0 10px 10px; }
+  .edit_tools.inter {
+    border-radius: 10px; }

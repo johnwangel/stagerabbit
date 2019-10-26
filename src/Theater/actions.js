@@ -6,6 +6,7 @@ export const  UPDATE_THEATER_ID = 'UPDATE_THEATER_ID';
 export const  UPDATE_THEATER    = 'UPDATE_THEATER';
 export const  ALTER_THEATER     = 'ALTER_THEATER';
 export const  THEATER_UPDATE    = 'THEATER_UPDATE';
+export const  ADD_THEATER       = 'ADD_THEATER';
 
 export function theaterUpdate ( values ){
   return { type : THEATER_UPDATE , payload : values }
@@ -43,3 +44,21 @@ const addTheaterUpdates = data => ({
   type : ALTER_THEATER,
   payload : { data }
 });
+
+export function addTheater ( body ){
+  GET_POST_HEADER.body = JSON.stringify(body)
+  return dispatch => {
+    fetch(`${URL}theaters/add_theater`, GET_POST_HEADER)
+    .then(response => response.json())
+    .then(data => {
+      dispatch(addedTheater(data.theater));
+    })
+    .catch( err => console.log(err.message));
+  };
+}
+
+const addedTheater = data => ({
+  type : ADD_THEATER,
+  payload : data
+});
+

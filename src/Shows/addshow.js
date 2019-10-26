@@ -112,7 +112,9 @@ class AddShow extends Component {
                               onChange={this.onDropdownSelected}>
                           {this.props.Shows.shows}
                         </select>
-                        <span className="list clickable" onClick={() => { this.showtitle() }}>Edit Name</span>
+                        <div className="edit_tools inter">
+                          <span className="list clickable" onClick={() => { this.showtitle() }}>Edit Name</span>
+                        </div>
                       </div>
               }
 

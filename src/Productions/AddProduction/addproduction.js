@@ -70,7 +70,7 @@ class AddProd extends Component {
     if (this.state.editmode) {
       body.prod_id=this.state.pid;
       this.props.edit_prod(body);
-      this.props.edit_prod_form();
+      this.props.prod_form();
     } else {
       this.props.newProdCB(body);
     }

@@ -1,4 +1,5 @@
  import React from 'react';
+ import SanitizedHTML from 'react-sanitized-html';
  import {
   ALL_SHOWS,
   ALL_ARTISTS,
@@ -57,7 +58,7 @@ function do_shows(shows){
   dropdown.push(<option key="show-0" value="0">Select one...</option>)
   for (let i = 0; i < shows.length; i++) {
     let _this=shows[i];
-    dropdown.push(<option key={_this.title+'-'+_this.id} value={_this.id}>{_this.title} ({_this.genre}) [{_this.id}]</option>);
+    dropdown.push(<option key={_this.title+'-'+_this.id} value={_this.id}>{_this.title.replace(/&rsquo;/g, "'")} ({_this.genre}) [{_this.id}]</option>);
   }
   return [ ...dropdown ];
 }

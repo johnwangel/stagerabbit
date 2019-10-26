@@ -18,7 +18,7 @@ class Venues extends Component {
                         {(item.venue_add2) ? <div>{item.venue_add2}</div> : null }
                         <div>{item.venue_city}, {item.venue_state} {item.venue_zip}</div>
                         { (this.props.perm > 1)
-                          ? <div>
+                          ? <div className="edit_tools inter">
                               <span className="list clickable"
                                     onClick={() => { this.props.edit('edit',item.venue_id) }}>Edit</span>
                               <span className="list clickable"

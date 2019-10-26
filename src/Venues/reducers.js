@@ -32,6 +32,8 @@ function vbt(state,action){
 }
 
 function vbp(state,action){
+  console.log('VENUES',action.payload)
+
   let curr=state.byprod;
   curr.push(action.payload.venue[0])
   return { venues: state.venues, list: state.list, byprod: curr, all: state.all };

@@ -5,7 +5,8 @@ import {  getStates } from './statesActions';
 
 import {  updateTheaterID,
           updateTheater,
-          alterTheater } from '../Theater/actions';
+          alterTheater,
+          addTheater } from '../Theater/actions';
 
 import {  updateProds,
           editProd,
@@ -24,6 +25,7 @@ import {  getAllShows,
 import  { removeArtist } from '../Artists/actions';
 
 import Theater from "../Theater/theater";
+import AddTheater from "../Theater/theaterAdd";
 import Venues from "../Venues/venues";
 import AddVenue from "../Venues/AddVenue/addvenue";
 import AddShow from "../Shows/addshow";
@@ -33,11 +35,14 @@ import AddProd from "../Productions/AddProduction/addproduction";
 class Main extends Component {
   constructor(props) {
     super(props);
-    this.state={  hide_production_form: true,
+    this.state={  current_id: this.props.Theater[0].id,
+                  hide_production_form: true,
                   hide_add_venue_form: true,
                   hide_edit_venue_form: true,
                   hide_assoc_venue_form: true,
                   hide_new_show_form: true,
+                  hide_new_theater_form: true,
+                  hide_delete_theater_form: true,
                   venue: { venue_id : 0 },
                   newArtistID: null,
                   clear_edit: false
@@ -60,21 +65,29 @@ class Main extends Component {
     this.new_prod_cb = this.new_prod_cb.bind(this);
     this.show_form = this.show_form.bind(this);
     this.prod_form = this.prod_form.bind(this);
+    this.theater_form = this.theater_form.bind(this);
+    this.add_theater = this.add_theater.bind(this);
   }
 
   componentDidUpdate(prevProps) {
     let tid = this.props.Theater[0].id;
+
+    if (this.props.Theater[0].id !== prevProps.Theater[0].id){
+      console.log(tid);
+      this.update_theater_details(tid);
+    }
+
     if (this.props.Prod && this.props.Prods.length !== prevProps.Prod.length) {
       this.update_theater_details(tid);
     }
     if (this.props.Shows !== prevProps.Shows ){
       this.props.updateProds(tid);
-      this.setState({clear_edit: true})
+      this.setState({clear_edit: true});
     }
   }
 
   handleIDChange(e) {
-    this.props.updateTheaterID(e.target.value)
+    this.props.updateTheaterID(e.target.value);
   }
 
   handleIDSubmit(e) {
@@ -96,7 +109,7 @@ class Main extends Component {
   }
 
   update_theater_details(tid){
-    (tid.charAt(0)===':') ? tid=tid.substr(1) : tid=tid;
+    //(tid.charAt(0)===':') ? tid=tid.substr(1) : tid=tid;
     this.props.updateTheater(tid);
     this.props.updateProds(tid);
     this.props.getVenuesByTheater(tid);
@@ -130,7 +143,9 @@ class Main extends Component {
         hide_assoc_venue_form: (item==='hide_assoc_venue_form') ? !this.state.hide_assoc_venue_form : true,
         venue: d,
         hide_new_show_form: true,
-        hide_production_form: true
+        hide_production_form: true,
+        hide_new_theater_form: true,
+        hide_delete_theater_form: true
       }
     );
   }
@@ -144,7 +159,9 @@ class Main extends Component {
         hide_edit_venue_form: true,
         venue: {venue_id: 0},
         hide_assoc_venue_form: true,
-        hide_production_form: true
+        hide_production_form: true,
+        hide_new_theater_form: true,
+        hide_delete_theater_form: true
       }
     );
   }
@@ -161,7 +178,9 @@ class Main extends Component {
         hide_edit_venue_form: true,
         venue: {venue_id: 0},
         hide_assoc_venue_form: true,
-        hide_production_form: true
+        hide_production_form: true,
+        hide_new_theater_form: true,
+        hide_delete_theater_form: true
       }
     );
   }
@@ -173,7 +192,9 @@ class Main extends Component {
         hide_add_venue_form: true,
         hide_edit_venue_form: true,
         venue: {venue_id: 0},
-        hide_assoc_venue_form: true
+        hide_assoc_venue_form: true,
+        hide_new_theater_form: true,
+        hide_delete_theater_form: true
       }
     );
   }
@@ -191,15 +212,57 @@ class Main extends Component {
     this.props.editProd( body );
   }
 
+  theater_form(){
+    this.setState(
+      {
+        hide_new_show_form: true,
+        hide_add_venue_form: true,
+        hide_edit_venue_form: true,
+        venue: {venue_id: 0},
+        hide_assoc_venue_form: true,
+        hide_new_theater_form: !this.state.hide_new_theater_form,
+        hide_delete_theater_form: true
+      });
+  }
+
+  add_theater(body){
+    this.props.addTheater( body );
+    this.setState(
+      {
+        hide_new_show_form: true,
+        hide_add_venue_form: true,
+        hide_edit_venue_form: true,
+        venue: {venue_id: 0},
+        hide_assoc_venue_form: true,
+        hide_new_theater_form: true,
+        hide_delete_theater_form: true
+      });
+  }
+
+  delete_theater_form(){
+    this.setState(
+      {
+        hide_new_show_form: true,
+        hide_add_venue_form: true,
+        hide_edit_venue_form: true,
+        venue: {venue_id: 0},
+        hide_assoc_venue_form: true,
+        hide_new_theater_form: true,
+        hide_delete_theater_form: !this.state.hide_delete_theater_form
+      });
+  }
+
   add_show(body){
     this.props.newShow( body );
     this.setState(
       {
-          hide_new_show_form: true,
-          hide_add_venue_form: true,
-          hide_edit_venue_form: true,
-          venue: {venue_id: 0},
-          hide_assoc_venue_form: true
+        hide_new_show_form: true,
+        hide_add_venue_form: true,
+        hide_edit_venue_form: true,
+        venue: {venue_id: 0},
+        hide_assoc_venue_form: true,
+        hide_new_theater_form: true,
+        hide_delete_theater_form: true
       }
     );
   }
@@ -217,10 +280,39 @@ class Main extends Component {
           ? <form onSubmit={this.handleIDSubmit}>
               <label>
                 <span className='runin'>Theater ID:</span>
-                <input type="text" name="id" value={ d.currId } onChange={this.handleIDChange} />
+                <input type="text" name="id" value={ this.state.current_id } onChange={this.handleIDChange} />
               </label>
               <input type="submit" value="Submit" className="subbutt" />
             </form>
+          : null
+        }
+
+        { (this.props.User.level===3)
+          ? (this.state.hide_delete_theater_form)
+            ? null
+            :<div className='overlay' style={{height: this.state.window + 'px'}}>
+              <div class="add_show" style={{marginTop: this.state.scroll + 'px'}}>
+                  <div class="close" onClick={() => { this.delete_theater_form() }} >&times;</div>
+                  <h1>Delete Theater</h1>
+                  <form onSubmit={this.handleSubmit}>
+                      <div>
+                        <span className='runin'>Name:</span>
+                        <input id="name" type="text" name="name" value={ this.state.name } onChange={this.handleChange} />
+                      </div>
+                      <input type="submit" value="Submit" className="subbutt" />
+                  </form>
+                </div>
+              </div>
+          : null
+        }
+
+        { (this.props.User.level===3)
+          ? (this.state.hide_new_theater_form)
+            ? null
+            : <AddTheater
+                        states={ this.props.States.dropdown }
+                        theater_form={ this.theater_form }
+                        add_theater={ this.add_theater }/>
           : null
         }
 
@@ -270,6 +362,7 @@ class Main extends Component {
               artists={ this.props.Shows.artists }
               addShowCB={ this.add_show }
               addArtistCB={ this.addArtistCallback }
+              removeArtistCB={ this.removeArtistCallback }
               newArtist={ this.props.Shows.new_artist }
               show_form={ this.show_form }
             />
@@ -290,15 +383,19 @@ class Main extends Component {
 
         { (this.props.User.level > 1 )
           ?  <div className='toolbar'>
-              <h2>Tools</h2>
-              <div className="list clickable"
+              <div className='head'>Tools</div>
+              <div className="tool"
                    onClick={() => { this.venue_form('add') }}>Add a Venue</div>
-              <div className="list clickable"
+              <div className="tool"
                    onClick={() => { this.venue_form('associate') }}>Associate a Venue</div>
-              <div className="list clickable"
+              <div className="tool"
                    onClick={() => { this.show_form() }}>Add a Show</div>
-              <div className="list clickable"
+              <div className="tool"
                    onClick={() => { this.prod_form() }}>Add a Production</div>
+              <div className="tool"
+                   onClick={() => { this.theater_form() }}>Add a Theater</div>
+              <div className="tool"
+                   onClick={() => { this.delete_theater_form() }}>Delete a Theater</div>
             </div>
           : null
         }
@@ -383,6 +480,9 @@ const mapDispatchToProps = dispatch => {
     },
     removeArtist: body => {
       dispatch( removeArtist(body) )
+    },
+    addTheater: body => {
+      dispatch( addTheater(body) )
     }
   }
 }

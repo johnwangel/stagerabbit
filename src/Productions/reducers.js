@@ -26,6 +26,8 @@ function updateProductions(state,action){
 }
 
 function newProduction(state,action){
+  console.log('current productions',state)
+  console.log('new production',action.payload)
   return [ ...state, action.payload ];
 }
 

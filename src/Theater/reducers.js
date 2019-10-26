@@ -2,19 +2,22 @@
   THEATER_UPDATE,
   UPDATE_THEATER_ID,
   UPDATE_THEATER,
-  ALTER_THEATER
+  ALTER_THEATER,
+  ADD_THEATER
  } from './actions';
 
 const TheaterReducers = (state=[ { currId: null, id: null } ], action) => {
   switch (action.type){
     case THEATER_UPDATE:
-        return theaterUpdate(state,action)
+        return theaterUpdate(state,action);
     case UPDATE_THEATER_ID:
-      return updateTheaterID(state,action)
+      return updateTheaterID(state,action);
     case UPDATE_THEATER:
-      return updateTheater(state,action)
+      return updateTheater(state,action);
     case ALTER_THEATER:
-      return alterTheater(state,action)
+      return alterTheater(state,action);
+    case ADD_THEATER:
+      return addTheater(state,action);
     default:
       return state;
   }
@@ -41,8 +44,16 @@ function alterTheater(state,action){
   return theater[0];
 }
 
+
 function theaterUpdate(state,action){
   return [ action.payload ];
 }
+
+function addTheater(state,action){
+  action.payload[0].currId=action.payload[0].id;
+  return [ action.payload[0] ];
+}
+
+
 
 export default TheaterReducers;

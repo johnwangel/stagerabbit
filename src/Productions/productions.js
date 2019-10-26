@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
+import SanitizedHTML from 'react-sanitized-html';
+
 import { checkVenue } from '../constants/constants.js';
 
 import { getArtists } from '../Artists/actions';
@@ -122,7 +124,7 @@ class Productions extends Component {
     let g1 = g[0], g2=g[1];
     return ( <div key={this.props.id+'-prod'} id={this.props.prod.production_id} className="production">
 
-                <div className="show_title">{p.title}</div>
+                <div className="show_title"><SanitizedHTML html={ p.title } /></div>
 
                 <div className='show_dates'>
                   {moment(p.start_date).format('MMMM D, YYYY')} to {moment(p.end_date).format('MMMM D, YYYY')}
@@ -145,12 +147,12 @@ class Productions extends Component {
                   { ( this.state.md ) ? <Artists type="Musical Direction" artists={ this.state.md }/> : null }
                 </div>
                 { ( p.description !== '')
-                      ?  ( <div className='description'><span>{p.description}</span></div>)
+                      ?  ( <div className='description'><span><SanitizedHTML html={p.description} /></span></div>)
                       : null
                 }
 
                 { (this.props.perm > 1)
-                  ? <div>
+                  ? <div className='edit_tools'>
                       { (!this.state.edit_show)
                           ? <span className="list clickable" onClick={() => { this.show_form() }}>Edit Show</span>
                           : <AddShow
@@ -159,6 +161,7 @@ class Productions extends Component {
                               artists={ this.props.Shows.artists }
                               addArtistCB={ this.props.addArtistCB }
                               newArtist={ this.props.Shows.new_artist }
+                              removeArtistCB={ this.props.removeArtistCB }
                               edit_show={ this.props.edit_show }
                               show_form={ this.show_form }
                             />
@@ -178,7 +181,7 @@ class Productions extends Component {
                         }
 
                     </div>
-                  : null
+                  : <div className='edit_tools'></div>
                 }
 
 
