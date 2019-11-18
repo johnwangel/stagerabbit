@@ -9,11 +9,7 @@ body {
   background-color: #EEE;
 }
 
-$black: #242B40;
-$yellow: #e8d25a;
-$gray: #505050;
-$main: indigo;
-$accent: darkorchid;
+@import "./css/variables.scss";
 
 @import "./css/headers.scss";
 @import "./css/search.scss";
