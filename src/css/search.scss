@@ -1,0 +1,42 @@
+.searchContent {
+  position: relative;
+  margin-top: 70px;
+  @media screen and (max-width: 600px){
+    width: 75%;
+  }
+}
+
+.searchContent {
+
+  select[id=state]{
+    margin: 0;
+  }
+
+  input[name=show],input[name=theater]{
+    width: 100%;
+    max-width: unset;
+    margin: 0 !important;
+  }
+
+  input[type='text'] {
+    margin: 0 10px;
+    background-color: #EEE;
+  }
+  form {
+    margin: 20px 0;
+  }
+  .go {
+    width: 100%;
+    margin-top: 10px;
+    .subbutt {
+      float: right;
+      margin: 0;
+    }
+  }
+}
+
+.search_result {
+  margin: 10px;
+  font-size: 1.2em;
+  text-align: left;
+}

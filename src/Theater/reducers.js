@@ -3,7 +3,8 @@
   UPDATE_THEATER_ID,
   UPDATE_THEATER,
   ALTER_THEATER,
-  ADD_THEATER
+  ADD_THEATER,
+  ALL_THEATERS
  } from './actions';
 
 const TheaterReducers = (state=[ { currId: null, id: null } ], action) => {
@@ -18,10 +19,16 @@ const TheaterReducers = (state=[ { currId: null, id: null } ], action) => {
       return alterTheater(state,action);
     case ADD_THEATER:
       return addTheater(state,action);
+    case ALL_THEATERS:
+      return allTheaters(state,action);
     default:
       return state;
   }
 };
+
+function allTheaters(state,action){
+  return action.payload.theater;
+}
 
 function updateTheaterID(state,action){
   state[0].currId=action.payload;
@@ -37,11 +44,17 @@ function updateTheater(state,action){
 }
 
 function alterTheater(state,action){
-  let t = action.payload.data;
-  var theater = Object.keys(t).map(function(key) {
-    return [ t[key] ];
-  });
-  return theater[0];
+  let pos;
+  (action.payload.data.pos) ? pos=action.payload.data.pos : pos=0;
+  let t = action.payload.data.data;
+  let f;
+  if (pos) {
+    state.splice(pos,1);
+    f=state.slice(0);
+  } else {
+    f=t;
+  }
+  return f;
 }
 
 
@@ -50,8 +63,10 @@ function theaterUpdate(state,action){
 }
 
 function addTheater(state,action){
+
+  console.log(action.payload)
   action.payload[0].currId=action.payload[0].id;
-  return [ action.payload[0] ];
+  return [ action.payload ];
 }
 
 

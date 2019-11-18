@@ -7,6 +7,8 @@ export const  UPDATE_THEATER    = 'UPDATE_THEATER';
 export const  ALTER_THEATER     = 'ALTER_THEATER';
 export const  THEATER_UPDATE    = 'THEATER_UPDATE';
 export const  ADD_THEATER       = 'ADD_THEATER';
+export const  ALL_THEATERS      = 'ALL_THEATERS';
+
 
 export function theaterUpdate ( values ){
   return { type : THEATER_UPDATE , payload : values }
@@ -15,6 +17,20 @@ export function theaterUpdate ( values ){
 export function updateTheaterID ( theaterid ){
   return { type : UPDATE_THEATER_ID , payload : theaterid };
 }
+
+export function allTheaters (){
+  return dispatch => {
+    fetch(`${URL}?type=alltheaters`, GET_HEADER)
+    .then(response => response.json())
+    .then(data => dispatch(all_theaters(data.data)))
+    .catch( err => console.log(err.message));
+  };
+}
+
+const all_theaters = theater => ({
+  type : ALL_THEATERS,
+  payload : { theater }
+});
 
 export function updateTheater ( theaterid ){
   return dispatch => {
@@ -35,7 +51,11 @@ export function alterTheater ( body ){
   return dispatch => {
     fetch(`${URL}theaters/alter_theater`, GET_POST_HEADER)
     .then(response => response.json())
-    .then(data => dispatch(addTheaterUpdates(data.data)))
+    .then(data => {
+      let thtr=data;
+      if (body.pos) thtr.pos=body.pos;
+      dispatch(addTheaterUpdates(thtr))
+    })
     .catch( err => console.log(err.message));
   };
 }
@@ -61,4 +81,5 @@ const addedTheater = data => ({
   type : ADD_THEATER,
   payload : data
 });
+
 

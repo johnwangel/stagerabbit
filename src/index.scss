@@ -11,12 +11,23 @@ body {
 
 $black: #242B40;
 $yellow: #e8d25a;
-$gray: #42495e;
-$accent: blueviolet;
+$gray: #505050;
+$main: indigo;
+$accent: darkorchid;
+
+@import "./css/headers.scss";
+@import "./css/search.scss";
+@import "./css/theater.scss";
+@import "./css/toolbar.scss";
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.MainBody{
+  position: relative;
+  width: 100%;
 }
 
 .head1 {
@@ -26,86 +37,57 @@ code {
   text-transform: uppercase;
 }
 
-.search_result {
-  margin: 10px;
-  font-size: 1.2em;
-  text-align: left;
-}
-
-
 .body {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
   margin-bottom: 100px;
 
   .main {
-    margin: 25px 0;
-    width: 60%;
-    p {
-      font-size: 1.5em;
-      line-height: 1.8em;
+    position: relative;
+    top: 40px;
+    width: 100vw;
+    min-width: 360px;
+    height: 400px;
+
+    @media screen and (max-width: 1070px){
+      height: 250px;
+    }
+
+    .intro {
+      position: absolute;
+      width: 70%;
+      min-width: 360px;
+      height: 100%;
+      top: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      > * {
+        font-size:1.2em;
+        line-height: 1.5em;
+        color: white;
+      }
+      .content { padding: 10%; }
+
+      @media screen and (max-width: 800px){
+        width: 60%;
+      }
+      @media screen and (max-width: 600px){
+        width: 100vw;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        right: unset;
+        left: 0;
+        background-color: rgba(0,0,0,.2);
+      }
+
     }
   }
 }
-
-.nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
-  height: 40px;
-  background-color:   #505050;
-  //padding: 20px 10px 10px;
-
-  .title {
-    color: white;
-    font-size: 2em;
-  }
-
-  .subtitle {
-    color: white;
-    font-size: 1.2em;
-    margin-left: 10px;
-  }
-
-  ul {
-    display: inline;;
-    list-style-type: none;
-    font-size: 1.2em;
-    color: white;
-    li {
-      margin-top: 20px;
-      padding: 10px;
-      display: inline;
-    }
-  }
-
-  .nav-head {
-    color: white;
-    font-size: 1.2em;
-  }
-
-  form {
-    margin-right: 20px
-  }
-
-  input.login {
-    border: unset;
-    width: 75px;
-    height: unset;
-    padding: 5px;
-    margin-left: 10px;
-  }
-}
-
 
 .group {
   margin: 25px 0;
@@ -137,7 +119,7 @@ code {
 
 .add_a_show, .add_venue {
   padding: 20px;
-  background-color: ivory;
+  background-color: $accent;
   margin: 20px 0;
 }
 
@@ -163,7 +145,7 @@ select {
   text-align: center;
   color: white;
   font-weight: 600;
-  background-color: darkblue;
+  background-color: $main;
   border-radius: 5px;
   width: 50px;
   height: 15px;
@@ -173,7 +155,7 @@ select {
   margin-left: 20px;
   color: white;
   font-weight: 600;
-  background-color: darkblue;
+  background-color: $main;
   border-radius: 5px;
 };
 
@@ -194,7 +176,7 @@ input[type='text'] {
   padding: 5px;
   border: none;
   border-bottom: 2px solid gray;
-  color: darkblue;
+  color: $main;
 
   &.person {
     width: 100px;
@@ -207,12 +189,16 @@ input[type='text'] {
 }
 
 .all_shows {
-  background-color: lightblue;
+  background-color: $accent;
 }
 
 .add_show {
   padding: 50px;
-  background-color: lightblue;
+  background-color: $accent;
+}
+
+.addr {
+  margin-left: 53px;
 }
 
 .clickable {
@@ -232,7 +218,7 @@ div.list.clickable {
   border-radius: 5px;
   //margin: 5px;
   color: white;
-  //background-color: darkblue;
+  //background-color: $main;
   //border: 1px grey solid;
   font-style: unset;
   border-right: 2px white solid;
@@ -248,7 +234,7 @@ div.list.clickable {
 
 .runin {
   // text-transform: uppercase;
-  color: darkblue;
+  color: $main;
   font-size: 1em;
   font-weight: bold;
   min-width: 200px;
@@ -262,16 +248,7 @@ textarea {
   height: 100px;
 }
 
-.footer {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  width: 100%;
-  height: 15px;
-  text-align: center;
-  color: white;
-  background-color: black;
-}
+
 
 a {
   color: white;
@@ -327,9 +304,9 @@ a {
 }
 
 .venues {
-  position: fixed;
-  top: 75px;
-  right: 0;
+  //position: fixed;
+  //top: 75px;
+  //right: 0;
   background-color: white;
   //background-image: linear-gradient(to left, rgba(112,128,144,0), rgba(119,136,153,1));
   margin: 20px;
@@ -403,97 +380,12 @@ a {
     .theater_name {
       font-family: 'Libre Baskerville', serif;
       font-size: 2em;
-      color: darkblue;
+      color: $main;
     }
   }
 }
 
-.theater {
-  margin-top: 30px;
-  width: 33%;
-  min-width: 200px;
-  h2 {
-    font-family: 'Libre Baskerville', serif;
-    color: darkblue;
-    font-size: 2em;
-  }
-}
 
-.productions {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  width: 33%;
-
-  h2 {
-    align-self: center;
-    font-family: 'Libre Baskerville', serif;
-    color: darkblue;
-    font-size: 2em;
-    margin: 20px 0 0;
-  }
-  .production {
-    background-image: linear-gradient(to left, rgba(112,128,144,.2), rgba(119,136,153,.8));
-    border-radius: 10px;
-    margin: 20px 0 0;
-    box-shadow: 5px 5px 10px grey;
-    //padding-bottom: 30px;
-    width: 100%;
-  }
-  .show_dates {
-    font-family: 'Libre Baskerville', serif;
-    font-style: italic;
-    font-weight: bold;
-    font-size: 1.1em;
-    color: $black;
-    margin: 10px;
-    text-align: center;
-  }
-  .show_title {
-    font-family: 'Libre Baskerville', serif;
-    margin-bottom: 15px;
-    font-size: 2em;
-    font-weight: 700;
-    color: lightgray;
-    //text-shadow: .5px .5px 35px black;
-    background-color: $black;
-    color: $yellow;
-    padding: 10px;
-    border-radius: 10px 10px 0 0;
-    text-align: center;
-    //box-shadow: 1px 1px 10px $gray;
-  }
-  .genre-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    padding: 0 20px;
-  }
-  .genre {
-    background-color: lightgray;
-    border: 1px solid gray;
-    border-radius: 10px;
-    padding: 5px 8px;
-    margin: 3px 3px 3px 0;
-    width: 300px;
-    text-align: center;
-  }
-  .venue {
-    margin: 10px;
-  }
-  .creatives {
-    margin: 20px;
-    line-height: 1.4em;
-  }
-  .description {
-    border-top: 1px solid darkblue;
-    margin: 0 20px;
-    padding-top: 10px;
-    line-height: 1.5em;
-  }
-}
 
 .overlay {
   position: absolute;
@@ -529,33 +421,7 @@ a {
   }
 }
 
-.toolbar {
-  position: fixed;
-  display: flex;
-  justify-content: space-around;
-  top: 40px;
-  width: 100%;
-  min-width: 200px;
-  background-color: blueviolet;
-  padding: 10px;
-  .head {
-    text-transform: uppercase;
-    padding: 0;
-    color: white;
-    font-weight: 900;
-    font-size: 1.2em;
-  }
-  .tool {
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1em;
-    &:hover {
-      color: $yellow;
-    }
-  }
 
-}
 
 select{
   max-width: 75%;
@@ -571,4 +437,69 @@ select{
   &.inter {
     border-radius: 10px;
   }
+}
+
+.error {
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: white;
+  padding: 5px;
+  background-color: red;
+  margin: 5px 0;
+  width: 50%;
+  border-radius: 5px;
+}
+
+.show_results {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .title {
+    font-weight: bold;
+    font-size: 1.2em;
+
+  }
+  .dates {
+    margin-left: 10px;
+  }
+}
+
+.email_item {
+  margin: 15px;
+  a {
+    margin: 0 15px;
+  }
+}
+
+.all_theaters {
+  margin-top: 75px;
+  text-align: auto;
+  margin-left: 20px;
+}
+
+.trash, .update {
+  cursor: pointer;
+}
+
+.loginPage {
+  margin-top: 75px;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+}
+
+.column {
+  margin-top: 50px;
+}
+
+.accent {
+  color: $accent;
 }

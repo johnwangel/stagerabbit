@@ -42,9 +42,9 @@ class TheaterInfo extends Component {
                           value={this.state[this.props.label]}
                           onChange={this.handleChange}
                           ref={this.value} />
-                      <span
-                          className="clickable"
-                          onClick={() => { this.props.submit_it(info) }}>Submit</span>
+                      <button
+                          className="subbutt"
+                          onClick={() => { this.props.submit_it(info) }}>Submit</button>
                     </form>
               }
             </div>

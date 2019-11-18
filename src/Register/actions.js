@@ -44,6 +44,7 @@ export function getProfileFetch(){
 }
 
 export function login( body ){
+  console.log('body in login',body)
   GET_POST_HEADER.body=JSON.stringify(body);
   return dispatch => {
     fetch(`${URL}auth/login`, GET_POST_HEADER )

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component, createRef } from 'react';
 import { connect } from 'react-redux';
 import DatePicker from "react-datepicker";
 
@@ -13,6 +13,8 @@ var Moment = require('moment');
 class AddProd extends Component {
   constructor(props) {
     super(props);
+
+    const errRef=createRef();
 
     var c;
     (this.props.specs) ? c=this.props.specs : c=null;
@@ -32,7 +34,9 @@ class AddProd extends Component {
       start : (sd) ? new Date(sd.year(),sd.month(),sd.date()) : new Date(),
       end:  (ed) ? new Date(ed.year(),ed.month(),ed.date()) : new Date(),
       venue_id: (c && c.venue && c.venue.venue_id) ? c.venue.venue_id : '0',
+      venue_error: false,
       show_id: (c && c.sid) ? c.sid : '0',
+      show_error: false,
       dirChildren: (c && c.dir && c.dir.length>0) ? c.dir.length : 1,
       dir_items: (c && c.dir && c.dir.length>0) ? c.dir : null,
       chorChildren: (c && c.chor && c.chor.length>0) ? c.chor.length : 1,
@@ -51,6 +55,7 @@ class AddProd extends Component {
     this.handleStartDateChange = this.handleStartDateChange.bind(this);
     this.handleEndDateChange = this.handleEndDateChange.bind(this);
     this.onDropdownSelected = this.onDropdownSelected.bind(this);
+    this.scrollToMyRef = this.scrollToMyRef.bind(this);
   }
 
   componentDidMount() {
@@ -66,6 +71,17 @@ class AddProd extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    if ( this.state.venue_id==='0' ) this.setState( { venue_error : true } );
+    if ( this.state.show_id==='0' ) this.setState( { show_error : true } );
+    if ( this.state.venue_error || this.state.show_error ) {
+        this.errRef.current.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+
+        return;
+    }
+
     let body = process_submit(e.target.elements);
     if (this.state.editmode) {
       body.prod_id=this.state.pid;
@@ -74,6 +90,10 @@ class AddProd extends Component {
     } else {
       this.props.newProdCB(body);
     }
+  }
+
+  scrollToMyRef(){
+   window.scrollTo(0, this.errRef.offsetTop);
   }
 
   handleChange(e) {
@@ -95,8 +115,8 @@ class AddProd extends Component {
 
   render() {
     return (
-      <div className='overlay' style={{height: this.state.window + 'px'}}>
-        <div className="all_shows"  style={{marginTop: this.state.scroll + 'px'}}>
+      <div ref={ this.errRef } className='overlay' style={{height: this.state.window + 'px'}}>
+        <div className="all_shows" style={{marginTop: this.state.scroll + 'px'}}>
           <div class="close" onClick={() => { this.props.prod_form() }} >&times;</div>
           <form id="form-1" onSubmit={this.handleSubmit}>
             <h1>{this.state.formTitle}</h1>
@@ -104,6 +124,7 @@ class AddProd extends Component {
             { ( this.props.VenuesByTheater.list)
               ?         <div>
                            <h2>Venue</h2>
+                           { (this.state.venue_error) ? <div className='error'>You must select a venue.</div> : null }
                            <select
                                   type="select"
                                   id="venue_by_theater"
@@ -116,6 +137,7 @@ class AddProd extends Component {
                 : null
               }
             <h2>Show Title</h2>
+            { (this.state.show_error) ? <div className='error'>You must select a show.</div> : null }
             <select
                   id="show_select"
                   type="select"
@@ -124,6 +146,7 @@ class AddProd extends Component {
                   onChange={this.onDropdownSelected}>
               {this.props.Shows.shows}
             </select>
+
 
             <div>
               <h2>Start Date:</h2>

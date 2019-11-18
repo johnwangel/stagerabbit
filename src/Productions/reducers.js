@@ -1,7 +1,8 @@
  import {
   UPDATE_PRODS,
   NEW_PROD,
-  EDIT_PROD
+  EDIT_PROD,
+  PROD_BY_SHOW
  } from './actions';
 
 const ProductionsReducer = (state=[], action) => {
@@ -12,6 +13,8 @@ const ProductionsReducer = (state=[], action) => {
         return newProduction(state,action);
       case EDIT_PROD:
         return editProduction(state,action);
+      case PROD_BY_SHOW:
+        return prodByShow(state,action);
       default:
         return state;
     }
@@ -26,8 +29,6 @@ function updateProductions(state,action){
 }
 
 function newProduction(state,action){
-  console.log('current productions',state)
-  console.log('new production',action.payload)
   return [ ...state, action.payload ];
 }
 
@@ -38,6 +39,10 @@ function editProduction(state,action){
     if (c.production_id === n.production_id ) clone[i]=n;
   })
   return clone;
+}
+
+function prodByShow(state,action){
+  return action.payload;
 }
 
 export default ProductionsReducer;

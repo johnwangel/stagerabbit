@@ -41,7 +41,9 @@ class Theater extends Component {
     return (
       <div key={this.props.theater.id} className='theater'>
         { (this.props.perm > 1)
-          ? <div>{ keys.map((keyname, keyindex ) => {
+          ? <div>
+              <div className='instr'>NOTE: Click name (label) on left to edit any of the fields below:</div>
+              { keys.map((keyname, keyindex ) => {
                   const _id = `${keyname}_t1`;
                   const _name = keyname === 'website'
                                 ? <a key={ this.props.theater.id+'-i' } target="_blank" href={x[keyname]}>{x[keyname]}</a>

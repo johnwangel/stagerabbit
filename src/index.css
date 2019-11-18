@@ -7,52 +7,28 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #EEE; }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace; }
-
-.head1 {
-  margin: 40px 0 20px;
-  font-size: 1.5em;
-  font-weight: bold;
-  text-transform: uppercase; }
-
-.search_result {
-  margin: 10px;
-  font-size: 1.2em;
-  text-align: left; }
-
-.body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 100px; }
-  .body .main {
-    margin: 25px 0;
-    width: 60%; }
-    .body .main p {
-      font-size: 1.5em;
-      line-height: 1.8em; }
-
 .nav {
   position: fixed;
   top: 0;
-  left: 0;
   z-index: 1000;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: 100vw;
   height: 40px;
   background-color: #505050; }
   .nav .title {
     color: white;
-    font-size: 2em; }
+    font-size: 2em;
+    padding-left: 10px; }
   .nav .subtitle {
     color: white;
     font-size: 1.2em;
     margin-left: 10px; }
+    @media screen and (max-width: 450px) {
+      .nav .subtitle {
+        display: none; } }
   .nav ul {
     display: inline;
     list-style-type: none;
@@ -73,6 +49,271 @@ code {
     height: unset;
     padding: 5px;
     margin-left: 10px; }
+
+.nav-icons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 50px;
+  margin-right: 15px; }
+
+.menu, .home {
+  color: white;
+  font-size: 2em;
+  cursor: pointer; }
+  .menu:hover, .home:hover {
+    color: darkorchid; }
+
+a.home {
+  text-decoration: none;
+  border: none;
+  font-size: 2.8em; }
+
+.dropdown_menu {
+  display: flex;
+  top: 40px;
+  right: 0;
+  flex-direction: column;
+  position: fixed;
+  width: 100px;
+  background-color: darkorchid;
+  color: white;
+  font-size: 1.2em; }
+
+.menu_item {
+  padding: 5px 10px; }
+  .menu_item:hover {
+    background-color: white;
+    color: darkorchid; }
+
+.footer {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 30px;
+  text-align: center;
+  color: white;
+  background-color: black;
+  font-size: 1em; }
+
+.searchContent {
+  position: relative;
+  margin-top: 70px; }
+  @media screen and (max-width: 600px) {
+    .searchContent {
+      width: 75%; } }
+
+.searchContent select[id=state] {
+  margin: 0; }
+
+.searchContent input[name=show], .searchContent input[name=theater] {
+  width: 100%;
+  max-width: unset;
+  margin: 0 !important; }
+
+.searchContent input[type='text'] {
+  margin: 0 10px;
+  background-color: #EEE; }
+
+.searchContent form {
+  margin: 20px 0; }
+
+.searchContent .go {
+  width: 100%;
+  margin-top: 10px; }
+  .searchContent .go .subbutt {
+    float: right;
+    margin: 0; }
+
+.search_result {
+  margin: 10px;
+  font-size: 1.2em;
+  text-align: left; }
+
+.theater {
+  margin-top: 30px;
+  width: 33%;
+  min-width: 200px; }
+  @media screen and (max-width: 600px) {
+    .theater {
+      width: 75%; } }
+  .theater h2 {
+    font-family: 'Libre Baskerville', serif;
+    color: indigo;
+    font-size: 2em; }
+
+input[type='text'] {
+  width: 65%; }
+
+.productions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 33%; }
+  @media screen and (max-width: 600px) {
+    .productions {
+      width: 75%; } }
+  .productions h2 {
+    align-self: center;
+    font-family: 'Libre Baskerville', serif;
+    color: indigo;
+    font-size: 2em;
+    margin: 20px 0 0; }
+  .productions .production {
+    background-image: linear-gradient(to left, rgba(112, 128, 144, 0.2), rgba(119, 136, 153, 0.8));
+    border-radius: 10px;
+    margin: 20px 0 0;
+    box-shadow: 5px 5px 10px grey;
+    width: 100%; }
+  .productions .show_dates {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #242B40;
+    margin: 10px;
+    text-align: center; }
+  .productions .show_title {
+    font-family: 'Libre Baskerville', serif;
+    margin-bottom: 15px;
+    font-size: 2em;
+    font-weight: 700;
+    color: lightgray;
+    background-color: #242B40;
+    color: #e8d25a;
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+    text-align: center; }
+  .productions .genre-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 20px; }
+  .productions .genre {
+    background-color: lightgray;
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding: 5px 8px;
+    margin: 3px 3px 3px 0;
+    width: 300px;
+    text-align: center; }
+  .productions .venue {
+    margin: 10px; }
+  .productions .creatives {
+    margin: 20px;
+    line-height: 1.4em; }
+  .productions .description {
+    border-top: 1px solid indigo;
+    margin: 0 20px;
+    padding-top: 10px;
+    line-height: 1.5em; }
+
+.instr {
+  font-weight: 600;
+  color: indigo;
+  margin: 20px 0; }
+
+.toolbar {
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  top: 40px;
+  width: 100%;
+  min-width: 200px;
+  background-color: indigo;
+  height: 25px; }
+  @media screen and (max-width: 600px) {
+    .toolbar {
+      height: 35px; } }
+  .toolbar .head {
+    text-align: center;
+    line-height: 2.2em;
+    background-color: black;
+    width: 100%;
+    height: 100%;
+    text-transform: uppercase;
+    margin: 0;
+    color: white;
+    font-weight: 900;
+    font-size: 1.2em; }
+  .toolbar .tool {
+    box-sizing: border-box;
+    text-align: center;
+    padding: 5px;
+    width: 100%;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1em; }
+    .toolbar .tool:hover {
+      border: 1px solid indigo;
+      background-color: #505050; }
+    @media screen and (max-width: 600px) {
+      .toolbar .tool {
+        border-left: 1px solid white; } }
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace; }
+
+.MainBody {
+  position: relative;
+  width: 100%; }
+
+.head1 {
+  margin: 40px 0 20px;
+  font-size: 1.5em;
+  font-weight: bold;
+  text-transform: uppercase; }
+
+.body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 100px; }
+  .body .main {
+    position: relative;
+    top: 40px;
+    width: 100vw;
+    min-width: 360px;
+    height: 400px; }
+    @media screen and (max-width: 1070px) {
+      .body .main {
+        height: 250px; } }
+    .body .main .intro {
+      position: absolute;
+      width: 70%;
+      min-width: 360px;
+      height: 100%;
+      top: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+      .body .main .intro > * {
+        font-size: 1.2em;
+        line-height: 1.5em;
+        color: white; }
+      .body .main .intro .content {
+        padding: 10%; }
+      @media screen and (max-width: 800px) {
+        .body .main .intro {
+          width: 60%; } }
+      @media screen and (max-width: 600px) {
+        .body .main .intro {
+          width: 100vw;
+          height: 100%;
+          width: 100%;
+          top: 0;
+          right: unset;
+          left: 0;
+          background-color: rgba(0, 0, 0, 0.2); } }
 
 .group {
   margin: 25px 0; }
@@ -100,7 +341,7 @@ code {
 
 .add_a_show, .add_venue {
   padding: 20px;
-  background-color: ivory;
+  background-color: darkorchid;
   margin: 20px 0; }
 
 select {
@@ -121,7 +362,7 @@ select {
   text-align: center;
   color: white;
   font-weight: 600;
-  background-color: darkblue;
+  background-color: indigo;
   border-radius: 5px;
   width: 50px;
   height: 15px; }
@@ -130,7 +371,7 @@ select {
   margin-left: 20px;
   color: white;
   font-weight: 600;
-  background-color: darkblue;
+  background-color: indigo;
   border-radius: 5px; }
 
 .addbutt {
@@ -149,7 +390,7 @@ input[type='text'] {
   padding: 5px;
   border: none;
   border-bottom: 2px solid gray;
-  color: darkblue; }
+  color: indigo; }
   input[type='text'].person {
     width: 100px; }
 
@@ -157,11 +398,14 @@ input[type='text'] {
   padding: 50px; }
 
 .all_shows {
-  background-color: lightblue; }
+  background-color: darkorchid; }
 
 .add_show {
   padding: 50px;
-  background-color: lightblue; }
+  background-color: darkorchid; }
+
+.addr {
+  margin-left: 53px; }
 
 .clickable {
   cursor: pointer;
@@ -184,7 +428,7 @@ div.list.clickable {
   margin-left: 30px; }
 
 .runin {
-  color: darkblue;
+  color: indigo;
   font-size: 1em;
   font-weight: bold;
   min-width: 200px;
@@ -195,16 +439,6 @@ textarea {
   margin: 5px 0;
   width: 90%;
   height: 100px; }
-
-.footer {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  width: 100%;
-  height: 15px;
-  text-align: center;
-  color: white;
-  background-color: black; }
 
 a {
   color: white;
@@ -217,7 +451,7 @@ a {
     text-decoration: none; }
   a:hover {
     cursor: pointer;
-    color: blueviolet; }
+    color: darkorchid; }
   a.link {
     margin-left: 10px; }
   a.inline {
@@ -248,9 +482,6 @@ a {
     color: #e8d25a; }
 
 .venues {
-  position: fixed;
-  top: 75px;
-  right: 0;
   background-color: white;
   margin: 20px;
   border-radius: 10px;
@@ -308,78 +539,7 @@ a {
     .theaters .theater_info .theater_name {
       font-family: 'Libre Baskerville', serif;
       font-size: 2em;
-      color: darkblue; }
-
-.theater {
-  margin-top: 30px;
-  width: 33%;
-  min-width: 200px; }
-  .theater h2 {
-    font-family: 'Libre Baskerville', serif;
-    color: darkblue;
-    font-size: 2em; }
-
-.productions {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  width: 33%; }
-  .productions h2 {
-    align-self: center;
-    font-family: 'Libre Baskerville', serif;
-    color: darkblue;
-    font-size: 2em;
-    margin: 20px 0 0; }
-  .productions .production {
-    background-image: linear-gradient(to left, rgba(112, 128, 144, 0.2), rgba(119, 136, 153, 0.8));
-    border-radius: 10px;
-    margin: 20px 0 0;
-    box-shadow: 5px 5px 10px grey;
-    width: 100%; }
-  .productions .show_dates {
-    font-family: 'Libre Baskerville', serif;
-    font-style: italic;
-    font-weight: bold;
-    font-size: 1.1em;
-    color: #242B40;
-    margin: 10px;
-    text-align: center; }
-  .productions .show_title {
-    font-family: 'Libre Baskerville', serif;
-    margin-bottom: 15px;
-    font-size: 2em;
-    font-weight: 700;
-    color: lightgray;
-    background-color: #242B40;
-    color: #e8d25a;
-    padding: 10px;
-    border-radius: 10px 10px 0 0;
-    text-align: center; }
-  .productions .genre-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    padding: 0 20px; }
-  .productions .genre {
-    background-color: lightgray;
-    border: 1px solid gray;
-    border-radius: 10px;
-    padding: 5px 8px;
-    margin: 3px 3px 3px 0;
-    width: 300px;
-    text-align: center; }
-  .productions .venue {
-    margin: 10px; }
-  .productions .creatives {
-    margin: 20px;
-    line-height: 1.4em; }
-  .productions .description {
-    border-top: 1px solid darkblue;
-    margin: 0 20px;
-    padding-top: 10px;
-    line-height: 1.5em; }
+      color: indigo; }
 
 .overlay {
   position: absolute;
@@ -410,29 +570,6 @@ a {
   .close:hover {
     color: #242B40; }
 
-.toolbar {
-  position: fixed;
-  display: flex;
-  justify-content: space-around;
-  top: 40px;
-  width: 100%;
-  min-width: 200px;
-  background-color: blueviolet;
-  padding: 10px; }
-  .toolbar .head {
-    text-transform: uppercase;
-    padding: 0;
-    color: white;
-    font-weight: 900;
-    font-size: 1.2em; }
-  .toolbar .tool {
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1em; }
-    .toolbar .tool:hover {
-      color: #e8d25a; }
-
 select {
   max-width: 75%; }
 
@@ -445,3 +582,53 @@ select {
   border-radius: 0 0 10px 10px; }
   .edit_tools.inter {
     border-radius: 10px; }
+
+.error {
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: white;
+  padding: 5px;
+  background-color: red;
+  margin: 5px 0;
+  width: 50%;
+  border-radius: 5px; }
+
+.show_results {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+  .show_results .title {
+    font-weight: bold;
+    font-size: 1.2em; }
+  .show_results .dates {
+    margin-left: 10px; }
+
+.email_item {
+  margin: 15px; }
+  .email_item a {
+    margin: 0 15px; }
+
+.all_theaters {
+  margin-top: 75px;
+  text-align: auto;
+  margin-left: 20px; }
+
+.trash, .update {
+  cursor: pointer; }
+
+.loginPage {
+  margin-top: 75px; }
+  .loginPage form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center; }
+
+.column {
+  margin-top: 50px; }
+
+.accent {
+  color: darkorchid; }

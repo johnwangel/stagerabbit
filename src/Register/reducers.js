@@ -27,7 +27,9 @@ function login(state,action){
   let name=`${user.fname} ${user.lname}`;
   let token=(user.token !=='')?user.token : null;
   let tid=user.tid;
-  return { level: user.level, name: name, token: token, loggedin: true, tid: tid } ;
+  let item={ level: user.level, name: name, token: token, loggedin: true, tid: tid };
+  console.log('item in login',item)
+  return item;
 }
 
 function logout(state,action){

@@ -22,7 +22,7 @@ class Venues extends Component {
                               <span className="list clickable"
                                     onClick={() => { this.props.edit('edit',item.venue_id) }}>Edit</span>
                               <span className="list clickable"
-                                    onClick={() => { this.props.del(item.venue_id) }}>Delete</span>
+                                    onClick={() => { this.props.del(item.venue_id) }}>Remove</span>
                             </div>
                           : null
                         }

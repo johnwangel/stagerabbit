@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
+import { Redirect } from "react-router";
+
 import {  getStates } from './statesActions';
 
 import {  updateTheaterID,
@@ -24,6 +26,8 @@ import {  getAllShows,
 
 import  { removeArtist } from '../Artists/actions';
 
+import { GET_POST_HEADER, URL, process_submit } from '../constants/constants.js';
+
 import Theater from "../Theater/theater";
 import AddTheater from "../Theater/theaterAdd";
 import Venues from "../Venues/venues";
@@ -45,13 +49,17 @@ class Main extends Component {
                   hide_delete_theater_form: true,
                   venue: { venue_id : 0 },
                   newArtistID: null,
-                  clear_edit: false
+                  clear_edit: false,
+                  delete_id: this.props.Theater[0].id
                 };
+
+    console.log('params',this.props.match.params)
     if (this.props.match.params.id) this.update_theater_details(this.props.match.params.id);
     this.props.getStates();
     this.props.getAllArtists();
     this.update_theater_details = this.update_theater_details.bind(this);
     this.handleIDSubmit = this.handleIDSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.handleIDChange = this.handleIDChange.bind(this);
     this.alterTheaterCallback = this.alterTheaterCallback.bind(this);
     this.venue_form = this.venue_form.bind(this);
@@ -67,13 +75,14 @@ class Main extends Component {
     this.prod_form = this.prod_form.bind(this);
     this.theater_form = this.theater_form.bind(this);
     this.add_theater = this.add_theater.bind(this);
+    this.delete_theater = this.delete_theater.bind(this);
   }
 
   componentDidUpdate(prevProps) {
     let tid = this.props.Theater[0].id;
 
     if (this.props.Theater[0].id !== prevProps.Theater[0].id){
-      console.log(tid);
+      this.setState({ current_id: this.props.Theater[0].id, delete_id: this.props.Theater[0].id });
       this.update_theater_details(tid);
     }
 
@@ -86,13 +95,18 @@ class Main extends Component {
     }
   }
 
+  handleChange(e) {
+    this.setState({ delete_id : e.target.value });
+  }
+
   handleIDChange(e) {
-    this.props.updateTheaterID(e.target.value);
+    this.setState({ current_id : e.target.value })
+    //this.props.updateTheaterID(e.target.value);
   }
 
   handleIDSubmit(e) {
     e.preventDefault();
-    let tid = this.props.Theater[0].currId;
+    let tid = this.state.current_id;
     this.update_theater_details(tid);
   }
 
@@ -109,6 +123,7 @@ class Main extends Component {
   }
 
   update_theater_details(tid){
+    this.setState({ hide_new_theater_form : true })
     //(tid.charAt(0)===':') ? tid=tid.substr(1) : tid=tid;
     this.props.updateTheater(tid);
     this.props.updateProds(tid);
@@ -226,7 +241,6 @@ class Main extends Component {
   }
 
   add_theater(body){
-    this.props.addTheater( body );
     this.setState(
       {
         hide_new_show_form: true,
@@ -237,6 +251,7 @@ class Main extends Component {
         hide_new_theater_form: true,
         hide_delete_theater_form: true
       });
+      this.props.addTheater( body );
   }
 
   delete_theater_form(){
@@ -250,6 +265,18 @@ class Main extends Component {
         hide_new_theater_form: true,
         hide_delete_theater_form: !this.state.hide_delete_theater_form
       });
+  }
+
+  delete_theater(e){
+    e.preventDefault();
+    let body = process_submit(e.target.elements);
+    console.log(body);
+
+    GET_POST_HEADER.body = JSON.stringify(body)
+    fetch(`${URL}theaters/delete_theater`, GET_POST_HEADER)
+    .then(response => response.json())
+    .then(data => this.props.history.push("/") )
+    .catch( err => console.log(err.message));
   }
 
   add_show(body){
@@ -294,10 +321,10 @@ class Main extends Component {
               <div class="add_show" style={{marginTop: this.state.scroll + 'px'}}>
                   <div class="close" onClick={() => { this.delete_theater_form() }} >&times;</div>
                   <h1>Delete Theater</h1>
-                  <form onSubmit={this.handleSubmit}>
+                  <form onSubmit={this.delete_theater}>
                       <div>
-                        <span className='runin'>Name:</span>
-                        <input id="name" type="text" name="name" value={ this.state.name } onChange={this.handleChange} />
+                        <span className='runin'>Theater ID:</span>
+                        <input id="delete_id" type="text" name="delete_id" value={ this.state.delete_id } onChange={this.handleChange} />
                       </div>
                       <input type="submit" value="Submit" className="subbutt" />
                   </form>
@@ -310,15 +337,15 @@ class Main extends Component {
           ? (this.state.hide_new_theater_form)
             ? null
             : <AddTheater
-                        states={ this.props.States.dropdown }
-                        theater_form={ this.theater_form }
-                        add_theater={ this.add_theater }/>
+                states={ this.props.States.dropdown }
+                theater_form={ this.theater_form }
+                add_theater={ this.add_theater }/>
           : null
         }
 
         { (d.id) ? <Theater cb={this.alterTheaterCallback} perm={ this.props.User.level } theater={ this.props.Theater[0] }/> : null }
 
-        { (v && v.length>0)
+        { (v && v.length>0 && this.props.User.level>1)
           ? <Venues
                   id={ d.id }
                   perm={ this.props.User.level }
@@ -392,10 +419,8 @@ class Main extends Component {
                    onClick={() => { this.show_form() }}>Add a Show</div>
               <div className="tool"
                    onClick={() => { this.prod_form() }}>Add a Production</div>
-              <div className="tool"
-                   onClick={() => { this.theater_form() }}>Add a Theater</div>
-              <div className="tool"
-                   onClick={() => { this.delete_theater_form() }}>Delete a Theater</div>
+              { (this.props.User.level === 3) ? <div className="tool" onClick={() => { this.theater_form() }}>Add a Theater</div> : null }
+              { (this.props.User.level === 3) ? <div className="tool" onClick={() => { this.delete_theater_form() }}>Delete a Theater</div> : null }
             </div>
           : null
         }

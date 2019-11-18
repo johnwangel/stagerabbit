@@ -1,13 +1,18 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
+
 
 import  { getProfileFetch } from './Register/actions';
 
 import Main from './Main/Main';
 import Home from './Home/Home';
 import Header from "./Header/header";
+import Login from './Register/login';
 import Register from './Register/register';
+import ProdByShow from './Productions/prodsByShow';
+import TheaterEmails from './Theater/theaterEmails';
 
 class App extends Component {
   constructor(props) {
@@ -21,13 +26,24 @@ class App extends Component {
   render() {
     return (
               <Router basename="/">
-                <div>
-                  <Header/>
+                <div className='MainBody'>
+                  <Helmet>
+                    <title>StageRabbit</title>
+                    <meta name="keywords" content="Find Productions Theatre Company Theater Amateur Professional Community Summer Stock Children's Regional High School College Shows Drama Musicals Revues Near Me Comedy Plays" />
+                    <meta
+                      name="description"
+                      content="Free searchable database of community theaters and productions across the United States" />
+                    <script data-ad-client="ca-pub-9593088864998919" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                  </Helmet>
+                  <Header />
                   <Route exact path="/" component={Home} />
                   <Route path="/edit" component={Main} />
                   <Route path="/theater/:id" component={Main} />
+                  <Route path="/login" component={Login} />
                   <Route path="/register" component={Register} />
-                  <div className='footer'>Icons made by <a href="https://www.flaticon.com/authors/darius-dan" title="Darius Dan">Darius Dan</a> from <a href="https://www.flaticon.com/"         title="Flaticon">www.flaticon.com</a></div>
+                  <Route path="/prodsbyshow/:id" component={ProdByShow} />
+                  <Route path="/emails" component={TheaterEmails} />
+                  <div className='footer'>StageRabbit, 20 River Ct. Ste. 2007, Jersey City, NJ 07310&nbsp;&nbsp;<a href='mailto:info@stagerabbit.com'>info@stagerabbit.com</a></div>
                 </div>
               </Router>
             )

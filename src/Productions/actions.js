@@ -5,6 +5,7 @@ import { GET_HEADER, GET_POST_HEADER, URL } from '../constants/constants.js';
 export const UPDATE_PRODS = 'UPDATE_PRODS';
 export const NEW_PROD = 'NEW_PROD';
 export const EDIT_PROD = 'EDIT_PROD';
+export const PROD_BY_SHOW = 'PROD_BY_SHOW';
 
 export function updateProds ( theaterid ){
   return dispatch => {
@@ -47,5 +48,18 @@ export function editProd(body){
 
 const EditProd = data => ({
   type : EDIT_PROD,
+  payload : data
+});
+
+export function prodsByShow(id){
+  return dispatch => {
+    fetch(`${URL}productions/byShow?id=${id}`, GET_HEADER )
+    .then(response => response.json())
+    .then(data => dispatch(prods_by_show(data)))
+    .catch( err => console.log(err.message));
+  };
+}
+const prods_by_show = data => ({
+  type : PROD_BY_SHOW,
   payload : data
 });
