@@ -8,7 +8,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100vw;
-  height: 40px;
+  height: 50px;
   background-color: $gray;
 
   .title {
@@ -36,6 +36,12 @@
       margin-top: 20px;
       padding: 10px;
       display: inline;
+      a {
+        color: white;
+        &:hover {
+          color: $accent;
+        }
+      }
     }
   }
 
@@ -82,7 +88,7 @@ a.home {
 
 .dropdown_menu {
   display: flex;
-  top: 40px;
+  top: 50px;
   right: 0;
   flex-direction: column;
   position: fixed;

@@ -2,7 +2,7 @@
   position: fixed;
   display: flex;
   justify-content: space-between;
-  top: 40px;
+  top: 50px;
   width: 100%;
   min-width: 200px;
   background-color: $main;
@@ -20,7 +20,7 @@
     margin: 0;
     color: white;
     font-weight: 900;
-    font-size: 1.2em;
+    font-size: .8em;
   }
   .tool {
     box-sizing: border-box;
@@ -30,7 +30,7 @@
     color: white;
     cursor: pointer;
     font-weight: bold;
-    font-size: 1em;
+    font-size: .8em;
     &:hover {
       border: 1px solid $main;
       background-color: $gray;

@@ -19,7 +19,7 @@ body {
   justify-content: space-between;
   align-items: center;
   width: 100vw;
-  height: 40px;
+  height: 50px;
   background-color: #505050; }
   .nav .title {
     color: white;
@@ -41,6 +41,10 @@ body {
       margin-top: 20px;
       padding: 10px;
       display: inline; }
+      .nav ul li a {
+        color: white; }
+        .nav ul li a:hover {
+          color: darkorchid; }
   .nav .nav-head {
     color: white;
     font-size: 1.2em; }
@@ -74,7 +78,7 @@ a.home {
 
 .dropdown_menu {
   display: flex;
-  top: 40px;
+  top: 50px;
   right: 0;
   flex-direction: column;
   position: fixed;
@@ -226,7 +230,7 @@ input[type='text'] {
   position: fixed;
   display: flex;
   justify-content: space-between;
-  top: 40px;
+  top: 50px;
   width: 100%;
   min-width: 200px;
   background-color: indigo;
@@ -244,7 +248,7 @@ input[type='text'] {
     margin: 0;
     color: white;
     font-weight: 900;
-    font-size: 1.2em; }
+    font-size: .8em; }
   .toolbar .tool {
     box-sizing: border-box;
     text-align: center;
@@ -253,7 +257,7 @@ input[type='text'] {
     color: white;
     cursor: pointer;
     font-weight: bold;
-    font-size: 1em; }
+    font-size: .8em; }
     .toolbar .tool:hover {
       border: 1px solid indigo;
       background-color: #505050; }
@@ -282,7 +286,7 @@ code {
   margin-bottom: 100px; }
   .body .main {
     position: relative;
-    top: 40px;
+    top: 50px;
     width: 100vw;
     min-width: 360px;
     height: 400px; }
