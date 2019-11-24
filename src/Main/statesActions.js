@@ -5,6 +5,7 @@ import { GET_HEADER, URL } from '../constants/constants.js';
 export const UPDATE_STATES='UPDATE_STATES';
 
 export function getStates(){
+  console.log('URL',URL);
   return dispatch => {
     fetch(`${URL}locations/states`, GET_HEADER)
     .then(response => response.json())
