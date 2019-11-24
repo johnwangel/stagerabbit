@@ -1,5 +1,5 @@
-//export const URL = 'http://localhost:3100/';
-export const URL = 'https://theater.stagerabbit.com/';
+export const URL = 'http://localhost:3100/';
+//export const URL = 'https://theater.stagerabbit.com/';
 
 export const GET_HEADER = {
         method: 'GET',

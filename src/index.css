@@ -2,10 +2,13 @@
 body {
   margin: 0;
   font-family: 'Raleway', sans-serif;
-  font-size: .6em;
+  font-size: 1em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #EEE; }
+  @media screen and (max-width: 800px) {
+    body {
+      font-size: .6em; } }
 
 .nav {
   position: fixed;
@@ -369,6 +372,7 @@ select {
 
 .subbutt {
   margin-left: 20px;
+  font-size: 1.2em;
   color: white;
   font-weight: 600;
   background-color: indigo;
@@ -385,6 +389,7 @@ select {
 
 input[type='text'] {
   margin: 5px 0;
+  font-size: 1.2em;
   font-family: 'Raleway', sans-serif;
   max-width: 75%;
   padding: 5px;
@@ -475,11 +480,13 @@ a {
       color: #e8d25a; }
 
 .website {
-  text-decoration: underline;
-  color: red;
-  cursor: pointer; }
+  text-decoration: none;
+  color: indigo;
+  cursor: pointer;
+  font-weight: bold;
+  border: none; }
   .website:hover {
-    color: #e8d25a; }
+    color: darkorchid; }
 
 .venues {
   background-color: white;
@@ -571,7 +578,8 @@ a {
     color: #242B40; }
 
 select {
-  max-width: 75%; }
+  max-width: 75%;
+  font-size: 1.2em; }
 
 .edit_tools {
   display: flex;
@@ -631,4 +639,6 @@ select {
   margin-top: 50px; }
 
 .accent {
-  color: darkorchid; }
+  color: darkorchid;
+  font-weight: 800;
+  text-shadow: .25px -.25px 0 #FFF, -.25px .25px 0 #FFF, .25px .25px 0 #FFF; }

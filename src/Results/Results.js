@@ -14,7 +14,7 @@ class Results extends Component {
                     { (this.props.type==='1')
                       ? <span><span className="theater_name">
                             <Link className='website' to={`/theater/${this.props.item.id}`}>{this.props.item.name}</Link>
-                          </span>
+                          </span>&nbsp;
                           {this.props.item.city}, {this.props.item.abbr} ({parseInt(this.props.item.distance)} miles)</span>
                         : null
                     }

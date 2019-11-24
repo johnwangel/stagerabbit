@@ -3,7 +3,10 @@
 body {
   margin: 0;
   font-family: 'Raleway', sans-serif;
-  font-size: .6em;
+  font-size: 1em;
+  @media screen and (max-width: 800px){
+    font-size: .6em;
+  }
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #EEE;
@@ -149,6 +152,7 @@ select {
 
 .subbutt {
   margin-left: 20px;
+  font-size: 1.2em;
   color: white;
   font-weight: 600;
   background-color: $main;
@@ -167,6 +171,7 @@ select {
 
 input[type='text'] {
   margin: 5px 0;
+  font-size: 1.2em;
   font-family: 'Raleway', sans-serif;
   max-width: 75%;
   padding: 5px;
@@ -244,8 +249,6 @@ textarea {
   height: 100px;
 }
 
-
-
 a {
   color: white;
   font-size: 1.2em;
@@ -291,11 +294,13 @@ a {
 }
 
 .website {
-  text-decoration: underline;
-  color: red;
+  text-decoration: none;
+  color: $main;
   cursor: pointer;
+  font-weight: bold;
+  border: none;
   &:hover{
-    color: $yellow;
+    color: $accent;
   }
 }
 
@@ -417,10 +422,9 @@ a {
   }
 }
 
-
-
 select{
   max-width: 75%;
+  font-size: 1.2em;
 }
 
 .edit_tools {
@@ -498,4 +502,10 @@ select{
 
 .accent {
   color: $accent;
+  font-weight: 800;
+  text-shadow:
+   //-.25px -.25px 0 #FFF,
+    .25px -.25px 0 #FFF,
+   -.25px .25px 0 #FFF,
+     .25px .25px 0 #FFF;
 }
