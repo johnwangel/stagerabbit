@@ -53,7 +53,7 @@ class Main extends Component {
                   delete_id: this.props.Theater[0].id
                 };
 
-    console.log('params',this.props.match.params)
+    //console.log('params',this.props.match.params)
     if (this.props.match.params.id) this.update_theater_details(this.props.match.params.id);
     this.props.getStates();
     this.props.getAllArtists();
@@ -100,7 +100,7 @@ class Main extends Component {
   }
 
   handleIDChange(e) {
-    this.setState({ current_id : e.target.value })
+    this.setState({ current_id : e.target.value });
     //this.props.updateTheaterID(e.target.value);
   }
 

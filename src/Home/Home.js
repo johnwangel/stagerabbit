@@ -63,8 +63,7 @@ class Home extends Component {
   }
 
   render() {
-    console.log('GETTING THIS');
-    console.log('PROPS IN HOME',this.props)
+    //console.log('PROPS IN HOME',this.props)
 
       return (<div className="body">
           <div className="main" style={bg}>

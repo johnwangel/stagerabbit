@@ -42,9 +42,8 @@ body {
       padding: 10px;
       display: inline; }
       .nav ul li a {
-        color: white; }
-        .nav ul li a:hover {
-          color: darkorchid; }
+        color: white;
+        text-decoration: none; }
   .nav .nav-head {
     color: white;
     font-size: 1.2em; }
@@ -67,9 +66,20 @@ body {
 .menu, .home {
   color: white;
   font-size: 2em;
-  cursor: pointer; }
-  .menu:hover, .home:hover {
-    color: darkorchid; }
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  margin-left: 5px;
+  margin-right: 5px; }
+
+.menu:focus .sub-menu,
+.menu:focus-within .sub-menu,
+.menu:hover .dropdown_menu {
+  visibility: visible;
+  /* shows sub-menu */
+  opacity: 1;
+  z-index: 1;
+  transition-delay: 0s, 0s, 0.3s; }
 
 a.home {
   text-decoration: none;
@@ -77,7 +87,13 @@ a.home {
   font-size: 2.8em; }
 
 .dropdown_menu {
+  visibility: hidden;
+  /* hides sub-menu */
   display: flex;
+  opacity: 0;
+  transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
+  z-index: -1;
+  position: absolute;
   top: 50px;
   right: 0;
   flex-direction: column;
@@ -85,7 +101,7 @@ a.home {
   width: 100px;
   background-color: darkorchid;
   color: white;
-  font-size: 1.2em; }
+  font-size: .5em; }
 
 .menu_item {
   padding: 5px 10px; }

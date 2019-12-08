@@ -35,7 +35,7 @@ class Header extends Component {
   }
 
   render() {
-    console.log(this.props)
+    //console.log(this.props)
     return (
       <div className="nav">
         <div className="logo">
@@ -54,10 +54,9 @@ class Header extends Component {
         </ul>
         <div className='nav-icons'>
           <Link className='home' to="/">&#8962;</Link>
-          <span className='menu' onClick={ this.ToggleMenu } >&#9776;</span>
-        </div>
-         { (this.state.showMenu)
-            ? <div className='dropdown_menu' >
+          <div className='menu'>
+              <div>&#9776;</div>
+              <div className='dropdown_menu' >
                 { ( this.state.loggedin)
                   ? <div className="menu_item" onClick={this.handleLogout}>Logout</div>
                   : <Link className="menu_item" onClick={ this.ToggleMenu } to="/login">Log In</Link>
@@ -66,9 +65,11 @@ class Header extends Component {
                   ? null
                   : <Link className="menu_item" onClick={ this.ToggleMenu } to="/register">Register</Link>
                 }
+                <div className="menu_item">About Us</div>
+                <div className="menu_item">Contact</div>
               </div>
-            : null
-        }
+            </div>
+          </div>
       </div>
     );
   }
