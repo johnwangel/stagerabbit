@@ -26,8 +26,8 @@ class AddProd extends Component {
     console.log('start date', p.start_date,  '| end date', p.end_date);
 
     if(p && p.start_date) {
-      sd = Moment.utc(p.start_date).format();
-      ed = Moment.utc(p.end_date).format();
+      sd = Moment.utc(p.start_date).format('YYYY-MM-DD');
+      ed = Moment.utc(p.end_date).format('YYYY-MM-DD');
     }
 
     console.log(sd, ' ', ed);
