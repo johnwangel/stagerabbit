@@ -102,10 +102,12 @@ class AddProd extends Component {
   }
 
   handleStartDateChange( date ) {
+    console.log('start',date);
     this.setState({ start : date, end: date } );
   }
 
   handleEndDateChange( date ) {
+    console.log('end',date);
     this.setState({ end : date } );
   }
 
