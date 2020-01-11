@@ -66,7 +66,7 @@ class Header extends Component {
                   : <Link className="menu_item" onClick={ this.ToggleMenu } to="/register">Register</Link>
                 }
                 <div className="menu_item">About Us</div>
-                <div className="menu_item">Contact</div>
+                <Link className="menu_item" onClick={ this.ToggleMenu } to="/contact">Contact</Link>
               </div>
             </div>
           </div>

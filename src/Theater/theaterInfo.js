@@ -5,13 +5,19 @@ class TheaterInfo extends Component {
   constructor(props) {
     super(props);
     this.value = React.createRef();
-    this.state = { [this.props.label] : this.props.value };
+    var val = (this.props.label === 'specialty_id') ? 0 : this.props.value;
+    this.state = { [this.props.label] :  val };
     this.handleChange = this.handleChange.bind(this);
+    this.onDropdownSelected = this.onDropdownSelected.bind(this);
   }
 
   handleChange(e) {
     const n = e.target.name;
     this.setState({ [n] : e.target.value});
+  }
+
+  onDropdownSelected(e){
+    this.setState({ [this.props.label] : parseInt(e.target.value) });
   }
 
   render() {
@@ -33,19 +39,29 @@ class TheaterInfo extends Component {
                         : <span>{ this.props.value }</span>
                       }
                     </div>
-                  : <form>
+                  : <div>
                       <span className="runin">{this.props.label}:</span>
-                      <input
-                          id={this.props.id}
-                          key={ this.props.id }
-                          type="text" name={this.props.label}
-                          value={this.state[this.props.label]}
-                          onChange={this.handleChange}
-                          ref={this.value} />
+
+                      { ( this.props.label === 'specialty' )
+                        ? <select id="specialty_id"
+                                  type="select"
+                                  name="specialty_id"
+                                  value={ this.state[this.props.label] }
+                                  onChange={this.onDropdownSelected}>
+                            {this.props.specialites}
+                          </select>
+                        : <input
+                              id={this.props.id}
+                              key={ this.props.id }
+                              type="text" name={this.props.label}
+                              value={this.state[this.props.label]}
+                              onChange={this.handleChange}
+                              ref={this.value} />
+                      }
                       <button
                           className="subbutt"
-                          onClick={() => { this.props.submit_it(info) }}>Submit</button>
-                    </form>
+                          onClick={ () => { this.props.submit_it(info) } }>Submit</button>
+                    </div>
               }
             </div>
       }

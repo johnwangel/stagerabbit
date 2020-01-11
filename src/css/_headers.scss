@@ -116,9 +116,10 @@ a.home {
   font-size: .5em;
 }
 
-
-.menu_item {
+.menu_item, a.menu_item {
   padding: 5px 10px;
+  color: white;
+  font-size: 1em;
   &:hover {
     background-color: white;
     color: $accent;

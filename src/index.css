@@ -10,6 +10,31 @@ body {
     body {
       font-size: .6em; } }
 
+.contact {
+  margin-top: 75px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+  .contact form {
+    position: relative;
+    width: 50%; }
+    @media only screen and (max-width: 800px) {
+      .contact form {
+        width: 90%; } }
+    .contact form .form-group {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center; }
+    .contact form input {
+      flex: 2; }
+    .contact form label {
+      margin-right: 10px; }
+    .contact form button {
+      float: right; }
+
 .nav {
   position: fixed;
   top: 0;
@@ -103,9 +128,11 @@ a.home {
   color: white;
   font-size: .5em; }
 
-.menu_item {
-  padding: 5px 10px; }
-  .menu_item:hover {
+.menu_item, a.menu_item {
+  padding: 5px 10px;
+  color: white;
+  font-size: 1em; }
+  .menu_item:hover, a.menu_item:hover {
     background-color: white;
     color: darkorchid; }
 
@@ -122,6 +149,34 @@ a.home {
   color: white;
   background-color: black;
   font-size: 1em; }
+
+.register_container {
+  margin-top: 75px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+  .register_container .register {
+    width: 50%; }
+    .register_container .register p {
+      line-height: 1.8em; }
+    @media only screen and (max-width: 800px) {
+      .register_container .register {
+        width: 90%; } }
+    .register_container .register form {
+      margin: 25px;
+      margin-bottom: 150px; }
+      .register_container .register form .rbut {
+        margin: 0 5px 0 15px; }
+      .register_container .register form .reg {
+        margin-top: 15px; }
+        .register_container .register form .reg input {
+          width: 100%;
+          max-width: 100%; }
+      .register_container .register form .note {
+        font-size: .8em; }
+      .register_container .register form .subbutt {
+        margin: 15px 0; }
 
 .searchContent {
   position: relative;
@@ -153,9 +208,19 @@ a.home {
     margin: 0; }
 
 .search_result {
-  margin: 10px;
+  margin: 25px 10px 10px;
   font-size: 1.2em;
   text-align: left; }
+
+.upcoming {
+  margin: 5px 0 20px;
+  font-size: .9em; }
+  .upcoming .runin {
+    font-size: .9em; }
+  .upcoming .prod {
+    font-weight: bold;
+    font-style: italic;
+    font-size: .9em; }
 
 .theater {
   margin-top: 30px;
@@ -407,7 +472,7 @@ select {
   border-radius: 5px;
   margin-bottom: 20px; }
 
-input[type='text'] {
+input[type='text'], input[type='email'] {
   margin: 5px 0;
   font-size: 1.2em;
   font-family: 'Raleway', sans-serif;
@@ -416,7 +481,7 @@ input[type='text'] {
   border: none;
   border-bottom: 2px solid gray;
   color: indigo; }
-  input[type='text'].person {
+  input[type='text'].person, input[type='email'].person {
     width: 100px; }
 
 .venues, .all_shows, .add_venue {
@@ -469,8 +534,7 @@ a {
   color: white;
   font-size: 1.2em;
   text-decoration: none;
-  padding-bottom: 2px;
-  border-bottom: .25px solid white; }
+  padding-bottom: 2px; }
   a:link, a:visit, a:active {
     color: white;
     text-decoration: none; }
@@ -480,7 +544,7 @@ a {
   a.link {
     margin-left: 10px; }
   a.inline {
-    color: blue; }
+    color: darkorchid; }
 
 .logo {
   display: flex;
@@ -654,17 +718,28 @@ select {
   font-size: 1.2em; }
 
 .loginPage {
-  margin-top: 75px; }
+  margin-top: 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
   .loginPage form {
+    width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center; }
+    .loginPage form input {
+      margin: 0; }
+    .loginPage form input[type=text], .loginPage form input[type=password] {
+      width: 100%;
+      max-width: 100%;
+      font-size: 1.2em;
+      padding: 10px;
+      margin-bottom: 15px; }
 
 .column {
   margin-top: 50px; }
 
 .accent {
   color: darkorchid;
-  font-weight: 800;
-  text-shadow: .25px -.25px 0 #FFF, -.25px .25px 0 #FFF, .25px .25px 0 #FFF; }
+  font-weight: 800; }

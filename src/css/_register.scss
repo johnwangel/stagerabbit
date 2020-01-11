@@ -1,0 +1,36 @@
+.register_container {
+  margin-top: 75px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .register {
+    p { line-height: 1.8em; }
+    width: 50%;
+
+    @media only screen and (max-width: 800px) { width: 90%; }
+
+    form {
+      margin: 25px;
+      margin-bottom: 150px;
+      .rbut {
+        margin: 0 5px 0 15px;
+      }
+      .reg {
+        margin-top: 15px;
+        input {
+          width: 100%;
+          max-width: 100%;
+        }
+      }
+      .note {
+        font-size: .8em;
+      }
+      .subbutt {
+        margin: 15px 0;
+      }
+    }
+
+  }
+
+}

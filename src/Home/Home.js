@@ -63,7 +63,7 @@ class Home extends Component {
   }
 
   render() {
-    //console.log('PROPS IN HOME',this.props)
+    console.log('PROPS IN HOME',this.props)
 
       return (<div className="body">
           <div className="main" style={bg}>
@@ -142,10 +142,10 @@ class Home extends Component {
                 : null
               }
 
-              { ( this.props.SearchResults && this.props.SearchResults.type === 1 && this.props.SearchResults.results.length ) ?
+              { ( this.props.SearchResults && this.props.SearchResults.type === 1 && this.props.SearchResults.results.theaters.length ) ?
                   <div className="results"><div className="head1">Results:</div>
                    <ol>
-                    { this.props.SearchResults.results.map( (item, idx) => <Results key={`search-${idx}`} type='1' item={item} idx={idx} />) }
+                    { this.props.SearchResults.results.theaters.map( (item, idx) => <Results key={`search-${idx}`} type='1' item={item} idx={idx} prod={ this.props.SearchResults.results.prods.filter( t => t.length > 0 && t[0].theater_id == item.id ) }/>) }
                    </ol>
                   </div>
                   : null

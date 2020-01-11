@@ -5,16 +5,17 @@ import Prods from "../Productions/reducers.js";
 import SearchResults from "../Results/reducers.js";
 import Shows from "../Shows/reducers.js";
 import States from "../Main/statesReducer.js";
+import Specialties from "../Specialties/reducers.js";
 import Theater from "../Theater/reducers.js";
 import User from "../Register/reducers.js";
 import VenuesByTheater from "../Venues/reducers.js";
-
 
 const rootReducer = combineReducers({
     Prods,
     ProdArtists,
     SearchResults,
     Shows,
+    Specialties,
     States,
     Theater,
     VenuesByTheater,

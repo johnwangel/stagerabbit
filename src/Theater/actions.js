@@ -52,6 +52,7 @@ export function alterTheater ( body ){
     fetch(`${URL}theaters/alter_theater`, GET_POST_HEADER)
     .then(response => response.json())
     .then(data => {
+      console.log(data)
       let thtr=data;
       if (body.pos) thtr.pos=body.pos;
       dispatch(addTheaterUpdates(thtr))

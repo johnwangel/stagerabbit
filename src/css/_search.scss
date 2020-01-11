@@ -36,7 +36,20 @@
 }
 
 .search_result {
-  margin: 10px;
+  margin: 25px 10px 10px;
   font-size: 1.2em;
   text-align: left;
+}
+
+.upcoming {
+  margin: 5px 0 20px;
+  font-size: .9em;
+  .runin {
+    font-size: .9em;
+  }
+  .prod {
+    font-weight: bold;
+    font-style: italic;
+    font-size: .9em;
+  }
 }

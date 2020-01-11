@@ -71,11 +71,14 @@ a.home {
   color: white;
   font-size: 1.2em; }
 
-.menu_item {
-  padding: 5px 10px; }
-  .menu_item:hover {
-    background-color: white;
-    color: darkorchid; }
+.menu_item, a.menu_item {
+  text-decoration: none;
+  color: white;
+  font-size: .5em;
+  padding: 5px 10px;
+}
+
+
 
 .footer {
   position: fixed;

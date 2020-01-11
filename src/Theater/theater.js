@@ -50,7 +50,7 @@ class Theater extends Component {
                                 : x[keyname];
                   const edit = this.state.edit===keyname ? true : false;
 
-                  if (keyname==='createdAt' || keyname==='updatedAt' || keyname==='edit') return null;
+                  if (keyname==='createdAt' || keyname==='updatedAt' || keyname==='edit' || keyname==='specialty_id') return null;
 
                   return <TheaterInfo
                               key={keyindex}
@@ -60,7 +60,8 @@ class Theater extends Component {
                               edit={edit}
                               submit_it={this.submit_it}
                               edit_it={this.edit_it}
-                              perm={this.props.perm}/>
+                              perm={this.props.perm}
+                              specialites={ this.props.specialties } />
               })}</div>
           : <div className='theater_info'>
               <div className='theater_name'>{this.props.theater.name}</div>

@@ -11,7 +11,7 @@ export function search ( body ){
     fetch(`${URL}search/${body.searchType}`, GET_POST_HEADER )
     .then(response => response.json())
     .then(data => {
-      if (data.length>0){
+      if (data.theaters.length>0){
         dispatch( addTheResults( { type: body.type, results: data } ) )
       } else {
         dispatch( no_results() )

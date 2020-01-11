@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import { Redirect } from "react-router";
 
+import {  getSpecialties } from '../Specialties/actions';
+
 import {  getStates } from './statesActions';
 
 import {  updateTheaterID,
@@ -56,6 +58,7 @@ class Main extends Component {
     //console.log('params',this.props.match.params)
     if (this.props.match.params.id) this.update_theater_details(this.props.match.params.id);
     this.props.getStates();
+    this.props.getSpecialties();
     this.props.getAllArtists();
     this.update_theater_details = this.update_theater_details.bind(this);
     this.handleIDSubmit = this.handleIDSubmit.bind(this);
@@ -270,8 +273,6 @@ class Main extends Component {
   delete_theater(e){
     e.preventDefault();
     let body = process_submit(e.target.elements);
-    console.log(body);
-
     GET_POST_HEADER.body = JSON.stringify(body)
     fetch(`${URL}theaters/delete_theater`, GET_POST_HEADER)
     .then(response => response.json())
@@ -343,7 +344,14 @@ class Main extends Component {
           : null
         }
 
-        { (d.id) ? <Theater cb={this.alterTheaterCallback} perm={ this.props.User.level } theater={ this.props.Theater[0] }/> : null }
+        { (d.id) ?
+          <Theater
+            cb={this.alterTheaterCallback}
+            perm={ this.props.User.level }
+            specialties={ this.props.Specialties.dropdown }
+            theater={ this.props.Theater[0] }/>
+          : null
+        }
 
         { (v && v.length>0 && this.props.User.level>1)
           ? <Venues
@@ -508,6 +516,9 @@ const mapDispatchToProps = dispatch => {
     },
     addTheater: body => {
       dispatch( addTheater(body) )
+    },
+    getSpecialties: body => {
+      dispatch( getSpecialties() )
     }
   }
 }
