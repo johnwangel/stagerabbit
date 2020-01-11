@@ -29,9 +29,6 @@ class AddProd extends Component {
       ed = parseISO(Moment.utc(p.end_date).format('YYYY-MM-DD'));
     }
 
-    console.log('start ',p.start_date, '| end ', p.end_date)
-    console.log('start ',sd, '| end ', ed)
-
     this.state = {
       pid: (c) ? c.pid : null,
       editmode: (c) ? true : false,
