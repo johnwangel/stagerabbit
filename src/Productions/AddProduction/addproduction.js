@@ -1,6 +1,7 @@
 import React, { Component, createRef } from 'react';
 import { connect } from 'react-redux';
 import DatePicker from "react-datepicker";
+import parseISO from 'date-fns/parseISO'
 
 import { process_submit } from '../../constants/constants';
 import { updateProds } from '../actions';
@@ -21,24 +22,22 @@ class AddProd extends Component {
     var p;
     (this.props.production) ? p=this.props.production : p=null;
 
-    var sd=null, ed=null;
-
-    console.log('start date', p.start_date,  '| end date', p.end_date);
+    var sd=new Date(), ed=new Date();
 
     if(p && p.start_date) {
-      sd = Moment.utc(p.start_date).format('YYYY-MM-DD');
-      ed = Moment.utc(p.end_date).format('YYYY-MM-DD');
+      sd = parseISO(Moment.utc(p.start_date).format('YYYY-MM-DD'));
+      ed = parseISO(Moment.utc(p.end_date).format('YYYY-MM-DD'));
     }
 
-    console.log(sd.year(),sd.month(),sd.date());
+    console.log('start ',p.start_date, '| end ', p.end_date)
+    console.log('start ',sd, '| end ', ed)
 
     this.state = {
       pid: (c) ? c.pid : null,
       editmode: (c) ? true : false,
       formTitle: (c) ? 'Edit Production' : 'Add Production',
-      //start : (sd) ? new Date(sd.year(),sd.month(),sd.date()) : new Date(),
-      start : (sd) ? new Date(sd.year(),sd.month(),sd.date()) : new Date(),
-      end:  (ed) ? new Date(ed.year(),ed.month(),ed.date()) : new Date(),
+      start : sd,
+      end:  ed,
       venue_id: (c && c.venue && c.venue.venue_id) ? c.venue.venue_id : '0',
       venue_error: false,
       show_id: (c && c.sid) ? c.sid : '0',
@@ -126,7 +125,7 @@ class AddProd extends Component {
     return (
       <div ref={ this.errRef } className='overlay' style={{height: this.state.window + 'px'}}>
         <div className="all_shows" style={{marginTop: this.state.scroll + 'px'}}>
-          <div class="close" onClick={() => { this.props.prod_form() }} >&times;</div>
+          <div className="close" onClick={() => { this.props.prod_form() }} >&times;</div>
           <form id="form-1" onSubmit={this.handleSubmit}>
             <h1>{this.state.formTitle}</h1>
 
