@@ -22,6 +22,9 @@ class AddProd extends Component {
     (this.props.production) ? p=this.props.production : p=null;
 
     var sd=null, ed=null;
+
+    console.log('start date', p.start_date,  '| end date', p.end_date);
+
     if(p && p.start_date) {
       sd = Moment(p.start_date,"YYYY-MM-DD");
       ed = Moment(p.end_date,"YYYY-MM-DD");
