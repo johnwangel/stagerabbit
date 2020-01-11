@@ -30,12 +30,13 @@ class AddProd extends Component {
       ed = Moment.utc(p.end_date).format('YYYY-MM-DD');
     }
 
-    console.log(sd, ' ', ed);
+    console.log(sd.year(),sd.month(),sd.date());
 
     this.state = {
       pid: (c) ? c.pid : null,
       editmode: (c) ? true : false,
       formTitle: (c) ? 'Edit Production' : 'Add Production',
+      //start : (sd) ? new Date(sd.year(),sd.month(),sd.date()) : new Date(),
       start : (sd) ? new Date(sd.year(),sd.month(),sd.date()) : new Date(),
       end:  (ed) ? new Date(ed.year(),ed.month(),ed.date()) : new Date(),
       venue_id: (c && c.venue && c.venue.venue_id) ? c.venue.venue_id : '0',
