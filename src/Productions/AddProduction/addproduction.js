@@ -85,6 +85,7 @@ class AddProd extends Component {
     let body = process_submit(e.target.elements);
     if (this.state.editmode) {
       body.prod_id=this.state.pid;
+      console.log(body)
       this.props.edit_prod(body);
       this.props.prod_form();
     } else {
