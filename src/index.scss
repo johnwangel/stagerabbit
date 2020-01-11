@@ -272,6 +272,10 @@ a {
   &.inline {
     color: $accent;
   }
+  &-webkit-any-link {
+    color: white;
+    text-decoration: none;
+  }
 }
 
 .logo {
