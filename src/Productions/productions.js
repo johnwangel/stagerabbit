@@ -127,7 +127,7 @@ class Productions extends Component {
                 <div className="show_title"><SanitizedHTML html={ p.title } /></div>
 
                 <div className='show_dates'>
-                  {moment(p.start_date).format('MMMM D, YYYY')} to {moment(p.end_date).format('MMMM D, YYYY')}
+                  {moment.utc(p.start_date).format('MMMM D, YYYY')} to {moment.utc(p.end_date).format('MMMM D, YYYY')}
                 </div>
 
                 <div className='genre-container'><span className="genre">{g1}</span><span className="genre">{g2}</span></div>
