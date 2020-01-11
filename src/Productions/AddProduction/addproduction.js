@@ -26,9 +26,11 @@ class AddProd extends Component {
     console.log('start date', p.start_date,  '| end date', p.end_date);
 
     if(p && p.start_date) {
-      sd = Moment(p.start_date,"YYYY-MM-DD");
-      ed = Moment(p.end_date,"YYYY-MM-DD");
+      sd = Moment.utc(p.start_date).format();
+      ed = Moment.utc(p.end_date).format();
     }
+
+    console.log(sd, ' ', ed);
 
     this.state = {
       pid: (c) ? c.pid : null,
