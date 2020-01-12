@@ -54,7 +54,12 @@
   }
 }
 
-.next {
+.runin.next {
   font-size: 1.1em;
   font-weight: bold;
+  color: red;
+}
+
+.noresults {
+  font-size: .5em;
 }
