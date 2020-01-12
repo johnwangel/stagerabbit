@@ -21,7 +21,7 @@ class Results extends Component {
 
                           { (this.props.prod.length > 0)
                               ? <div className="upcoming"><span className="runin">Next Production:</span> <span className="prod">{ this.props.prod[0][0].title }</span>&emsp;({moment.utc(this.props.prod[0][0].start_date).format('M/D/YY')}&ndash;{moment(this.props.prod[0][0].end_date).format('M/D/YY')})</div>
-                              : <div className="upcoming"><span className="runin">No Upcoming Productions Available</span></div>
+                              : <div className="upcoming">No Upcoming Productions Available</div>
                           }
 
                           </span>
