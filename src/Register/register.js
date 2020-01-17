@@ -71,7 +71,7 @@ class Register extends Component {
                   <h2>Theater Company Administrator</h2>
                   <p>
                     If you are associated with a listed theater company,
-                    you can request an account to become and Administrator of your
+                    you can request an account to become an Administrator of your
                     company&rsquo;s content.
                     <ol>
                       <li>
