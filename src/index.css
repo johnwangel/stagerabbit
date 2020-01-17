@@ -28,12 +28,20 @@ body {
       flex-direction: row;
       justify-content: space-between;
       align-items: center; }
-    .contact form input {
+    .contact form input, .contact form select {
       flex: 2; }
+    .contact form select {
+      margin: 5px 0; }
     .contact form label {
       margin-right: 10px; }
     .contact form button {
       float: right; }
+
+.email_status {
+  text-align: center;
+  color: red;
+  padding: 20px;
+  font-size: 1.5em; }
 
 .nav {
   position: fixed;
@@ -717,10 +725,12 @@ select {
     width: 300px;
     font-size: 1em; }
 
-.all_theaters {
-  margin-top: 75px;
-  text-align: auto;
-  margin-left: 20px; }
+.all_emails {
+  margin: 75px 100px 100px; }
+  .all_emails .email_item {
+    margin: 50px 0; }
+    .all_emails .email_item > div {
+      margin: 10px 0; }
 
 .trash, .update {
   cursor: pointer;

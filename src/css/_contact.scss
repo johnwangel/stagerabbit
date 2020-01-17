@@ -17,9 +17,14 @@
       align-items: center;
     }
 
-    input {
+    input, select {
       flex: 2;
     }
+
+    select {
+      margin: 5px 0;
+    }
+
     label {
       margin-right: 10px;
     }
@@ -27,4 +32,11 @@
       float: right;
     }
   }
+}
+
+.email_status {
+  text-align: center;
+  color: red;
+  padding: 20px;
+  font-size: 1.5em;
 }
