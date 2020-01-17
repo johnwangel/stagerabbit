@@ -72,7 +72,13 @@ class Contact extends Component {
         <form id="contact-form" onSubmit={this.handleSubmit.bind(this)} method="POST">
           <div className="form-group">
             <label htmlFor="name">Name</label>
-            <input type="text" className="form-control" value={this.state.name} onChange={this.onNameChange.bind(this)} />
+            <input
+                  type="text"
+                  className="form-control"
+                  value={this.state.name}
+                  onChange={this.onNameChange.bind(this)}
+                  required
+              />
           </div>
           <div className="form-group">
               <label htmlFor="exampleInputEmail1">Email address</label>
@@ -80,7 +86,8 @@ class Contact extends Component {
                       className="form-control"
                       aria-describedby="emailHelp"
                       value={this.state.email}
-                      onChange={this.onEmailChange.bind(this)} />
+                      onChange={this.onEmailChange.bind(this)}
+                      required />
           </div>
 
           <div className="form-group">
@@ -101,7 +108,12 @@ class Contact extends Component {
 
           <div className="form-group">
               <label htmlFor="message">Message</label>
-              <textarea className="form-control" rows="5" value={this.state.message} onChange={this.onMessageChange.bind(this)} />
+              <textarea
+                    className="form-control"
+                    rows="5" value={this.state.message}
+                    onChange={this.onMessageChange.bind(this)}
+                    required
+                />
           </div>
           <button type="submit" className="subbutt">Submit</button>
         </form>
