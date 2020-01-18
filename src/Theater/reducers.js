@@ -4,7 +4,8 @@
   UPDATE_THEATER,
   ALTER_THEATER,
   ADD_THEATER,
-  ALL_THEATERS
+  ALL_THEATERS,
+  UPDATE_GEO
  } from './actions';
 
 const TheaterReducers = (state=[ { currId: null, id: null } ], action) => {
@@ -21,6 +22,8 @@ const TheaterReducers = (state=[ { currId: null, id: null } ], action) => {
       return addTheater(state,action);
     case ALL_THEATERS:
       return allTheaters(state,action);
+    case UPDATE_GEO:
+      return theaterUpdate(state,action);
     default:
       return state;
   }
@@ -57,14 +60,12 @@ function alterTheater(state,action){
   return f;
 }
 
-
 function theaterUpdate(state,action){
+  console.log(action.payload)
   return [ action.payload ];
 }
 
 function addTheater(state,action){
-
-  console.log(action.payload)
   action.payload[0].currId=action.payload[0].id;
   return [ action.payload ];
 }

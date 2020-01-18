@@ -10,7 +10,8 @@ import {  getStates } from './statesActions';
 import {  updateTheaterID,
           updateTheater,
           alterTheater,
-          addTheater } from '../Theater/actions';
+          addTheater,
+          updateGeo } from '../Theater/actions';
 
 import {  updateProds,
           editProd,
@@ -92,6 +93,7 @@ class Main extends Component {
     if (this.props.Prod && this.props.Prods.length !== prevProps.Prod.length) {
       this.update_theater_details(tid);
     }
+
     if (this.props.Shows !== prevProps.Shows ){
       this.props.updateProds(tid);
       this.setState({clear_edit: true});
@@ -295,8 +297,13 @@ class Main extends Component {
     );
   }
 
+  handleGeo(e){
+    e.preventDefault();
+    let body = process_submit(e.target.elements);
+    this.props.updateGeo(body);
+  }
+
   render() {
-    console.log('PROPS',this.props)
     const d = this.props.Theater[0];
     const p = this.props.Prods;
     const v = (this.props.VenuesByTheater.venues) ? this.props.VenuesByTheater.venues : null;
@@ -305,13 +312,18 @@ class Main extends Component {
     return (
       <div className="theaters">
         { (this.props.User.level===3)
-          ? <form onSubmit={this.handleIDSubmit}>
-              <label>
-                <span className='runin'>Theater ID:</span>
-                <input type="text" name="id" value={ this.state.current_id } onChange={this.handleIDChange} />
-              </label>
-              <input type="submit" value="Submit" className="subbutt" />
-            </form>
+          ? <div>
+              <form onSubmit={this.handleIDSubmit}>
+                <label>
+                  <span className='runin'>Theater ID:</span>
+                  <input type="text" name="id" value={ this.state.current_id } onChange={this.handleIDChange} />
+                </label>
+                <input type="submit" value="Submit" className="subbutt" />
+              </form>
+              <form onSubmit={this.handleGeo.bind(this)}>
+                <button id="geo" type="submit" value={ this.state.current_id } className="subbutt">Refresh Geo</button>
+              </form>
+            </div>
           : null
         }
 
@@ -519,6 +531,9 @@ const mapDispatchToProps = dispatch => {
     },
     getSpecialties: body => {
       dispatch( getSpecialties() )
+    },
+    updateGeo: body => {
+      dispatch( updateGeo(body) )
     }
   }
 }

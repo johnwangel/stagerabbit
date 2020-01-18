@@ -8,7 +8,7 @@ export const  ALTER_THEATER     = 'ALTER_THEATER';
 export const  THEATER_UPDATE    = 'THEATER_UPDATE';
 export const  ADD_THEATER       = 'ADD_THEATER';
 export const  ALL_THEATERS      = 'ALL_THEATERS';
-
+export const  UPDATE_GEO        = 'UPDATE_GEO';
 
 export function theaterUpdate ( values ){
   return { type : THEATER_UPDATE , payload : values }
@@ -84,3 +84,19 @@ const addedTheater = data => ({
 });
 
 
+export function updateGeo ( body ){
+  GET_POST_HEADER.body = JSON.stringify(body)
+  return dispatch => {
+    fetch(`${URL}theaters/update_geo`, GET_POST_HEADER)
+    .then(response => response.json())
+    .then(data => {
+      dispatch(newGeo(data.theater[0]));
+    })
+    .catch( err => console.log(err.message));
+  };
+}
+
+const newGeo = data => ({
+  type : UPDATE_GEO,
+  payload : data
+});
