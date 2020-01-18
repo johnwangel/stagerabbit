@@ -239,6 +239,17 @@ a.home {
 .noresults {
   font-size: .5em; }
 
+.pagination {
+  margin-top: 25px; }
+  .pagination .subbutt {
+    cursor: pointer;
+    font-size: 1em;
+    padding: 5px 10px; }
+    .pagination .subbutt.prev {
+      margin: 0 20px 0 0; }
+    .pagination .subbutt.next {
+      margin: 0 0 0 20px; }
+
 .theater {
   margin-top: 30px;
   width: 33%;

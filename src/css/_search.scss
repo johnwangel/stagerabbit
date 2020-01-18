@@ -63,3 +63,20 @@
 .noresults {
   font-size: .5em;
 }
+
+.pagination {
+  margin-top: 25px;
+
+  .subbutt {
+    cursor: pointer;
+    font-size: 1em;
+    padding: 5px 10px;
+
+    &.prev{
+      margin: 0 20px 0 0;
+    }
+    &.next{
+      margin: 0 0 0 20px;
+    }
+  }
+}

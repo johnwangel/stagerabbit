@@ -19,18 +19,40 @@ const bg = {
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state={ searchType: '1' }
+    this.state={ searchType: '1', pages: 0, startPage: 0, search: null }
     this.props.getStates();
     this.city = React.createRef();
     this.theater = React.createRef();
     this.show = React.createRef();
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.newlist1 = this.newlist1.bind(this);
+    this.newlist2 = this.newlist2.bind(this);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.SearchResults.results !== prevProps.SearchResults.results && this.props.SearchResults.results.count){
+      this.setState({ pages: Math.ceil(this.props.SearchResults.results.count/25), startPage: this.props.SearchResults.results.startAt +1 })
+    }
   }
 
   handleChange(e){
     e.preventDefault();
     this.setState({ searchType: e.target.value })
+  }
+
+  newlist1(){
+    let body = this.state.search;
+    body.startAt=this.state.startPage-2;
+    this.setState({search:body});
+    this.props.search(body);
+  }
+
+  newlist2(){
+    let body = this.state.search;
+    body.startAt=this.state.startPage;
+    this.setState({search:body});
+    this.props.search(body);
   }
 
   handleSubmit(e){
@@ -44,7 +66,7 @@ class Home extends Component {
         body[id]=val;
       }
     }
-
+    body.startAt=0;
     switch (this.state.searchType){
       case "1":
         body.type=1;
@@ -59,11 +81,13 @@ class Home extends Component {
         body.searchType='ByShow';
         break;
     }
+    this.setState({search:body});
     this.props.search(body);
   }
 
   render() {
-    console.log('PROPS IN HOME',this.props)
+    console.log('PROPS IN HOME',this.props);
+    console.log(this.state)
 
       return (<div className="body">
           <div className="main" style={bg}>
@@ -144,7 +168,7 @@ class Home extends Component {
 
               { ( this.props.SearchResults && this.props.SearchResults.type === 1 && this.props.SearchResults.results.theaters.length ) ?
                   <div className="results"><div className="head1">Results:</div>
-                   <ol>
+                   <ol start={ ((this.state.startPage - 1) * 25) + 1 }>
                     { this.props.SearchResults.results.theaters.map( (item, idx) => <Results key={`search-${idx}`} type='1' item={item} idx={idx} prod={ this.props.SearchResults.results.prods.filter( t => t.length > 0 && t[0].theater_id == item.id ) }/>) }
                    </ol>
                   </div>
@@ -169,6 +193,20 @@ class Home extends Component {
                   : null
               }
         </div>
+        { (this.state.pages !== 0)
+            ? <div className='pagination'>
+                { (this.state.startPage>1)
+                  ? <span className="subbutt prev" onClick={ () => { this.newlist1() } }>Prev</span>
+                  : null
+                }
+                page {this.state.startPage} of {this.state.pages}
+                { (this.state.startPage < this.state.pages)
+                  ? <span className="subbutt next" onClick={ () => { this.newlist2() } }>Next</span>
+                  : null
+                }
+            </div>
+            : null
+        }
       </div>)
   }
 }
