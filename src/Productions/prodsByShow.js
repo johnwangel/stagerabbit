@@ -22,7 +22,7 @@ class ProdByShow extends Component {
                   ? <ol>
                       { this.props.Prods.data.map((item, idx) => {
                             return <li>
-                                <span className='title'>{ item.title }</span>, <Link className='website' to={`/theater/${item.theater_id}`}>
+                                <span className='title'><SanitizedHTML html={ item.title } /></span>, <Link className='website' to={`/theater/${item.theater_id}`}>
                                 <SanitizedHTML html={item.theater_name} /></Link>,&nbsp;<SanitizedHTML html={ item.city_name} />,&nbsp;{ item.state_abbr }
                                 <span className="dates">({moment.utc(item.start_date).format('M/D/YY')}&ndash;{moment.utc(item.end_date).format('M/D/YY')})</span></li>
                           })
