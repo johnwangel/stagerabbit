@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 
 import {  prodsByShow } from './actions';
 
+import SanitizedHTML from 'react-sanitized-html';
+
 const moment = require('moment');
 
 class ProdByShow extends Component {
@@ -21,8 +23,8 @@ class ProdByShow extends Component {
                       { this.props.Prods.data.map((item, idx) => {
                             return <li>
                                 <span className='title'>{ item.title }</span>, <Link className='website' to={`/theater/${item.theater_id}`}>
-                                {item.theater_name}</Link>,&nbsp;{ item.city_name},&nbsp;{ item.state_abbr }
-                                <span className="dates">({moment(item.start_date).format('M/D/YY')}&ndash;{moment(item.end_date).format('M/D/YY')})</span></li>
+                                <SanitizedHTML html={item.theater_name} /></Link>,&nbsp;<SanitizedHTML html={ item.city_name} />,&nbsp;{ item.state_abbr }
+                                <span className="dates">({moment.utc(item.start_date).format('M/D/YY')}&ndash;{moment.utc(item.end_date).format('M/D/YY')})</span></li>
                           })
                       }
                     </ol>
