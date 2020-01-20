@@ -86,8 +86,9 @@ class Home extends Component {
   }
 
   render() {
-    console.log('PROPS IN HOME',this.props);
-    console.log(this.state)
+    //console.log('PROPS IN HOME',this.props);
+    //console.log(typeof this.props.SearchResults.type, this.props.SearchResults.type)
+    //console.log(this.state)
 
       return (<div className="body">
           <div className="main" style={bg}>
@@ -161,12 +162,12 @@ class Home extends Component {
                 : null
               }
 
-              { ( this.props.SearchResults && this.props.SearchResults.type === 0 )
+              { ( this.props.SearchResults && this.props.SearchResults.results && this.props.SearchResults.type === 0 )
                 ? <div className='error'>No results</div>
                 : null
               }
 
-              { ( this.props.SearchResults && this.props.SearchResults.type === 1 && this.props.SearchResults.results.theaters.length ) ?
+              { ( this.props.SearchResults && this.props.SearchResults.type === 1 && this.props.SearchResults.results && this.props.SearchResults.results.theaters && this.props.SearchResults.results.theaters.length ) ?
                   <div className="results"><div className="head1">Results:</div>
                    <ol start={ ((this.state.startPage - 1) * 25) + 1 }>
                     { this.props.SearchResults.results.theaters.map( (item, idx) => <Results key={`search-${idx}`} type='1' item={item} idx={idx} prod={ this.props.SearchResults.results.prods.filter( t => t.length > 0 && t[0].theater_id == item.id ) }/>) }
@@ -175,19 +176,19 @@ class Home extends Component {
                   : null
               }
 
-              { ( this.props.SearchResults && this.props.SearchResults.type === 2 && this.props.SearchResults.results.length ) ?
+              { ( this.props.SearchResults && this.props.SearchResults.type === 2 && this.props.SearchResults.results &&  this.props.SearchResults.results.theaters && this.props.SearchResults.results.theaters.length ) ?
                   <div className="results"><div className="head1">Results:</div>
                    <ol>
-                    { this.props.SearchResults.results.map( (item, idx) => <Results key={`search-${idx}`} type='2' item={item} idx={idx} />) }
+                    { this.props.SearchResults.results.theaters.map( (item, idx) => <Results key={`search-${idx}`} type='2' item={item} idx={idx} />) }
                    </ol>
                   </div>
                   : null
               }
 
-              { ( this.props.SearchResults && this.props.SearchResults.type === 3 && this.props.SearchResults.results.length ) ?
+              { ( this.props.SearchResults && this.props.SearchResults.results && this.props.SearchResults.type === 3 && this.props.SearchResults.results.theaters && this.props.SearchResults.results.theaters.length ) ?
                   <div className="results"><div className="head1">Results:</div>
                    <ol>
-                    { this.props.SearchResults.results.map( (item, idx) => <Results key={`search-${idx}`} type='3' item={item} idx={idx} />) }
+                    { this.props.SearchResults.results.theaters.map( (item, idx) => <Results key={`search-${idx}`} type='3' item={item} idx={idx} />) }
                    </ol>
                   </div>
                   : null

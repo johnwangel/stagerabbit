@@ -3,7 +3,7 @@
   NORESULTS
  } from './actions';
 
-const SearchResults = (state={ type: null, results: [] }, action) => {
+const SearchResults = (state={ type: null, results: { theaters: [] } }, action) => {
     switch (action.type){
       case RESULTS:
         return action.payload;
