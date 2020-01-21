@@ -28,20 +28,19 @@ class AboutUs extends Component {
           the companies themselves. Then discovery of
           great new theaters and productions can be available at the theater-lover's fingertips!</p>
 
-          <p></p>
-
           <h1>Our Vision</h1>
           <p>At StageRabbit we not only have the theatergoer in mind, but also all the various types of
-          theaters across the country:</p>
-          <ul>
-            <li>sit-down productions</li>
-            <li>larger touring houses</li>
-            <li>professional regional companies</li>
-            <li>non-professional community theaters</li>
-            <li>children's theater companies</li>
-            <li>university theater programs</li>
-            <li>high schools and church productions</li>
-          </ul>
+          theaters across the country:
+            <ul>
+              <li>sit-down productions</li>
+              <li>larger touring houses</li>
+              <li>professional regional companies</li>
+              <li>non-professional community theaters</li>
+              <li>children's theater companies</li>
+              <li>university theater programs</li>
+              <li>high schools and church productions</li>
+            </ul>
+          </p>
 
           <p>There is talent to be found everywhere. And with so many theaters trying to stretch small budgets
           to bring art to their community, everyone should have an equal opportunity to be discovered and seen.</p>

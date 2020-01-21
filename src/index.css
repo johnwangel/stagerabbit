@@ -394,6 +394,12 @@ input[type='text'] {
     .aboutus .aboutus_column p {
       margin-bottom: 30px;
       line-height: 2em; }
+    .aboutus .aboutus_column li {
+      margin: 0 0 1em; }
+    @media only screen and (max-width: 800px) {
+      .aboutus .aboutus_column {
+        width: 80%;
+        font-size: 1.2em; } }
   .aboutus .mytheaters {
     width: 1px;
     height: 1px;
