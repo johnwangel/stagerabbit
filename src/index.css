@@ -253,6 +253,9 @@ a.home {
 .show_results div {
   display: inline-block; }
 
+.upcoming div {
+  display: inline-block; }
+
 .theater {
   margin-top: 30px;
   width: 33%;
