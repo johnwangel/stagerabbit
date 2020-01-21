@@ -65,7 +65,7 @@ class Header extends Component {
                   ? null
                   : <Link className="menu_item" onClick={ this.ToggleMenu } to="/register">Register</Link>
                 }
-                <div className="menu_item">About Us</div>
+                <Link className="menu_item" onClick={ this.ToggleMenu } to="/aboutus">About Us</Link>
                 <Link className="menu_item" onClick={ this.ToggleMenu } to="/contact">Contact</Link>
               </div>
             </div>
