@@ -57,6 +57,7 @@ class Header extends Component {
           <div className='menu'>
               <div>&#9776;</div>
               <div className='dropdown_menu' >
+                <Link className="menu_item" onClick={ this.ToggleMenu } to="/">Search</Link>
                 { ( this.state.loggedin)
                   ? <div className="menu_item" onClick={this.handleLogout}>Logout</div>
                   : <Link className="menu_item" onClick={ this.ToggleMenu } to="/login">Log In</Link>

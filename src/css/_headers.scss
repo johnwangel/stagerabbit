@@ -1,7 +1,6 @@
 .nav {
   position: fixed;
   top: 0;
-
   z-index: 1000;
   display: flex;
   flex-direction: row;
@@ -21,9 +20,9 @@
     color: white;
     font-size: 1.2em;
     margin-left: 10px;
-      @media screen and (max-width: 450px){
-        display: none;
-      }
+    @media screen and (max-width: 450px){
+      display: none;
+    }
 
   }
 
@@ -102,7 +101,6 @@ a.home {
   visibility: hidden; /* hides sub-menu */
   display: flex;
   opacity: 0;
-  //transform: translateY(-50px);
   transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
   z-index: -1;
   position: absolute;
@@ -110,14 +108,25 @@ a.home {
   right: 0;
   flex-direction: column;
   position: fixed;
-  width: 100px;
+  width: 140px;
   background-color: $accent;
   color: white;
-  font-size: .5em;
+  font-size: .7em;
+  @media screen and (max-width: 800px){
+    font-size: 1.2em;
+  }
+
+
 }
 
 .menu_item, a.menu_item {
-  padding: 5px 10px;
+  padding: 10px 20px;
+  &:first-child {
+    padding-top: 15px;
+  }
+  &:last-child {
+    padding-bottom: 15px;
+  }
   color: white;
   font-size: 1em;
   text-decoration: none;
@@ -136,7 +145,6 @@ a.home {
   left: 0;
   width: 100vw;
   height: 30px;
-  //padding: 5px 0;
   text-align: center;
   color: white;
   background-color: black;
