@@ -22,7 +22,7 @@ class AboutUs extends Component {
           Web searches usually turn up movie theaters, and it requires a great deal of scrolling, sorting,
           and scouring search results to discern what live theater is playing during the dates of our trip.</p>
 
-          <p>That's when we had to idea to create a database of theater, and to make it FREE
+          <p>That's when we had the idea to create a database of theater, and to make it FREE
           and EASY for theater companies to include their listings in our database. With thousands of theaters across the country,
           constantly developing new productions. With fluctuating dates, cast, creative teams, venues, the key is to put updates in the hands of
           the companies themselves. Then discovery of
