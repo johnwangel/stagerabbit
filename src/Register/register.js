@@ -144,7 +144,7 @@ class Register extends Component {
                         <span className="runin">Password:</span>
                         <input  id="password"
                                 key="password"
-                                type="text"
+                                type="password"
                                 name="password"
                                 value={this.state.password}
                                 onChange={this.handleChange}
