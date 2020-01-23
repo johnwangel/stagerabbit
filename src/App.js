@@ -10,6 +10,7 @@ import Main from './Main/Main';
 import Home from './Home/Home';
 import Header from "./Header/header";
 import Login from './Register/login';
+import Password from './Register/password';
 import Register from './Register/register';
 import About from './About/about';
 import Contact from './Contact/contact';
@@ -42,6 +43,7 @@ class App extends Component {
                   <Route path="/edit" component={Main} />
                   <Route path="/theater/:id" component={Main} />
                   <Route path="/login" component={Login} />
+                  <Route path="/password" component={Password} />
                   <Route path="/register" component={Register} />
                   <Route path="/prodsbyshow/:id" component={ProdByShow} />
                   <Route path="/emails" component={TheaterEmails} />

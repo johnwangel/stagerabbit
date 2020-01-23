@@ -163,6 +163,46 @@ a.home {
   background-color: black;
   font-size: 1em; }
 
+.loginPage {
+  margin-top: 75px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+  .loginPage form {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center; }
+    .loginPage form input {
+      margin: 0; }
+    .loginPage form input[type=text], .loginPage form input[type=password] {
+      width: 100%;
+      max-width: 100%;
+      font-size: 1.2em;
+      padding: 10px;
+      margin-bottom: 15px; }
+  .loginPage .fill {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center; }
+    .loginPage .fill .runin {
+      min-width: unset; }
+  .loginPage .links {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px; }
+    .loginPage .links > * {
+      margin: 10px 0 0;
+      color: indigo; }
+      .loginPage .links > *:hover {
+        color: darkorchid; }
+
 .register_container {
   margin-top: 75px;
   display: flex;
@@ -796,30 +836,3 @@ select {
 .trash, .update {
   cursor: pointer;
   font-size: 1.2em; }
-
-.loginPage {
-  margin-top: 75px;
-  display: flex;
-  justify-content: center;
-  align-items: center; }
-  .loginPage form {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center; }
-    .loginPage form input {
-      margin: 0; }
-    .loginPage form input[type=text], .loginPage form input[type=password] {
-      width: 100%;
-      max-width: 100%;
-      font-size: 1.2em;
-      padding: 10px;
-      margin-bottom: 15px; }
-
-.column {
-  margin-top: 50px; }
-
-.accent {
-  color: darkorchid;
-  font-weight: 800; }

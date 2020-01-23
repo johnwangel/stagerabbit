@@ -66,9 +66,11 @@ class Login extends Component {
                           value={this.state.password}
                           onChange={this.handleChange}/>
                   <input className='subbutt' id='login' type="submit" value='Log In' />
-                  <Link className="link column accent" to="/register">Register</Link>
                 </form>
-
+                <div className="links">
+                  <Link className="link" to="/password">Forgot Password</Link>
+                  <Link className="link" to="/register">Register</Link>
+                </div>
               </div>
     )
   }
