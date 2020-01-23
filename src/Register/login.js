@@ -11,14 +11,19 @@ class Login extends Component {
     super(props);
     this.state={
                   username: null,
-                  password: null
+                  password: null,
+                  message: null
                 };
     this.handleChange = this.handleChange.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
   }
 
   componentDidUpdate(prevState){
-    if (prevState.User.loggedin!==this.props.User.loggedin) window.location.href='/';
+    if (prevState.User.message!==this.props.User.message && this.props.User.message !== null ){
+      this.setState.message = this.props.User.message;
+    } else if (prevState.User.loggedin!==this.props.User.loggedin) {
+      window.location.href='/';
+    }
   }
 
   handleChange(e) {
@@ -28,9 +33,9 @@ class Login extends Component {
 
   handleLogin(e) {
     e.preventDefault();
+    this.setState({ message: null });
     let body = process_submit(e.target.elements);
     this.props.login(body);
-
   }
 
   render() {
@@ -38,6 +43,12 @@ class Login extends Component {
               <div className='loginPage'>
                 <form onSubmit={this.handleLogin}>
                       <h2>Log In</h2>
+
+                      {(this.props.User.message)
+                        ? <div class="error">{ this.props.User.message }</div>
+                        : null
+                      }
+
                       <input
                           type='text'
                           className='login'

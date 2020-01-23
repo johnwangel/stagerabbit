@@ -5,6 +5,7 @@ import { GET_HEADER, GET_POST_HEADER, URL } from '../constants/constants.js';
 export const  REGISTER = 'REGISTER';
 export const  LOGIN = 'LOGIN';
 export const  LOGOUT = 'LOGOUT';
+export const  LOGINERROR = 'LOGINERROR';
 
 export function register_user( body ){
   GET_POST_HEADER.body=JSON.stringify(body);
@@ -12,8 +13,8 @@ export function register_user( body ){
     fetch(`${URL}auth/register`, GET_POST_HEADER )
     .then(response => response.json())
     .then(data => {
-      window.localStorage.setItem("token", data.jwt)
-      dispatch(Registered(data));
+        window.localStorage.setItem("token", data.jwt)
+        dispatch(Registered(data));
     })
     .catch( err => console.log('THERE WAS AN ERROR'))
   }
@@ -44,14 +45,17 @@ export function getProfileFetch(){
 }
 
 export function login( body ){
-  console.log('body in login',body)
   GET_POST_HEADER.body=JSON.stringify(body);
   return dispatch => {
     fetch(`${URL}auth/login`, GET_POST_HEADER )
     .then(response => response.json())
     .then(data => {
-      window.localStorage.setItem("token", data.jwt);
-      dispatch(loginUser(data));
+      if (data.message){
+        dispatch( loginError( data ) );
+      } else {
+        window.localStorage.setItem( "token", data.jwt );
+        dispatch( loginUser( data ) );
+      }
     })
     .catch( err => console.log('THERE WAS AN ERROR'));
   }
@@ -60,6 +64,11 @@ export function login( body ){
 const loginUser = user => ({
   type : LOGIN,
   payload : user
+});
+
+const loginError = msg => ({
+  type : LOGINERROR,
+  payload : msg
 });
 
 export function logout(){

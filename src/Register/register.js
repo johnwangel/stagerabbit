@@ -45,6 +45,8 @@ class Register extends Component {
   handleRegSubmit(e){
     e.preventDefault();
     let body = process_submit(e.target.elements);
+    body.optin = e.target.elements.optin.checked;
+
     if (e.target.elements.account_type[0].checked){
       body.account_type='general';
     } else if  (e.target.elements.account_type[1].checked) {
@@ -52,7 +54,6 @@ class Register extends Component {
     }
     this.props.register_user(body);
   }
-
 
   render() {
     return (
@@ -134,7 +135,8 @@ class Register extends Component {
                                 type="text"
                                 name="username"
                                 value={this.state.username}
-                                onChange={this.handleChange} />
+                                onChange={this.handleChange}
+                                required />
                           <div className='note'>(This will be your username.)</div>
                       </div>
 
@@ -145,7 +147,9 @@ class Register extends Component {
                                 type="text"
                                 name="password"
                                 value={this.state.password}
-                                onChange={this.handleChange} />
+                                onChange={this.handleChange}
+                                required
+                                />
                       </div>
 
                       <div className="reg">
@@ -155,7 +159,8 @@ class Register extends Component {
                                 type="text"
                                 name="fname"
                                 value={this.state.fname}
-                                onChange={this.handleChange} />
+                                onChange={this.handleChange}
+                              />
                       </div>
 
                       <div className="reg">
@@ -165,7 +170,9 @@ class Register extends Component {
                                 type="text"
                                 name="lname"
                                 value={this.state.lname}
-                                onChange={this.handleChange} />
+                                onChange={this.handleChange}
+                                required
+                                />
                       </div>
 
                       <div className="reg">
@@ -185,7 +192,18 @@ class Register extends Component {
                                 type="text"
                                 name="phone"
                                 value={this.state.phone}
-                                onChange={this.handleChange} />
+                                onChange={this.handleChange}
+                              />
+                      </div>
+
+                      <div className="optin">
+                        <input  type="checkbox"
+                                id="optin"
+                                name="optin"
+                                value="false" />
+                        <div className="agree">By checking this box, you give permission for the StageRabbit to
+                              periodically send emails to the address associated with this account regarding
+                              site enhancements and account update reminders.</div>
                       </div>
 
                       <input className='subbutt' id='submit-reg' type="submit" value='Submit' />

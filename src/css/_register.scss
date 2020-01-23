@@ -26,6 +26,16 @@
       .note {
         font-size: .8em;
       }
+
+      .optin {
+        display: flex;
+        margin: 15px 0;
+        input {
+          margin-right: 8px;
+        }
+        .agree { font-size: .8rem; }
+      }
+
       .subbutt {
         margin: 15px 0;
       }
