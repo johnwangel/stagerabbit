@@ -135,9 +135,6 @@ a.home {
   background-color: darkorchid;
   color: white;
   font-size: .7em; }
-  @media screen and (max-width: 800px) {
-    .dropdown_menu {
-      font-size: 1.2em; } }
 
 .menu_item, a.menu_item {
   padding: 10px 20px;
