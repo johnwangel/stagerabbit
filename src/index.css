@@ -135,9 +135,6 @@ a.home {
   background-color: darkorchid;
   color: white;
   font-size: .7em; }
-  @media screen and (max-width: 800px) {
-    .dropdown_menu {
-      font-size: 1.2em; } }
 
 .menu_item, a.menu_item {
   padding: 10px 20px;
@@ -191,6 +188,13 @@ a.home {
           max-width: 100%; }
       .register_container .register form .note {
         font-size: .8em; }
+      .register_container .register form .optin {
+        display: flex;
+        margin: 15px 0; }
+        .register_container .register form .optin input {
+          margin-right: 8px; }
+        .register_container .register form .optin .agree {
+          font-size: .8rem; }
       .register_container .register form .subbutt {
         margin: 15px 0; }
 
