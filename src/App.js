@@ -10,6 +10,7 @@ import Main from './Main/Main';
 import Home from './Home/Home';
 import Header from "./Header/header";
 import Login from './Register/login';
+import Reset from './Register/reset';
 import Password from './Register/password';
 import Register from './Register/register';
 import About from './About/about';
@@ -49,7 +50,8 @@ class App extends Component {
                   <Route path="/emails" component={TheaterEmails} />
                   <Route path="/contact" component={Contact} />
                   <Route path="/aboutus" component={About} />
-                  <div className='footer'>StageRabbit, 20 River Ct. Ste. 2007, Jersey City, NJ 07310&nbsp;&nbsp;<a href='mailto:info@stagerabbit.com'>info@stagerabbit.com</a></div>
+                  <Route path="/reset" component={Reset} />
+                  <div className='footer'>StageRabbit, Jersey City, NJ&nbsp;&nbsp;<a href='mailto:info@stagerabbit.com'>info@stagerabbit.com</a></div>
                 </div>
               </Router>
             )

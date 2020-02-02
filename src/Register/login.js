@@ -45,7 +45,7 @@ class Login extends Component {
                       <h2>Log In</h2>
 
                       {(this.props.User.message)
-                        ? <div class="error">{ this.props.User.message }</div>
+                        ? <div className="error">{ this.props.User.message }</div>
                         : null
                       }
 

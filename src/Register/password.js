@@ -33,15 +33,14 @@ class Login extends Component {
     return (
               <div className='loginPage'>
 
-                <h2>Password Reminder</h2>
+                <h2>Password Reset</h2>
 
                 {(this.state.message)
-                    ? <div class="error">{ this.state.message }</div>
+                    ? <div className="error">{ this.state.message }</div>
                     : null
                 }
 
-                <p>Submit your registration email to recieve an email reminder
-                     at that email address.</p>
+                <p>Submit your registration email to recieve instructions for resetting your password.</p>
 
                 <form onSubmit={this.handleReminder}>
                   <div className="fill">
@@ -53,7 +52,7 @@ class Login extends Component {
                         key='username'
                         name='username'
                         value={this.state.email}
-                        placeholder="Type your registration email here &ensp;.&ensp;.&ensp;."
+                        placeholder="Type your registration email here"
                         onChange={this.handleChange}/>
                   </div>
 
