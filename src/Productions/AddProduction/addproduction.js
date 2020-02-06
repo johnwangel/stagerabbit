@@ -76,16 +76,14 @@ class AddProd extends Component {
     if ( this.state.venue_id==='0' ) this.setState( { venue_error : true } );
     if ( this.state.show_id==='0' ) this.setState( { show_error : true } );
     if ( this.state.venue_error || this.state.show_error ) {
-        this.errRef.current.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start',
-        });
-
-        return;
+      this.errRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+      return;
     }
 
     let body = process_submit(e.target.elements);
-    console.log('body',body)
     if (this.state.editmode) {
       body.prod_id=this.state.pid;
       this.props.edit_prod(body);
@@ -105,12 +103,10 @@ class AddProd extends Component {
   }
 
   handleStartDateChange( date ) {
-    console.log('start',date);
     this.setState({ start : date, end: date } );
   }
 
   handleEndDateChange( date ) {
-    console.log('end',date);
     this.setState({ end : date } );
   }
 
@@ -258,7 +254,11 @@ class AddProd extends Component {
             </div>
             <div className='add-div' id="mdChildren" onClick={this.handleNew}>Another MD</div>
 
-            <input className='subbutt' id={ this.props.theaterid } type="submit" value="Submit Production" />
+            <input
+                className='subbutt'
+                id={ this.props.theaterid }
+                type="submit"
+                value="Submit Production"/>
           </form>
         </div>
       </div>

@@ -22,7 +22,7 @@ body {
 @import "./css/theater.scss";
 @import "./css/toolbar.scss";
 @import "./css/about.scss";
-
+@import "./css/forms.scss";
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
@@ -422,18 +422,7 @@ a {
   max-width: 33%;
 }
 
-.close {
-  position: absolute;
-  cursor: pointer;
-  right: 10px;
-  top: 0;
-  color: white;
-  font-size: 3em;
-  margin-top: auto;
-  &:hover {
-    color: $black;
-  }
-}
+
 
 select{
   max-width: 75%;

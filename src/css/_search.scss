@@ -86,5 +86,10 @@
 }
 
 .upcoming div {
-  display: inline-block;
+  display: block;
+}
+
+.theater_name {
+  display: flex;
+  align-items: center;
 }

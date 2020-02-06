@@ -15,16 +15,18 @@ class Results extends Component {
 
                     { (this.props.type==='1')
                       ? <span>
-                          <span className="theater_name">
-                            <Link className='website' to={`/theater/${this.props.item.id}`}>{this.props.item.name}</Link>
-                          </span>&nbsp;
-                          {this.props.item.city}, {this.props.item.abbr} ({parseInt(this.props.item.distance)} miles)
-
-                          { (this.props.prod.length > 0)
-                              ? <div className="upcoming"><span className="runin next">Next Production:</span> <span className="prod"><SanitizedHTML html={ this.props.prod[0][0].title }/></span>&emsp;({moment.utc(this.props.prod[0][0].start_date).format('M/D/YY')}&ndash;{moment.utc(this.props.prod[0][0].end_date).format('M/D/YY')})</div>
-                              : <div className="upcoming"><span className="noresults">No Upcoming Productions Available</span></div>
-                          }
-
+                            <span className="theater_name">
+                              <Link className='website' to={`/theater/${this.props.item.id}`}>{this.props.item.name}</Link>
+                              &nbsp;
+                              {this.props.item.city}, {this.props.item.abbr} ({parseInt(this.props.item.distance)} miles)
+                            </span>
+                            { (this.props.prod.length > 0)
+                                ? <div className="upcoming"><span className="runin next">Next Production:</span>
+                                    <span className="prod"><SanitizedHTML html={ this.props.prod[0][0].title }/></span>
+                                    {moment.utc(this.props.prod[0][0].start_date).format('M-D')} to {moment.utc(this.props.prod[0][0].end_date).format('M-D')}
+                                  </div>
+                                : <div className="upcoming"><span className="noresults">No Upcoming Productions Available</span></div>
+                            }
                           </span>
                         : null
                     }

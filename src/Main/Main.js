@@ -172,6 +172,7 @@ class Main extends Component {
 
   update_venue(body){
     body.tid=this.props.Theater[0].id;
+
     this.props.updateVenues(body);
     this.setState( {
         hide_new_show_form: true,

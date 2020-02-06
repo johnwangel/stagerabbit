@@ -22,12 +22,6 @@ body {
     @media only screen and (max-width: 800px) {
       .contact form {
         width: 90%; } }
-    .contact form .form-group {
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center; }
     .contact form input, .contact form select {
       flex: 2; }
     .contact form select {
@@ -305,7 +299,11 @@ a.home {
   display: inline-block; }
 
 .upcoming div {
-  display: inline-block; }
+  display: block; }
+
+.theater_name {
+  display: flex;
+  align-items: center; }
 
 .theater {
   margin-top: 30px;
@@ -455,6 +453,68 @@ input[type='text'] {
     width: 1px;
     height: 1px;
     overflow: hidden; }
+
+.overlay-container {
+  position: relative;
+  width: 40%;
+  padding: 30px;
+  background-color: darkorchid; }
+  @media only screen and (max-width: 600px) {
+    .overlay-container {
+      width: 80%; } }
+  .overlay-container .close {
+    position: absolute;
+    cursor: pointer;
+    right: 20px;
+    top: 0;
+    color: white;
+    font-size: 3em;
+    margin-top: auto; }
+    .overlay-container .close:hover {
+      color: #242B40; }
+  .overlay-container .error {
+    width: 100%;
+    padding: 10px 0;
+    margin-bottom: 15px; }
+
+.form-title {
+  color: white;
+  margin-top: 0; }
+
+.form-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 5px; }
+  .form-group .label {
+    color: white;
+    font-weight: bold;
+    margin-right: .5em;
+    white-space: nowrap; }
+  .form-group input[type='text'] {
+    box-sizing: border-box;
+    max-width: unset;
+    width: 100%;
+    padding: 5px; }
+  .form-group select {
+    color: darkorchid;
+    background-color: white; }
+  .form-group textarea {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 5px; }
+
+.form-button {
+  float: right;
+  font-size: 1.2em;
+  color: white;
+  font-weight: 600;
+  background-color: indigo;
+  border-radius: 10px;
+  padding: 5px 10px;
+  margin-top: 10px; }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace; }
@@ -767,17 +827,6 @@ a {
 .add_show, .all_shows, .add_venue {
   position: relative;
   max-width: 33%; }
-
-.close {
-  position: absolute;
-  cursor: pointer;
-  right: 10px;
-  top: 0;
-  color: white;
-  font-size: 3em;
-  margin-top: auto; }
-  .close:hover {
-    color: #242B40; }
 
 select {
   max-width: 75%;
