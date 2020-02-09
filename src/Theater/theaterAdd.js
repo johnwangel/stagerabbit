@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import SanitizedHTML from 'react-sanitized-html';
 
 import { process_submit } from '../constants/constants';
 
@@ -8,12 +9,15 @@ class AddTheater extends Component {
     super(props);
 
     this.state = {
-      name: '',
-      city: '',
-      state: 0,
+      name: null,
+      city: null,
+      state: '0',
       window: null,
-      scroll: null
+      scroll: null,
+      error: null
     };
+
+    this.errorRef = React.createRef();
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -30,6 +34,22 @@ class AddTheater extends Component {
   handleSubmit(e) {
     e.preventDefault();
     let body = process_submit(e.target.elements);
+
+
+    var error='';
+    if (!this.state.name) error+='<li>You must provide a theater name.</li>';
+    if (!this.state.city) error+='<li>You must provide a city.</li>';
+    if (this.state.state==='0') error+='<li>You must provide a state.</li>';
+
+    if ( error !== '' ){
+      error='<h4>Errors</h4><ol>'+error+'</ol>';
+      this.setState({ error });
+      this.errorRef.current.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      return;
+    }
     this.props.add_theater(body);
   }
 
@@ -44,21 +64,25 @@ class AddTheater extends Component {
 
   render() {
     return (<div className='overlay' style={{height: this.state.window + 'px'}}>
-            <div class="add_show" style={{marginTop: this.state.scroll + 'px'}}>
+            <div class="overlay-container" style={{marginTop: this.state.scroll + 'px'}} ref={this.errorRef}>
                 <div class="close" onClick={() => { this.props.theater_form() }} >&times;</div>
-                 <h1>Add Theater</h1>
+                <h2 className='form-title'>Add Theater</h2>
+                { (this.state.error)
+                  ? <div className="error" ><SanitizedHTML html={this.state.error}/></div>
+                  : null
+                }
                 <form onSubmit={this.handleSubmit}>
 
-                    <div>
-                      <span className='runin'>Name:</span>
+                    <div className='form-group'>
+                      <div className="label">Name:</div>
                       <input id="name" type="text" name="name" value={ this.state.name } onChange={this.handleChange} />
                     </div>
-                    <div>
-                      <span className='runin'>City:</span>
+                    <div className='form-group'>
+                      <div className="label">City:</div>
                       <input id='city' type="text" name="city" value={ this.state.city } onChange={this.handleChange} />
                     </div>
-                    <div>
-                      <span className="runin">State:</span>
+                    <div className='form-group'>
+                      <div className="label">State:</div>
                       <select id="state"
                               type="select"
                               name="state"
@@ -67,7 +91,10 @@ class AddTheater extends Component {
                         {this.props.states}
                       </select>
                     </div>
-                  <input type="submit" value="Submit" className="subbutt" />
+                  <input
+                        className='form-button'
+                        type="submit"
+                        value="Submit" />
                 </form>
               </div>
             </div>

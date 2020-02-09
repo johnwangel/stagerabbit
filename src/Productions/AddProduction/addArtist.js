@@ -8,7 +8,7 @@ class AddArtist extends Component {
     super(props);
 
     this.state = {
-      edit_title: (this.props.editmode) ? 'Edit Artist' : 'Add an Artist',
+      edit_title: (this.props.editmode) ? 'Edit Artist' : 'Create a New Artist',
       show_select: true,
       show_field: false,
       fname : (this.props.item) ? this.props.item.fname : '',
@@ -18,11 +18,13 @@ class AddArtist extends Component {
       fnameid : `fname_${this.props.type}_${this.props.num}`,
       lnameid : `lname_${this.props.type}_${this.props.num}`,
       defaultvalue: (this.props.item) ? this.props.item.artist_id : '0',
+      error: null
     };
     this.handleChange = this.handleChange.bind(this);
     this.onDropdownSelected = this.onDropdownSelected.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.inputname = this.inputname.bind(this);
+    this.selectname = this.selectname.bind(this);
     this.removeArtist = this.removeArtist.bind(this);
   }
 
@@ -46,6 +48,10 @@ class AddArtist extends Component {
   }
 
   handleSubmit() {
+    if (this.state.lname==='') {
+      this.setState({ error: 'You must enter a last name.' });
+      return;
+    }
     const data={
                 fname : this.state.fname,
                 lname : this.state.lname,
@@ -54,11 +60,15 @@ class AddArtist extends Component {
                 artist_id: this.state.defaultvalue
               };
     this.props.addArtistCB( data );
-    this.setState({ show_field : false, show_select : true });
+    this.setState({ show_field : false, show_select : true, error: null });
   }
 
   inputname(){
     this.setState({ show_field : true, show_select : false })
+  }
+
+  selectname(){
+    this.setState({ show_field : false, show_select : true })
   }
 
   removeArtist(){
@@ -74,11 +84,12 @@ class AddArtist extends Component {
   }
 
   render() {
-    return ( <div>
+    return ( <div className="subform-wrapper">
               { (this.state.show_select)
-               ? <div id={this.state.itemid} className="artist_item">
-                    <span className="runin">{this.props.title} {this.props.num}:</span>
+               ? <div id={this.state.itemid} className="form-group">
+                    <div className="label">{this.props.title} {this.props.num}:</div>
                     <select
+                        className="form-select wide"
                         value={ this.state.defaultvalue }
                         id={this.state.selid}
                         type="select"
@@ -86,10 +97,18 @@ class AddArtist extends Component {
                         onChange={this.onDropdownSelected}>
                       {this.props.sel}
                     </select>
-                    <div className="edit_tools inter">
-                      <span className="list clickable" onClick={() => { this.inputname() }}>{ this.state.edit_title }</span>
+
+                    <div className="edit_buttons">
+                      <span className="form-button-2"
+                            onClick={() => { this.inputname() }}>
+                        { this.state.edit_title }
+                      </span>
                       { (this.state.edit_title === 'Edit Artist')
-                          ? <span className="list clickable" onClick={() => { this.removeArtist() }}>Remove</span>
+                          ? <span
+                              className="form-button-2"
+                              onClick={() => { this.removeArtist() }}>
+                                  Remove
+                            </span>
                           : null
                       }
                     </div>
@@ -98,30 +117,45 @@ class AddArtist extends Component {
               }
 
               { (this.state.show_field)
-                ? <div id={`form-${this.state.itemid}`}>
-                    <div>
-                        <span className="runin">First Name:</span>
+                ? <div className="subform-wrapper" id={`form-${this.state.itemid}`}>
+                    <div className="form-group">
+                      { (this.state.error)
+                        ? <div className="error">{this.state.error}</div>
+                        : null
+                      }
+
+                        <div className="label">First Name:</div>
                         <input
                             type="text"
-                            className="person"
                             key={this.state.fnameid}
                             id={this.state.fnameid}
                             name="fname"
                             value={this.state.fname}
                             onChange={this.handleChange}  />
                       </div>
-                      <div>
-                        <span className="runin">Last Name:</span>
+                      <div className="form-group">
+                        <div className="label">Last Name:</div>
                         <input
                             type="text"
-                            className="person"
                             key={this.state.lnameid}
                             id={this.state.lnameid}
                             name="lname"
                             value={this.state.lname}
-                            onChange={this.handleChange} />
+                            onChange={this.handleChange}
+                         />
                     </div>
-                    <div className='submit_me' value="Submit" onClick={ this.handleSubmit }>Submit</div>
+                    <div className="edit_buttons">
+                      <div className='form-button-2'
+                           value="Submit"
+                           onClick={ this.selectname }>
+                        Return to Select
+                      </div>
+                      <div className='form-button-2'
+                           value="Submit"
+                           onClick={ this.handleSubmit }>
+                        Save Artist
+                      </div>
+                    </div>
                   </div>
                 : null
               }

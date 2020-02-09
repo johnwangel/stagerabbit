@@ -44,7 +44,7 @@ function artistAdded(state,action){
 
 function do_artists(artists){
   let dropdown=[];
-  dropdown.push(<option key="artists-0" value="0">Select one...</option>);
+  dropdown.push(<option key="artists-0" value="0">Select an existing artist...</option>);
   dropdown.push(<option key="artists-00" value="-1">Add artist...</option>)
   for (let i = 0; i < artists.length; i++) {
     let _this=artists[i];
@@ -58,7 +58,7 @@ function do_shows(shows){
   dropdown.push(<option key="show-0" value="0">Select one...</option>)
   for (let i = 0; i < shows.length; i++) {
     let _this=shows[i];
-    dropdown.push(<option key={_this.title+'-'+_this.id} value={_this.id}>{_this.title.replace(/&rsquo;/g, "'")} ({_this.genre}) [{_this.id}]</option>);
+    dropdown.push(<option key={_this.title+'-'+_this.id} value={_this.id}>{_this.title.replace(/&rsquo;/g, "'")} ({_this.genre})</option>);
   }
   return [ ...dropdown ];
 }

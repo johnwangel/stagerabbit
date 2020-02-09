@@ -13,7 +13,7 @@ class AddShow extends Component {
 
     this.state = {
       editmode: (c) ? true : false,
-      formTitle: (c) ? 'Edit Show' : 'Add Show',
+      formTitle: (c) ? 'Update Show' : 'Add Show',
       bookChildren: (c && c.book && c.book.length>0) ? c.book.length : 1,
       book_items: (c && c.book && c.book.length>0) ? c.book : null,
       musicChildren: (c && c.music && c.music.length>0) ? c.music.length : 1,
@@ -89,151 +89,182 @@ class AddShow extends Component {
 
   render() {
     return (<div className='overlay' style={{height: this.state.window + 'px'}}>
-            <div class="add_show" style={{marginTop: this.state.scroll + 'px'}}>
-            <div class="close" onClick={() => { this.props.show_form() }} >&times;</div>
-            <form id="form-1" onSubmit={this.handleSubmit}>
-              <h1>{this.state.formTitle}</h1>
-              <h2>Title:</h2>
-              { ( this.state.showtitle )
-                  ?  <input
-                        key="show-title-1"
-                        id="show_title_1"
-                        type="text"
-                        name="show_title"
-                        value={this.state.show_title}
-                        onChange={this.handleChange} />
+            <div class="overlay-container" style={{marginTop: this.state.scroll + 'px'}}>
+              <div class="close" onClick={() => { this.props.show_form() }} >&times;</div>
+              <h2 className='form-title'>{this.state.formTitle}</h2>
+              <form id="form-1" onSubmit={this.handleSubmit}>
+                    { ( this.state.showtitle )
+                        ? <div className='form-group'>
+                            <div className="label">Title:</div>
+                            <input
+                                  className="form-select wide"
+                                  key="show-title-1"
+                                  id="show_title_1"
+                                  type="text"
+                                  name="show_title"
+                                  value={this.state.show_title}
+                                  onChange={this.handleChange} />
+                            </div>
+                          : <div className='form-group'>
+                              <div className="label">Title:</div>
+                              <select
+                                    className="form-select wide"
+                                    id="show_select"
+                                    type="select"
+                                    name="sel_show"
+                                    value={this.state.show_select}
+                                    onChange={this.onDropdownSelected}>
+                                {this.props.Shows.shows}
+                              </select>
+                              <div className="edit_buttons">
+                                <span
+                                    className="form-button-2"
+                                    onClick={() => { this.showtitle() }}>
+                                  Edit Title
+                                </span>
+                              </div>
+                            </div>
+                      }
 
-                    : <div>
-                        <select
-                              id="show_select"
-                              type="select"
-                              name="sel_show"
-                              value={this.state.show_select}
-                              onChange={this.onDropdownSelected}>
-                          {this.props.Shows.shows}
-                        </select>
-                        <div className="edit_tools inter">
-                          <span className="list clickable" onClick={() => { this.showtitle() }}>Edit Name</span>
+                  <div className='form-group'>
+                    <div className="label">Genre:</div>
+                      <select
+                            className="form-select wide"
+                            id="genre_1"
+                            key="genre-1"
+                            type="select"
+                            name="genre"
+                            value={this.state.genre_1}
+                            onChange={this.onDropdownSelected} >
+                        <option key="genre-0" value="0">Select one...</option>
+                        <option key="genre-1" value="2">musical, comedy</option>
+                        <option key="genre-2" value="3">musical, drama</option>
+                        <option key="genre-3" value="4">musical, revue</option>
+                        <option key="genre-4" value="5">play, comedy</option>
+                        <option key="genre-5" value="6">play, drama</option>
+                      </select>
+                  </div>
+
+                  { (this.state.musical)
+                    ?  <div className="creatives">
+                          <div id="book-group">
+                             <h3 className='form-title'>Book By:</h3>
+                            {
+                              [...Array(this.state.bookChildren)].map( (m,i,a) =>{
+                                return <AddArtist
+                                          key={`b-${i}`}
+                                          num={i+1}
+                                          editmode={this.state.editmode}
+                                          assoc="show"
+                                          type="book"
+                                          title="Bookwriter"
+                                          item={(this.state.book_items) ? this.state.book_items[i] : null}
+                                          sel={this.props.artists}
+                                          addArtistCB={ this.props.addArtistCB }
+                                          removeArtistCB={ this.props.removeArtistCB }
+                                          newArtist={ this.props.newArtist }
+                                        />
+                              })
+                            }
+                            <div className='another-artist'
+                                 id="bookChildren"
+                                 onClick={this.handleNew}>
+                              <span className="plus">+</span>
+                              Another Bookwriter
+                            </div>
+                          </div>
+
+                          <div id="music-group">
+                            <h3 className='form-title'>Music By:</h3>
+                            {
+                              [...Array(this.state.musicChildren)].map( (m,i,a) =>{
+                                return <AddArtist
+                                            key={`m-${i}`}
+                                            num={i+1}
+                                            editmode={this.state.editmode}
+                                            assoc="show"
+                                            type="music"
+                                            title="Composer"
+                                            item={(this.state.music_items) ? this.state.music_items[i] : null}
+                                            sel={this.props.artists}
+                                            addArtistCB={ this.props.addArtistCB }
+                                            removeArtistCB={ this.props.removeArtistCB }
+                                            newArtist={ this.props.newArtist }
+                                        />
+                              })
+                            }
+                            <div className='another-artist'
+                                 id="musicChildren"
+                                 onClick={this.handleNew}>
+                              <span className="plus">+</span>
+                              Another Composer
+                            </div>
+                          </div>
+
+                          <div id="lyrics-group">
+                            <h3 className='form-title'>Lyrics By:</h3>
+                            {
+                              [...Array(this.state.lyricsChildren)].map( (m,i,a) =>{
+                                return <AddArtist
+                                              key={`l-${i}`}
+                                              num={i+1}
+                                              editmode={this.state.editmode}
+                                              assoc="show"
+                                              type="lyrics"
+                                              title="Lyricist"
+                                              item={(this.state.lyrics_items) ? this.state.lyrics_items[i] : null}
+                                              sel={this.props.artists}
+                                              addArtistCB={ this.props.addArtistCB }
+                                              removeArtistCB={ this.props.removeArtistCB }
+                                              newArtist={ this.props.newArtist }
+                                          />
+                              })
+                            }
+                            <div className='another-artist'
+                                 id="lyricsChildren"
+                                 onClick={this.handleNew}>
+                              <span className="plus">+</span>
+                              Another Lyricist
+                            </div>
+                          </div>
+                        </div>
+                      : null
+                  }
+
+                { (this.state.play)
+                    ? <div className="creatives">
+                        <div id="pw-group">
+                          <h3 className='form-title'>Written By:</h3>
+                          {
+                            [...Array(this.state.pwChildren)].map( (m,i,a) =>{
+                              return <AddArtist
+                                            key={`p-${i}`}
+                                            num={i+1}
+                                            editmode={this.state.editmode}
+                                            assoc="show"
+                                            type="pw"
+                                            title="Playwright"
+                                            item={(this.state.pw_items) ? this.state.pw_items[i] : null}
+                                            sel={this.props.artists}
+                                            addArtistCB={ this.props.addArtistCB }
+                                            removeArtistCB={ this.props.removeArtistCB }
+                                            newArtist={ this.props.newArtist }
+                                        />
+                            })
+                          }
+                        </div>
+                        <div className='another-artist'
+                             id="pwChildren"
+                             onClick={this.handleNew}>
+                          <span className="plus">+</span>
+                          Another Playwright
                         </div>
                       </div>
-              }
+                    : null
+                }
 
-              <h2>Genre:</h2>
-              <select
-                    id="genre_1"
-                    key="genre-1"
-                    type="select"
-                    name="genre"
-                    value={this.state.genre_1}
-                    onChange={this.onDropdownSelected} >
-                <option key="genre-0" value="0">Select one...</option>
-                <option key="genre-1" value="2">musical, comedy</option>
-                <option key="genre-2" value="3">musical, drama</option>
-                <option key="genre-3" value="4">musical, revue</option>
-                <option key="genre-4" value="5">play, comedy</option>
-                <option key="genre-5" value="6">play, drama</option>
-              </select>
-
-              { (this.state.musical)
-                ?  <div>
-                      <div id="book-group">
-                        <h2>Book By:</h2>
-                        {
-                          [...Array(this.state.bookChildren)].map( (m,i,a) =>{
-                            return <AddArtist
-                                      key={`b-${i}`}
-                                      num={i+1}
-                                      editmode={this.state.editmode}
-                                      assoc="show"
-                                      type="book"
-                                      title="Bookwriter"
-                                      item={(this.state.book_items) ? this.state.book_items[i] : null}
-                                      sel={this.props.artists}
-                                      addArtistCB={ this.props.addArtistCB }
-                                      removeArtistCB={ this.props.removeArtistCB }
-                                      newArtist={ this.props.newArtist }
-                                    />
-                          })
-                        }
-                      </div>
-                      <div className='add-div' id="bookChildren" onClick={this.handleNew}>Another Bookwriter</div>
-
-                      <div id="music-group">
-                        <h2>Music By:</h2>
-                        {
-                          [...Array(this.state.musicChildren)].map( (m,i,a) =>{
-                            return <AddArtist
-                                        key={`m-${i}`}
-                                        num={i+1}
-                                        editmode={this.state.editmode}
-                                        assoc="show"
-                                        type="music"
-                                        title="Composer"
-                                        item={(this.state.music_items) ? this.state.music_items[i] : null}
-                                        sel={this.props.artists}
-                                        addArtistCB={ this.props.addArtistCB }
-                                        removeArtistCB={ this.props.removeArtistCB }
-                                        newArtist={ this.props.newArtist }
-                                    />
-                          })
-                        }
-                      </div>
-                      <div className='add-div' id="musicChildren" onClick={this.handleNew}>Another Composer</div>
-
-                      <div id="lyrics-group">
-                        <h2>Lyrics By:</h2>
-                        {
-                          [...Array(this.state.lyricsChildren)].map( (m,i,a) =>{
-                            return <AddArtist
-                                          key={`l-${i}`}
-                                          num={i+1}
-                                          editmode={this.state.editmode}
-                                          assoc="show"
-                                          type="lyrics"
-                                          title="Lyricist"
-                                          item={(this.state.lyrics_items) ? this.state.lyrics_items[i] : null}
-                                          sel={this.props.artists}
-                                          addArtistCB={ this.props.addArtistCB }
-                                          removeArtistCB={ this.props.removeArtistCB }
-                                          newArtist={ this.props.newArtist }
-                                      />
-                          })
-                        }
-                      </div>
-                      <div className='add-div' id="lyricsChildren" onClick={this.handleNew}>Another Lyricist</div>
-                    </div>
-                  : null
-              }
-
-              { (this.state.play)
-                  ? <div>
-                      <div id="pw-group">
-                        <h2>Written By:</h2>
-                        {
-                          [...Array(this.state.pwChildren)].map( (m,i,a) =>{
-                            return <AddArtist
-                                          key={`p-${i}`}
-                                          num={i+1}
-                                          editmode={this.state.editmode}
-                                          assoc="show"
-                                          type="pw"
-                                          title="Playwright"
-                                          item={(this.state.pw_items) ? this.state.pw_items[i] : null}
-                                          sel={this.props.artists}
-                                          addArtistCB={ this.props.addArtistCB }
-                                          removeArtistCB={ this.props.removeArtistCB }
-                                          newArtist={ this.props.newArtist }
-                                      />
-                          })
-                        }
-                      </div>
-                      <div className='add-div' id="pwChildren" onClick={this.handleNew}>Another Playwright</div>
-                    </div>
-                  : null
-              }
-
-              <input className='subbutt' type="submit" value={this.state.formTitle} />
-          </form>
+                <input className='form-button' type="submit" value={this.state.formTitle} />
+            </form>
           </div>
         </div>
         )

@@ -188,7 +188,7 @@ class Main extends Component {
   }
 
   deleteVenueCallback(id) {
-    const body = { vid: id, venue_type: 4 };
+    const body = { vid: id, tid: this.state.current_id, venue_type: 4 };
     this.props.updateVenues(body);
   }
 
@@ -313,16 +313,23 @@ class Main extends Component {
     return (
       <div className="theaters">
         { (this.props.User.level===3)
-          ? <div>
+          ? <div className="admin-theater">
               <form onSubmit={this.handleIDSubmit}>
                 <label>
                   <span className='runin'>Theater ID:</span>
-                  <input type="text" name="id" value={ this.state.current_id } onChange={this.handleIDChange} />
+                  <input  type="text"
+                          name="id" value={ this.state.current_id }
+                          onChange={this.handleIDChange} />
                 </label>
-                <input type="submit" value="Submit" className="subbutt" />
+                <input  type="submit"
+                        value="Submit"
+                        className="subbutt" />
               </form>
               <form onSubmit={this.handleGeo.bind(this)}>
-                <button id="geo" type="submit" value={ this.state.current_id } className="subbutt">Refresh Geo</button>
+                <button id="geo"
+                        type="submit"
+                        value={ this.state.current_id }
+                        className="subbutt">Refresh Geo</button>
               </form>
             </div>
           : null
@@ -332,15 +339,15 @@ class Main extends Component {
           ? (this.state.hide_delete_theater_form)
             ? null
             :<div className='overlay' style={{height: this.state.window + 'px'}}>
-              <div class="add_show" style={{marginTop: this.state.scroll + 'px'}}>
+              <div class="overlay-container" style={{marginTop: this.state.scroll + 'px'}}>
                   <div class="close" onClick={() => { this.delete_theater_form() }} >&times;</div>
-                  <h1>Delete Theater</h1>
+                  <h2 className="form-title">Delete Theater</h2>
                   <form onSubmit={this.delete_theater}>
-                      <div>
-                        <span className='runin'>Theater ID:</span>
+                      <div className="form-group">
+                        <div className='label'>Theater ID:</div>
                         <input id="delete_id" type="text" name="delete_id" value={ this.state.delete_id } onChange={this.handleChange} />
                       </div>
-                      <input type="submit" value="Submit" className="subbutt" />
+                      <input type="submit" value="Submit" className="form-button" />
                   </form>
                 </div>
               </div>
@@ -357,6 +364,7 @@ class Main extends Component {
           : null
         }
 
+        <h2 className="main-page">Theater Company</h2>
         { (d.id) ?
           <Theater
             cb={this.alterTheaterCallback}
@@ -367,12 +375,17 @@ class Main extends Component {
         }
 
         { (v && v.length>0 && this.props.User.level>1)
+          ? <h2 className="main-page">Venues</h2>
+          : null
+        }
+
+        { (v && v.length>0 && this.props.User.level>1)
           ? <Venues
-                  id={ d.id }
-                  perm={ this.props.User.level }
-                  venues={ this.props.VenuesByTheater.venues}
-                  edit={ this.venue_form }
-                  del={ this.deleteVenueCallback }
+              id={ d.id }
+              perm={ this.props.User.level }
+              venues={ this.props.VenuesByTheater.venues}
+              edit={ this.venue_form }
+              del={ this.deleteVenueCallback }
             />
           : null }
 
@@ -446,8 +459,9 @@ class Main extends Component {
           : null
         }
 
+        <h2 className="main-page">Productions</h2>
         { (p.length > 0)
-          ? <div className='productions'><h2>Productions</h2>
+          ? <div className='productions'>
               { p.map( ( item, index ) => {
                     return <Productions
                         idx={ index }
@@ -465,7 +479,7 @@ class Main extends Component {
                 })
               }
             </div>
-          : null
+          : <div className='productions'>No productions listed yet.</div>
         }
 
        </div>

@@ -53,7 +53,7 @@ function dropdown(v){
   for (let i = 0; i < v.length; i++) {
     let _this=v[i];
     let _thiskey= `va-${_this.venue_id}`;
-    dropdown.push(<option key={_thiskey} value={_this.venue_id}>{_this.venue_name}, {_this.venue_add1}, {_this.venue_city}, {_this.venue_state} [{_this.venue_id}]</option>);
+    dropdown.push(<option key={_thiskey} value={_this.venue_id}>{_this.venue_name}, {_this.venue_add1}, {_this.venue_city}, {_this.venue_state}</option>);
    }
    return dropdown;
 }

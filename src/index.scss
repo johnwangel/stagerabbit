@@ -23,6 +23,7 @@ body {
 @import "./css/toolbar.scss";
 @import "./css/about.scss";
 @import "./css/forms.scss";
+@import "./css/venues.scss";
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
@@ -190,7 +191,7 @@ input[type='text'],input[type='email'] {
 
 }
 
-.venues, .all_shows, .add_venue {
+.all_shows, .add_venue {
   padding: 50px;
 }
 
@@ -203,9 +204,6 @@ input[type='text'],input[type='email'] {
   background-color: $accent;
 }
 
-.addr {
-  margin-left: 53px;
-}
 
 .clickable {
     //text-decoration: underline;
@@ -317,54 +315,7 @@ a {
   }
 }
 
-.venues {
-  //position: fixed;
-  //top: 75px;
-  //right: 0;
-  background-color: white;
-  //background-image: linear-gradient(to left, rgba(112,128,144,0), rgba(119,136,153,1));
-  margin: 20px;
-  border-radius: 10px;
-  padding:10px;
-  box-shadow: 5px 5px 10px grey;
-  width: 20%;
-  min-width: 200px;
-
-  ol {
-    max-width: 350px;
-    counter-reset: my-awesome-counter;
-    list-style: none;
-    padding-left: 40px;
-  }
-  ol li {
-    //margin-bottom: 15px;
-    margin: 0 0 0.5rem 0;
-    counter-increment: my-awesome-counter;
-    position: relative;
-  }
-
-  ol li::before {
-    content: counter(my-awesome-counter);
-    color: $yellow;
-    font-size: 1.5rem;
-    font-weight: bold;
-    position: absolute;
-    --size: 32px;
-    left: calc(-1 * var(--size) - 10px);
-    line-height: var(--size);
-    width: var(--size);
-    height: var(--size);
-    top: 0;
-    //transform: rotate(-10deg);
-    background: $black;
-    border-radius: 50%;
-    text-align: center;
-    box-shadow: 1px 1px 0 #999;
-  }
-
-}
-
-.venues, .toolbar {
+.toolbar {
   h2 {
     font-family: 'Libre Baskerville', serif;
     color: crimson;
@@ -372,34 +323,6 @@ a {
     text-shadow: .25px .25px 8px white;
   }
 }
-
-
-.theaters {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 200px;
-  margin-top: 75px;
-
-  .theater_info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    > * {
-      font-size: 1.4em;
-    }
-    .theater_name {
-      font-family: 'Libre Baskerville', serif;
-      font-size: 2em;
-      color: $main;
-    }
-  }
-}
-
-
 
 .overlay {
   position: absolute;
@@ -442,7 +365,7 @@ select{
 }
 
 .error {
-  text-align: center;
+  text-align: left;
   font-size: 1.2em;
   font-weight: bold;
   color: white;
@@ -451,6 +374,9 @@ select{
   margin: 5px 0;
   width: 50%;
   border-radius: 5px;
+  h4 {
+    text-align: center;
+  }
 }
 
 .show_results {

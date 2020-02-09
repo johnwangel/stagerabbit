@@ -17,7 +17,6 @@ class Results extends Component {
                       ? <span>
                             <span className="theater_name">
                               <Link className='website' to={`/theater/${this.props.item.id}`}>{this.props.item.name}</Link>
-                              &nbsp;
                               {this.props.item.city}, {this.props.item.abbr} ({parseInt(this.props.item.distance)} miles)
                             </span>
                             { (this.props.prod.length > 0)

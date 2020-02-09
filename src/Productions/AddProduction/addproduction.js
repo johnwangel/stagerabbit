@@ -32,7 +32,7 @@ class AddProd extends Component {
     this.state = {
       pid: (c) ? c.pid : null,
       editmode: (c) ? true : false,
-      formTitle: (c) ? 'Edit Production' : 'Add Production',
+      formTitle: (c) ? 'Update Production' : 'Add Production',
       start : sd,
       end:  ed,
       venue_id: (c && c.venue && c.venue.venue_id) ? c.venue.venue_id : '0',
@@ -117,40 +117,46 @@ class AddProd extends Component {
   render() {
     return (
       <div ref={ this.errRef } className='overlay' style={{height: this.state.window + 'px'}}>
-        <div className="all_shows" style={{marginTop: this.state.scroll + 'px'}}>
+        <div className="overlay-container" style={{marginTop: this.state.scroll + 'px'}}>
           <div className="close" onClick={() => { this.props.prod_form() }} >&times;</div>
+          <h2 className="form-title">{this.state.formTitle}</h2>
           <form id="form-1" onSubmit={this.handleSubmit}>
-            <h1>{this.state.formTitle}</h1>
-
             { ( this.props.VenuesByTheater.list)
-              ?         <div>
-                           <h2>Venue</h2>
-                           { (this.state.venue_error) ? <div className='error'>You must select a venue.</div> : null }
-                           <select
-                                  type="select"
-                                  id="venue_by_theater"
-                                  name="venue_id"
-                                  value={this.state.venue_id}
-                                  onChange={this.onDropdownSelected}>
-                             {this.props.VenuesByTheater.list}
-                           </select>
-                        </div>
+              ? <div className='form-group'>
+                  <div className="label">Venue:</div>
+                   { (this.state.venue_error)
+                      ? <div className='error'>You must select a venue.</div>
+                      : null
+                   }
+                   <select className="form-select wide"
+                           type="select"
+                           id="venue_by_theater"
+                           name="venue_id"
+                           value={this.state.venue_id}
+                           onChange={this.onDropdownSelected}>
+                     {this.props.VenuesByTheater.list}
+                   </select>
+                  </div>
                 : null
               }
-            <h2>Show Title</h2>
-            { (this.state.show_error) ? <div className='error'>You must select a show.</div> : null }
-            <select
-                  id="show_select"
-                  type="select"
-                  name="show_id"
-                  value={this.state.show_id}
-                  onChange={this.onDropdownSelected}>
-              {this.props.Shows.shows}
-            </select>
-
-
-            <div>
-              <h2>Start Date:</h2>
+            <div className='form-group'>
+              <div className="label">Show Title:</div>
+              { (this.state.show_error)
+                ? <div className='error'>You must select a show.</div>
+                : null
+              }
+              <select
+                    className="form-select wide"
+                    id="show_select"
+                    type="select"
+                    name="show_id"
+                    value={this.state.show_id}
+                    onChange={this.onDropdownSelected}>
+                {this.props.Shows.shows}
+              </select>
+            </div>
+            <div className='form-group'>
+              <div className="label">Start Date:</div>
               <DatePicker
                 id="start_date_1"
                 name="start_date"
@@ -159,8 +165,8 @@ class AddProd extends Component {
               />
             </div>
 
-            <div>
-              <h2>End Date:</h2>
+            <div className='form-group'>
+              <div className="label">End Date:</div>
               <DatePicker
                 id="end_date_1"
                 name="end_date"
@@ -169,8 +175,8 @@ class AddProd extends Component {
               />
             </div>
 
-            <div>
-              <h2>Description</h2>
+            <div className='form-group'>
+              <div className="label">Description:</div>
               <textarea
                     id="description_1"
                     name="description"
@@ -178,8 +184,8 @@ class AddProd extends Component {
                     onChange={this.handleChange} />
             </div>
 
-            <div>
-              <h2>Cast</h2>
+            <div className='form-group'>
+              <div className="label">Cast:</div>
               <textarea
                   id="cast_1"
                   name="cast"
@@ -188,7 +194,7 @@ class AddProd extends Component {
             </div>
 
             <div id="dir-group">
-            <h2>Director</h2>
+              <h3 className='form-title'>Director:</h3>
               {
                 [...Array(this.state.dirChildren)].map( (m,i,a) =>{
                   return <AddArtist
@@ -207,10 +213,16 @@ class AddProd extends Component {
                 })
               }
             </div>
-            <div className='add-div' id="dirChildren" onClick={this.handleNew}>Another Director</div>
+
+            <div className='another-artist'
+                 id="dirChildren"
+                 onClick={this.handleNew}>
+              <span className="plus">+</span>
+              Another Director
+            </div>
 
             <div id="chor-group">
-              <h2>Choreographer</h2>
+              <h3 className='form-title'>Choreographer:</h3>
               {
                 [...Array(this.state.chorChildren)].map( (m,i,a) =>{
                   return <AddArtist
@@ -229,11 +241,17 @@ class AddProd extends Component {
                 })
               }
             </div>
-            <div className='add-div' id="chorChildren" onClick={this.handleNew}>Another Choreo.</div>
+
+            <div className='another-artist'
+                 id="chorChildren"
+                 onClick={this.handleNew}>
+              <span className="plus">+</span>
+              Another Choreograher
+            </div>
 
 
             <div id="md-group">
-              <h2>Music Director</h2>
+              <h3 className='form-title'>Music Director:</h3>
               {
                 [...Array(this.state.mdChildren)].map( (m,i,a) =>{
                   return <AddArtist
@@ -252,10 +270,15 @@ class AddProd extends Component {
                 })
               }
             </div>
-            <div className='add-div' id="mdChildren" onClick={this.handleNew}>Another MD</div>
+            <div className='another-artist'
+                 id="mdChildren"
+                 onClick={this.handleNew}>
+              <span className="plus">+</span>
+              Another MD
+            </div>
 
             <input
-                className='subbutt'
+                className='form-button'
                 id={ this.props.theaterid }
                 type="submit"
                 value="Submit Production"/>

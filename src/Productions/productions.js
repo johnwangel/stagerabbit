@@ -132,12 +132,8 @@ class Productions extends Component {
 
                 <div className='genre-container'><span className="genre">{g1}</span><span className="genre">{g2}</span></div>
 
-
-                <div className='venue'>
+                <table className="details-table">
                   { ( this.state.venue ) ? <Venue ven={ this.state.venue }/> : null}
-                </div>
-
-                <div className='creatives'>
                   { ( this.state.book ) ? <Artists type="Book" artists={ this.state.book }/> : null }
                   { ( this.state.music ) ? <Artists type="Music" artists={ this.state.music }/> : null }
                   { ( this.state.lyrics ) ? <Artists type="Lyrics" artists={ this.state.lyrics }/> : null }
@@ -145,16 +141,20 @@ class Productions extends Component {
                   { ( this.state.dir ) ? <Artists type="Directed" artists={ this.state.dir }/> : null }
                   { ( this.state.chor ) ? <Artists type= "Choreographed" artists={ this.state.chor }/> : null }
                   { ( this.state.md ) ? <Artists type="Musical Direction" artists={ this.state.md }/> : null }
-                </div>
+                </table>
+
                 { ( p.description !== '')
-                      ?  ( <div className='description'><span><SanitizedHTML html={p.description} /></span></div>)
+                      ?  ( <div className='description'><SanitizedHTML html={p.description} /></div>)
                       : null
                 }
 
                 { (this.props.perm > 1)
-                  ? <div className='edit_tools'>
+                  ? <div className='edit-prod-buttons'>
                       { (!this.state.edit_show)
-                          ? <span className="list clickable" onClick={() => { this.show_form() }}>Edit Show</span>
+                          ? <span className="form-button-3"
+                                  onClick={() => { this.show_form() }}>
+                                Update Show
+                              </span>
                           : <AddShow
                               production={ this.props.prod }
                               creatives={ this.state }
@@ -167,7 +167,10 @@ class Productions extends Component {
                             />
                         }
                         { (!this.state.edit_prod)
-                           ? <span className="list clickable" onClick={() => { this.prod_form() }}>Edit Production</span>
+                           ? <span className="form-button-3"
+                                   onClick={() => { this.prod_form() }}>
+                                Update Production
+                              </span>
                            : <AddProd
                               production={ this.props.prod }
                               specs={ this.state }
@@ -181,7 +184,7 @@ class Productions extends Component {
                         }
 
                     </div>
-                  : <div className='edit_tools'></div>
+                  : null
                 }
 
 

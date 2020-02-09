@@ -267,7 +267,7 @@ a.home {
   text-align: left; }
 
 .upcoming {
-  margin: 5px 0 20px;
+  margin: 5px 0 20px 20px;
   font-size: .9em; }
   .upcoming .runin {
     font-size: .9em; }
@@ -303,44 +303,79 @@ a.home {
 
 .theater_name {
   display: flex;
+  align-items: flex-start;
+  flex-direction: column; }
+
+h2.main-page, .admin-theater, .theater, .productions, .venues {
+  width: 50%;
+  min-width: 750px;
+  padding: 20px 50px; }
+  @media screen and (max-width: 800px) {
+    h2.main-page, .admin-theater, .theater, .productions, .venues {
+      width: 100%;
+      min-width: unset;
+      padding: 20px 0; } }
+
+.admin-theater {
+  background-color: white;
+  display: grid;
+  grid-template-columns: 80% 20%;
   align-items: center; }
 
-.theater {
-  margin-top: 30px;
-  width: 33%;
-  min-width: 200px; }
-  @media screen and (max-width: 600px) {
-    .theater {
-      width: 75%; } }
-  .theater h2 {
-    font-family: 'Libre Baskerville', serif;
-    color: indigo;
-    font-size: 2em; }
+h2.main-page {
+  margin: 0 auto;
+  font-family: 'Libre Baskerville', serif;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: indigo;
+  text-align: center;
+  margin: 0; }
 
-input[type='text'] {
-  width: 65%; }
+.theater {
+  background-color: white; }
+
+.theaters {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px; }
+  .theaters .theater_info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0; }
+    .theaters .theater_info > * {
+      font-size: 1.4em; }
+    .theaters .theater_info .theater_name {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 2em;
+      color: indigo; }
 
 .productions {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  width: 33%; }
-  @media screen and (max-width: 600px) {
-    .productions {
-      width: 75%; } }
-  .productions h2 {
-    align-self: center;
-    font-family: 'Libre Baskerville', serif;
-    color: indigo;
-    font-size: 2em;
-    margin: 20px 0 0; }
+  background-color: white;
+  padding-bottom: 200px; }
   .productions .production {
-    background-image: linear-gradient(to left, rgba(112, 128, 144, 0.2), rgba(119, 136, 153, 0.8));
-    border-radius: 10px;
-    margin: 20px 0 0;
-    box-shadow: 5px 5px 10px grey;
-    width: 100%; }
+    margin-top: 40px;
+    width: 100%;
+    border-bottom: 2px solid indigo; }
+    .productions .production .details-table {
+      margin: 10px auto; }
+      .productions .production .details-table tr {
+        vertical-align: top; }
+        .productions .production .details-table tr td {
+          padding: 0 50px 20px 0; }
+          .productions .production .details-table tr td:first-child {
+            color: indigo;
+            font-weight: bold;
+            margin-right: 30px; }
   .productions .show_dates {
     font-family: 'Libre Baskerville', serif;
     font-style: italic;
@@ -354,11 +389,8 @@ input[type='text'] {
     margin-bottom: 15px;
     font-size: 2em;
     font-weight: 700;
-    color: lightgray;
-    background-color: #242B40;
-    color: #e8d25a;
+    color: indigo;
     padding: 10px;
-    border-radius: 10px 10px 0 0;
     text-align: center; }
   .productions .genre-container {
     display: flex;
@@ -376,19 +408,34 @@ input[type='text'] {
     text-align: center; }
   .productions .venue {
     margin: 10px; }
-  .productions .creatives {
-    margin: 20px;
-    line-height: 1.4em; }
   .productions .description {
     border-top: 1px solid indigo;
     margin: 0 20px;
     padding-top: 10px;
     line-height: 1.5em; }
+    .productions .description > * {
+      margin: 0 25px 25px; }
 
 .instr {
   font-weight: 600;
   color: indigo;
   margin: 20px 0; }
+
+.edit-prod-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px; }
+  .edit-prod-buttons .form-button-3 {
+    width: 50%;
+    background-color: indigo;
+    color: white;
+    text-align: center;
+    font-size: 1em;
+    font-weight: bold;
+    padding: 15px; }
+    .edit-prod-buttons .form-button-3:first-child {
+      border-right: 2px solid white; }
 
 .toolbar {
   position: fixed;
@@ -458,7 +505,9 @@ input[type='text'] {
   position: relative;
   width: 40%;
   padding: 30px;
-  background-color: darkorchid; }
+  background-color: darkorchid;
+  border-radius: 10px;
+  margin-bottom: 50px; }
   @media only screen and (max-width: 600px) {
     .overlay-container {
       width: 80%; } }
@@ -471,7 +520,7 @@ input[type='text'] {
     font-size: 3em;
     margin-top: auto; }
     .overlay-container .close:hover {
-      color: #242B40; }
+      color: indigo; }
   .overlay-container .error {
     width: 100%;
     padding: 10px 0;
@@ -481,7 +530,18 @@ input[type='text'] {
   color: white;
   margin-top: 0; }
 
+h2.form-title {
+  text-transform: uppercase; }
+
+h3.form-title {
+  color: white;
+  font-weight: 800;
+  margin-top: 25px;
+  border-top: 2px solid indigo;
+  padding-top: 5px; }
+
 .form-group {
+  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -491,30 +551,110 @@ input[type='text'] {
   .form-group .label {
     color: white;
     font-weight: bold;
-    margin-right: .5em;
-    white-space: nowrap; }
+    white-space: nowrap;
+    margin: 10px 0 5px; }
+  .form-group .form-select.wide {
+    width: 100%;
+    min-width: 100%; }
   .form-group input[type='text'] {
     box-sizing: border-box;
     max-width: unset;
     width: 100%;
-    padding: 5px; }
+    padding: 5px;
+    color: black;
+    background-color: #EEE;
+    border-radius: 5px; }
   .form-group select {
-    color: darkorchid;
-    background-color: white; }
+    color: black;
+    background-color: #EEE; }
   .form-group textarea {
+    color: black;
+    background-color: #EEE;
     box-sizing: border-box;
     width: 100%;
-    padding: 5px; }
+    padding: 5px;
+    border-radius: 10px;
+    border-color: gray; }
 
 .form-button {
-  float: right;
+  width: 100%;
   font-size: 1.2em;
   color: white;
   font-weight: 600;
   background-color: indigo;
   border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
+  cursor: pointer; }
+
+.form-button-2 {
+  font-size: 1em;
+  color: white;
+  background-color: indigo;
+  border-radius: 10px;
   padding: 5px 10px;
-  margin-top: 10px; }
+  cursor: pointer;
+  font-weight: bold;
+  border: 1px solid white;
+  margin: 0 0 0 5px;
+  text-align: center; }
+
+.subform-wrapper {
+  height: 100%;
+  padding-left: 30px; }
+
+.another-artist {
+  display: flex;
+  width: 200px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 1em;
+  color: white;
+  font-weight: bold;
+  background-color: darkgray;
+  border-radius: 10px;
+  padding: 0 20px;
+  cursor: pointer;
+  border: 1px solid white;
+  margin: 0 0 20px 30px; }
+  .another-artist .plus {
+    font-size: 2em;
+    margin-right: 10px; }
+
+.edit_buttons {
+  width: 100%;
+  margin: 10px 0;
+  display: flex;
+  justify-content: flex-end; }
+
+.creatives {
+  margin-top: 20px; }
+
+.venues {
+  background-color: white; }
+  .venues .venue {
+    border-bottom: 2px solid indigo;
+    display: grid;
+    grid-template-columns: 20% 40% 20% 20%;
+    align-items: center;
+    padding: 10px; }
+    .venues .venue:last-child {
+      border-bottom: none; }
+    .venues .venue .number {
+      text-align: center;
+      background-color: indigo;
+      width: 50px;
+      height: 50px;
+      font-size: 2em;
+      color: white;
+      border-radius: 50%;
+      line-height: 1.4em; }
+      @media screen and (max-width: 800px) {
+        .venues .venue .number {
+          width: 30px;
+          height: 30px;
+          line-height: 1.2em; } }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace; }
@@ -654,7 +794,7 @@ input[type='text'], input[type='email'] {
   input[type='text'].person, input[type='email'].person {
     width: 100px; }
 
-.venues, .all_shows, .add_venue {
+.all_shows, .add_venue {
   padding: 50px; }
 
 .all_shows {
@@ -663,9 +803,6 @@ input[type='text'], input[type='email'] {
 .add_show {
   padding: 50px;
   background-color: darkorchid; }
-
-.addr {
-  margin-left: 53px; }
 
 .clickable {
   cursor: pointer;
@@ -750,65 +887,11 @@ a {
   .website:hover {
     color: darkorchid; }
 
-.venues {
-  background-color: white;
-  margin: 20px;
-  border-radius: 10px;
-  padding: 10px;
-  box-shadow: 5px 5px 10px grey;
-  width: 20%;
-  min-width: 200px; }
-  .venues ol {
-    max-width: 350px;
-    counter-reset: my-awesome-counter;
-    list-style: none;
-    padding-left: 40px; }
-  .venues ol li {
-    margin: 0 0 0.5rem 0;
-    counter-increment: my-awesome-counter;
-    position: relative; }
-  .venues ol li::before {
-    content: counter(my-awesome-counter);
-    color: #e8d25a;
-    font-size: 1.5rem;
-    font-weight: bold;
-    position: absolute;
-    --size: 32px;
-    left: calc(-1 * var(--size) - 10px);
-    line-height: var(--size);
-    width: var(--size);
-    height: var(--size);
-    top: 0;
-    background: #242B40;
-    border-radius: 50%;
-    text-align: center;
-    box-shadow: 1px 1px 0 #999; }
-
-.venues h2, .toolbar h2 {
+.toolbar h2 {
   font-family: 'Libre Baskerville', serif;
   color: crimson;
   text-weight: bold;
   text-shadow: .25px .25px 8px white; }
-
-.theaters {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 200px;
-  margin-top: 75px; }
-  .theaters .theater_info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center; }
-    .theaters .theater_info > * {
-      font-size: 1.4em; }
-    .theaters .theater_info .theater_name {
-      font-family: 'Libre Baskerville', serif;
-      font-size: 2em;
-      color: indigo; }
 
 .overlay {
   position: absolute;
@@ -843,7 +926,7 @@ select {
     border-radius: 10px; }
 
 .error {
-  text-align: center;
+  text-align: left;
   font-size: 1.2em;
   font-weight: bold;
   color: white;
@@ -852,6 +935,8 @@ select {
   margin: 5px 0;
   width: 50%;
   border-radius: 5px; }
+  .error h4 {
+    text-align: center; }
 
 .show_results {
   margin-top: 100px;

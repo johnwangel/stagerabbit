@@ -1,48 +1,96 @@
+h2.main-page, .admin-theater, .theater, .productions, .venues {
+  width: 50%;
+  min-width:750px;
+  padding: 20px 50px;
+
+  @media screen and (max-width: 800px){
+    width: 100%;
+    min-width: unset;
+    padding: 20px 0;
+  }
+}
+
+.admin-theater {
+  background-color: white;
+  display: grid;
+  grid-template-columns: 80% 20%;
+  align-items: center;
+}
+
+h2.main-page {
+  margin: 0 auto;
+  font-family: 'Libre Baskerville', serif;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: $main;
+  text-align: center;
+  margin: 0;
+
+}
+
 .theater {
-  margin-top: 30px;
-  width: 33%;
-  min-width: 200px;
+  background-color: white;
+}
 
-  @media screen and (max-width: 600px){
-    width: 75%;
-  }
+.theaters {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
 
-  h2 {
-    font-family: 'Libre Baskerville', serif;
-    color: $main;
-    font-size: 2em;
+  .theater_info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0;
+    > * {
+      font-size: 1.4em;
+    }
+    .theater_name {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 2em;
+      color: $main;
+    }
   }
 }
 
-input[type='text']{
-  width: 65%;
-}
+
+// input[type='text']{
+//   width: 65%;
+// }
 
 .productions {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  width: 33%;
+  background-color: white;
+  padding-bottom: 200px;
 
-  @media screen and (max-width: 600px){
-    width: 75%;
-  }
-
-  h2 {
-    align-self: center;
-    font-family: 'Libre Baskerville', serif;
-    color: $main;
-    font-size: 2em;
-    margin: 20px 0 0;
-  }
   .production {
-    background-image: linear-gradient(to left, rgba(112,128,144,.2), rgba(119,136,153,.8));
-    border-radius: 10px;
-    margin: 20px 0 0;
-    box-shadow: 5px 5px 10px grey;
-    //padding-bottom: 30px;
+    margin-top: 40px;
     width: 100%;
+    border-bottom: 2px solid $main;
+
+    .details-table {
+      margin: 10px auto;
+      tr {
+        vertical-align: top;
+        td {
+          padding: 0 50px 20px 0;
+          &:first-child {
+            color: $main;
+            font-weight: bold;
+            margin-right: 30px;
+          }
+        }
+      }
+
+    }
   }
   .show_dates {
     font-family: 'Libre Baskerville', serif;
@@ -58,14 +106,9 @@ input[type='text']{
     margin-bottom: 15px;
     font-size: 2em;
     font-weight: 700;
-    color: lightgray;
-    //text-shadow: .5px .5px 35px black;
-    background-color: $black;
-    color: $yellow;
+    color: $main;
     padding: 10px;
-    border-radius: 10px 10px 0 0;
     text-align: center;
-    //box-shadow: 1px 1px 10px $gray;
   }
   .genre-container {
     display: flex;
@@ -86,15 +129,15 @@ input[type='text']{
   .venue {
     margin: 10px;
   }
-  .creatives {
-    margin: 20px;
-    line-height: 1.4em;
-  }
+
   .description {
     border-top: 1px solid $main;
     margin: 0 20px;
     padding-top: 10px;
     line-height: 1.5em;
+    &>*{
+      margin: 0 25px 25px;
+    }
   }
 }
 
@@ -103,3 +146,27 @@ input[type='text']{
   color: $main;
   margin: 20px 0;
 }
+
+.edit-prod-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+
+  .form-button-3 {
+    width: 50%;
+    background-color: $main;
+    color: white;
+    text-align: center;
+    font-size: 1em;
+    font-weight: bold;
+    padding: 15px;
+    &:first-child {
+      border-right: 2px solid white;
+    }
+  }
+}
+
+
+
+

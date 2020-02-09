@@ -3,7 +3,8 @@
   width: 40%;
   padding: 30px;
   background-color: $accent;
-
+  border-radius: 10px;
+  margin-bottom: 50px;
   @media only screen and (max-width: 600px) { width: 80%; }
 
   .close {
@@ -15,7 +16,7 @@
     font-size: 3em;
     margin-top: auto;
     &:hover {
-      color: $black;
+      color: $main;
     }
   }
 
@@ -30,8 +31,23 @@
 .form-title {
   color: white;
   margin-top: 0;
+  //text-transform: uppercase;
 }
+
+h2.form-title {
+  text-transform: uppercase;
+}
+
+h3.form-title {
+  color: white;
+  font-weight: 800;
+  margin-top: 25px;
+  border-top: 2px solid $main;
+  padding-top: 5px;
+}
+
 .form-group {
+  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -42,8 +58,13 @@
   .label {
     color: white;
     font-weight: bold;
-    margin-right: .5em;
     white-space: nowrap;
+    margin: 10px 0 5px;
+  }
+
+  .form-select.wide {
+    width: 100%;
+    min-width: 100%;
   }
 
   input[type='text'] {
@@ -51,27 +72,87 @@
     max-width: unset;
     width: 100%;
     padding: 5px;
+    color: black;
+    background-color: $background;
+    border-radius: 5px;
   }
 
   select {
-    color: $accent;
-    background-color: white;
+    color: black;
+    background-color: $background;
   }
 
   textarea {
+    color: black;
+    background-color: $background;
     box-sizing: border-box;
     width: 100%;
     padding: 5px;
+    border-radius: 10px;
+    border-color: gray;
   }
 }
 
 .form-button {
-  float: right;
+  width: 100%;
   font-size: 1.2em;
   color: white;
   font-weight: 600;
   background-color: $main;
   border-radius: 10px;
-  padding: 5px 10px;
+  padding: 10px;
   margin-top: 10px;
+  cursor: pointer;
 }
+
+.form-button-2 {
+  font-size: 1em;
+  color: white;
+  background-color: $main;
+  border-radius: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-weight: bold;
+  border: 1px solid white;
+  margin: 0 0 0 5px;
+  text-align: center;
+}
+
+.subform-wrapper {
+  height: 100%;
+  padding-left: 30px;
+}
+
+.another-artist {
+  display: flex;
+  width: 200px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 1em;
+  color: white;
+  font-weight: bold;
+  background-color: darkgray;
+  border-radius: 10px;
+  padding: 0 20px;
+  cursor: pointer;
+  border: 1px solid white;
+  margin: 0 0 20px 30px;
+
+  .plus {
+    font-size: 2em;
+    margin-right: 10px;
+  }
+}
+
+.edit_buttons {
+  width: 100%;
+  margin: 10px 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.creatives {
+  margin-top: 20px;
+}
+

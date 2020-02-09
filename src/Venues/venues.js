@@ -7,30 +7,31 @@ class Venues extends Component {
     let v = this.props.venues;
     return (
       <div className='venues'>
-        <h2>Venues</h2>
-        <ol>
           {
             v.map( (item, idx) => {
-              return (<li key={idx} className='venue' id={item.venue_id}>
-                        <span className='runin'>{item.venue_name}</span>
-                        {(this.props.perm > 1) ? <span>({item.venue_id})</span> : null }
-                        {(item.venue_add1) ? <div>{item.venue_add1}</div> : null }
-                        {(item.venue_add2) ? <div>{item.venue_add2}</div> : null }
-                        <div>{item.venue_city}, {item.venue_state} {item.venue_zip}</div>
+              return (<div key={idx} className='venue' id={item.venue_id}>
+                        <div className='number'>{idx+1}</div>
+                        <div className='venue-info'>
+                          <span className='runin'>{item.venue_name}</span>
+                          {(item.venue_add1) ? <div>{item.venue_add1}</div> : null }
+                          {(item.venue_add2) ? <div>{item.venue_add2}</div> : null }
+                          <div>{item.venue_city}, {item.venue_state} {item.venue_zip}</div>
+                        </div>
                         { (this.props.perm > 1)
-                          ? <div className="edit_tools inter">
-                              <span className="list clickable"
-                                    onClick={() => { this.props.edit('edit',item.venue_id) }}>Edit</span>
-                              <span className="list clickable"
-                                    onClick={() => { this.props.del(item.venue_id) }}>Remove</span>
-                            </div>
+                          ?   <div className="form-button-2"
+                                    onClick={() => { this.props.edit('edit',item.venue_id) }}>
+                                Edit</div>
+                          :null
+                        }
+                        { (this.props.perm > 1)
+                            ?  <div className="form-button-2"
+                                    onClick={() => { this.props.del(item.venue_id) }}>
+                                  Remove</div>
                           : null
                         }
-
-                      </li>)
+                      </div>)
             } )
           }
-        </ol>
 
       </div>
     );
