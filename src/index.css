@@ -367,7 +367,7 @@ h2.main-page {
     width: 100%;
     border-bottom: 2px solid indigo; }
     .productions .production .details-table {
-      margin: 10px auto; }
+      margin: 50px auto 30px; }
       .productions .production .details-table tr {
         vertical-align: top; }
         .productions .production .details-table tr td {

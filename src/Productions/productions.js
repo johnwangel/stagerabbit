@@ -120,8 +120,8 @@ class Productions extends Component {
 
   render() {
     let p = this.props.prod;
-    let g = p.genre.split(',');
-    let g1 = g[0], g2=g[1];
+    // let g = p.genre.split(',');
+    // let g1 = g[0], g2=g[1];
     return ( <div key={this.props.id+'-prod'} id={this.props.prod.production_id} className="production">
 
                 <div className="show_title"><SanitizedHTML html={ p.title } /></div>
@@ -130,9 +130,11 @@ class Productions extends Component {
                   {moment.utc(p.start_date).format('MMMM D, YYYY')} to {moment.utc(p.end_date).format('MMMM D, YYYY')}
                 </div>
 
-                <div className='genre-container'><span className="genre">{g1}</span><span className="genre">{g2}</span></div>
+{/*                <div className='genre-container'>
+                <span className="genre">{g1}</span><span className="genre">{g2}</span></div>*/}
 
                 <table className="details-table">
+                  <tr><td>Genre:</td><td>{p.genre}</td></tr>
                   { ( this.state.venue ) ? <Venue ven={ this.state.venue }/> : null}
                   { ( this.state.book ) ? <Artists type="Book" artists={ this.state.book }/> : null }
                   { ( this.state.music ) ? <Artists type="Music" artists={ this.state.music }/> : null }
