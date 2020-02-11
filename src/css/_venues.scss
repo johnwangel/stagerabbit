@@ -1,5 +1,13 @@
 .venues {
   background-color: white;
+  &.showlast {
+    order: 10;
+    padding-bottom: 200px;
+
+    .venue:last-child {
+      border-bottom: 2px solid $main;
+    }
+  }
 
   .venue {
     border-bottom: 2px solid $main;

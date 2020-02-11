@@ -313,7 +313,7 @@ class Main extends Component {
     return (
       <div className="theaters">
         { (this.props.User.level===3)
-          ? <div className="admin-theater">
+          ? <div className="admin-theater main-column">
               <form onSubmit={this.handleIDSubmit}>
                 <label>
                   <span className='runin'>Theater ID:</span>
@@ -364,7 +364,7 @@ class Main extends Component {
           : null
         }
 
-        <h2 className="main-page">Theater Company</h2>
+        <h2 className="main-page main-column">Theater Company</h2>
         { (d.id) ?
           <Theater
             cb={this.alterTheaterCallback}
@@ -374,14 +374,15 @@ class Main extends Component {
           : null
         }
 
-        { (v && v.length>0 && this.props.User.level>1)
-          ? <h2 className="main-page">Venues</h2>
+        { (v && v.length>0)
+          ? <h2 className={ (this.props.User.level===1)?"main-page main-column showlast": "main-page main-column" } >Venues</h2>
           : null
         }
 
-        { (v && v.length>0 && this.props.User.level>1)
+        { (v && v.length>0)
           ? <Venues
               id={ d.id }
+              order={(this.props.User.level===1)?1:0}
               perm={ this.props.User.level }
               venues={ this.props.VenuesByTheater.venues}
               edit={ this.venue_form }
@@ -459,9 +460,9 @@ class Main extends Component {
           : null
         }
 
-        <h2 className="main-page">Productions</h2>
+        <h2 className="main-page main-column">Productions</h2>
         { (p.length > 0)
-          ? <div className='productions'>
+          ? <div className='productions main-column'>
               { p.map( ( item, index ) => {
                     return <Productions
                         idx={ index }
