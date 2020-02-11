@@ -318,9 +318,10 @@ a.home {
 
 .admin-theater {
   background-color: white;
-  display: grid;
-  grid-template-columns: 80% 20%;
-  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
   margin-top: 25px; }
 
 h2.main-page {
@@ -401,6 +402,9 @@ h3.sub-column {
   justify-content: flex-start;
   align-items: center;
   width: 61%; }
+  @media screen and (max-width: 800px) {
+    .toggle {
+      width: 100%; } }
   .toggle .toggle-button {
     cursor: pointer;
     width: 50%;

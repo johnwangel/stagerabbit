@@ -329,13 +329,13 @@ class Main extends Component {
                 </label>
                 <input  type="submit"
                         value="Submit"
-                        className="subbutt" />
+                        className="form-button" />
               </form>
               <form onSubmit={this.handleGeo.bind(this)}>
                 <button id="geo"
                         type="submit"
                         value={ this.state.current_id }
-                        className="subbutt">Refresh Geo</button>
+                        className="form-button">Refresh Geo</button>
               </form>
             </div>
           : null
@@ -351,7 +351,7 @@ class Main extends Component {
                   <form onSubmit={this.delete_theater}>
                       <div className="form-group">
                         <div className='label'>Theater ID:</div>
-                        <input id="delete_id" type="text" name="delete_id" value={ this.state.delete_id } onChange={this.handleChange} />
+                        <input className="form-button" id="delete_id" type="text" name="delete_id" value={ this.state.delete_id } onChange={this.handleChange} />
                       </div>
                       <input type="submit" value="Submit" className="form-button" />
                   </form>
@@ -498,7 +498,7 @@ class Main extends Component {
                 })
               }
             </div>
-          : <div className='productions'>No upcoming productions listed.</div>
+          : <div className={ (this.state.show_prods===0) ? 'productions main-column' : 'productions main-column hide' }>No upcoming productions listed.</div>
         }
         { (p.previous.length > 0)
           ? <div className={ (this.state.show_prods===1) ? 'productions main-column' : 'productions main-column hide' }>
@@ -519,7 +519,7 @@ class Main extends Component {
                 })
               }
             </div>
-          : <div className='productions'>No previous productions available.</div>
+          : <div className={ (this.state.show_prods===1) ? 'productions main-column' : 'productions main-column hide' }>No previous productions available.</div>
         }
 
 

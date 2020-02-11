@@ -63,8 +63,8 @@ class AddProd extends Component {
   componentDidMount() {
     var body = document.body,
     html = document.documentElement;
-    var height = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight );
-    this.setState({ scroll: window.scrollY, window: height });
+    var height = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+    this.setState({ scroll: 35+window.scrollY, window: height });
   }
 
   handleNew(e) {
