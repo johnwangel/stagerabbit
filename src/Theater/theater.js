@@ -11,10 +11,11 @@ class Theater extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.edit_it = this.edit_it.bind(this);
     this.submit_it = this.submit_it.bind(this);
+    this.return_it = this.return_it.bind(this);
   }
 
   updateInputs(a,b){
-    if (a !== b) this.setState( this.props.theater )
+    if (a !== b) this.setState( this.props.theater );
   }
 
   handleChange(e) {
@@ -23,12 +24,16 @@ class Theater extends Component {
   }
 
   edit_it(data) {
-    this.setState({edit: data})
+    this.setState({edit: data});
   }
 
   submit_it(data) {
     data.theater_id=this.props.theater.id;
     this.props.cb(data);
+    this.setState({edit: ''});
+  }
+
+  return_it(data) {
     this.setState({edit: ''});
   }
 
@@ -39,30 +44,66 @@ class Theater extends Component {
     const y = this.state;
     const keys= Object.keys( this.props.theater );
     return (
-      <div key={this.props.theater.id} className='theater'>
+      <div key={this.props.theater.id} className='theater main-column'>
         { (this.props.perm > 1)
           ? <div>
-              <div className='instr'>NOTE: Click name (label) on left to edit any of the fields below:</div>
-              { keys.map((keyname, keyindex ) => {
-                  const _id = `${keyname}_t1`;
-                  const _name = keyname === 'website'
-                                ? <a key={ this.props.theater.id+'-i' } target="_blank" href={x[keyname]}>{x[keyname]}</a>
-                                : x[keyname];
-                  const edit = this.state.edit===keyname ? true : false;
+              <div className='theater_info'>
+                <div className='theater_name'>{this.props.theater.name}</div>
+                <div className='address'>
+                  { (this.props.theater.address1) ? <div>{this.props.theater.address1}</div> : null  }
+                  { (this.props.theater.address1) ? <div> {this.props.theater.address2}</div> : null }
+                  <div> {this.props.theater.city}, { this.props.theater.theater_state } { this.props.theater.zip }</div>
+                  <div>{this.props.theater.phone}</div>
+                  <div><a href={this.props.theater.website} target='_blank' className='website'>{this.props.theater.website}</a></div>
+                </div>
+              </div>
 
-                  if (keyname==='createdAt' || keyname==='updatedAt' || keyname==='edit' || keyname==='specialty_id') return null;
+              <h3 className="sub-column">Edit Company Details</h3>
+              <table className="theater-info-table">
+                  { keys.map((keyname, keyindex ) => {
+                      const _id = `${keyname}_t1`;
+                      const _name = keyname === 'website'
+                                    ? <a key={ this.props.theater.id+'-i' } target="_blank" href={x[keyname]}>{x[keyname]}</a>
+                                    : x[keyname];
+                      const edit = this.state.edit===keyname ? true : false;
 
-                  return <TheaterInfo
-                              key={keyindex}
-                              id={_id}
-                              label={keyname}
-                              value={x[keyname]}
-                              edit={edit}
-                              submit_it={this.submit_it}
-                              edit_it={this.edit_it}
-                              perm={this.props.perm}
-                              specialites={ this.props.specialties } />
-              })}</div>
+                      if ( ( keyname==='createdAt' ||
+                              keyname==='updatedAt' ||
+                              keyname==='edit' ||
+                              keyname==='specialty_id'
+                            ) ||
+                            (
+                              this.props.perm < 3 &&
+                              ( keyname==='id' ||
+                                keyname==='state' ||
+                                keyname==='place_id' ||
+                                keyname==='location_lat' ||
+                                keyname==='location_lng' ||
+                                keyname==='viewport_ne_lat' ||
+                                keyname==='viewport_ne_lng' ||
+                                keyname==='viewport_sw_lng' ||
+                                keyname==='viewport_sw_lat' ||
+                                keyname==='formatted_address' ||
+                                keyname==='name_alt' ||
+                                keyname==='token'
+                              )
+                            )
+                          ) return null;
+
+                      return <TheaterInfo
+                                  key={keyindex}
+                                  id={_id}
+                                  label={keyname}
+                                  value={x[keyname]}
+                                  edit={edit}
+                                  submit_it={this.submit_it}
+                                  edit_it={this.edit_it}
+                                  return_it={this.return_it}
+                                  perm={this.props.perm}
+                                  specialites={ this.props.specialties } />
+                  })}
+                </table>
+            </div>
           : <div className='theater_info'>
               <div className='theater_name'>{this.props.theater.name}</div>
               <div className='address'>

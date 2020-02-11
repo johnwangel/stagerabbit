@@ -6,7 +6,7 @@ class Venues extends Component {
   render() {
     let v = this.props.venues;
     return (
-      <div className='venues'>
+      <div className={ (this.props.order===1)?"venues main-column showlast": "venues main-column" }>
           {
             v.map( (item, idx) => {
               return (<div key={idx} className='venue' id={item.venue_id}>
@@ -32,7 +32,6 @@ class Venues extends Component {
                       </div>)
             } )
           }
-
       </div>
     );
   }

@@ -306,12 +306,12 @@ a.home {
   align-items: flex-start;
   flex-direction: column; }
 
-h2.main-page, .admin-theater, .theater, .productions, .venues {
+.main-column {
   width: 50%;
   min-width: 750px;
   padding: 20px 50px; }
   @media screen and (max-width: 800px) {
-    h2.main-page, .admin-theater, .theater, .productions, .venues {
+    .main-column {
       width: 100%;
       min-width: unset;
       padding: 20px 0; } }
@@ -320,7 +320,8 @@ h2.main-page, .admin-theater, .theater, .productions, .venues {
   background-color: white;
   display: grid;
   grid-template-columns: 80% 20%;
-  align-items: center; }
+  align-items: center;
+  margin-top: 25px; }
 
 h2.main-page {
   margin: 0 auto;
@@ -329,8 +330,19 @@ h2.main-page {
   font-weight: bold;
   text-transform: uppercase;
   background-color: indigo;
+  text-align: center; }
+  h2.main-page.showlast {
+    order: 9; }
+
+h3.sub-column {
+  margin: 0 auto;
+  font-family: 'Libre Baskerville', serif;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: darkgray;
   text-align: center;
-  margin: 0; }
+  padding: 10px; }
 
 .theater {
   background-color: white; }
@@ -347,13 +359,42 @@ h2.main-page {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 30px 0; }
+    padding: 30px; }
     .theaters .theater_info > * {
       font-size: 1.4em; }
     .theaters .theater_info .theater_name {
       font-family: 'Libre Baskerville', serif;
       font-size: 2em;
       color: indigo; }
+  .theaters .theater-info-table {
+    width: 100%;
+    padding: 15px; }
+  .theaters .theater-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center; }
+  .theaters .table-button {
+    padding: 0 10px;
+    cursor: pointer; }
+    .theaters .table-button .table-edit {
+      font-size: 2em; }
+    .theaters .table-button .table-submit {
+      font-size: 2em;
+      color: indigo;
+      margin-right: 10px; }
+    .theaters .table-button .table-return {
+      font-size: 2em;
+      color: crimson; }
+  .theaters .table-label {
+    font-weight: bold;
+    color: indigo;
+    text-align: right; }
+
+.showlast ~ .productions {
+  padding-bottom: 0; }
+  .showlast ~ .productions .production:last-child {
+    border-bottom: unset; }
 
 .productions {
   display: flex;
@@ -586,6 +627,8 @@ h3.form-title {
   padding: 10px;
   margin-top: 10px;
   cursor: pointer; }
+  .form-button.edit {
+    background-color: darkgray; }
 
 .form-button-2 {
   font-size: 1em;
@@ -633,6 +676,11 @@ h3.form-title {
 
 .venues {
   background-color: white; }
+  .venues.showlast {
+    order: 10;
+    padding-bottom: 200px; }
+    .venues.showlast .venue:last-child {
+      border-bottom: 2px solid indigo; }
   .venues .venue {
     border-bottom: 2px solid indigo;
     display: grid;

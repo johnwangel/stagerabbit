@@ -1,4 +1,4 @@
-h2.main-page, .admin-theater, .theater, .productions, .venues {
+.main-column {
   width: 50%;
   min-width:750px;
   padding: 20px 50px;
@@ -15,6 +15,11 @@ h2.main-page, .admin-theater, .theater, .productions, .venues {
   display: grid;
   grid-template-columns: 80% 20%;
   align-items: center;
+  margin-top: 25px;
+
+  @media screen and (max-width: 800px){
+
+  }
 }
 
 h2.main-page {
@@ -25,8 +30,19 @@ h2.main-page {
   text-transform: uppercase;
   background-color: $main;
   text-align: center;
-  margin: 0;
 
+  &.showlast{ order: 9; }
+}
+
+h3.sub-column {
+  margin: 0 auto;
+  font-family: 'Libre Baskerville', serif;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: darkgray;
+  text-align: center;
+  padding: 10px;
 }
 
 .theater {
@@ -47,6 +63,7 @@ h2.main-page {
     justify-content: center;
     align-items: center;
     padding: 30px;
+
     > * {
       font-size: 1.4em;
     }
@@ -56,12 +73,59 @@ h2.main-page {
       color: $main;
     }
   }
+
+  .theater-info-table {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .theater-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .table-button {
+    padding: 0 10px;
+    cursor: pointer;
+    .table-edit {
+      font-size: 2em;
+    }
+    .table-submit {
+      font-size: 2em;
+      color: $main;
+      margin-right: 10px;
+    }
+    .table-return {
+      font-size: 2em;
+      color: crimson;
+    }
+  }
+  .table-label {
+    font-weight: bold;
+    color: $main;
+    text-align: right;
+  }
+  .table-field {
+
+  }
+
+
 }
 
 
 // input[type='text']{
 //   width: 65%;
 // }
+
+.showlast ~ .productions {
+  padding-bottom: 0;
+
+  .production:last-child {
+    border-bottom: unset;
+  }
+}
 
 .productions {
   display: flex;
