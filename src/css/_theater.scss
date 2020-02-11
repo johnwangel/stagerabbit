@@ -16,10 +16,6 @@
   grid-template-columns: 80% 20%;
   align-items: center;
   margin-top: 25px;
-
-  @media screen and (max-width: 800px){
-
-  }
 }
 
 h2.main-page {
@@ -114,11 +110,6 @@ h3.sub-column {
 
 }
 
-
-// input[type='text']{
-//   width: 65%;
-// }
-
 .showlast ~ .productions {
   padding-bottom: 0;
 
@@ -132,6 +123,8 @@ h3.sub-column {
   justify-content: flex-start;
   align-items: center;
   width: 61%;
+
+  @media screen and (max-width: 800px){ width: 100%; }
 
   .toggle-button {
     cursor: pointer;
