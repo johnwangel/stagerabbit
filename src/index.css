@@ -401,6 +401,9 @@ h3.sub-column {
   justify-content: flex-start;
   align-items: center;
   width: 61%; }
+  @media screen and (max-width: 800px) {
+    .toggle {
+      width: 100%; } }
   .toggle .toggle-button {
     cursor: pointer;
     width: 50%;
