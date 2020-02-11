@@ -5,7 +5,10 @@
   PROD_BY_SHOW
  } from './actions';
 
-const ProductionsReducer = (state=[], action) => {
+const moment = require('moment');
+const today = moment.utc().format('YYYY-MM-DD');
+
+const ProductionsReducer = (state={ upcoming: [], previous: [] }, action) => {
     switch (action.type){
       case UPDATE_PRODS:
         return updateProductions(state,action);
@@ -25,11 +28,11 @@ function updateProductions(state,action){
   var prods = Object.keys(p).map(function(key) {
     return p[key];
   });
-  return [ ...prods ];
+  return parseProds(prods);
 }
 
 function newProduction(state,action){
-  return [ ...state, action.payload ];
+  return parseProds( [ ...state, action.payload ] );
 }
 
 function editProduction(state,action){
@@ -38,11 +41,20 @@ function editProduction(state,action){
   clone.forEach( (c,i) => {
     if (c.production_id === n.production_id ) clone[i]=n;
   })
-  return clone;
+  return parseProds(clone);
 }
 
 function prodByShow(state,action){
-  return action.payload;
+  return { upcoming: action.payload, previous: [] };
+}
+
+function parseProds(prods){
+  const upcoming=[], previous=[];
+  prods.forEach( item => {
+    let end=moment.utc(item.end_date).format('YYYY-MM-DD');
+    let old = (today>end) ? previous.push(item) : upcoming.push(item);
+  })
+  return { upcoming, previous };
 }
 
 export default ProductionsReducer;

@@ -120,8 +120,6 @@ class Productions extends Component {
 
   render() {
     let p = this.props.prod;
-    // let g = p.genre.split(',');
-    // let g1 = g[0], g2=g[1];
     return ( <div key={this.props.id+'-prod'}
                   id={this.props.prod.production_id}
                   className="production">

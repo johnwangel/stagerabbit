@@ -53,7 +53,8 @@ class Main extends Component {
                   venue: { venue_id : 0 },
                   newArtistID: null,
                   clear_edit: false,
-                  delete_id: this.props.Theater[0].id
+                  delete_id: this.props.Theater[0].id,
+                  show_prods: 0
                 };
 
     //console.log('params',this.props.match.params)
@@ -80,6 +81,7 @@ class Main extends Component {
     this.theater_form = this.theater_form.bind(this);
     this.add_theater = this.add_theater.bind(this);
     this.delete_theater = this.delete_theater.bind(this);
+    this.toggleProds = this.toggleProds.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -304,6 +306,10 @@ class Main extends Component {
     this.props.updateGeo(body);
   }
 
+  toggleProds(number){
+    this.setState({show_prods:number});
+  }
+
   render() {
     const d = this.props.Theater[0];
     const p = this.props.Prods;
@@ -461,27 +467,61 @@ class Main extends Component {
         }
 
         <h2 className="main-page main-column">Productions</h2>
-        { (p.length > 0)
-          ? <div className='productions main-column'>
-              { p.map( ( item, index ) => {
-                    return <Productions
-                        idx={ index }
-                        key={ `pr-${index}` }
-                        prod={ item }
-                        addShowCB={ this.add_show }
-                        addArtistCB={ this.addArtistCallback }
-                        removeArtistCB={ this.removeArtistCallback }
-                        newArtist={ this.props.Shows.new_artist }
-                        edit_show={ this.edit_show }
-                        edit_prod={ this.edit_prod }
-                        clear_edit={ this.state.clear_edit }
-                        perm={ this.props.User.level }
-                      />
+        <div className="toggle">
+          <div  id="upcoming1"
+                className={ (this.state.show_prods===0) ? "toggle-button active" : "toggle-button" }
+                onClick={() => { this.toggleProds(0) } }>
+              Upcoming
+          </div>
+          <div  id="previous1"
+                className={ (this.state.show_prods===1) ? "toggle-button active" : "toggle-button" }
+                onClick={() => { this.toggleProds(1) } }>
+              Previous
+          </div>
+        </div>
+        { (p.upcoming.length > 0)
+          ? <div className={ (this.state.show_prods===0) ? 'productions main-column' : 'productions main-column hide' }>
+              { p.upcoming.map( ( item, index ) => {
+                return <Productions
+                    idx={ index }
+                    key={ `pr-${index}` }
+                    prod={ item }
+                    addShowCB={ this.add_show }
+                    addArtistCB={ this.addArtistCallback }
+                    removeArtistCB={ this.removeArtistCallback }
+                    newArtist={ this.props.Shows.new_artist }
+                    edit_show={ this.edit_show }
+                    edit_prod={ this.edit_prod }
+                    clear_edit={ this.state.clear_edit }
+                    perm={ this.props.User.level }
+                  />
                 })
               }
             </div>
-          : <div className='productions'>No productions listed yet.</div>
+          : <div className='productions'>No upcoming productions listed.</div>
         }
+        { (p.previous.length > 0)
+          ? <div className={ (this.state.show_prods===1) ? 'productions main-column' : 'productions main-column hide' }>
+              { p.previous.map( ( item, index ) => {
+                return <Productions
+                    idx={ index }
+                    key={ `pr-${index}` }
+                    prod={ item }
+                    addShowCB={ this.add_show }
+                    addArtistCB={ this.addArtistCallback }
+                    removeArtistCB={ this.removeArtistCallback }
+                    newArtist={ this.props.Shows.new_artist }
+                    edit_show={ this.edit_show }
+                    edit_prod={ this.edit_prod }
+                    clear_edit={ this.state.clear_edit }
+                    perm={ this.props.User.level }
+                  />
+                })
+              }
+            </div>
+          : <div className='productions'>No previous productions available.</div>
+        }
+
 
        </div>
     );

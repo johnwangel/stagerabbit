@@ -396,6 +396,25 @@ h3.sub-column {
   .showlast ~ .productions .production:last-child {
     border-bottom: unset; }
 
+.toggle {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 61%; }
+  .toggle .toggle-button {
+    cursor: pointer;
+    width: 50%;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: white;
+    background-color: darkgray;
+    padding: 15px 0; }
+    .toggle .toggle-button.active {
+      color: indigo; }
+    .toggle .toggle-button:first-child {
+      border-right: 2px solid white; }
+
 .productions {
   display: flex;
   flex-direction: column;
@@ -403,6 +422,8 @@ h3.sub-column {
   align-items: flex-start;
   background-color: white;
   padding-bottom: 200px; }
+  .productions.hide {
+    display: none; }
   .productions .production {
     margin-top: 40px;
     width: 100%;
