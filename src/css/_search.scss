@@ -1,38 +1,55 @@
-.searchContent {
-  position: relative;
-  margin-top: 70px;
-  @media screen and (max-width: 600px){
-    width: 75%;
-  }
+.main-page.main-column.search {
+  margin-top: 50px;
 }
 
-.searchContent {
+.search-label {
+  color: $main;
+  text-transform: uppercase;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.searchContent.main-column {
+  position: relative;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 70px;
+
+  &:last-child {
+    padding-bottom: 100px;
+  }
+
+  form {
+    width: 100%;
+    padding-top: 20px;
+    &:first-child { padding-top: 0; }
+    @media screen and (max-width: 600px){
+      width: 95%;
+    }
+  }
 
   select[id=state]{
     margin: 0;
   }
 
   input[name=show],input[name=theater]{
-    width: 100%;
+    box-sizing: border-box;
     max-width: unset;
-    margin: 0 !important;
+    width: 100%;
+    padding: 5px;
+    color: black;
+    background-color: $background;
+    border-radius: 5px;
   }
 
   input[type='text'] {
-    margin: 0 10px;
     background-color: #EEE;
   }
-  form {
-    margin: 20px 0;
-  }
-  .go {
-    width: 100%;
-    margin-top: 10px;
-    .subbutt {
-      float: right;
-      margin: 0;
-    }
-  }
+
 }
 
 .search_result {
@@ -65,7 +82,17 @@
 }
 
 .pagination {
-  margin-top: 25px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+
+  &.main-column {
+    padding-top: 25px;
+    padding-bottom: 100px;
+  }
 
   .subbutt {
     cursor: pointer;

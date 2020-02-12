@@ -45,7 +45,7 @@ function editProduction(state,action){
 }
 
 function prodByShow(state,action){
-  return { upcoming: action.payload, previous: [] };
+  return parseProds(action.payload.data);
 }
 
 function parseProds(prods){

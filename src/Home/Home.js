@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import SanitizedHTML from 'react-sanitized-html';
+
 
 import { getStates } from '../Main/statesActions';
 import { search } from '../Results/actions';
@@ -19,7 +21,16 @@ const bg = {
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state={ searchType: '1', pages: 0, startPage: 0, search: null }
+    this.state={
+                  searchType: '1',
+                  pages: 0,
+                  startPage: 0,
+                  search: null,
+                  scroll: false,
+                  error: null
+               };
+    this.errorRef = React.createRef();
+    this.resultRef = React.createRef();
     this.props.getStates();
     this.city = React.createRef();
     this.theater = React.createRef();
@@ -32,7 +43,13 @@ class Home extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.SearchResults.results !== prevProps.SearchResults.results && this.props.SearchResults.results.count){
-      this.setState({ pages: Math.ceil(this.props.SearchResults.results.count/25), startPage: this.props.SearchResults.results.startAt +1 })
+      this.setState({ pages: Math.ceil(this.props.SearchResults.results.count/25), startPage: this.props.SearchResults.results.startAt +1 });
+    }
+    if (this.props.SearchResults.results !== prevProps.SearchResults.results) {
+        this.resultRef.current.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
     }
   }
 
@@ -66,21 +83,38 @@ class Home extends Component {
         body[id]=val;
       }
     }
+
+    var error='';
     body.startAt=0;
     switch (this.state.searchType){
       case "1":
+        if (!body.city) error+='<li>You must provide a city.</li>';
+        if (!body.state) error+='<li>You must provide a state.</li>';
         body.type=1;
         body.searchType='ByCity';
         break;
       case "2":
+        if (!body.theater) error+='<li>You must provide a theater name.</li>';
         body.type=2;
         body.searchType='ByTheater';
         break;
       case "3":
+        if (!body.show) error+='<li>You must provide a show title.</li>';
         body.type=3;
         body.searchType='ByShow';
         break;
     }
+
+    if ( error !== '' ){
+      error='<h4>Errors</h4><ol>'+error+'</ol>';
+      this.setState({ error });
+      this.errorRef.current.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      return;
+    }
+
     this.setState({search:body});
     this.props.search(body);
   }
@@ -105,23 +139,38 @@ class Home extends Component {
               </div>
             </div>
           </div>
-          <div className='searchContent'>
-              <span className='runin'>Select Search Type:</span> <select
-                id="searchType"
-                type="searchType"
-                name="searchType"
-                value={ this.state.searchType }
-                onChange={ this.handleChange }>
-                  <option key='search-1' value='1'>Search by Location</option>
-                  <option key='search-2' value='2'>Search by Theater</option>
-                  <option key='search-3' value='3'>Search by Show</option>
-              </select>
+
+            <h2 className="main-page main-column search">Search</h2>
+
+            <div className='searchContent main-column'>
+              <form ref={this.errorRef}>
+                <div className='form-group'>
+                  <div className="search-label">Select Search Type:</div>
+                  <select
+                    className="form-select wide"
+                    id="searchType"
+                    type="searchType"
+                    name="searchType"
+                    value={ this.state.searchType }
+                    onChange={ this.handleChange }>
+                      <option key='search-1' value='1'>Search by Location</option>
+                      <option key='search-2' value='2'>Search by Theater</option>
+                      <option key='search-3' value='3'>Search by Show</option>
+                  </select>
+                </div>
+              </form>
+
+              { (this.state.error)
+                ? <div className="error" ><SanitizedHTML html={this.state.error}/></div>
+                : null
+              }
 
               { ( this.state.searchType === '1')
                 ? <form onSubmit={this.handleSubmit}>
-                    <div className='single'>
-                        <span className='runin'>Find shows within:</span>
-                        <select
+                        <div className='form-group'>
+                          <div className="search-label">Find shows within:</div>
+                          <select
+                              className="form-select wide"
                               type="select"
                               id="distance"
                               name="distance">
@@ -129,73 +178,88 @@ class Home extends Component {
                                 <option key="2" value="50">50 miles</option>
                                 <option key="3" value="100">100 miles</option>
                                 <option key="4" value="100">200 miles</option>
-                       </select>
-                        <span className="runin">of</span>
-
-                        <input type="text" id="city" name="city" ref={this.city} placeholder="city"/>
-
-                        <select
-                              id="state"
-                              type="select"
-                              name="search_state">
-                          {this.props.States.dropdown}
-                        </select>
-                    </div>
-                    <div className='go'><input id='st-1' type="submit" value="Go!" className="subbutt" /></div>
+                          </select>
+                        </div>
+                        <div className='form-group'>
+                          <div className="search-label ">of:</div>
+                          <input  type="text"
+                                  id="city" name="city"
+                                  ref={this.city}
+                                  placeholder="CITY"/>
+                        </div>
+                        <div className='form-group'>
+                           <select
+                                id="state"
+                                type="select"
+                                name="search_state">
+                            {this.props.States.dropdown}
+                          </select>
+                        </div>
+                    <input className='form-button' id='st-1' type="submit" value="Go!" />
                   </form>
                 : null
               }
 
               { ( this.state.searchType === '2')
                 ? <form onSubmit={this.handleSubmit}>
-                    <input type="text" id="theater" name="theater" ref={this.theater} placeholder="Theater Name"/>
-                    <div className='go'><input id='st-2' type="submit" value="Go!" className="subbutt" /></div>
+                    <input  type="text"
+                            id="theater" name="theater"
+                            ref={this.theater}
+                            placeholder="THEATER NAME"/>
+                    <input className='form-button' id='st-2' type="submit" value="Go!" />
                   </form>
                 : null
               }
 
               { ( this.state.searchType === '3')
                 ? <form onSubmit={this.handleSubmit}>
-                    <input type="text" id="show" name="show" ref={this.show} placeholder="Show Title"/>
-                    <div className='go'><input id='st-3' type="submit" value="Go!" className="subbutt" /></div>
+                    <input type="text" id="show" name="show" ref={this.show} placeholder="SHOW TITLE"/>
+                    <input className='form-button' id='st-3' type="submit" value="Go!"/>
                   </form>
                 : null
               }
+            </div>
 
-              { ( this.props.SearchResults && this.props.SearchResults.results && this.props.SearchResults.type === 0 )
-                ? <div className='error'>No results</div>
+            { ( this.props.SearchResults && this.props.SearchResults.results &&  this.props.SearchResults.results.theaters && this.props.SearchResults.results.theaters.length )
+                ? <h2 className="main-page main-column" ref={this.resultRef}>Results</h2>
                 : null
-              }
+            }
 
-              { ( this.props.SearchResults && this.props.SearchResults.type === 1 && this.props.SearchResults.results && this.props.SearchResults.results.theaters && this.props.SearchResults.results.theaters.length ) ?
-                  <div className="results"><div className="head1">Results:</div>
-                   <ol start={ (this.startPage > 0 ) ? ((this.state.startPage - 1) * 25) + 1 : 1 }>
-                    { this.props.SearchResults.results.theaters.map( (item, idx) => <Results key={`search-${idx}`} type='1' item={item} idx={idx} prod={ this.props.SearchResults.results.prods.filter( t => t.length > 0 && t[0].theater_id == item.id ) }/>) }
-                   </ol>
-                  </div>
-                  : null
-              }
+            { ( this.props.SearchResults && this.props.SearchResults.results &&  this.props.SearchResults.results.theaters && this.props.SearchResults.results.theaters.length )
 
-              { ( this.props.SearchResults && this.props.SearchResults.type === 2 && this.props.SearchResults.results &&  this.props.SearchResults.results.theaters && this.props.SearchResults.results.theaters.length ) ?
-                  <div className="results"><div className="head1">Results:</div>
-                   <ol>
-                    { this.props.SearchResults.results.theaters.map( (item, idx) => <Results key={`search-${idx}`} type='2' item={item} idx={idx} />) }
-                   </ol>
-                  </div>
-                  : null
-              }
+                ? <div className='searchContent main-column'>
+                      { ( this.props.SearchResults && this.props.SearchResults.results && this.props.SearchResults.type === 0 )
+                        ? <div className='error'>No results</div>
+                        : null
+                      }
 
-              { ( this.props.SearchResults && this.props.SearchResults.results && this.props.SearchResults.type === 3 && this.props.SearchResults.results.theaters && this.props.SearchResults.results.theaters.length ) ?
-                  <div className="results"><div className="head1">Results:</div>
-                   <ol>
-                    { this.props.SearchResults.results.theaters.map( (item, idx) => <Results key={`search-${idx}`} type='3' item={item} idx={idx} />) }
-                   </ol>
+                      { ( this.props.SearchResults && this.props.SearchResults.type === 1 && this.props.SearchResults.results && this.props.SearchResults.results.theaters && this.props.SearchResults.results.theaters.length )
+                          ? <ol start={ (this.startPage > 0 ) ? ((this.state.startPage - 1) * 25) + 1 : 1 }>
+                              { this.props.SearchResults.results.theaters.map( (item, idx) => <Results key={`search-${idx}`} type='1' item={item} idx={idx} prod={ this.props.SearchResults.results.prods.filter( t => t.length > 0 && t[0].theater_id == item.id ) }/>) }
+                            </ol>
+                          : null
+                      }
+
+                      { ( this.props.SearchResults && this.props.SearchResults.type === 2 && this.props.SearchResults.results &&  this.props.SearchResults.results.theaters && this.props.SearchResults.results.theaters.length )
+                          ? <ol>
+                              { this.props.SearchResults.results.theaters.map( (item, idx) => <Results key={`search-${idx}`} type='2' item={item} idx={idx} />) }
+                            </ol>
+                          : null
+                      }
+
+                      { ( this.props.SearchResults && this.props.SearchResults.results && this.props.SearchResults.type === 3 && this.props.SearchResults.results.theaters && this.props.SearchResults.results.theaters.length )
+                          ? <ol>
+                              { this.props.SearchResults.results.theaters.map( (item, idx) => <Results key={`search-${idx}`} type='3' item={item} idx={idx} />) }
+                            </ol>
+                          : null
+                      }
                   </div>
-                  : null
-              }
-        </div>
+                : null
+            }
+
+
         { (this.state.pages !== 0)
-            ? <div className='pagination'>
+            ? <div className='pagination main-column'>
                 { (this.state.startPage>1)
                   ? <span className="subbutt prev" onClick={ () => { this.newlist1() } }>Prev</span>
                   : null
