@@ -36,6 +36,11 @@
    "sizes": "192x192",
    "type": "image\/png",
    "density": "4.0"
+  },
+  {
+    "src": "rabbit512.png",
+    "type": "image\/png",
+    "sizes": "512x512"
   }
  ]
 }
