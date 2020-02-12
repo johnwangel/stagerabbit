@@ -115,7 +115,7 @@ class Home extends Component {
       return;
     }
 
-    this.setState({search:body});
+    this.setState({ search: body, error: null});
     this.props.search(body);
   }
 
