@@ -7,7 +7,7 @@ import { search } from '../Results/actions';
 import Results from "../Results/Results";
 
 const curtain = require('../Assets/curtain.jpg');
-const stage = require('../Assets/stage.jpg');
+//const stage = require('../Assets/stage.jpg');
 
 const bg = {
   backgroundImage: `url(${curtain})`,

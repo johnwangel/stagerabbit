@@ -27,7 +27,8 @@ import {  getAllShows,
           newArtist,
           editShow } from '../Shows/actions';
 
-import  { removeArtist } from '../Artists/actions';
+import { removeArtist } from '../Artists/actions';
+import { getPosition } from '../constants/helpers';
 
 import { GET_POST_HEADER, URL, process_submit } from '../constants/constants.js';
 
@@ -54,7 +55,9 @@ class Main extends Component {
                   newArtistID: null,
                   clear_edit: false,
                   delete_id: this.props.Theater[0].id,
-                  show_prods: 0
+                  show_prods: 0,
+                  scroll: null,
+                  height: null
                 };
 
     //console.log('params',this.props.match.params)
@@ -82,6 +85,7 @@ class Main extends Component {
     this.add_theater = this.add_theater.bind(this);
     this.delete_theater = this.delete_theater.bind(this);
     this.toggleProds = this.toggleProds.bind(this);
+    this.handleScroll = this.handleScroll.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -100,6 +104,15 @@ class Main extends Component {
       this.props.updateProds(tid);
       this.setState({clear_edit: true});
     }
+  }
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll);
+
+  }
+
+  handleScroll(){
+    this.setState(getPosition());
   }
 
   handleChange(e) {
@@ -174,7 +187,6 @@ class Main extends Component {
 
   update_venue(body){
     body.tid=this.props.Theater[0].id;
-
     this.props.updateVenues(body);
     this.setState( {
         hide_new_show_form: true,
@@ -222,6 +234,36 @@ class Main extends Component {
     );
   }
 
+
+  add_theater(body){
+    this.setState(
+      {
+        hide_production_form: true,
+        hide_new_show_form: true,
+        hide_add_venue_form: true,
+        hide_edit_venue_form: true,
+        venue: {venue_id: 0},
+        hide_assoc_venue_form: true,
+        hide_new_theater_form: true,
+        hide_delete_theater_form: true
+      });
+      this.props.addTheater( body );
+  }
+
+  delete_theater_form(){
+    this.setState(
+      {
+        hide_production_form: true,
+        hide_new_show_form: true,
+        hide_add_venue_form: true,
+        hide_edit_venue_form: true,
+        venue: {venue_id: 0},
+        hide_assoc_venue_form: true,
+        hide_new_theater_form: true,
+        hide_delete_theater_form: !this.state.hide_delete_theater_form
+      });
+  }
+
   new_prod_cb(body){
     this.props.newProd(body);
     this.setState( { hide_production_form : true } );
@@ -238,6 +280,7 @@ class Main extends Component {
   theater_form(){
     this.setState(
       {
+        hide_production_form: true,
         hide_new_show_form: true,
         hide_add_venue_form: true,
         hide_edit_venue_form: true,
@@ -245,33 +288,6 @@ class Main extends Component {
         hide_assoc_venue_form: true,
         hide_new_theater_form: !this.state.hide_new_theater_form,
         hide_delete_theater_form: true
-      });
-  }
-
-  add_theater(body){
-    this.setState(
-      {
-        hide_new_show_form: true,
-        hide_add_venue_form: true,
-        hide_edit_venue_form: true,
-        venue: {venue_id: 0},
-        hide_assoc_venue_form: true,
-        hide_new_theater_form: true,
-        hide_delete_theater_form: true
-      });
-      this.props.addTheater( body );
-  }
-
-  delete_theater_form(){
-    this.setState(
-      {
-        hide_new_show_form: true,
-        hide_add_venue_form: true,
-        hide_edit_venue_form: true,
-        venue: {venue_id: 0},
-        hide_assoc_venue_form: true,
-        hide_new_theater_form: true,
-        hide_delete_theater_form: !this.state.hide_delete_theater_form
       });
   }
 
@@ -344,9 +360,9 @@ class Main extends Component {
         { (this.props.User.level===3)
           ? (this.state.hide_delete_theater_form)
             ? null
-            :<div className='overlay' style={{height: this.state.window + 'px'}}>
-              <div class="overlay-container" style={{marginTop: this.state.scroll + 'px'}}>
-                  <div class="close" onClick={() => { this.delete_theater_form() }} >&times;</div>
+            :<div className='overlay' style={{height: this.state.height + 'px'}}>
+              <div className="overlay-container" style={{marginTop: this.state.scroll + 'px'}}>
+                  <div className="close" onClick={() => { this.delete_theater_form() }} >&times;</div>
                   <h2 className="form-title">Delete Theater</h2>
                   <form onSubmit={this.delete_theater}>
                       <div className="form-group">

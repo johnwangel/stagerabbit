@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import SanitizedHTML from 'react-sanitized-html';
 
+import { getPosition } from '../../constants/helpers';
+
 class AddVenue extends Component {
   constructor(props) {
     super(props);
@@ -22,7 +24,7 @@ class AddVenue extends Component {
       dir: (v.venue_dir) ? v.venue_dir :null,
       venues_associate: 0,
       venue_state: (v.venue_state_id) ? `${v.venue_state_id}-${v.venue_state_name}` : '0',
-      window: null,
+      height: null,
       scroll: null,
       type: '',
       error: null
@@ -34,10 +36,7 @@ class AddVenue extends Component {
   }
 
   componentDidMount() {
-    var body = document.body,
-    html = document.documentElement;
-    var height = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight );
-    this.setState({ scroll: 35+window.scrollY, window: height });
+    this.setState(getPosition());
     if (this.props.hide_add_venue_form) this.setState({ type : 'add' });
     if (this.props.hide_edit_venue_form) this.setState({ type : 'edit' });
     if (this.props.hide_assoc_venue_form) this.setState({ type : 'associate' });
@@ -96,7 +95,7 @@ class AddVenue extends Component {
 
   render() {
     return (
-      <div className='overlay' style={{height: this.state.window + 'px'}}>
+      <div className='overlay' style={{height: this.state.height + 'px'}}>
         <div className="overlay-container" style={{marginTop: this.state.scroll + 'px'}}  ref={this.myRef}>
           <div  className="close"
                 onClick={() => { this.props.venue_form( this.state.type ) } }>

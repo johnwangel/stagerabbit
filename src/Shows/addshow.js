@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
 import { process_submit } from '../constants/constants';
+import { getPosition } from '../constants/helpers';
 
 import AddArtist from "../Productions/AddProduction/addArtist";
 
@@ -28,7 +29,7 @@ class AddShow extends Component {
       show_select: (c) ? `${this.props.production.show_id}` :'0',
       showtitle: (c) ? false : true,
       genre_1: (c) ? `${this.props.production.genre_id}` :'0',
-      window: null,
+      height: null,
       scroll: null
     };
 
@@ -40,10 +41,7 @@ class AddShow extends Component {
   }
 
   componentDidMount() {
-    var body = document.body,
-    html = document.documentElement;
-    var height = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight );
-    this.setState({ scroll: 35+window.scrollY, window: height });
+    this.setState(getPosition());
   }
 
   handleNew(e) {
@@ -88,7 +86,7 @@ class AddShow extends Component {
   }
 
   render() {
-    return (<div className='overlay' style={{height: this.state.window + 'px'}}>
+    return (<div className='overlay' style={{height: this.state.height + 'px'}}>
             <div class="overlay-container" style={{marginTop: this.state.scroll + 'px'}}>
               <div class="close" onClick={() => { this.props.show_form() }} >&times;</div>
               <h2 className='form-title'>{this.state.formTitle}</h2>
