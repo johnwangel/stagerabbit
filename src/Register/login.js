@@ -41,37 +41,42 @@ class Login extends Component {
   render() {
     return (
               <div className='loginPage'>
-                <form onSubmit={this.handleLogin}>
-                      <h2>Log In</h2>
+                <h2 className="main-page main-column">Log In</h2>
+                <div className='login-form main-column'>
+                  <form onSubmit={this.handleLogin}>
 
                       {(this.props.User.message)
                         ? <div className="error">{ this.props.User.message }</div>
                         : null
                       }
-
-                      <input
-                          type='text'
-                          className='login'
-                          id='username'
-                          key='username'
-                          name='username'
-                          value={this.state.username}
-                          onChange={this.handleChange}/>
-                      <input
-                          type='password'
-                          className='login'
-                          id='password'
-                          key='password'
-                          name='password'
-                          value={this.state.password}
-                          onChange={this.handleChange}/>
-                  <input className='subbutt' id='login' type="submit" value='Log In' />
+                      <div className='form-group'>
+                          <div className="search-label">Username:</div>
+                            <input
+                                type='text'
+                                id='username'
+                                key='username'
+                                name='username'
+                                value={this.state.username}
+                                onChange={this.handleChange}/>
+                      </div>
+                      <div className='form-group'>
+                          <div className="search-label">Password:</div>
+                            <input
+                                type='password'
+                                id='password'
+                                key='password'
+                                name='password'
+                                value={this.state.password}
+                                onChange={this.handleChange}/>
+                      </div>
+                      <input className='form-button' id='login' type="submit" value='Log In' />
                 </form>
                 <div className="links">
                   <Link className="link" to="/password">Forgot Password</Link>
                   <Link className="link" to="/register">Register</Link>
                 </div>
               </div>
+            </div>
     )
   }
 }
