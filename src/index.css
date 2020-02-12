@@ -173,6 +173,9 @@ a.home {
     flex-direction: column;
     justify-content: space-around;
     align-items: center; }
+    @media only screen and (max-width: 800px) {
+      .loginPage form {
+        padding: 0 20px; } }
     .loginPage form input {
       margin: 0; }
   .loginPage .fill {
