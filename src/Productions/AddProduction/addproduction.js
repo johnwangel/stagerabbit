@@ -4,6 +4,7 @@ import DatePicker from "react-datepicker";
 import parseISO from 'date-fns/parseISO'
 
 import { process_submit } from '../../constants/constants';
+import { getPosition } from '../../constants/helpers';
 import { updateProds } from '../actions';
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -47,7 +48,7 @@ class AddProd extends Component {
       md_items: (c && c.md && c.md.length>0) ? c.md : null,
       cast: (p && p.cast) ? p.cast : '',
       description: (p && p.description) ? p.description : '',
-      window: null,
+      height: null,
       scroll: null
     };
 
@@ -61,10 +62,7 @@ class AddProd extends Component {
   }
 
   componentDidMount() {
-    var body = document.body,
-    html = document.documentElement;
-    var height = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
-    this.setState({ scroll: 35+window.scrollY, window: height });
+    this.setState(getPosition());
   }
 
   handleNew(e) {
@@ -116,7 +114,7 @@ class AddProd extends Component {
 
   render() {
     return (
-      <div ref={ this.errRef } className='overlay' style={{height: this.state.window + 'px'}}>
+      <div ref={ this.errRef } className='overlay' style={{height: this.state.height + 'px'}}>
         <div className="overlay-container" style={{marginTop: this.state.scroll + 'px'}}>
           <div className="close" onClick={() => { this.props.prod_form() }} >&times;</div>
           <h2 className="form-title">{this.state.formTitle}</h2>

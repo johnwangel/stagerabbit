@@ -3,39 +3,32 @@ import { connect } from 'react-redux';
 import SanitizedHTML from 'react-sanitized-html';
 
 import { process_submit } from '../constants/constants';
+import { getPosition } from '../constants/helpers';
 
 class AddTheater extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       name: null,
       city: null,
       state: '0',
-      window: null,
+      height: null,
       scroll: null,
       error: null
     };
-
     this.errorRef = React.createRef();
-
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.onDropdownSelected = this.onDropdownSelected.bind(this);
   }
 
   componentDidMount() {
-    var body = document.body,
-    html = document.documentElement;
-    var height = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight );
-    this.setState({ scroll: 35+window.scrollY, window: height });
+    this.setState(getPosition());
   }
 
   handleSubmit(e) {
     e.preventDefault();
     let body = process_submit(e.target.elements);
-
-
     var error='';
     if (!this.state.name) error+='<li>You must provide a theater name.</li>';
     if (!this.state.city) error+='<li>You must provide a city.</li>';
@@ -63,7 +56,7 @@ class AddTheater extends Component {
   }
 
   render() {
-    return (<div className='overlay' style={{height: this.state.window + 'px'}}>
+    return (<div className='overlay' style={{height: this.state.height + 'px'}}>
             <div class="overlay-container" style={{marginTop: this.state.scroll + 'px'}} ref={this.errorRef}>
                 <div class="close" onClick={() => { this.props.theater_form() }} >&times;</div>
                 <h2 className='form-title'>Add Theater</h2>

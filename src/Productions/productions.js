@@ -133,7 +133,7 @@ class Productions extends Component {
 {/*                <div className='genre-container'>
                 <span className="genre">{g1}</span><span className="genre">{g2}</span></div>*/}
 
-                <table className="details-table">
+                <table className="details-table"><tbody>
                   <tr><td>Genre:</td><td>{p.genre}</td></tr>
                   { ( this.state.venue ) ? <Venue ven={ this.state.venue }/> : null}
                   { ( this.state.book ) ? <Artists type="Book" artists={ this.state.book }/> : null }
@@ -143,7 +143,7 @@ class Productions extends Component {
                   { ( this.state.dir ) ? <Artists type="Directed" artists={ this.state.dir }/> : null }
                   { ( this.state.chor ) ? <Artists type= "Choreographed" artists={ this.state.chor }/> : null }
                   { ( this.state.md ) ? <Artists type="Musical Direction" artists={ this.state.md }/> : null }
-                </table>
+                </tbody></table>
 
                 { ( p.description !== '')
                       ?  ( <div className='description'><SanitizedHTML html={p.description} /></div>)
