@@ -8,7 +8,7 @@ body {
   background-color: #EEE; }
   @media screen and (max-width: 800px) {
     body {
-      font-size: .6em; } }
+      font-size: .8em; } }
 
 .contact {
   margin-top: 75px;
@@ -158,25 +158,20 @@ a.home {
   font-size: 1em; }
 
 .loginPage {
-  margin-top: 75px;
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center; }
+  .loginPage .login-form {
+    background-color: white; }
   .loginPage form {
-    width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center; }
     .loginPage form input {
       margin: 0; }
-    .loginPage form input[type=text], .loginPage form input[type=password] {
-      width: 100%;
-      max-width: 100%;
-      font-size: 1.2em;
-      padding: 10px;
-      margin-bottom: 15px; }
   .loginPage .fill {
     width: 100%;
     display: flex;
@@ -250,6 +245,8 @@ a.home {
   justify-content: center;
   align-items: center;
   padding-bottom: 70px; }
+  .searchContent.main-column.hide {
+    display: none; }
   .searchContent.main-column:last-child {
     padding-bottom: 100px; }
   .searchContent.main-column form {
@@ -314,8 +311,16 @@ a.home {
     .pagination .subbutt.next {
       margin: 0 0 0 20px; }
 
-.show_results div {
-  display: inline-block; }
+.show_results {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+  .show_results .title {
+    font-weight: bold;
+    font-size: 1.2em; }
+  .show_results .toggle {
+    padding: 0; }
 
 .upcoming div {
   display: block; }
@@ -324,6 +329,16 @@ a.home {
   display: flex;
   align-items: flex-start;
   flex-direction: column; }
+
+.result-item {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
+  padding: 20px 0;
+  flex-wrap: nowrap; }
+  .result-item > * {
+    margin-right: 10px; }
 
 .main-column {
   width: 50%;
@@ -422,7 +437,10 @@ h3.sub-column {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  width: 61%; }
+  min-width: 850px; }
+  .toggle:hover {
+    background-color: darkorchid;
+    color: black; }
   @media screen and (max-width: 800px) {
     .toggle {
       width: 100%; } }
@@ -643,7 +661,7 @@ h3.form-title {
   .form-group .form-select.wide {
     width: 100%;
     min-width: 100%; }
-  .form-group input[type='text'] {
+  .form-group input[type='text'], .form-group input[type='password'] {
     box-sizing: border-box;
     max-width: unset;
     width: 100%;
@@ -735,20 +753,21 @@ h3.form-title {
     padding: 10px; }
     .venues .venue:last-child {
       border-bottom: none; }
-    .venues .venue .number {
-      text-align: center;
-      background-color: indigo;
-      width: 50px;
-      height: 50px;
-      font-size: 2em;
-      color: white;
-      border-radius: 50%;
-      line-height: 1.4em; }
-      @media screen and (max-width: 800px) {
-        .venues .venue .number {
-          width: 30px;
-          height: 30px;
-          line-height: 1.2em; } }
+
+.number {
+  text-align: center;
+  background-color: indigo;
+  width: 50px;
+  height: 50px;
+  font-size: 2em;
+  color: white;
+  border-radius: 50%;
+  line-height: 1.4em; }
+  @media screen and (max-width: 800px) {
+    .number {
+      width: 30px;
+      height: 30px;
+      line-height: 1.2em; } }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace; }
@@ -875,7 +894,7 @@ select {
   border-radius: 5px;
   margin-bottom: 20px; }
 
-input[type='text'], input[type='email'] {
+input[type='text'], input[type='email'], input[type='password'] {
   margin: 5px 0;
   font-size: 1.2em;
   font-family: 'Raleway', sans-serif;
@@ -884,7 +903,7 @@ input[type='text'], input[type='email'] {
   border: none;
   border-bottom: 2px solid gray;
   color: indigo; }
-  input[type='text'].person, input[type='email'].person {
+  input[type='text'].person, input[type='email'].person, input[type='password'].person {
     width: 100px; }
 
 .all_shows, .add_venue {
@@ -1030,18 +1049,6 @@ select {
   border-radius: 5px; }
   .error h4 {
     text-align: center; }
-
-.show_results {
-  margin-top: 100px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; }
-  .show_results .title {
-    font-weight: bold;
-    font-size: 1.2em; }
-  .show_results .dates {
-    margin-left: 10px; }
 
 .email_item {
   margin: 15px; }

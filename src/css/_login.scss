@@ -1,12 +1,16 @@
 .loginPage {
-  margin-top: 75px;
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
+  .login-form {
+    background-color: white;
+  }
+
   form {
-    width: 50%;
+    //width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -16,13 +20,13 @@
       margin: 0;
     }
 
-    input[type=text],input[type=password]{
-      width: 100%;
-      max-width: 100%;
-      font-size: 1.2em;
-      padding: 10px;
-      margin-bottom: 15px;
-    }
+    // input[type=text],input[type=password]{
+    //   width: 100%;
+    //   max-width: 100%;
+    //   font-size: 1.2em;
+    //   padding: 10px;
+    //   margin-bottom: 15px;
+    // }
 
   }
 

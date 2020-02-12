@@ -5,7 +5,7 @@ body {
   font-family: 'Raleway', sans-serif;
   font-size: 1em;
   @media screen and (max-width: 800px){
-    font-size: .6em;
+    font-size: .8em;
   }
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -175,7 +175,7 @@ select {
   margin-bottom: 20px;
 };
 
-input[type='text'],input[type='email'] {
+input[type='text'],input[type='email'],input[type='password'] {
   margin: 5px 0;
   font-size: 1.2em;
   font-family: 'Raleway', sans-serif;
@@ -376,22 +376,6 @@ select{
   border-radius: 5px;
   h4 {
     text-align: center;
-  }
-}
-
-.show_results {
-  margin-top: 100px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  .title {
-    font-weight: bold;
-    font-size: 1.2em;
-
-  }
-  .dates {
-    margin-left: 10px;
   }
 }
 

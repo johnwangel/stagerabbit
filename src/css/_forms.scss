@@ -67,7 +67,7 @@ h3.form-title {
     min-width: 100%;
   }
 
-  input[type='text'] {
+  input[type='text'],input[type='password'] {
     box-sizing: border-box;
     max-width: unset;
     width: 100%;
