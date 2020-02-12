@@ -232,34 +232,46 @@ a.home {
       .register_container .register form .subbutt {
         margin: 15px 0; }
 
-.searchContent {
+.main-page.main-column.search {
+  margin-top: 50px; }
+
+.search-label {
+  color: indigo;
+  text-transform: uppercase;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 10px 0; }
+
+.searchContent.main-column {
   position: relative;
-  margin-top: 70px; }
-  @media screen and (max-width: 600px) {
-    .searchContent {
-      width: 75%; } }
-
-.searchContent select[id=state] {
-  margin: 0; }
-
-.searchContent input[name=show], .searchContent input[name=theater] {
-  width: 100%;
-  max-width: unset;
-  margin: 0 !important; }
-
-.searchContent input[type='text'] {
-  margin: 0 10px;
-  background-color: #EEE; }
-
-.searchContent form {
-  margin: 20px 0; }
-
-.searchContent .go {
-  width: 100%;
-  margin-top: 10px; }
-  .searchContent .go .subbutt {
-    float: right;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 70px; }
+  .searchContent.main-column:last-child {
+    padding-bottom: 100px; }
+  .searchContent.main-column form {
+    width: 100%;
+    padding-top: 20px; }
+    .searchContent.main-column form:first-child {
+      padding-top: 0; }
+    @media screen and (max-width: 600px) {
+      .searchContent.main-column form {
+        width: 95%; } }
+  .searchContent.main-column select[id=state] {
     margin: 0; }
+  .searchContent.main-column input[name=show], .searchContent.main-column input[name=theater] {
+    box-sizing: border-box;
+    max-width: unset;
+    width: 100%;
+    padding: 5px;
+    color: black;
+    background-color: #EEE;
+    border-radius: 5px; }
+  .searchContent.main-column input[type='text'] {
+    background-color: #EEE; }
 
 .search_result {
   margin: 25px 10px 10px;
@@ -285,7 +297,14 @@ a.home {
   font-size: .5em; }
 
 .pagination {
-  margin-top: 25px; }
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: white; }
+  .pagination.main-column {
+    padding-top: 25px;
+    padding-bottom: 100px; }
   .pagination .subbutt {
     cursor: pointer;
     font-size: 1em;
@@ -748,8 +767,7 @@ code {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  margin-bottom: 100px; }
+  align-items: center; }
   .body .main {
     position: relative;
     top: 50px;

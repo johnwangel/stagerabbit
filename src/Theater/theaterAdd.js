@@ -68,11 +68,19 @@ class AddTheater extends Component {
 
                     <div className='form-group'>
                       <div className="label">Name:</div>
-                      <input id="name" type="text" name="name" value={ this.state.name } onChange={this.handleChange} />
+                      <input  id="name"
+                              type="text"
+                              name="name"
+                              value={ this.state.name }
+                              onChange={this.handleChange} />
                     </div>
                     <div className='form-group'>
                       <div className="label">City:</div>
-                      <input id='city' type="text" name="city" value={ this.state.city } onChange={this.handleChange} />
+                      <input  id='city'
+                              type="text"
+                              name="city"
+                              value={ this.state.city }
+                              onChange={this.handleChange} />
                     </div>
                     <div className='form-group'>
                       <div className="label">State:</div>

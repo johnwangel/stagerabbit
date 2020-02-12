@@ -10,7 +10,5 @@ export const getPosition = () => {
         scroll = (window.outerWidth > 800 )
           ? 25+window.scrollY
           : 35+window.scrollY;
-
-  console.log('scroll',window.scrollY);
   return { scroll, height };
 };

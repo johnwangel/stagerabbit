@@ -16,20 +16,44 @@ class ProdByShow extends Component {
   }
 
   render() {
+    console.log('prods',this.props)
     return ( <div className='show_results'>
               <h2>Results</h2>
-                { ( this.props.Prods && this.props.Prods.data && this.props.Prods.data.length>0)
-                  ? <ol>
-                      { this.props.Prods.data.map((item, idx) => {
-                            return <li>
-                                <span className='title'><SanitizedHTML html={ item.title } /></span>, <Link className='website' to={`/theater/${item.theater_id}`}>
-                                <SanitizedHTML html={item.theater_name} /></Link>,&nbsp;<SanitizedHTML html={ item.city_name} />,&nbsp;{ item.state_abbr }
-                                <span className="dates">({moment.utc(item.start_date).format('M/D/YY')}&ndash;{moment.utc(item.end_date).format('M/D/YY')})</span></li>
-                          })
-                      }
-                    </ol>
+                { ( this.props.Prods && this.props.Prods.upcoming && this.props.Prods.upcoming.length>0)
+                  ? <div>
+                      <h3>Upcoming Productions</h3>
+                      <ol>
+                        { this.props.Prods.upcoming.map((item, idx) => {
+                              return <li>
+                                  <span className='title'><SanitizedHTML html={ item.title } /></span>, <Link className='website' to={`/theater/${item.theater_id}`}>
+                                  <SanitizedHTML html={item.theater_name} /></Link>,&nbsp;<SanitizedHTML html={ item.city_name} />,&nbsp;{ item.state_abbr }
+                                  <span className="dates">({moment.utc(item.start_date).format('M/D/YY')}&ndash;{moment.utc(item.end_date).format('M/D/YY')})</span></li>
+                            })
+                        }
+                      </ol>
+                    </div>
                   : null
                 }
+                { ( this.props.Prods && this.props.Prods.previous && this.props.Prods.previous.length>0)
+                  ? <div>
+                      <h3>Past Productions</h3>
+                      <ol>
+                        { this.props.Prods.previous.map((item, idx) => {
+                              return <li>
+                                  <span className='title'><SanitizedHTML html={ item.title } /></span>, <Link className='website' to={`/theater/${item.theater_id}`}>
+                                  <SanitizedHTML html={item.theater_name} /></Link>,&nbsp;<SanitizedHTML html={ item.city_name} />,&nbsp;{ item.state_abbr }
+                                  <span className="dates">({moment.utc(item.start_date).format('M/D/YY')}&ndash;{moment.utc(item.end_date).format('M/D/YY')})</span></li>
+                            })
+                        }
+                      </ol>
+                    </div>
+                  : null
+                }
+                { ( this.props.Prods && this.props.Prods.upcoming && this.props.Prods.upcoming.length===0 && this.props.Prods.previous && this.props.Prods.previous.length===0 )
+                  ? <div>No productions found.</div>
+                  : null
+                }
+
               </div>
     );
   }
