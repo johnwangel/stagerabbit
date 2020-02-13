@@ -47,10 +47,10 @@ class Header extends Component {
             ? <li><Link to={`/theater/${ this.props.User.tid }`}>Edit</Link></li>
             : null
           }
-          { ( this.props.User.level>1 )
+{/*          { ( this.props.User.level>1 )
             ? <li><Link to={`/emails`}>Emails</Link></li>
             : null
-          }
+          }*/}
         </ul>
         <div className='nav-icons'>
           <Link className='home' to="/">&#8962;</Link>

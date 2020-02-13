@@ -390,6 +390,12 @@ h2.main-page {
   text-transform: uppercase;
   background-color: indigo;
   text-align: center; }
+  h2.main-page:first-child {
+    margin-top: 25px;
+    border-top: 2px solid white; }
+    @media screen and (max-width: 800px) {
+      h2.main-page:first-child {
+        margin-top: 35px; } }
   h2.main-page.showlast {
     order: 9; }
 
