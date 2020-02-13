@@ -57,10 +57,11 @@ class Register extends Component {
 
   render() {
     return (
-        <div className="register_container">
+      <div className='loginPage'>
+          <h2 className="main-page main-column">Register</h2>
           { (this.state.loggedin)
             ? <Redirect to='/'/>
-            : <div className="register">
+            : <div className='login-form main-column'>
                   <p>
                     StageRabbit is free to use for the general public.
                     No account is required to search our extensive database of regional, community, and
@@ -100,99 +101,109 @@ class Register extends Component {
                   <h2>Register</h2>
                   <form className='registration-form' onSubmit={this.handleRegSubmit}>
 
-                  <span className="runin">Account Type:</span>
-                    <span className="rbut">General</span>
-                    <input  type="radio"
-                            id="acct-gen"
-                            name='account_type'
-                            checked={ this.state.selectedOption === 'general' }
-                            value='general'
-                            onChange={this.handleOptionChange} />
-
-                    <span className="rbut">Admin</span>
-                    <input  type="radio"
-                            id="acct-admin"
-                            name="account_type"
-                            value='admin'
-                            checked= { this.state.selectedOption === 'admin' }
-                            onChange={this.handleOptionChange} />
-
-                      <div className="reg">
-                        <span className="runin">Token:</span>
+                    <div className='form-group radio'>
+                      <div className="search-label">Account Type:</div>
+                        <div className="radio-group">
+                        <span className="radio-label">General</span>
+                        <input  type="radio"
+                                id="acct-gen"
+                                name='account_type'
+                                checked={ this.state.selectedOption === 'general' }
+                                value='general'
+                                onChange={this.handleOptionChange} />
+                        </div>
+                        <div className="radio-group">
+                          <span className="radio-label">Admin</span>
+                          <input  type="radio"
+                                id="acct-admin"
+                                name="account_type"
+                                value='admin'
+                                checked= { this.state.selectedOption === 'admin' }
+                                onChange={this.handleOptionChange} />
+                        </div>
+                      </div>
+                      <div className='form-group'>
+                        <div className="search-label">Token:</div>
                         <input  id="token"
                                 key="token"
                                 type="text"
                                 name="token"
                                 value={this.state.token}
-                                onChange={this.handleChange} />
-                          <div className='note'>(Required only for Theater Admin accounts.)</div>
+                                onChange={this.handleChange}
+                                placeholder="Required only for Theater Admin accounts." />
                       </div>
 
-                      <div className="reg">
-                        <span className="runin">Email:</span>
+                      <div className='form-group'>
+                        <div className="search-label">Email:</div>
                         <input  id="username"
                                 key="username"
                                 type="text"
                                 name="username"
                                 value={this.state.username}
                                 onChange={this.handleChange}
+                                placeholder="Email address"
                                 required />
                           <div className='note'>(This will be your username.)</div>
                       </div>
 
-                      <div className="reg">
-                        <span className="runin">Password:</span>
+                      <div className='form-group'>
+                        <div className="search-label">Password:</div>
                         <input  id="password"
                                 key="password"
                                 type="password"
                                 name="password"
                                 value={this.state.password}
                                 onChange={this.handleChange}
+                                placeholder="Password"
                                 required
                                 />
                       </div>
 
-                      <div className="reg">
-                        <span className="runin">First Name:</span>
+                      <div className='form-group'>
+                        <div className="search-label">First Name:</div>
                         <input  id="fname"
                                 key="fname"
                                 type="text"
                                 name="fname"
                                 value={this.state.fname}
+                                placeholder="First Name"
                                 onChange={this.handleChange}
                               />
                       </div>
 
-                      <div className="reg">
-                        <span className="runin">Last Name:</span>
+                      <div className='form-group'>
+                        <div className="search-label">Last Name:</div>
                         <input  id="lname"
                                 key="lname"
                                 type="text"
                                 name="lname"
                                 value={this.state.lname}
                                 onChange={this.handleChange}
+                                placeholder="Last Name"
                                 required
                                 />
                       </div>
 
-                      <div className="reg">
-                        <span className="runin">Title/Role:</span>
+                      <div className='form-group'>
+                        <div className="search-label">Title/Role:</div>
                         <input  id="role"
                                 key="role"
                                 type="text"
                                 name="role"
                                 value={this.state.role}
+                                placeholder="Title/Role (optional)"
                                 onChange={this.handleChange} />
                       </div>
 
-                      <div className="reg">
-                        <span className="runin">Phone Number:</span>
+                      <div className='form-group'>
+                        <div className="search-label">Phone Number:</div>
                         <input  id="phone"
                                 key="phone"
                                 type="text"
                                 name="phone"
                                 value={this.state.phone}
                                 onChange={this.handleChange}
+                                placeholder="Phone Number (optional)"
                               />
                       </div>
 
@@ -206,7 +217,7 @@ class Register extends Component {
                               site enhancements and account update reminders.</div>
                       </div>
 
-                      <input className='subbutt' id='submit-reg' type="submit" value='Submit' />
+                      <input className='form-button' id='submit-reg' type="submit" value='Submit' />
 
                   </form>
             </div>

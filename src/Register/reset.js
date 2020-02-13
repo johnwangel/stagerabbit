@@ -49,56 +49,56 @@ class Reset extends Component {
   render() {
     return (
               <div className='loginPage'>
+                <h2 className="main-page main-column">Log In</h2>
+                <div className='login-form main-column'>
 
-                <h2>Reset Password</h2>
+                  {(this.state.message)
+                      ? <div className="error">{ this.state.message }</div>
+                      : null
+                  }
 
-                {(this.state.message)
-                    ? <div className="error">{ this.state.message }</div>
-                    : null
-                }
-
-                <form onSubmit={this.handleReset}>
-                  <div className="fill">
-
-                    <input
-                        type='text'
-                        className='login'
-                        id='code'
-                        key='code'
-                        name='code'
-                        value={this.state.code}
-                        placeholder="Enter Your Reset Code from Email"
-                        onChange={this.handleChange}/>
+                  <form onSubmit={this.handleReset}>
+                    <div className='form-group'>
+                      <div className="search-label">Reset Code:</div>
+                      <input
+                          type='text'
+                          id='code'
+                          key='code'
+                          name='code'
+                          value={this.state.code}
+                          placeholder="Enter Your Reset Code from Email"
+                          onChange={this.handleChange}/>
+                    </div>
+                    <div className='form-group'>
+                      <div className="search-label">New Password:</div>
+                      <input
+                          type='text'
+                          id='pass1'
+                          key='pass1'
+                          name='pass1'
+                          value={this.state.pass1}
+                          placeholder="New password"
+                          onChange={this.handleChange}/>
+                    </div>
+                    <div className='form-group'>
+                      <div className="search-label">Retype Password:</div>
+                      <input
+                          type='text'
+                          id='pass2'
+                          key='pass2'
+                          name='pass2'
+                          value={this.state.pass2}
+                          placeholder="Retype New password"
+                          onChange={this.handleChange}/>
+                    </div>
+                    <input  className='form-button'
+                            id='password'
+                            type="submit"
+                            value='Reset' />
+                  </form>
+                  <div className="links">
+                    <Link className="link" to="/login">Back to Login</Link>
                   </div>
-                  <div className="fill">
-                    <input
-                        type='text'
-                        className='login'
-                        id='pass1'
-                        key='pass1'
-                        name='pass1'
-                        value={this.state.pass1}
-                        placeholder="New password"
-                        onChange={this.handleChange}/>
-                  </div>
-                  <div className="fill">
-                    <input
-                        type='text'
-                        className='login'
-                        id='pass2'
-                        key='pass2'
-                        name='pass2'
-                        value={this.state.pass2}
-                        placeholder="Retype New password"
-                        onChange={this.handleChange}/>
-                  </div>
-                  <input  className='subbutt'
-                          id='password'
-                          type="submit"
-                          value='Reset' />
-                </form>
-                <div className="links">
-                  <Link className="link" to="/login">Back to Login</Link>
                 </div>
               </div>
     )

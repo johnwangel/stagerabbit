@@ -1,6 +1,7 @@
 .main-column {
-  width: 50%;
+  //width: 50%;
   min-width:750px;
+  max-width:750px;
   padding: 20px 50px;
 
   @media screen and (max-width: 800px){
@@ -112,7 +113,7 @@ h3.sub-column {
 }
 
 .showlast ~ .productions {
-  padding-bottom: 0;
+  //padding-bottom: 0;
 
   .production:last-child {
     border-bottom: unset;
@@ -130,7 +131,10 @@ h3.sub-column {
     color: black;
   }
 
-  @media screen and (max-width: 800px){ width: 100%; }
+  @media screen and (max-width: 800px){
+    width: 100%;
+    min-width: unset;
+  }
 
   .toggle-button {
     cursor: pointer;
@@ -157,6 +161,12 @@ h3.sub-column {
   align-items: flex-start;
   background-color: white;
   padding-bottom: 200px;
+
+
+  .empty {
+    width: 100%;
+    text-align: center;
+  }
 
   &.hide {
     display: none;

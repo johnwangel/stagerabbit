@@ -32,37 +32,38 @@ class Login extends Component {
   render() {
     return (
               <div className='loginPage'>
+                <h2 className="main-page main-column">Password Reset</h2>
+                <div className='login-form main-column'>
+                  {(this.state.message)
+                      ? <div className="error">{ this.state.message }</div>
+                      : null
+                  }
 
-                <h2>Password Reset</h2>
+                  <p>Submit your registration email to recieve instructions for resetting your password.</p>
 
-                {(this.state.message)
-                    ? <div className="error">{ this.state.message }</div>
-                    : null
-                }
+                  <form onSubmit={this.handleReminder}>
+                    <div className='form-group'>
+                        <div className="search-label">Registration Email:</div>
+                        <input
+                            type='text'
+                            id='username'
+                            key='username'
+                            name='username'
+                            value={this.state.email}
+                            placeholder="Type your registration email here"
+                            onChange={this.handleChange}
+                            required/>
+                    </div>
 
-                <p>Submit your registration email to recieve instructions for resetting your password.</p>
+                    <input  className='form-button'
+                            id='password'
+                            type="submit"
+                            value='Send Reminder' />
+                  </form>
 
-                <form onSubmit={this.handleReminder}>
-                  <div className="fill">
-                    {/*<span className="runin">Email:</span>*/}
-                    <input
-                        type='text'
-                        className='login'
-                        id='username'
-                        key='username'
-                        name='username'
-                        value={this.state.email}
-                        placeholder="Type your registration email here"
-                        onChange={this.handleChange}/>
+                  <div className="links">
+                    <Link className="link" to="/login">Back to Login</Link>
                   </div>
-
-                  <input  className='subbutt'
-                          id='password'
-                          type="submit"
-                          value='Send Reminder' />
-                </form>
-                <div className="links">
-                  <Link className="link" to="/login">Back to Login</Link>
                 </div>
               </div>
     )

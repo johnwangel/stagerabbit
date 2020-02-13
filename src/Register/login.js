@@ -10,9 +10,9 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state={
-                  username: null,
-                  password: null,
-                  message: null
+                  username: undefined,
+                  password: undefined,
+                  message: undefined
                 };
     this.handleChange = this.handleChange.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
@@ -57,7 +57,8 @@ class Login extends Component {
                                 key='username'
                                 name='username'
                                 value={this.state.username}
-                                onChange={this.handleChange}/>
+                                onChange={this.handleChange}
+                                required/>
                       </div>
                       <div className='form-group'>
                           <div className="search-label">Password:</div>
@@ -67,7 +68,8 @@ class Login extends Component {
                                 key='password'
                                 name='password'
                                 value={this.state.password}
-                                onChange={this.handleChange}/>
+                                onChange={this.handleChange}
+                                required/>
                       </div>
                       <input className='form-button' id='login' type="submit" value='Log In' />
                 </form>

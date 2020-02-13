@@ -513,7 +513,7 @@ class Main extends Component {
                 })
               }
             </div>
-          : <div className={ (this.state.show_prods===0) ? 'productions main-column' : 'productions main-column hide' }>No upcoming productions listed.</div>
+          : <div className={ (this.state.show_prods===0) ? 'productions main-column' : 'productions main-column hide' }><div className="empty">No upcoming productions listed.</div></div>
         }
         { (p.previous.length > 0)
           ? <div className={ (this.state.show_prods===1) ? 'productions main-column' : 'productions main-column hide' }>
@@ -534,7 +534,7 @@ class Main extends Component {
                 })
               }
             </div>
-          : <div className={ (this.state.show_prods===1) ? 'productions main-column' : 'productions main-column hide' }>No previous productions available.</div>
+          : <div className={ (this.state.show_prods===1) ? 'productions main-column' : 'productions main-column hide' }><div className="empty">No previous productions available.</div></div>
         }
 
 
