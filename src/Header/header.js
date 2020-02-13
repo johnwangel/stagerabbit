@@ -29,33 +29,40 @@ class Header extends Component {
     this.setState( { showMenu : !this.state.showMenu } )
   }
 
-
   handleLogout(e) {
     this.props.logout();
   }
 
   render() {
-    //console.log(this.props)
+    console.log(this.props)
     return (
       <div className="nav">
         <div className="logo">
           <span className="title">StageRabbit</span>
           <span className="subtitle">.&nbsp;.&nbsp;.&nbsp;great theater is just a hop away!</span>
         </div>
-        <ul>
+{/*        <ul>
+
           { ( this.props.User.level>1 )
-            ? <li><Link to={`/theater/${ this.props.User.tid }`}>Edit</Link></li>
-            : null
-          }
-{/*          { ( this.props.User.level>1 )
             ? <li><Link to={`/emails`}>Emails</Link></li>
             : null
-          }*/}
-        </ul>
+          }
+        </ul>*/}
+        { (this.props.User.level > 1)
+          ? <div className="welcome">
+             <div className="marquee">Welcome, {this.props.User.name}!</div>
+            </div>
+          : null
+        }
+
         <div className='nav-icons'>
-          <Link className='home' to="/">&#8962;</Link>
+          <Link className='home icon' to="/">&#8962;</Link>
+          { ( this.props.User.level>1 )
+            ? <Link className="edit icon" to={`/theater/${ this.props.User.tid }`}>&#9998;</Link>
+            : null
+          }
           <div className='menu'>
-              <div>&#9776;</div>
+              <div className="dm icon">&#9776;</div>
               <div className='dropdown_menu' >
                 <Link className="menu_item" onClick={ this.ToggleMenu } to="/">Search</Link>
                 { ( this.state.loggedin)

@@ -63,9 +63,24 @@
 .nav-icons{
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
   min-width: 50px;
   margin-right: 15px;
+  font-size: 1em;
+  @media screen and (max-width: 600px){
+    font-size: .6em;
+  }
+
+  .icon {
+
+    &.home{
+      //font-size: 2.2em;
+    }
+    &.edit{
+      font-size: 2em;
+    }
+
+  }
 }
 
 .menu, .home {
@@ -76,9 +91,6 @@
   position: relative;
   margin-left: 5px;
   margin-right: 5px;
-  // &:hover {
-  //   color: $accent;
-  // }
 }
 
 
@@ -126,7 +138,7 @@ a.home {
     padding-bottom: 15px;
   }
   color: white;
-  font-size: 1em;
+  font-size: .8em;
   text-decoration: none;
   &:hover {
     background-color: white;
@@ -147,4 +159,26 @@ a.home {
   color: white;
   background-color: black;
   font-size: 1em;
+}
+
+.welcome {
+  position: relative;
+  padding:3px;
+  //border:1px solid #e6e6e6;
+  width:700px;
+  overflow:hidden;
+  margin: 0 5px;
+}
+.marquee{
+  display:block;
+  width: 100%;
+  position:relative;
+  animation:scroll 10s linear infinite;
+  padding:3px;
+  white-space: nowrap;
+}
+
+@keyframes scroll{
+  0% {left:50vw;}
+  100% {left:-50vw;}
 }

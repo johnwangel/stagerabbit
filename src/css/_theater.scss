@@ -26,12 +26,17 @@
 h2.main-page {
   margin: 0 auto;
   font-family: 'Libre Baskerville', serif;
-
   color: white;
   font-weight: bold;
   text-transform: uppercase;
   background-color: $main;
   text-align: center;
+
+  &.search {
+    background-color: darkgrey;
+  }
+
+
   &:first-child{
     margin-top: 25px;
     border-top: 2px solid white;
