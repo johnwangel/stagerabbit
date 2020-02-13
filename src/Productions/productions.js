@@ -188,8 +188,6 @@ class Productions extends Component {
                     </div>
                   : null
                 }
-
-
               </div>
 
             )

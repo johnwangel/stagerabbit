@@ -55,6 +55,25 @@ h3.form-title {
   align-items: flex-start;
   margin-bottom: 5px;
 
+  &.radio {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .radio-group {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+
+      .radio-label {
+        margin-right: 15px;
+      }
+
+    }
+
+  }
+
   .label {
     color: white;
     font-weight: bold;
@@ -67,7 +86,7 @@ h3.form-title {
     min-width: 100%;
   }
 
-  input[type='text'],input[type='password'] {
+  input[type='text'],input[type='password'],input[type='email'] {
     box-sizing: border-box;
     max-width: unset;
     width: 100%;
@@ -161,3 +180,27 @@ h3.form-title {
   margin-top: 20px;
 }
 
+input[type='text'],input[type='email'],input[type='password'] {
+  margin: 5px 0;
+  font-size: 1.2em;
+  font-family: 'Raleway', sans-serif;
+  max-width: 75%;
+  padding: 5px;
+  border: none;
+  border-bottom: 2px solid gray;
+  color: $main;
+
+  &.person {
+    width: 100px;
+  }
+
+}
+
+.loginPage form .optin {
+  display: flex;
+  margin: 15px 0;
+  input {
+    margin-right: 8px;
+  }
+  .agree { font-size: .8rem; }
+}

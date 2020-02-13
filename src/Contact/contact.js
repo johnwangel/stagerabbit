@@ -56,67 +56,68 @@ class Contact extends Component {
               .bind(this),
               3000
           );
-
       });
   }
 
 
   render() {
    return(
-      <div className="contact">
-        <h1>Contact Us</h1>
-        { (this.state.status)
-          ? <div className='email_status'>{this.state.status}</div>
-          : null
-        }
-        <form id="contact-form" onSubmit={this.handleSubmit.bind(this)} method="POST">
-          <div className="form-group">
-            <label htmlFor="name">Name</label>
-            <input
-                  type="text"
-                  className="form-control"
-                  value={this.state.name}
-                  onChange={this.onNameChange.bind(this)}
-                  required
-              />
-          </div>
-          <div className="form-group">
-              <label htmlFor="exampleInputEmail1">Email address</label>
-              <input  type="email"
-                      className="form-control"
-                      aria-describedby="emailHelp"
-                      value={this.state.email}
-                      onChange={this.onEmailChange.bind(this)}
-                      required />
-          </div>
+      <div className='loginPage'>
+        <h2 className="main-page main-column">Contact Us</h2>
+        <div className='login-form main-column'>
+            { (this.state.status)
+              ? <div className='email_status'>{this.state.status}</div>
+              : null
+            }
+            <form id="contact-form" onSubmit={this.handleSubmit.bind(this)} method="POST">
+              <div className="form-group">
+                <div className="search-label">Name:</div>
+                <input
+                      type="text"
+                      value={this.state.name}
+                      onChange={this.onNameChange.bind(this)}
+                      placeholder="Your name"
+                      required
+                  />
+              </div>
+              <div className="form-group">
+                  <div className="search-label">Email address:</div>
+                  <input  type="email"
+                          aria-describedby="emailHelp"
+                          value={this.state.email}
+                          onChange={this.onEmailChange.bind(this)}
+                          placeholder="Your Email Address"
+                          required />
+              </div>
 
-          <div className="form-group">
-          <label>Subject:</label>
-            <select
-                id="subject_select"
-                type="select"
-                name="subject"
-                value={this.state.subject_select}
-                onChange={this.onDropdownSelected.bind(this)}>
-              <option key='subj1' value="General Question">General Question</option>
-              <option key='subj2' value="New Admin Account Request">New Admin Account Request</option>
-              <option key='subj3' value="Suggested Theater Company Addition">Suggested Theater Company Addition</option>
-              <option key='subj4' value="Request a Data Change">General Question</option>
-              <option key='subj5' value="Compliment or Suggestion">Compliment or Suggestion</option>
-            </select>
-          </div>
+              <div className="form-group">
+                <div className="search-label">Subject:</div>
+                <select
+                    className="form-select wide "
+                    id="subject_select"
+                    type="select"
+                    name="subject"
+                    value={this.state.subject_select}
+                    onChange={this.onDropdownSelected.bind(this)}>
+                  <option key='subj1' value="General Question">General Question</option>
+                  <option key='subj2' value="New Admin Account Request">New Admin Account Request</option>
+                  <option key='subj3' value="Suggested Theater Company Addition">Suggested Theater Company Addition</option>
+                  <option key='subj4' value="Request a Data Change">General Question</option>
+                  <option key='subj5' value="Compliment or Suggestion">Compliment or Suggestion</option>
+                </select>
+              </div>
 
-          <div className="form-group">
-              <label htmlFor="message">Message</label>
-              <textarea
-                    className="form-control"
-                    rows="5" value={this.state.message}
-                    onChange={this.onMessageChange.bind(this)}
-                    required
-                />
+              <div className="form-group">
+                  <div className="search-label">Message:</div>
+                  <textarea
+                        rows="10" value={this.state.message}
+                        onChange={this.onMessageChange.bind(this)}
+                        required
+                    />
+              </div>
+              <button type="submit" className="form-button">Submit</button>
+            </form>
           </div>
-          <button type="submit" className="subbutt">Submit</button>
-        </form>
       </div>
    );
   }

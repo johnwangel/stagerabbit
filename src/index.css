@@ -162,9 +162,14 @@ a.home {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+  background-color: white;
+  padding-bottom: 100px; }
   .loginPage .login-form {
     background-color: white; }
+    @media only screen and (max-width: 800px) {
+      .loginPage .login-form p, .loginPage .login-form h2 {
+        padding: 0 20px; } }
   .loginPage form {
     display: flex;
     flex-direction: column;
@@ -220,13 +225,6 @@ a.home {
           max-width: 100%; }
       .register_container .register form .note {
         font-size: .8em; }
-      .register_container .register form .optin {
-        display: flex;
-        margin: 15px 0; }
-        .register_container .register form .optin input {
-          margin-right: 8px; }
-        .register_container .register form .optin .agree {
-          font-size: .8rem; }
       .register_container .register form .subbutt {
         margin: 15px 0; }
 
@@ -336,16 +334,37 @@ a.home {
 .result-item {
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: flex-start;
   align-items: baseline;
   padding: 20px 0;
-  flex-wrap: nowrap; }
-  .result-item > * {
-    margin-right: 10px; }
+  flex-wrap: nowrap;
+  margin: 0 10px; }
+  .result-item div:not(:first-child) {
+    margin-left: 70px; }
+    @media screen and (max-width: 600px) {
+      .result-item div:not(:first-child) {
+        margin-left: 55px; } }
+  .result-item .link-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center; }
+    .result-item .link-group a div {
+      margin-left: 15px;
+      display: inline-block; }
+
+.show-title {
+  background-color: white; }
+  .show-title div {
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+    color: indigo; }
 
 .main-column {
-  width: 50%;
   min-width: 750px;
+  max-width: 750px;
   padding: 20px 50px; }
   @media screen and (max-width: 800px) {
     .main-column {
@@ -431,10 +450,8 @@ h3.sub-column {
     color: indigo;
     text-align: right; }
 
-.showlast ~ .productions {
-  padding-bottom: 0; }
-  .showlast ~ .productions .production:last-child {
-    border-bottom: unset; }
+.showlast ~ .productions .production:last-child {
+  border-bottom: unset; }
 
 .toggle {
   display: flex;
@@ -446,7 +463,8 @@ h3.sub-column {
     color: black; }
   @media screen and (max-width: 800px) {
     .toggle {
-      width: 100%; } }
+      width: 100%;
+      min-width: unset; } }
   .toggle .toggle-button {
     cursor: pointer;
     width: 50%;
@@ -468,6 +486,9 @@ h3.sub-column {
   align-items: flex-start;
   background-color: white;
   padding-bottom: 200px; }
+  .productions .empty {
+    width: 100%;
+    text-align: center; }
   .productions.hide {
     display: none; }
   .productions .production {
@@ -656,6 +677,17 @@ h3.form-title {
   justify-content: flex-start;
   align-items: flex-start;
   margin-bottom: 5px; }
+  .form-group.radio {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center; }
+    .form-group.radio .radio-group {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center; }
+      .form-group.radio .radio-group .radio-label {
+        margin-right: 15px; }
   .form-group .label {
     color: white;
     font-weight: bold;
@@ -664,7 +696,7 @@ h3.form-title {
   .form-group .form-select.wide {
     width: 100%;
     min-width: 100%; }
-  .form-group input[type='text'], .form-group input[type='password'] {
+  .form-group input[type='text'], .form-group input[type='password'], .form-group input[type='email'] {
     box-sizing: border-box;
     max-width: unset;
     width: 100%;
@@ -741,6 +773,26 @@ h3.form-title {
 .creatives {
   margin-top: 20px; }
 
+input[type='text'], input[type='email'], input[type='password'] {
+  margin: 5px 0;
+  font-size: 1.2em;
+  font-family: 'Raleway', sans-serif;
+  max-width: 75%;
+  padding: 5px;
+  border: none;
+  border-bottom: 2px solid gray;
+  color: indigo; }
+  input[type='text'].person, input[type='email'].person, input[type='password'].person {
+    width: 100px; }
+
+.loginPage form .optin {
+  display: flex;
+  margin: 15px 0; }
+  .loginPage form .optin input {
+    margin-right: 8px; }
+  .loginPage form .optin .agree {
+    font-size: .8rem; }
+
 .venues {
   background-color: white; }
   .venues.showlast {
@@ -761,7 +813,9 @@ h3.form-title {
   text-align: center;
   background-color: indigo;
   width: 50px;
+  min-width: 50px;
   height: 50px;
+  min-height: 50px;
   font-size: 2em;
   color: white;
   border-radius: 50%;
@@ -770,7 +824,11 @@ h3.form-title {
     .number {
       width: 30px;
       height: 30px;
-      line-height: 1.2em; } }
+      min-width: 30px;
+      min-height: 30px;
+      line-height: 1.1em;
+      font-size: 1.8em;
+      margin-left: 10px; } }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace; }
@@ -817,12 +875,11 @@ code {
         padding: 10%; }
       @media screen and (max-width: 800px) {
         .body .main .intro {
-          width: 60%; } }
+          font-size: .8em; } }
       @media screen and (max-width: 600px) {
         .body .main .intro {
           width: 100vw;
           height: 100%;
-          width: 100%;
           top: 0;
           right: unset;
           left: 0;
@@ -896,18 +953,6 @@ select {
   background-color: darkgray;
   border-radius: 5px;
   margin-bottom: 20px; }
-
-input[type='text'], input[type='email'], input[type='password'] {
-  margin: 5px 0;
-  font-size: 1.2em;
-  font-family: 'Raleway', sans-serif;
-  max-width: 75%;
-  padding: 5px;
-  border: none;
-  border-bottom: 2px solid gray;
-  color: indigo; }
-  input[type='text'].person, input[type='email'].person, input[type='password'].person {
-    width: 100px; }
 
 .all_shows, .add_venue {
   padding: 50px; }

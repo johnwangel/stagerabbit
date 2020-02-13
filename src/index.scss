@@ -78,12 +78,11 @@ code {
       .content { padding: 10%; }
 
       @media screen and (max-width: 800px){
-        width: 60%;
+        font-size: .8em;
       }
       @media screen and (max-width: 600px){
         width: 100vw;
         height: 100%;
-        width: 100%;
         top: 0;
         right: unset;
         left: 0;
@@ -175,21 +174,6 @@ select {
   margin-bottom: 20px;
 };
 
-input[type='text'],input[type='email'],input[type='password'] {
-  margin: 5px 0;
-  font-size: 1.2em;
-  font-family: 'Raleway', sans-serif;
-  max-width: 75%;
-  padding: 5px;
-  border: none;
-  border-bottom: 2px solid gray;
-  color: $main;
-
-  &.person {
-    width: 100px;
-  }
-
-}
 
 .all_shows, .add_venue {
   padding: 50px;

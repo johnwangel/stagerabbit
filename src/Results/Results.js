@@ -33,7 +33,7 @@ class Results extends Component {
                     { (this.props.type==='2')
                       ? <span>
                           <span className="theater_name">
-                            <Link className='website' to={`/theater/${this.props.item.id}`}><SanitizedHTML html={this.props.item.name}/></Link>, {this.props.item.city}, {this.props.item.abbr}
+                            <Link className='website' to={`/theater/${this.props.item.id}`}><SanitizedHTML html={this.props.item.name}/></Link>{this.props.item.city}, {this.props.item.abbr}
                           </span>
                         </span>
                       : null
