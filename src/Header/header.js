@@ -56,7 +56,7 @@ class Header extends Component {
         }
 
         <div className='nav-icons'>
-          <Link className='home icon' to="/">&#8962;</Link>
+          <Link className='home icon' to="/">&#128269;</Link>
           { ( this.props.User.level>1 )
             ? <Link className="edit icon" to={`/theater/${ this.props.User.tid }`}>&#9998;</Link>
             : null
@@ -65,6 +65,10 @@ class Header extends Component {
               <div className="dm icon">&#9776;</div>
               <div className='dropdown_menu' >
                 <Link className="menu_item" onClick={ this.ToggleMenu } to="/">Search</Link>
+                { ( this.props.User.level>1 )
+                  ? <Link className="menu_item" to={`/theater/${ this.props.User.tid }`}>Edit</Link>
+                  : null
+                }
                 { ( this.state.loggedin)
                   ? <div className="menu_item" onClick={this.handleLogout}>Logout</div>
                   : <Link className="menu_item" onClick={ this.ToggleMenu } to="/login">Log In</Link>
