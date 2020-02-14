@@ -6,7 +6,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   height: 50px;
   background-color: $gray;
 
@@ -64,33 +64,33 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  min-width: 50px;
-  margin-right: 15px;
-  font-size: 1em;
-  @media screen and (max-width: 600px){
-    font-size: .6em;
-  }
+  //min-width: 50px;
+  //margin-right: 15px;
 
   .icon {
+    font-size: 1.5em;
+    padding: 0 5px;
 
-    &.home{
-      //font-size: 2.2em;
-    }
-    &.edit{
-      font-size: 2em;
+    @media screen and (max-width: 800px){
+      &.home, &.edit {
+        display: none;
+      }
+      &.menu { padding: 0; }
     }
 
   }
 }
 
-.menu, .home {
+.menu, .home, a.home {
   color: white;
-  font-size: 2em;
+  //font-size: 1rem;
   cursor: pointer;
   display: inline-block;
   position: relative;
   margin-left: 5px;
   margin-right: 5px;
+  text-decoration: none;
+  border: none;
 }
 
 
@@ -102,11 +102,6 @@
   z-index: 1;
   //transform: translateY(0%);
   transition-delay: 0s, 0s, 0.3s;
-}
-a.home {
-  text-decoration: none;
-  border: none;
-  font-size: 2.8em;
 }
 
 .dropdown_menu {
@@ -120,26 +115,28 @@ a.home {
   right: 0;
   flex-direction: column;
   position: fixed;
-  width: 140px;
   background-color: $accent;
   color: white;
-  font-size: .7em;
-  // @media screen and (max-width: 800px){
-  //   font-size: .9em;
-  // }
+
 }
 
 .menu_item, a.menu_item {
+  color: white;
+  font-size: 1em;
+  text-decoration: none;
   padding: 10px 20px;
+  white-space: nowrap;
+
+  @media screen and (max-width: 800px){
+    font-size: 1.4em;
+  }
+
   &:first-child {
     padding-top: 15px;
   }
   &:last-child {
     padding-bottom: 15px;
   }
-  color: white;
-  font-size: .8em;
-  text-decoration: none;
   &:hover {
     background-color: white;
     color: $accent;
