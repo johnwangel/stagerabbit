@@ -140,7 +140,7 @@ class Home extends Component {
             </div>
           </div>
 
-            <h2 className="main-page main-column search">Search</h2>
+            <h2 className="main-page main-column search gray">Search</h2>
 
             <div className='searchContent main-column'>
               <form ref={this.errorRef}>
