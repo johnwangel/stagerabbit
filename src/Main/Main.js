@@ -43,7 +43,9 @@ import AddProd from "../Productions/AddProduction/addproduction";
 class Main extends Component {
   constructor(props) {
     super(props);
+
     this.state={  current_id: this.props.Theater[0].id,
+                  admin: false,
                   hide_production_form: true,
                   hide_add_venue_form: true,
                   hide_edit_venue_form: true,
@@ -94,15 +96,24 @@ class Main extends Component {
     if (this.props.Theater[0].id !== prevProps.Theater[0].id){
       this.setState({ current_id: this.props.Theater[0].id, delete_id: this.props.Theater[0].id });
       this.update_theater_details(tid);
+      let admin=(this.props.User.token===this.props.Theater[0].token) ? true : false;
+      this.setState({ admin } );
     }
 
-    if (this.props.Prod && this.props.Prods.length !== prevProps.Prod.length) {
+    if (this.props.Prod && this.props.Prods.upcoming && this.props.Prods.previous &&
+           (this.props.Prods.upcoming.length !== prevProps.Prod.upcoming.length
+            || this.props.Prods.previous.length !== prevProps.Prod.previous.length)
+        ) {
       this.update_theater_details(tid);
     }
 
     if (this.props.Shows !== prevProps.Shows ){
       this.props.updateProds(tid);
       this.setState({clear_edit: true});
+    }
+
+    if (this.props.User !== prevProps.User && (this.props.User.token===this.props.Theater[0].token) ? true : false ){
+      this.setState({admin:true});
     }
   }
 
@@ -326,6 +337,7 @@ class Main extends Component {
   }
 
   render() {
+    //console.log('Props in Main',this.props);
     const d = this.props.Theater[0];
     const p = this.props.Prods;
     const v = (this.props.VenuesByTheater.venues) ? this.props.VenuesByTheater.venues : null;
@@ -389,7 +401,7 @@ class Main extends Component {
         { (d.id) ?
           <Theater
             cb={this.alterTheaterCallback}
-            perm={ this.props.User.level }
+            perm={ (this.props.User.level===3 || this.state.admin ) ? true : false }
             specialties={ this.props.Specialties.dropdown }
             theater={ this.props.Theater[0] }/>
           : null
@@ -404,7 +416,7 @@ class Main extends Component {
           ? <Venues
               id={ d.id }
               order={(this.props.User.level===1)?1:0}
-              perm={ this.props.User.level }
+              perm={ (this.props.User.level===3 || this.state.admin ) ? true : false }
               venues={ this.props.VenuesByTheater.venues}
               edit={ this.venue_form }
               del={ this.deleteVenueCallback }
@@ -464,7 +476,7 @@ class Main extends Component {
             />
         }
 
-        { (this.props.User.level > 1 )
+        { (this.props.User.level === 3 || this.state.admin === true )
           ?  <div className='toolbar'>
               <div className='head'>Tools</div>
               <div className="tool"
@@ -508,7 +520,7 @@ class Main extends Component {
                     edit_show={ this.edit_show }
                     edit_prod={ this.edit_prod }
                     clear_edit={ this.state.clear_edit }
-                    perm={ this.props.User.level }
+                    perm={ (this.props.User.level===3 || this.state.admin ) ? true : false }
                   />
                 })
               }
@@ -529,15 +541,13 @@ class Main extends Component {
                     edit_show={ this.edit_show }
                     edit_prod={ this.edit_prod }
                     clear_edit={ this.state.clear_edit }
-                    perm={ this.props.User.level }
+                    perm={ (this.props.User.level===3 || this.state.admin ) ? true : false }
                   />
                 })
               }
             </div>
           : <div className={ (this.state.show_prods===1) ? 'productions main-column' : 'productions main-column hide' }><div className="empty">No previous productions available.</div></div>
         }
-
-
        </div>
     );
   }

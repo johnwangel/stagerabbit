@@ -17,13 +17,13 @@ class Venues extends Component {
                           {(item.venue_add2) ? <div>{item.venue_add2}</div> : null }
                           <div>{item.venue_city}, {item.venue_state} {item.venue_zip}</div>
                         </div>
-                        { (this.props.perm > 1)
+                        { (this.props.perm)
                           ?   <div className="form-button-2"
                                     onClick={() => { this.props.edit('edit',item.venue_id) }}>
                                 Edit</div>
                           :null
                         }
-                        { (this.props.perm > 1)
+                        { (this.props.perm)
                             ?  <div className="form-button-2"
                                     onClick={() => { this.props.del(item.venue_id) }}>
                                   Remove</div>

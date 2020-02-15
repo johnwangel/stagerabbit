@@ -150,7 +150,7 @@ class Productions extends Component {
                       : null
                 }
 
-                { (this.props.perm > 1)
+                { (this.props.perm)
                   ? <div className='edit-prod-buttons'>
                       { (!this.state.edit_show)
                           ? <span className="form-button-3"

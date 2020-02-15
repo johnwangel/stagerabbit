@@ -45,7 +45,7 @@ class Theater extends Component {
     const keys= Object.keys( this.props.theater );
     return (
       <div key={this.props.theater.id} className='theater main-column'>
-        { (this.props.perm > 1)
+        { (this.props.perm)
           ? <div>
               <div className='theater_info'>
                 <div className='theater_name'>{this.props.theater.name}</div>
