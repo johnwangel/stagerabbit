@@ -73,7 +73,7 @@ class Theater extends Component {
                               keyname==='specialty_id'
                             ) ||
                             (
-                              this.props.perm < 3 &&
+                              this.props.perm_level < 3 &&
                               ( keyname==='id' ||
                                 keyname==='state' ||
                                 keyname==='place_id' ||

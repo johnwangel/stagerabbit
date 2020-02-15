@@ -408,6 +408,7 @@ class Main extends Component {
           <Theater
             cb={this.alterTheaterCallback}
             perm={ (this.props.User.level===3 || this.state.admin ) ? true : false }
+            perm_level={ this.props.User.level}
             specialties={ this.props.Specialties.dropdown }
             theater={ this.props.Theater[0] }/>
           : null
