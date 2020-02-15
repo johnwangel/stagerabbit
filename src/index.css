@@ -91,10 +91,12 @@ body {
     font-size: 1.5em;
     padding: 0 5px; }
     @media screen and (max-width: 800px) {
-      .nav-icons .icon.home, .nav-icons .icon.edit {
-        display: none; }
-      .nav-icons .icon.menu {
-        padding: 0; } }
+      .nav-icons .icon {
+        font-size: 2em; }
+        .nav-icons .icon.home, .nav-icons .icon.edit {
+          display: none; }
+        .nav-icons .icon.menu {
+          padding: 0; } }
 
 .menu, .home, a.home {
   color: white;
