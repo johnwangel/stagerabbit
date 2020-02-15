@@ -10,6 +10,17 @@
   height: 50px;
   background-color: $gray;
 
+  .logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    white-space: nowrap;
+  }
+
+
+
+
   .title {
     color: white;
     font-size: 2em;
@@ -161,22 +172,26 @@
 
 .welcome {
   position: relative;
+  color: white;
   padding:3px;
+  font-size: 1.2em;
   //border:1px solid #e6e6e6;
-  width:700px;
+  //width:700px;
   overflow:hidden;
   margin: 0 5px;
+  flex: 1 1 100%;
 }
+
 .marquee{
   display:block;
   width: 100%;
   position:relative;
-  animation:scroll 10s linear infinite;
+  animation:scroll 20s linear infinite;
   padding:3px;
   white-space: nowrap;
 }
 
 @keyframes scroll{
-  0% {left:50vw;}
-  100% {left:-50vw;}
+  0% {left:100vw;}
+  100% {left:-100vw;}
 }

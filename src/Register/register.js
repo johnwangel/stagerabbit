@@ -60,7 +60,9 @@ class Register extends Component {
       <div className='loginPage'>
           <h2 className="main-page main-column">Register</h2>
           { (this.state.loggedin)
-            ? <Redirect to='/'/>
+            ? (this.props.User.level===2)
+              ? <Redirect to={ `/theater/${this.props.User.tid}`}/>
+              :<Redirect to='/'/>
             : <div className='login-form main-column'>
                   <p>
                     StageRabbit is free to use for the general public.
