@@ -100,9 +100,9 @@ class Main extends Component {
       this.setState({ admin } );
     }
 
-    if (this.props.Prod && this.props.Prods.upcoming && this.props.Prods.previous &&
-           (this.props.Prods.upcoming.length !== prevProps.Prod.upcoming.length
-            || this.props.Prods.previous.length !== prevProps.Prod.previous.length)
+    if (this.props.Prods && this.props.Prods.upcoming && this.props.Prods.previous &&
+           (this.props.Prods.upcoming.length !== prevProps.Prods.upcoming.length
+            || this.props.Prods.previous.length !== prevProps.Prods.previous.length)
         ) {
       this.update_theater_details(tid);
     }
