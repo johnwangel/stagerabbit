@@ -119,6 +119,12 @@ class Main extends Component {
 
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll);
+   }
+
+  getSnapshotBeforeUpdate(prevProps) {
+    if (prevProps.location.pathname !== this.props.location.pathname){
+      this.update_theater_details(this.props.match.params.id)
+    }
   }
 
   handleScroll(){
