@@ -135,7 +135,6 @@ class Productions extends Component {
 
                 <table className="details-table"><tbody>
                   <tr><td>Genre:</td><td>{p.genre}</td></tr>
-                  { ( this.state.venue ) ? <Venue ven={ this.state.venue }/> : null}
                   { ( this.state.book ) ? <Artists type="Book" artists={ this.state.book }/> : null }
                   { ( this.state.music ) ? <Artists type="Music" artists={ this.state.music }/> : null }
                   { ( this.state.lyrics ) ? <Artists type="Lyrics" artists={ this.state.lyrics }/> : null }
@@ -143,6 +142,7 @@ class Productions extends Component {
                   { ( this.state.dir ) ? <Artists type="Directed" artists={ this.state.dir }/> : null }
                   { ( this.state.chor ) ? <Artists type= "Choreographed" artists={ this.state.chor }/> : null }
                   { ( this.state.md ) ? <Artists type="Musical Direction" artists={ this.state.md }/> : null }
+                  { ( this.state.venue ) ? <Venue ven={ this.state.venue }/> : null}
                 </tbody></table>
 
                 { ( p.description !== '')
