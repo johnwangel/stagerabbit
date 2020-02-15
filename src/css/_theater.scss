@@ -248,7 +248,7 @@ h3.sub-column {
     border-top: 1px solid $main;
     margin: 0 20px;
     padding-top: 10px;
-    line-height: 1.5em;
+    line-height: 2em;
     &>*{
       margin: 0 25px 25px;
     }
@@ -275,6 +275,10 @@ h3.sub-column {
     font-size: 1em;
     font-weight: bold;
     padding: 15px;
+    cursor: pointer;
+    &:hover{
+      color: $accent;
+    }
     &:first-child {
       border-right: 2px solid white;
     }
