@@ -100,6 +100,12 @@ class Main extends Component {
       this.setState({ admin } );
     }
 
+    console.log('this.props.Prods',this.props.Prods);
+    console.log('this.props.Prods.upcoming',this.props.Prods.upcoming)
+    console.log('this.props.Prods.previous',this.props.Prods.previous)
+    console.log('this.props.Prods.upcoming.length',this.props.Prods.upcoming.length)
+    console.log('this.props.Prods.previous.length',this.props.Prods.previous.length)
+
     if (this.props.Prods && this.props.Prods.upcoming && this.props.Prods.previous &&
            (this.props.Prods.upcoming.length !== prevProps.Prods.upcoming.length
             || this.props.Prods.previous.length !== prevProps.Prods.previous.length)

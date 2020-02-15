@@ -32,7 +32,7 @@ function updateProductions(state,action){
 }
 
 function newProduction(state,action){
-  return parseProds( [ ...state, action.payload ] );
+  return parseProds( [ ...state.upcoming, ...state.previous, action.payload ] );
 }
 
 function editProduction(state,action){
