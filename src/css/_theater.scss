@@ -249,6 +249,7 @@ h3.sub-column {
     margin: 0 20px;
     padding-top: 10px;
     line-height: 2em;
+    p { margin-bottom: 35px; }
     &>*{
       margin: 0 25px 25px;
     }
@@ -277,7 +278,7 @@ h3.sub-column {
     padding: 15px;
     cursor: pointer;
     &:hover{
-      color: $accent;
+      background-color: lightgray;
     }
     &:first-child {
       border-right: 2px solid white;
