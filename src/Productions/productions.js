@@ -150,6 +150,14 @@ class Productions extends Component {
                       : null
                 }
 
+                { ( p.cast_list)
+                      ?  ( <div className='cast'>
+                              <div className='title'>Cast</div>
+                              <SanitizedHTML html={p.cast_list} />
+                            </div>)
+                      : null
+                }
+
                 { (this.props.perm)
                   ? <div className='edit-prod-buttons'>
                       { (!this.state.edit_show)

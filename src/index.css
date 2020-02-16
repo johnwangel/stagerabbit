@@ -467,6 +467,14 @@ h3.sub-column {
       font-family: 'Libre Baskerville', serif;
       font-size: 2em;
       color: indigo; }
+    .theaters .theater_info .specialty {
+      width: 50%;
+      border-top: 1px solid indigo;
+      border-bottom: 1px solid indigo;
+      font-size: 1.5em;
+      padding: 10px 0;
+      margin: 20px 0 30px;
+      text-align: center; }
   .theaters .theater-info-table {
     width: 100%;
     padding: 15px; }
@@ -591,6 +599,22 @@ h3.sub-column {
     .productions .description p {
       margin-bottom: 35px; }
     .productions .description > * {
+      margin: 0 25px 25px; }
+  .productions .cast {
+    border-top: 1px solid indigo;
+    margin: 0 20px; }
+    .productions .cast .title {
+      text-align: center;
+      font-family: "Libre Baskerville", serif;
+      font-size: 1.5em;
+      color: indigo;
+      margin-top: 20px; }
+    .productions .cast p {
+      margin-block-start: .5em;
+      margin-block-end: .5em;
+      margin-inline-start: .5px;
+      margin-inline-end: .5px; }
+    .productions .cast > * {
       margin: 0 25px 25px; }
 
 .instr {

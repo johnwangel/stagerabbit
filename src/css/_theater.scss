@@ -85,6 +85,17 @@ h3.sub-column {
       font-size: 2em;
       color: $main;
     }
+
+    .specialty {
+      width: 50%;
+      border-top: 1px solid $main;
+      border-bottom: 1px solid $main;
+      font-size: 1.5em;
+      padding: 10px 0;
+      margin: 20px 0 30px;
+      text-align:center;
+    }
+
   }
 
   .theater-info-table {
@@ -258,6 +269,29 @@ h3.sub-column {
       margin: 0 25px 25px;
     }
   }
+
+  .cast {
+    border-top: 1px solid $main;
+    margin: 0 20px;
+    .title {
+      text-align: center;
+      font-family: $heading_font;
+      font-size: 1.5em;
+      color: $main;
+      margin-top: 20px;
+    }
+    p {
+      margin-block-start: .5em;
+      margin-block-end: .5em;
+      margin-inline-start: .5px;
+      margin-inline-end: .5px;
+    }
+    &>*{
+      margin: 0 25px 25px;
+    }
+  }
+
+
 }
 
 .instr {
