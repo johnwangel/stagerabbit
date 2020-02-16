@@ -56,7 +56,14 @@ class Theater extends Component {
                   <div>{this.props.theater.phone}</div>
                   <div><a href={this.props.theater.website} target='_blank' className='website'>{this.props.theater.website}</a></div>
                 </div>
+
+                { (this.props.theater.specialty)
+                  ? <div className="specialty"><span className="runin">Specialty:</span>{this.props.theater.specialty}</div>
+                  : null
+                }
+
               </div>
+
 
               <h3 className="sub-column">Edit Company Details</h3>
               <table className="theater-info-table">
@@ -113,6 +120,10 @@ class Theater extends Component {
                 <div>{this.props.theater.phone}</div>
                 <div><a href={this.props.theater.website} target='_blank' className='website'>{this.props.theater.website}</a></div>
               </div>
+                { (this.props.theater.specialty)
+                  ? <div className="specialty"><span className="runin">Specialty:</span>{this.props.theater.specialty}</div>
+                  : null
+                }
             </div>
         }
       </div>
