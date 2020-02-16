@@ -36,10 +36,8 @@ h2.main-page {
     background-color: darkgrey;
   }
 
-
-  &:first-child{
+  &.adm{
     margin-top: 25px;
-    border-top: 2px solid white;
     @media screen and (max-width: 800px){
       margin-top: 35px;
     }
@@ -122,6 +120,9 @@ h3.sub-column {
     color: $main;
     text-align: right;
   }
+  .table-field input{
+    width:100%;
+  }
 
 }
 
@@ -139,11 +140,6 @@ h3.sub-column {
   align-items: center;
   min-width: 850px;
 
-  &:hover {
-    background-color: $accent;
-    color: black;
-  }
-
   @media screen and (max-width: 800px){
     width: 100%;
     min-width: unset;
@@ -158,6 +154,15 @@ h3.sub-column {
     color: white;
     background-color: darkgray;
     padding: 15px 0;
+
+    &:hover {
+      background-color: $accent;
+      color: white;
+      &.active{
+        color: white;
+      }
+    }
+
     &.active{
       color: $main;
     }
@@ -174,7 +179,6 @@ h3.sub-column {
   align-items: flex-start;
   background-color: white;
   padding-bottom: 200px;
-
 
   .empty {
     width: 100%;
@@ -266,7 +270,7 @@ h3.sub-column {
   width: 100%;
   display: flex;
   justify-content: space-around;
-  margin-top: 30px;
+  margin: 30px 0 2px;
 
   .form-button-3 {
     width: 50%;

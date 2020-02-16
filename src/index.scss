@@ -13,7 +13,6 @@ body {
 }
 
 @import "./css/variables.scss";
-
 @import "./css/contact.scss";
 @import "./css/headers.scss";
 @import "./css/login.scss";
@@ -235,6 +234,8 @@ textarea {
   width: 90%;
   height: 100px;
   font-size: 1em;
+  font-family: 'Raleway', sans-serif;
+  padding: 10px;
 }
 
 a {
@@ -277,15 +278,6 @@ a {
   }
 }
 
-.toolbar {
-  h2 {
-    font-family: 'Libre Baskerville', serif;
-    color: crimson;
-    text-weight: bold;
-    text-shadow: .25px .25px 8px white;
-  }
-}
-
 .overlay {
   position: absolute;
   top: 0;
@@ -306,8 +298,6 @@ a {
   position: relative;
   max-width: 33%;
 }
-
-
 
 select{
   max-width: 75%;

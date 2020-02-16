@@ -7,9 +7,18 @@
   min-width: 200px;
   background-color: $main;
   height: 25px;
+    border-bottom: 2px solid white;
   @media screen and (max-width: 600px){
     height: 35px;
   }
+
+  h2 {
+    font-family: 'Libre Baskerville', serif;
+    color: crimson;
+    text-weight: bold;
+    text-shadow: .25px .25px 8px white;
+  }
+
   .head {
     text-align: center;
     line-height: 2.2em;
