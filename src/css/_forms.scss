@@ -28,6 +28,10 @@
 
 }
 
+.form-group {
+  width: 100%;
+}
+
 .form-title {
   color: white;
   margin-top: 0;
@@ -39,11 +43,22 @@ h2.form-title {
 }
 
 h3.form-title {
+  width: 100%;
   color: white;
   font-weight: 800;
   margin-top: 25px;
   border-top: 2px solid $main;
   padding-top: 5px;
+}
+
+h4.form-title {
+  width: 100%;
+  color: white;
+  font-weight: 800;
+  margin-top: 10px;
+  border-top: 2px solid $main;
+  margin-block-start: 5px;
+  margin-block-end: 5px;
 }
 
 .form-group {
