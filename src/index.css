@@ -602,7 +602,7 @@ h3.sub-column {
       margin: 0 25px 25px; }
   .productions .cast {
     border-top: 1px solid indigo;
-    margin: 0 20px; }
+    margin: 0 20px 60px; }
     .productions .cast .title {
       text-align: center;
       font-family: "Libre Baskerville", serif;
@@ -640,6 +640,26 @@ h3.sub-column {
       background-color: gray; }
     .edit-prod-buttons .form-button-3:first-child {
       border-right: 2px solid white; }
+
+.add_artist {
+  width: 100%;
+  height: 0;
+  max-height: 0;
+  overflow: hidden;
+  -webkit-transition: all .5s ease-in-out;
+  -moz-transition: all .5s ease-in-out;
+  -o-transition: all .5s ease-in-out;
+  transition: all .5s ease-in-out; }
+  .add_artist.show {
+    display: block;
+    height: auto;
+    max-height: 100%; }
+
+.expand {
+  cursor: pointer; }
+  .expand .plus {
+    padding-right: 10px;
+    font-size: 1.5em; }
 
 .toolbar {
   position: fixed;
@@ -736,6 +756,9 @@ h3.sub-column {
     padding: 10px 0;
     margin-bottom: 15px; }
 
+.form-group {
+  width: 100%; }
+
 .form-title {
   color: white;
   margin-top: 0; }
@@ -744,11 +767,21 @@ h2.form-title {
   text-transform: uppercase; }
 
 h3.form-title {
+  width: 100%;
   color: white;
   font-weight: 800;
   margin-top: 25px;
   border-top: 2px solid indigo;
   padding-top: 5px; }
+
+h4.form-title {
+  width: 100%;
+  color: white;
+  font-weight: 800;
+  margin-top: 10px;
+  border-top: 2px solid indigo;
+  margin-block-start: 5px;
+  margin-block-end: 5px; }
 
 .form-group {
   height: 100%;
