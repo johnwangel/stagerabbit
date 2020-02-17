@@ -203,7 +203,8 @@ class AddProd extends Component {
 
             <div className='form-group'>
               <h4 onClick={ () => { this.handleExpand(1) } } className="form-title expand">
-                <span id="desc-show" className="plus">{ (this.state.expand_desc) ? '-' : '+' }</span>Description:
+                <span id="desc-show" className="plus">{ (this.state.expand_desc) ? '-' : '+' }</span>
+                  Description
               </h4>
               <div id="desc-display" className={ (this.state.expand_desc) ? "add_artist show" : "add_artist" }>
                 <textarea
@@ -216,7 +217,8 @@ class AddProd extends Component {
 
             <div className='form-group'>
               <h4 onClick={ () => { this.handleExpand(2) } } className="form-title expand">
-                <span id="cast-show" className="plus">{ (this.state.expand_cast) ? '-' : '+' }</span>Cast
+                <span id="cast-show" className="plus">{ (this.state.expand_cast) ? '-' : '+' }</span>
+                  Cast
               </h4>
               <div id="desc-display" className={ (this.state.expand_cast) ? "add_artist show" : "add_artist" }>
                 <textarea
@@ -229,7 +231,8 @@ class AddProd extends Component {
 
             <div id="dir-group">
               <h4 onClick={ () => { this.handleExpand(3) } } className='form-title expand'>
-                <span id="dir-show" className="plus">{ (this.state.expand_dir) ? '-' : '+' }</span>Director
+                <span id="dir-show" className="plus">{ (this.state.expand_dir) ? '-' : '+' }</span>
+                  Director
               </h4>
               <div id="dir-display" className={ (this.state.expand_dir) ? "add_artist show" : "add_artist" }>
                 {
@@ -261,7 +264,8 @@ class AddProd extends Component {
 
             <div id="chor-group">
               <h4 onClick={  () => { this.handleExpand(4) } } className='form-title expand'>
-                <span id="dir-show" className="plus">{ (this.state.expand_chor) ? '-' : '+' }</span>Choreographer
+                <span id="dir-show" className="plus">{ (this.state.expand_chor) ? '-' : '+' }</span>
+                  Choreographer
               </h4>
               <div id="chor-display" className={ (this.state.expand_chor) ? "add_artist show" : "add_artist" }>
                 {
@@ -292,7 +296,8 @@ class AddProd extends Component {
 
             <div id="md-group">
               <h4 onClick={ () => { this.handleExpand(5) } }  className='form-title expand'>
-                  <span id="dir-show" className="plus">{ (this.state.expand_md) ? '-' : '+' }</span>Music Director
+                  <span id="dir-show" className="plus">{ (this.state.expand_md) ? '-' : '+' }</span>
+                    Music Director
               </h4>
               <div id="md-display" className={ (this.state.expand_md) ? "add_artist show" : "add_artist" }>
                 {
