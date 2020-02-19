@@ -29,7 +29,7 @@ class Productions extends Component {
   render() {
     let p = this.props.prod;
     let a = (p && p.artists) ? p.artists : null;
-    let v = (p && p.venue.length ) ? p.venue[0] : null;
+    let v = (p && p.venue && p.venue.length ) ? p.venue[0] : null;
 
     return ( <div key={this.props.id+'-prod'}
                   id={this.props.prod.production_id}
