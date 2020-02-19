@@ -404,7 +404,13 @@ body {
   margin: 0 50px; }
   @media screen and (max-width: 800px) {
     .main-column {
+<<<<<<< HEAD
       min-width: unset; } }
+=======
+      width: 100%;
+      min-width: 100%;
+      max-width: 100%; } }
+>>>>>>> cee44da89dc556d8f4dcc2c9569344909ed8d6c2
 
 .admin-theater {
   background-color: white;
