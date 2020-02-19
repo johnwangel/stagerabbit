@@ -225,15 +225,13 @@ class Home extends Component {
                 : null
             }
 
-            { ( this.props.SearchResults && this.props.SearchResults.results &&  this.props.SearchResults.results.theaters && this.props.SearchResults.results.theaters.length )
+            { ( this.props.SearchResults &&
+                this.props.SearchResults.results &&
+                this.props.SearchResults.results.theaters &&
+                this.props.SearchResults.results.theaters.length )
 
                 ? <div className='searchContent main-column'>
-                      { ( this.props.SearchResults && this.props.SearchResults.results && this.props.SearchResults.type === 0 )
-                        ? <div className='error'>No results</div>
-                        : null
-                      }
-
-                      { ( this.props.SearchResults && this.props.SearchResults.type === 1 && this.props.SearchResults.results && this.props.SearchResults.results.theaters && this.props.SearchResults.results.theaters.length )
+                    { ( this.props.SearchResults && this.props.SearchResults.type === 1 && this.props.SearchResults.results && this.props.SearchResults.results.theaters && this.props.SearchResults.results.theaters.length )
                           ? <ol start={ (this.startPage > 0 ) ? ((this.state.startPage - 1) * 25) + 1 : 1 }>
                               { this.props.SearchResults.results.theaters.map( (item, idx) => <Results key={`search-${idx}`} type='1' item={item} idx={idx} prod={ this.props.SearchResults.results.prods.filter( t => t.length > 0 && t[0].theater_id == item.id ) }/>) }
                             </ol>
@@ -254,7 +252,14 @@ class Home extends Component {
                           : null
                       }
                   </div>
-                : null
+                : <div className='searchContent main-column'>
+                      { ( this.props.SearchResults &&
+                          this.props.SearchResults.results &&
+                          this.props.SearchResults.type === 0 )
+                        ? <div className='error'>No results</div>
+                        : null
+                      }
+                    </div>
             }
 
 
