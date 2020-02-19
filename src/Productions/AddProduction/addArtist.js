@@ -8,7 +8,7 @@ class AddArtist extends Component {
     super(props);
 
     this.state = {
-      edit_title: (this.props.editmode) ? 'Edit Artist' : 'Create a New Artist',
+      edit_title: (this.props.editmode && this.props.item) ? 'Edit Artist' : 'Create a New Artist',
       show_select: true,
       show_field: false,
       fname : (this.props.item) ? this.props.item.fname : '',
@@ -52,6 +52,7 @@ class AddArtist extends Component {
       this.setState({ error: 'You must enter a last name.' });
       return;
     }
+
     const data={
                 fname : this.state.fname,
                 lname : this.state.lname,
@@ -72,15 +73,22 @@ class AddArtist extends Component {
   }
 
   removeArtist(){
-    const data =  {artist_id: this.state.defaultvalue, type: this.props.type };
+    const data =  {
+                    number : this.props.num,
+                    artist_id : this.state.defaultvalue,
+                    type : this.props.type
+                  };
+
     if (this.props.pid){
       data.assoc='production';
       data.assoc_id=this.props.pid.production_id;
-    } else if (this.props.sid){
+    } else if (this.props.item.show_id){
       data.assoc='show';
-      data.assoc_id=this.props.sid;
+      data.assoc_id=this.props.item.show_id;
     }
     this.props.removeArtistCB( data );
+    this.setState({defaultvalue:0})
+
   }
 
   render() {
@@ -99,11 +107,24 @@ class AddArtist extends Component {
                     </select>
 
                     <div className="edit_buttons">
-                      <span className="form-button-2"
-                            onClick={() => { this.inputname() }}>
-                        { this.state.edit_title }
-                      </span>
-                      { (this.state.edit_title === 'Edit Artist')
+
+                      { ( this.state.defaultvalue === 0 || !this.props.item)
+                        ? <span className="form-button-2"
+                                onClick={() => { this.inputname() }}>
+                            Create a New Artist
+                          </span>
+                        :null
+                      }
+
+                      { ( this.props.item && this.state.defaultvalue !== 0 )
+                        ? <span className="form-button-2"
+                                onClick={() => { this.inputname() }}>
+                            { this.state.edit_title }
+                          </span>
+                        : null
+                      }
+
+                      { (this.state.edit_title === 'Edit Artist' && this.props.item && this.state.defaultvalue !== 0 )
                           ? <span
                               className="form-button-2"
                               onClick={() => { this.removeArtist() }}>

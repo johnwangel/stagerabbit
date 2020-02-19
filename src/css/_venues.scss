@@ -2,7 +2,7 @@
   background-color: white;
   &.showlast {
     order: 10;
-    padding-bottom: 200px;
+    padding-bottom: 50px;
 
     .venue:last-child {
       border-bottom: 2px solid $main;
@@ -14,16 +14,13 @@
     display: grid;
     grid-template-columns: 20% 40% 20% 20%;
     align-items: center;
-    padding: 10px;
+    padding: 30px;
 
     &:last-child{
       border-bottom: none;
     }
-
   }
-
 }
-
 
 .number {
   text-align: center;

@@ -35,8 +35,6 @@ class ProdByShow extends Component {
   }
 
   render() {
-
-
     return ( <div className='show_results'>
               <h2 className="main-page main-column search">Production Results</h2>
               <div className="toggle main-column">

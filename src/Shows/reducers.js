@@ -5,11 +5,12 @@
   ALL_ARTISTS,
   NEW_SHOW,
   NEW_ARTIST,
-  EDIT_SHOW
+  EDIT_SHOW,
+  REMOVE_ARTIST_FROM_SHOW
  } from './actions';
  import { makeArray } from '../constants/constants';
 
-const ShowsReducers = (state = { shows: [], artists: [],  new_artist: null }, action) => {
+const ShowsReducers = (state = { shows: [], artists: [],  new_artist: null, removed_artist: null }, action) => {
   switch (action.type){
     case ALL_SHOWS:
       return allShows(state,action);
@@ -21,25 +22,31 @@ const ShowsReducers = (state = { shows: [], artists: [],  new_artist: null }, ac
       return showAdded(state,action);
     case NEW_ARTIST:
       return artistAdded(state,action);
+    case REMOVE_ARTIST_FROM_SHOW:
+      return removeArtist(state,action);
     default:
       return state;
   }
 }
 
 function allShows(state,action){
-  return { shows: do_shows(action.payload), artists: state.artists, new_artist: null };
+  return { shows: do_shows(action.payload), artists: state.artists, new_artist: null, removed_artist: null };
 }
 
 function allArtists(state,action){
-  return { shows: state.shows, artists: do_artists(action.payload), new_artist: null };
+  return { shows: state.shows, artists: do_artists(action.payload), new_artist: null, removed_artist: null  };
 }
 
 function showAdded(state,action){
-  return { shows: do_shows(action.payload.shows), artists: do_artists(action.payload.artists), new_artist: null };
+  return { shows: do_shows(action.payload.shows), artists: do_artists(action.payload.artists), new_artist: null, removed_artist: null  };
 }
 
 function artistAdded(state,action){
-  return { shows: state.shows, artists: do_artists(action.payload.artists), new_artist: action.payload.new_artist };
+  return { shows: state.shows, artists: do_artists(action.payload.artists), new_artist: action.payload.new_artist, removed_artist: null  };
+}
+
+function removeArtist(state,action){
+  return { shows: state.shows, artists: do_artists(action.payload.data.artists), new_artist: null, removed_artist: action.payload.data.artists.body.artist_id  };
 }
 
 function do_artists(artists){

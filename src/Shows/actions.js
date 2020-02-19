@@ -7,7 +7,7 @@ export const  ALL_ARTISTS  = 'ALL_ARTISTS';
 export const  NEW_SHOW  = 'NEW_SHOW';
 export const  NEW_ARTIST  = 'NEW_ARTIST';
 export const  EDIT_SHOW  = 'EDIT_SHOW';
-export const  REMOVE_ARTIST ='REMOVE_ARTIST';
+export const  REMOVE_ARTIST_FROM_SHOW ='REMOVE_ARTIST_FROM_SHOW';
 
 export function getAllShows(){
   return dispatch => {
@@ -83,5 +83,21 @@ export function editShow(body){
 
 const EditShow = data => ({
   type : EDIT_SHOW,
+  payload : data
+});
+
+export function removeArtistFromShow( body ){
+  body.fromWhere='show';
+  GET_POST_HEADER.body= JSON.stringify(body);
+  return dispatch => {
+    fetch(`${URL}artists/remove_artist`, GET_POST_HEADER )
+    .then(response => response.json())
+    .then(data => dispatch( RemoveArtistFromShow( { body, artists: data } ) ) )
+    .catch( err => console.log(err.message));
+  };
+}
+
+const RemoveArtistFromShow = ( data ) => ({
+  type : REMOVE_ARTIST_FROM_SHOW,
   payload : data
 });
