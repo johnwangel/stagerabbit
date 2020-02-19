@@ -106,7 +106,6 @@ class Main extends Component {
            (this.props.Prods.upcoming.length !== prevProps.Prods.upcoming.length
             || this.props.Prods.previous.length !== prevProps.Prods.previous.length)
         ) {
-      console.log('different');
       this.update_theater_details(tid);
     }
 
@@ -118,18 +117,16 @@ class Main extends Component {
     if (this.props.User !== prevProps.User && (this.props.User.token===this.props.Theater[0].token) ? true : false ){
       this.setState({admin:true});
     }
+
+    if (prevProps.location.pathname !== this.props.location.pathname){
+      this.update_theater_details(this.props.match.params.id);
+    }
+
   }
 
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll);
    }
-
-  getSnapshotBeforeUpdate(prevProps) {
-    if (prevProps.location.pathname !== this.props.location.pathname){
-      this.update_theater_details(this.props.match.params.id)
-    }
-    //return null;
-  }
 
   handleScroll(){
     this.setState(getPosition());
