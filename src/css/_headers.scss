@@ -10,8 +10,6 @@
   height: 50px;
   background-color: $gray;
 
-  @media screen and (max-width: 600px){ width: auto;}
-
   .logo {
     display: flex;
     flex-direction: row;
