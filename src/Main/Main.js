@@ -15,7 +15,8 @@ import {  updateTheaterID,
 
 import {  updateProds,
           editProd,
-          newProd } from '../Productions/actions';
+          newProd,
+          removeArtistFromProd } from '../Productions/actions';
 
 import {  getVenuesByTheater,
           getAllVenues,
@@ -25,9 +26,9 @@ import {  getAllShows,
           getAllArtists,
           newShow,
           newArtist,
-          editShow } from '../Shows/actions';
+          editShow,
+          removeArtistFromShow } from '../Shows/actions';
 
-import { removeArtist } from '../Artists/actions';
 import { getPosition } from '../constants/helpers';
 
 import { GET_POST_HEADER, URL, process_submit } from '../constants/constants.js';
@@ -76,7 +77,8 @@ class Main extends Component {
     this.update_venue = this.update_venue.bind(this);
     this.deleteVenueCallback = this.deleteVenueCallback.bind(this);
     this.addArtistCallback = this.addArtistCallback.bind(this);
-    this.removeArtistCallback = this.removeArtistCallback.bind(this);
+    this.removeArtistFromProdCallback = this.removeArtistFromProdCallback.bind(this);
+    this.removeArtistFromShowCallback = this.removeArtistFromShowCallback.bind(this);
     this.add_show = this.add_show.bind(this);
     this.edit_show = this.edit_show.bind(this);
     this.edit_prod = this.edit_prod.bind(this);
@@ -104,6 +106,7 @@ class Main extends Component {
            (this.props.Prods.upcoming.length !== prevProps.Prods.upcoming.length
             || this.props.Prods.previous.length !== prevProps.Prods.previous.length)
         ) {
+      console.log('different');
       this.update_theater_details(tid);
     }
 
@@ -125,6 +128,7 @@ class Main extends Component {
     if (prevProps.location.pathname !== this.props.location.pathname){
       this.update_theater_details(this.props.match.params.id)
     }
+    //return null;
   }
 
   handleScroll(){
@@ -154,8 +158,12 @@ class Main extends Component {
     this.props.newArtist(newData);
   }
 
-  removeArtistCallback(newData) {
-    this.props.removeArtist(newData);
+  removeArtistFromProdCallback(newData) {
+    this.props.removeArtistFromProd(newData);
+  }
+
+  removeArtistFromShowCallback(newData) {
+    this.props.removeArtistFromShow(newData);
   }
 
   update_theater_details(tid){
@@ -477,7 +485,8 @@ class Main extends Component {
               addShowCB={ this.add_show }
               newProdCB={ this.new_prod_cb }
               addArtistCB={ this.addArtistCallback }
-              removeArtistCB={ this.removeArtistCallback }
+              removeArtistProdCB={ this.removeArtistFromProdCallback }
+              removeArtistShowCB={ this.removeArtistFromShowCallback }
               newArtist={ this.props.Shows.new_artist }
               prod_form={ this.prod_form }
             />
@@ -520,9 +529,11 @@ class Main extends Component {
                     idx={ index }
                     key={ `pr-${index}` }
                     prod={ item }
+                    shows={ this.props.Shows }
                     addShowCB={ this.add_show }
                     addArtistCB={ this.addArtistCallback }
-                    removeArtistCB={ this.removeArtistCallback }
+                    removeArtistShowCB={ this.removeArtistFromShowCallback }
+                    removeArtistProdCB={ this.removeArtistFromProdCallback }
                     newArtist={ this.props.Shows.new_artist }
                     edit_show={ this.edit_show }
                     edit_prod={ this.edit_prod }
@@ -541,9 +552,11 @@ class Main extends Component {
                     idx={ index }
                     key={ `pr-${index}` }
                     prod={ item }
+                    shows={ this.props.Shows }
                     addShowCB={ this.add_show }
                     addArtistCB={ this.addArtistCallback }
-                    removeArtistCB={ this.removeArtistCallback }
+                    removeArtistShowCB={ this.removeArtistFromShowCallback }
+                    removeArtistProdCB={ this.removeArtistFromProdCallback }
                     newArtist={ this.props.Shows.new_artist }
                     edit_show={ this.edit_show }
                     edit_prod={ this.edit_prod }
@@ -611,8 +624,11 @@ const mapDispatchToProps = dispatch => {
     editProd: body => {
       dispatch( editProd(body) )
     },
-    removeArtist: body => {
-      dispatch( removeArtist(body) )
+    removeArtistFromProd: body => {
+      dispatch( removeArtistFromProd(body) )
+    },
+    removeArtistFromShow: body => {
+      dispatch( removeArtistFromShow(body) )
     },
     addTheater: body => {
       dispatch( addTheater(body) )

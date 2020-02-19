@@ -5,7 +5,7 @@ body {
   font-size: 1em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #EEE; }
+  background-color: #FFF; }
   @media screen and (max-width: 800px) {
     body {
       font-size: .8em; } }
@@ -48,6 +48,9 @@ body {
   width: 100%;
   height: 50px;
   background-color: #505050; }
+  @media screen and (max-width: 600px) {
+    .nav {
+      width: auto; } }
   .nav .logo {
     display: flex;
     flex-direction: row;
@@ -398,14 +401,14 @@ body {
     color: indigo; }
 
 .main-column {
+  width: 50%;
   min-width: 750px;
   max-width: 750px;
-  padding: 20px 50px; }
+  margin: 0 50px; }
   @media screen and (max-width: 800px) {
     .main-column {
       width: 100%;
-      min-width: unset;
-      padding: 20px 0; } }
+      min-width: unset; } }
 
 .admin-theater {
   background-color: white;
@@ -418,13 +421,16 @@ body {
     width: 50%; }
 
 h2.main-page {
-  margin: 0 auto;
+  margin: 20px auto;
+  padding: 20px 0;
   font-family: 'Libre Baskerville', serif;
   color: white;
   font-weight: bold;
   text-transform: uppercase;
   background-color: indigo;
-  text-align: center; }
+  text-align: center;
+  margin-block-start: 0;
+  margin-block-end: 0; }
   h2.main-page.gray {
     background-color: darkgrey; }
   h2.main-page.adm {
@@ -445,6 +451,15 @@ h3.sub-column {
   text-align: center;
   padding: 10px; }
 
+.artist-name {
+  display: inline-block; }
+  .artist-name div {
+    display: inline-block; }
+  .artist-name div:first-child {
+    margin-right: 5px; }
+  .artist-name div:last-child {
+    margin-right: 5px; }
+
 .theater {
   background-color: white; }
 
@@ -454,7 +469,7 @@ h3.sub-column {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 50px; }
+  margin: 50px 0 200px; }
   .theaters .theater_info {
     display: flex;
     flex-direction: column;
@@ -509,7 +524,7 @@ h3.sub-column {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  min-width: 850px; }
+  min-width: 750px; }
   @media screen and (max-width: 800px) {
     .toggle {
       width: 100%;
@@ -538,27 +553,31 @@ h3.sub-column {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  background-color: white;
-  padding-bottom: 200px; }
+  background-color: white; }
   .productions .empty {
     width: 100%;
     text-align: center; }
   .productions.hide {
     display: none; }
   .productions .production {
-    margin-top: 40px;
+    padding-top: 40px;
     width: 100%;
-    border-bottom: 2px solid indigo; }
+    border-bottom: 2px solid indigo;
+    background-color: #F5F5F5; }
+    .productions .production:nth-child(odd) {
+      background-color: #e7e1f1; }
     .productions .production .details-table {
-      margin: 50px auto 30px; }
+      margin: 50px auto 30px;
+      padding: 0 20px; }
       .productions .production .details-table tr {
         vertical-align: top; }
         .productions .production .details-table tr td {
-          padding: 0 50px 20px 0; }
+          padding: 0 10px 10px 0; }
           .productions .production .details-table tr td:first-child {
             color: indigo;
             font-weight: bold;
-            margin-right: 30px; }
+            margin-right: 100px;
+            text-align: right; }
   .productions .show_dates {
     font-family: 'Libre Baskerville', serif;
     font-style: italic;
@@ -591,35 +610,23 @@ h3.sub-column {
     text-align: center; }
   .productions .venue {
     margin: 10px; }
-  .productions .description {
+  .productions .description, .productions .cast {
     border-top: 1px solid indigo;
-    margin: 0 20px;
+    border-top: 1px solid indigo;
+    margin: 0 20px 30px;
     padding-top: 10px;
     line-height: 2em; }
-    .productions .description p {
-      margin-bottom: 35px; }
-    .productions .description > * {
-      margin: 0 25px 25px; }
-  .productions .cast {
-    border-top: 1px solid indigo;
-<<<<<<< HEAD
-    margin: 0 20px 35px; }
-=======
-    margin: 0 20px 60px; }
->>>>>>> 310e6874980fc8f4366b44c9f080320747a689a3
-    .productions .cast .title {
-      text-align: center;
-      font-family: "Libre Baskerville", serif;
-      font-size: 1.5em;
-      color: indigo;
-      margin-top: 20px; }
-    .productions .cast p {
+    .productions .description p, .productions .cast p {
       margin-block-start: .5em;
       margin-block-end: .5em;
       margin-inline-start: .5px;
       margin-inline-end: .5px; }
-    .productions .cast > * {
-      margin: 0 25px 25px; }
+    .productions .description .title, .productions .cast .title {
+      font-family: "Raleway", sans-serif;
+      font-size: 1.2em;
+      font-weight: bold;
+      color: indigo;
+      margin-top: 20px; }
 
 .instr {
   font-weight: 600;
@@ -627,10 +634,10 @@ h3.sub-column {
   margin: 20px 0; }
 
 .edit-prod-buttons {
-  width: 100%;
   display: flex;
   justify-content: space-around;
-  margin: 30px 0 2px; }
+  margin: 30px 0 10px;
+  padding: 0 20%; }
   .edit-prod-buttons .form-button-3 {
     width: 50%;
     background-color: indigo;
@@ -639,7 +646,8 @@ h3.sub-column {
     font-size: 1em;
     font-weight: bold;
     padding: 15px;
-    cursor: pointer; }
+    cursor: pointer;
+    white-space: nowrap; }
     .edit-prod-buttons .form-button-3:hover {
       background-color: gray; }
     .edit-prod-buttons .form-button-3:first-child {
@@ -914,7 +922,7 @@ input[type='text'], input[type='email'], input[type='password'] {
   background-color: white; }
   .venues.showlast {
     order: 10;
-    padding-bottom: 200px; }
+    padding-bottom: 50px; }
     .venues.showlast .venue:last-child {
       border-bottom: 2px solid indigo; }
   .venues .venue {
@@ -922,7 +930,7 @@ input[type='text'], input[type='email'], input[type='password'] {
     display: grid;
     grid-template-columns: 20% 40% 20% 20%;
     align-items: center;
-    padding: 10px; }
+    padding: 30px; }
     .venues .venue:last-child {
       border-bottom: none; }
 

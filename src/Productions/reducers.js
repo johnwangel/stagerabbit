@@ -2,7 +2,8 @@
   UPDATE_PRODS,
   NEW_PROD,
   EDIT_PROD,
-  PROD_BY_SHOW
+  PROD_BY_SHOW,
+  REMOVE_ARTIST_FROM_PROD
  } from './actions';
 
 const moment = require('moment');
@@ -18,6 +19,8 @@ const ProductionsReducer = (state={ upcoming: [], previous: [] }, action) => {
         return editProduction(state,action);
       case PROD_BY_SHOW:
         return prodByShow(state,action);
+      case REMOVE_ARTIST_FROM_PROD:
+        return editProduction(state,action);
       default:
         return state;
     }
@@ -37,10 +40,12 @@ function newProduction(state,action){
 
 function editProduction(state,action){
   var n = action.payload;
-  var clone = state.slice(0);
+
+  var clone = [ ...state.upcoming, ...state.previous ];
   clone.forEach( (c,i) => {
     if (c.production_id === n.production_id ) clone[i]=n;
-  })
+  });
+
   return parseProds(clone);
 }
 
@@ -56,5 +61,7 @@ function parseProds(prods){
   })
   return { upcoming, previous };
 }
+
+
 
 export default ProductionsReducer;

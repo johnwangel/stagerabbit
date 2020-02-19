@@ -18,12 +18,12 @@ class AddProd extends Component {
 
     const errRef=createRef();
 
-    var c;
-    (this.props.specs) ? c=this.props.specs : c=null;
-    var p;
-    (this.props.production) ? p=this.props.production : p=null;
-
+    var c = (this.props.specs) ? this.props.specs : null;
+    var p = (this.props.production) ? this.props.production : null;
+    var a = (p && p.artists) ? p.artists : null;
     var sd=new Date(), ed=new Date();
+
+    console.log('artists in const',a);
 
     if(p && p.start_date) {
       sd = parseISO(Moment.utc(p.start_date).format('YYYY-MM-DD'));
@@ -31,22 +31,22 @@ class AddProd extends Component {
     }
 
     this.state = {
-      pid: (c) ? c.pid : null,
+      pid: (p && p.production_id) ? p.production_id : null,
       editmode: (c) ? true : false,
       formTitle: (c) ? 'Update Production' : 'Add Production',
       start : sd,
       end:  ed,
-      venue_id: (c && c.venue && c.venue.venue_id) ? c.venue.venue_id : '0',
+      venue_id: (p && p.venue && p.venue[0] && p.venue[0].venue_id) ? p.venue[0].venue_id : '0',
       venue_error: false,
-      show_id: (c && c.sid) ? c.sid : '0',
+      show_id: (p && p.show_id) ? p.show_id : '0',
       show_error: false,
-      dirChildren: (c && c.dir && c.dir.length>0) ? c.dir.length : 1,
-      dir_items: (c && c.dir && c.dir.length>0) ? c.dir : null,
-      chorChildren: (c && c.chor && c.chor.length>0) ? c.chor.length : 1,
-      chor_items: (c && c.chor && c.chor.length>0) ? c.chor : null,
-      mdChildren: (c && c.md && c.md.length>0) ? c.md.length : 1,
-      md_items: (c && c.md && c.md.length>0) ? c.md : null,
-      cast: (p && p.cast) ? p.cast : '',
+      directors: (a && a.dir && a.dir.length>0) ? a.dir : null,
+      dirChildren: (a && a.dir && a.dir.length>0) ? a.dir.length : 1,
+      choreographers : (a && a.chor && a.chor.length>0) ? a.chor : null,
+      chorChildren: (a && a.chor && a.chor.length>0) ? a.chor.length : 1,
+      mds : (a && a.md && a.md.length>0) ? a.md : null,
+      mdChildren: (a && a.md && a.md.length>0) ? a.md.length : 1,
+      cast: (p && p.cast_list) ? p.cast_list : '',
       description: (p && p.description) ? p.description : '',
       height: null,
       scroll: null,
@@ -135,6 +135,28 @@ class AddProd extends Component {
         return;
     }
   }
+
+  // removeItem(data){
+  //   let items,count;
+  //   switch (data.type){
+  //     case 'dir':
+  //         items=[ ...this.state.directors].splice(data.number,1);
+  //         count=(this.state.dirChildren===1) ? 1 : this.state.dirChildren-1;
+  //         this.setState( { directors: items, dirChildren: count  } );
+  //       break;
+  //     case 'chor':
+  //         items=[...this.state.choreographers].splice(data.number,1);
+  //         count=(this.state.chorChildren===1) ? 1 : this.state.dirChildren-1;
+  //         this.setState( { choreographers: items, chorChildren: count  } );
+  //       break;
+  //     case 'md':
+  //         items=[...this.state.mds].splice(data.number,1);
+  //         count=(this.state.mdChildren===1) ? 1 : this.state.dirChildren-1;
+  //         this.setState( { mds: items, mdChildren: count } );
+  //       break;
+  //   }
+  //   this.forceUpdate();
+  // }
 
   onDropdownSelected( e ) {
     this.setState({ [e.target.name] : e.target.value } );
@@ -244,10 +266,10 @@ class AddProd extends Component {
                                 type="dir"
                                 title="Director"
                                 editmode={this.state.editmode}
-                                item={(this.state.dir_items) ? this.state.dir_items[i] : null}
+                                item={ (this.state.directors) ? this.state.directors[i] : null }
                                 sel={this.props.artists}
                                 addArtistCB={ this.props.addArtistCB }
-                                removeArtistCB={ this.props.removeArtistCB }
+                                removeArtistCB={ this.props.removeArtistProdCB }
                                 newArtist={ this.props.newArtist }
                               />
                   })
@@ -277,10 +299,10 @@ class AddProd extends Component {
                                 editmode={this.state.editmode}
                                 type="chor"
                                 title="Choreographer"
-                                item={(this.state.chor_items) ? this.state.chor_items[i] : null}
+                                item={(this.state.choreographers) ? this.state.choreographers[i] : null}
                                 sel={this.props.artists}
                                 addArtistCB={ this.props.addArtistCB }
-                                removeArtistCB={ this.props.removeArtistCB }
+                                removeArtistCB={ this.props.removeArtistProdCB }
                                 newArtist={ this.props.newArtist }
                               />
                   })
@@ -310,9 +332,9 @@ class AddProd extends Component {
                                 title="Music Director"
                                 sel={this.props.artists}
                                 editmode={this.state.editmode}
-                                item={(this.state.md_items) ? this.state.md_items[i] : null}
+                                item={(this.state.mds) ? this.state.mds[i] : null}
                                 addArtistCB={ this.props.addArtistCB }
-                                removeArtistCB={ this.props.removeArtistCB }
+                                removeArtistCB={ this.props.removeArtistProdCB }
                                 newArtist={ this.props.newArtist }
                               />
                   })

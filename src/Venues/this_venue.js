@@ -6,7 +6,7 @@ class This_Venue extends Component {
   render() {
     const v = this.props.ven;
     return (
-      <tr className="venue" id={v.id} >
+      <tr className="venue" id={v.venue_id} >
         <td className="label">Location:</td>
         <td>
           { v.venue_name}

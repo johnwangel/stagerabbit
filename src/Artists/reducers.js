@@ -1,6 +1,5 @@
  import {
-  SAVE_ARTIST,
-  REMOVE_ARTIST
+  SAVE_ARTIST
  } from './actions';
 
  import { makeArray } from '../constants/constants';
@@ -9,8 +8,6 @@ const ArtistsReducers = (state = { book: [], lyrics: [], music: [], pw: [], dir:
   switch (action.type){
     case SAVE_ARTIST:
       return save_artist(state,action);
-    case REMOVE_ARTIST:
-      return remove_artist(state,action);
     default:
       return state;
   }
@@ -51,33 +48,6 @@ function save_artist(state,action){
               md: md_all
             };
   }
-}
-
-function remove_artist(state,action){
-  const obj = Object.assign( {}, state );
-  const arr = state[action.payload.type];
-
-  let field;
-  switch (action.payload.assoc){
-    case ('show'):
-      field='sid';
-    case ('production'):
-      field='pid'
-  }
-
-  arr.forEach( (c,i,a) => {
-    if (c[field]===action.payload.assoc_id && c.artists.length>0){
-      c.artists.forEach( (c1,i1,a1) => {
-        if (c1.artist_id==action.payload.artist_id) {
-          c.artists.splice(i1,1);
-        }
-      });
-    }
-  });
-
-  obj[action.payload.type]=arr;
-  return obj;
-
 }
 
 export default ArtistsReducers;

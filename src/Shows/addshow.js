@@ -16,13 +16,9 @@ class AddShow extends Component {
       editmode: (c) ? true : false,
       formTitle: (c) ? 'Update Show' : 'Add Show',
       bookChildren: (c && c.book && c.book.length>0) ? c.book.length : 1,
-      book_items: (c && c.book && c.book.length>0) ? c.book : null,
       musicChildren: (c && c.music && c.music.length>0) ? c.music.length : 1,
-      music_items: (c && c.music && c.music.length>0) ? c.music : null,
       lyricsChildren: (c && c.lyrics && c.lyrics.length>0) ? c.lyrics.length : 1,
-      lyrics_items: (c && c.lyrics && c.lyrics.length>0) ? c.lyrics : null,
       pwChildren:  (c && c.pw && c.pw.length>0) ? c.pw.length : 1,
-      pw_items: (c && c.pw && c.pw.length>0) ? c.pw : null,
       show_title: (c) ? this.props.production.title : '',
       musical: (c && this.props.production.genre_id<5) ? true : false,
       play: (c && this.props.production.genre_id>=5) ? true : false,
@@ -86,9 +82,12 @@ class AddShow extends Component {
   }
 
   render() {
+
+    let c=this.props.creatives;
+
     return (<div className='overlay' style={{height: this.state.height + 'px'}}>
-            <div class="overlay-container" style={{marginTop: this.state.scroll + 'px'}}>
-              <div class="close" onClick={() => { this.props.show_form() }} >&times;</div>
+            <div className="overlay-container" style={{marginTop: this.state.scroll + 'px'}}>
+              <div className="close" onClick={() => { this.props.show_form() }} >&times;</div>
               <h2 className='form-title'>{this.state.formTitle}</h2>
               <form id="form-1" onSubmit={this.handleSubmit}>
                     { ( this.state.showtitle )
@@ -156,10 +155,10 @@ class AddShow extends Component {
                                           assoc="show"
                                           type="book"
                                           title="Bookwriter"
-                                          item={(this.state.book_items) ? this.state.book_items[i] : null}
+                                          item={(c.book) ? c.book[i] : null}
                                           sel={this.props.artists}
                                           addArtistCB={ this.props.addArtistCB }
-                                          removeArtistCB={ this.props.removeArtistCB }
+                                          removeArtistCB={ this.props.removeArtistShowCB }
                                           newArtist={ this.props.newArtist }
                                         />
                               })
@@ -183,10 +182,10 @@ class AddShow extends Component {
                                             assoc="show"
                                             type="music"
                                             title="Composer"
-                                            item={(this.state.music_items) ? this.state.music_items[i] : null}
+                                            item={(c.music.length) ? c.music[i] : null}
                                             sel={this.props.artists}
                                             addArtistCB={ this.props.addArtistCB }
-                                            removeArtistCB={ this.props.removeArtistCB }
+                                            removeArtistCB={ this.props.removeArtistShowCB }
                                             newArtist={ this.props.newArtist }
                                         />
                               })
@@ -210,10 +209,10 @@ class AddShow extends Component {
                                               assoc="show"
                                               type="lyrics"
                                               title="Lyricist"
-                                              item={(this.state.lyrics_items) ? this.state.lyrics_items[i] : null}
+                                              item={(c.lyrics) ? c.lyrics[i] : null}
                                               sel={this.props.artists}
                                               addArtistCB={ this.props.addArtistCB }
-                                              removeArtistCB={ this.props.removeArtistCB }
+                                              removeArtistCB={ this.props.removeArtistShowCB }
                                               newArtist={ this.props.newArtist }
                                           />
                               })
@@ -242,10 +241,10 @@ class AddShow extends Component {
                                             assoc="show"
                                             type="pw"
                                             title="Playwright"
-                                            item={(this.state.pw_items) ? this.state.pw_items[i] : null}
+                                            item={(c.pw) ? c.pw[i] : null}
                                             sel={this.props.artists}
                                             addArtistCB={ this.props.addArtistCB }
-                                            removeArtistCB={ this.props.removeArtistCB }
+                                            removeArtistCB={ this.props.removeArtistShowCB }
                                             newArtist={ this.props.newArtist }
                                         />
                             })

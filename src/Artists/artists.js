@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 
-class Artists extends Component {
+import SanitizedHTML from 'react-sanitized-html';
 
+class Artists extends Component {
   render() {
     return (
       <tr key={ this.props.type }>
@@ -9,19 +10,16 @@ class Artists extends Component {
         <td>
           { this.props.artists.map( (item, idx) => {
                   return (
-                    <span
+                    <div className="artist-name"
                         key={ `${this.props.type}-${item.artist_id}` }>
-                            {item.fname} {item.lname}{ (this.props.artists.length !== idx+1) ? ', '  : ''  }
-                    </span>
+                          <SanitizedHTML html={item.fname} /><SanitizedHTML html={item.lname} />{ (this.props.artists.length !== idx+1) ? <SanitizedHTML html=',&nbsp;' />  : ''  }
+                    </div>
                   )
               })
           }
           </td>
       </tr>
     )
-
   }
-
 }
-
 export default Artists;

@@ -6,10 +6,11 @@ export const UPDATE_PRODS = 'UPDATE_PRODS';
 export const NEW_PROD = 'NEW_PROD';
 export const EDIT_PROD = 'EDIT_PROD';
 export const PROD_BY_SHOW = 'PROD_BY_SHOW';
+export const REMOVE_ARTIST_FROM_PROD = 'REMOVE_ARTIST_FROM_PROD';
 
 export function updateProds ( theaterid ){
   return dispatch => {
-    fetch(`${URL}?type=productions&id=${theaterid}`, GET_HEADER)
+    fetch(`${URL}productions/byCompany/?id=${theaterid}`, GET_HEADER)
     .then(response => response.json())
     .then(data => dispatch(ProductionsSuccess(data.data)))
     .catch( err => console.log(err.message));
@@ -61,5 +62,22 @@ export function prodsByShow(id){
 }
 const prods_by_show = data => ({
   type : PROD_BY_SHOW,
+  payload : data
+});
+
+
+export function removeArtistFromProd ( body ){
+  body.fromWhere='prod';
+  GET_POST_HEADER.body= JSON.stringify(body);
+  return dispatch => {
+    fetch(`${URL}artists/remove_artist`, GET_POST_HEADER )
+    .then(response => response.json())
+    .then(data => dispatch( RemoveArtistFromProd( data.data ) ) )
+    .catch( err => console.log(err.message));
+  };
+}
+
+const RemoveArtistFromProd = ( data ) => ({
+  type : REMOVE_ARTIST_FROM_PROD,
   payload : data
 });
