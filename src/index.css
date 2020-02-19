@@ -602,11 +602,7 @@ h3.sub-column {
       margin: 0 25px 25px; }
   .productions .cast {
     border-top: 1px solid indigo;
-<<<<<<< HEAD
-    margin: 0 20px 35px; }
-=======
     margin: 0 20px 60px; }
->>>>>>> 310e6874980fc8f4366b44c9f080320747a689a3
     .productions .cast .title {
       text-align: center;
       font-family: "Libre Baskerville", serif;
