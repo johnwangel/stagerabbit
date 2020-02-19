@@ -83,7 +83,7 @@ class AddShow extends Component {
 
   render() {
 
-    let c=this.props.creatives;
+    let c = (this.props.creatives) ? this.props.creatvies : null;
 
     return (<div className='overlay' style={{height: this.state.height + 'px'}}>
             <div className="overlay-container" style={{marginTop: this.state.scroll + 'px'}}>
@@ -155,7 +155,7 @@ class AddShow extends Component {
                                           assoc="show"
                                           type="book"
                                           title="Bookwriter"
-                                          item={(c.book && c.book.length) ? c.book[i] : null}
+                                          item={(c && c.book && c.book.length) ? c.book[i] : null}
                                           sel={this.props.artists}
                                           addArtistCB={ this.props.addArtistCB }
                                           removeArtistCB={ this.props.removeArtistShowCB }
@@ -182,7 +182,7 @@ class AddShow extends Component {
                                             assoc="show"
                                             type="music"
                                             title="Composer"
-                                            item={(c.music && c.music.length) ? c.music[i] : null}
+                                            item={(c && c.music && c.music.length) ? c.music[i] : null}
                                             sel={this.props.artists}
                                             addArtistCB={ this.props.addArtistCB }
                                             removeArtistCB={ this.props.removeArtistShowCB }
@@ -209,7 +209,7 @@ class AddShow extends Component {
                                               assoc="show"
                                               type="lyrics"
                                               title="Lyricist"
-                                              item={(c.lyrics && c.lyrics.length) ? c.lyrics[i] : null}
+                                              item={(c && c.lyrics && c.lyrics.length) ? c.lyrics[i] : null}
                                               sel={this.props.artists}
                                               addArtistCB={ this.props.addArtistCB }
                                               removeArtistCB={ this.props.removeArtistShowCB }
@@ -241,7 +241,7 @@ class AddShow extends Component {
                                             assoc="show"
                                             type="pw"
                                             title="Playwright"
-                                            item={(c.pw && c.pw.length) ? c.pw[i] : null}
+                                            item={(c && c.pw && c.pw.length) ? c.pw[i] : null}
                                             sel={this.props.artists}
                                             addArtistCB={ this.props.addArtistCB }
                                             removeArtistCB={ this.props.removeArtistShowCB }
