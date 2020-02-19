@@ -58,7 +58,7 @@ class Theater extends Component {
                 </div>
 
                 { (this.props.theater.specialty)
-                  ? <div className="specialty"><span className="runin">Specialty:</span>{this.props.theater.specialty}</div>
+                  ? <div className="specialty">{this.props.theater.specialty}</div>
                   : null
                 }
 
@@ -121,7 +121,7 @@ class Theater extends Component {
                 <div><a href={this.props.theater.website} target='_blank' className='website'>{this.props.theater.website}</a></div>
               </div>
                 { (this.props.theater.specialty)
-                  ? <div className="specialty"><span className="runin">Specialty:</span>{this.props.theater.specialty}</div>
+                  ? <div className="specialty">{this.props.theater.specialty}</div>
                   : null
                 }
             </div>

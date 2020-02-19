@@ -98,13 +98,14 @@ h3.sub-column {
     }
 
     .specialty {
-      width: 50%;
-      border-top: 1px solid $main;
-      border-bottom: 1px solid $main;
+      width: 75%;
+      color: $main;
+      background-color: $altrow;
+      border: 1px solid $main;
       font-size: 1.5em;
       padding: 10px 0;
-      margin: 20px 0 30px;
-      text-align:center;
+      margin: 40px 0;
+      text-align: center;
     }
 
   }

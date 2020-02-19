@@ -481,12 +481,13 @@ h3.sub-column {
       font-size: 2em;
       color: indigo; }
     .theaters .theater_info .specialty {
-      width: 50%;
-      border-top: 1px solid indigo;
-      border-bottom: 1px solid indigo;
+      width: 75%;
+      color: indigo;
+      background-color: #e7e1f1;
+      border: 1px solid indigo;
       font-size: 1.5em;
       padding: 10px 0;
-      margin: 20px 0 30px;
+      margin: 40px 0;
       text-align: center; }
   .theaters .theater-info-table {
     width: 100%;
