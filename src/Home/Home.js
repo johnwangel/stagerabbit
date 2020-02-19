@@ -220,7 +220,7 @@ class Home extends Component {
               }
             </div>
 
-            { ( this.props.SearchResults && this.props.SearchResults.results &&  this.props.SearchResults.results.theaters && this.props.SearchResults.results.theaters.length )
+            { ( this.props.SearchResults && this.props.SearchResults.results )
                 ? <h2 className="main-page main-column" ref={this.resultRef}>Results</h2>
                 : null
             }

@@ -9,15 +9,18 @@ import AddArtist from "../Productions/AddProduction/addArtist";
 class AddShow extends Component {
   constructor(props) {
     super(props);
-    var c;
-    (this.props.creatives) ? c=this.props.creatives : c=null;
+    var c=(this.props.creatives) ? this.props.creatives : null;
 
     this.state = {
       editmode: (c) ? true : false,
       formTitle: (c) ? 'Update Show' : 'Add Show',
+      book: (c && c.book && c.book.length) ? c.book : null,
       bookChildren: (c && c.book && c.book.length>0) ? c.book.length : 1,
+      music: (c && c.music && c.music.length>0) ? c.music : null,
       musicChildren: (c && c.music && c.music.length>0) ? c.music.length : 1,
+      lyrics: (c && c.lyrics && c.lyrics.length>0) ? c.lyrics : null,
       lyricsChildren: (c && c.lyrics && c.lyrics.length>0) ? c.lyrics.length : 1,
+      playwright: (c && c.pw && c.pw.length>0) ? c.pw : null,
       pwChildren:  (c && c.pw && c.pw.length>0) ? c.pw.length : 1,
       show_title: (c) ? this.props.production.title : '',
       musical: (c && this.props.production.genre_id<5) ? true : false,
@@ -155,7 +158,7 @@ class AddShow extends Component {
                                           assoc="show"
                                           type="book"
                                           title="Bookwriter"
-                                          item={(c && c.book && c.book.length) ? c.book[i] : null}
+                                          item={(this.state.book.length) ? this.state.book[i] : null}
                                           sel={this.props.artists}
                                           addArtistCB={ this.props.addArtistCB }
                                           removeArtistCB={ this.props.removeArtistShowCB }
@@ -182,7 +185,7 @@ class AddShow extends Component {
                                             assoc="show"
                                             type="music"
                                             title="Composer"
-                                            item={(c && c.music && c.music.length) ? c.music[i] : null}
+                                            item={(this.state.music.length) ? this.state.music[i] : null}
                                             sel={this.props.artists}
                                             addArtistCB={ this.props.addArtistCB }
                                             removeArtistCB={ this.props.removeArtistShowCB }
@@ -209,7 +212,7 @@ class AddShow extends Component {
                                               assoc="show"
                                               type="lyrics"
                                               title="Lyricist"
-                                              item={(c && c.lyrics && c.lyrics.length) ? c.lyrics[i] : null}
+                                              item={(this.state.lyrics.length) ? this.state.lyrics[i] : null}
                                               sel={this.props.artists}
                                               addArtistCB={ this.props.addArtistCB }
                                               removeArtistCB={ this.props.removeArtistShowCB }
@@ -241,7 +244,7 @@ class AddShow extends Component {
                                             assoc="show"
                                             type="pw"
                                             title="Playwright"
-                                            item={(c && c.pw && c.pw.length) ? c.pw[i] : null}
+                                            item={(this.state.pw.length) ? this.state.pw[i] : null}
                                             sel={this.props.artists}
                                             addArtistCB={ this.props.addArtistCB }
                                             removeArtistCB={ this.props.removeArtistShowCB }
