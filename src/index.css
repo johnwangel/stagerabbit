@@ -419,6 +419,7 @@ body {
 .show-title {
   background-color: white; }
   .show-title div {
+    padding: 25px 0;
     text-align: center;
     font-size: 2em;
     font-weight: bold;

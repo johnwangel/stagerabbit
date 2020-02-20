@@ -26,7 +26,7 @@ class Results extends Component {
                               </td>
                             </tr>
                             <tr>
-                              <td></td>
+                              <td><div className='number_long'>{this.props.number}</div></td>
                               <td>{ (this.props.prod.length > 0)
                                     ? <div className="upcoming">
                                           <div className="next">Up Next:</div>
@@ -43,23 +43,36 @@ class Results extends Component {
                     }
 
                     { (this.props.type==='2')
-                      ? <span>
-                          <span className="theater_name">
-                            <Link className='website' to={`/theater/${this.props.item.id}`}><SanitizedHTML html={this.props.item.name}/></Link>{this.props.item.city}, {this.props.item.abbr}
-                          </span>
-                        </span>
+                      ? <table>
+                          <tbody>
+                            <tr>
+                              <td>
+                                <div className='number_long'>{this.props.number}</div>
+                              </td>
+                              <td>
+                                <Link className='website' to={`/theater/${this.props.item.id}`}><SanitizedHTML html={this.props.item.name}/></Link>{this.props.item.city}, {this.props.item.abbr}
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       : null
                     }
 
                     { (this.props.type==='3')
-                      ? <span>
-                          <span className="show_title">
-                            <Link className='website' to={`/prodsbyshow/${this.props.item.id}`}><SanitizedHTML html={this.props.item.title} /></Link>
-                          </span>
-                        </span>
+                      ? <table>
+                          <tbody>
+                            <tr>
+                              <td>
+                                <div className='number_long'>{this.props.number}</div>
+                              </td>
+                              <td>
+                                <Link className='website' to={`/prodsbyshow/${this.props.item.id}`}><SanitizedHTML html={this.props.item.title} /></Link>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                         : null
                     }
-
                   </div>
                 )
     }

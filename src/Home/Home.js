@@ -243,17 +243,21 @@ class Home extends Component {
                           : null
                       }
 
-                      { ( this.props.SearchResults && this.props.SearchResults.type === 2 && this.props.SearchResults.results &&  this.props.SearchResults.results.theaters && this.props.SearchResults.results.theaters.length )
-                          ? <ol>
-                              { this.props.SearchResults.results.theaters.map( (item, idx) => <Results key={`search-${idx}`} type='2' item={item} idx={idx} />) }
-                            </ol>
+                      { ( this.props.SearchResults &&
+                          this.props.SearchResults.type === 2 &&
+                          this.props.SearchResults.results &&
+                          this.props.SearchResults.results.theaters &&
+                          this.props.SearchResults.results.theaters.length )
+                          ? <div className="searchResults">
+                              { this.props.SearchResults.results.theaters.map( (item, idx) => <Results key={`search-${idx}`} number={idx+1} type='2' item={item} idx={idx} />) }
+                            </div>
                           : null
                       }
 
                       { ( this.props.SearchResults && this.props.SearchResults.results && this.props.SearchResults.type === 3 && this.props.SearchResults.results.theaters && this.props.SearchResults.results.theaters.length )
-                          ? <ol>
-                              { this.props.SearchResults.results.theaters.map( (item, idx) => <Results key={`search-${idx}`} type='3' item={item} idx={idx} />) }
-                            </ol>
+                          ? <div className="searchResults">
+                              { this.props.SearchResults.results.theaters.map( (item, idx) => <Results key={`search-${idx}`} number={idx+1} type='3' item={item} idx={idx} />) }
+                            </div>
                           : null
                       }
                   </div>
