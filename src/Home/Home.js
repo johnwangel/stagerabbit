@@ -238,7 +238,7 @@ class Home extends Component {
                         this.props.SearchResults.results.theaters &&
                         this.props.SearchResults.results.theaters.length )
                           ? <div className="searchResults">
-                              { this.props.SearchResults.results.theaters.map( (item, idx) => <Results key={`search-${idx}`} number={ (this.startPage>0) ? (((this.state.startPage-1)*25)+(idx+1)) : (idx+1) } type='1' item={item} idx={idx} prod={ this.props.SearchResults.results.prods.filter( t => t.length > 0 && t[0].theater_id == item.id ) }/> )}
+                              { this.props.SearchResults.results.theaters.map( (item, idx) => <Results key={`search-${idx}`} number={ (this.state.startPage>0) ? (((this.state.startPage-1)*25)+(idx+1)) : (idx+1) } type='1' item={item} idx={idx} prod={ this.props.SearchResults.results.prods.filter( t => t.length > 0 && t[0].theater_id == item.id ) }/> )}
                             </div>
                           : null
                       }
