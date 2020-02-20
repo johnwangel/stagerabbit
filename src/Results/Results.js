@@ -11,23 +11,35 @@ class Results extends Component {
   }
 
   render() {
-        return   ( <li className="search_result" key={this.props.idx} id={this.props.item.id}>
+        return   ( <div className="search_result" key={this.props.idx} id={this.props.item.id}>
 
                     { (this.props.type==='1')
-                      ? <span>
-                            <span className="theater_name">
-                              <Link className='website' to={`/theater/${this.props.item.id}`}>{this.props.item.name}</Link>
-                              {this.props.item.city}, {this.props.item.abbr} ({parseInt(this.props.item.distance)} miles)
-                            </span>
-                            { (this.props.prod.length > 0)
-                                ? <div className="upcoming"><span className="runin next">Next Production:</span>
-                                    <span className="prod"><SanitizedHTML html={ this.props.prod[0][0].title }/></span>
-                                    {moment.utc(this.props.prod[0][0].start_date).format('M-D')} to {moment.utc(this.props.prod[0][0].end_date).format('M-D')}
-                                  </div>
-                                : <div className="upcoming"><span className="noresults">No Upcoming Productions Available</span></div>
-                            }
-                          </span>
-                        : null
+                      ? <table>
+                          <tbody>
+                            <tr>
+                              <td>
+                                <div className='number_long'>{this.props.number}</div>
+                              </td>
+                              <td>
+                                <Link className='website' to={`/theater/${this.props.item.id}`}>{this.props.item.name}</Link>
+                                <div className="address">{this.props.item.city}, {this.props.item.abbr} ({parseInt(this.props.item.distance)} miles)</div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td></td>
+                              <td>{ (this.props.prod.length > 0)
+                                    ? <div className="upcoming">
+                                          <div className="next">Up Next:</div>
+                                          <div className="prod"><SanitizedHTML html={ this.props.prod[0][0].title }/></div>
+                                          <div className="dates">{moment.utc(this.props.prod[0][0].start_date).format('M-D')} to {moment.utc(this.props.prod[0][0].end_date).format('M-D')}</div>
+                                        </div>
+                                      : null
+                                    }
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      : null
                     }
 
                     { (this.props.type==='2')
@@ -48,7 +60,7 @@ class Results extends Component {
                         : null
                     }
 
-                  </li>
+                  </div>
                 )
     }
 

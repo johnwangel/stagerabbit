@@ -203,7 +203,8 @@ class Home extends Component {
               { ( this.state.searchType === '2')
                 ? <form onSubmit={this.handleSubmit}>
                     <input  type="text"
-                            id="theater" name="theater"
+                            id="theater"
+                            name="theater"
                             ref={this.theater}
                             placeholder="THEATER NAME"/>
                     <input className='form-button' id='st-2' type="submit" value="Go!" />
@@ -231,10 +232,14 @@ class Home extends Component {
                 this.props.SearchResults.results.theaters.length )
 
                 ? <div className='searchContent main-column'>
-                    { ( this.props.SearchResults && this.props.SearchResults.type === 1 && this.props.SearchResults.results && this.props.SearchResults.results.theaters && this.props.SearchResults.results.theaters.length )
-                          ? <ol start={ (this.startPage > 0 ) ? ((this.state.startPage - 1) * 25) + 1 : 1 }>
-                              { this.props.SearchResults.results.theaters.map( (item, idx) => <Results key={`search-${idx}`} type='1' item={item} idx={idx} prod={ this.props.SearchResults.results.prods.filter( t => t.length > 0 && t[0].theater_id == item.id ) }/>) }
-                            </ol>
+                    { ( this.props.SearchResults &&
+                        this.props.SearchResults.type === 1 &&
+                        this.props.SearchResults.results &&
+                        this.props.SearchResults.results.theaters &&
+                        this.props.SearchResults.results.theaters.length )
+                          ? <div className="searchResults">
+                              { this.props.SearchResults.results.theaters.map( (item, idx) => <Results key={`search-${idx}`} number={ (this.startPage>0) ? (((this.state.startPage-1)*25)+(idx+1)) : (idx+1) } type='1' item={item} idx={idx} prod={ this.props.SearchResults.results.prods.filter( t => t.length > 0 && t[0].theater_id == item.id ) }/> )}
+                            </div>
                           : null
                       }
 

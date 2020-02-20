@@ -56,10 +56,36 @@
 
 }
 
+.searchContent {
+  width: 100%;
+  padding: 50px;
+  .searchResults {
+    width:100%;
+  }
+
+}
+
 .search_result {
+  width: 100%;
   margin: 25px 10px 10px;
   font-size: 1.2em;
   text-align: left;
+
+
+
+  .number_long {
+    font-size: 2em;
+    font-weight: bold;
+    min-width: 50px;
+    color: $main;
+    margin-top: 0;
+  }
+
+  .theater_address {
+    margin-left: 65px;
+  }
+
+
 }
 
 .upcoming {
@@ -75,18 +101,24 @@
   }
 }
 
-.runin.next {
-  font-size: 1.1em;
+.next {
+  font-size: 1em;
   font-weight: bold;
-  color: red;
+  color: $main;
+  text-transform: uppercase;
+}
+
+.prod {
+  font-size: 1em;
+  //text-transform: uppercase;
+  color: $accent;
 }
 
 .noresults {
-  font-size: .5em;
+  font-size: 1em;
 }
 
 .pagination {
-
   display: flex;
   flex-direction: row;
   justify-content: center;

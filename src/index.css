@@ -306,10 +306,25 @@ body {
   .searchContent.main-column input[type='text'] {
     background-color: #EEE; }
 
+.searchContent {
+  width: 100%;
+  padding: 50px; }
+  .searchContent .searchResults {
+    width: 100%; }
+
 .search_result {
+  width: 100%;
   margin: 25px 10px 10px;
   font-size: 1.2em;
   text-align: left; }
+  .search_result .number_long {
+    font-size: 2em;
+    font-weight: bold;
+    min-width: 50px;
+    color: indigo;
+    margin-top: 0; }
+  .search_result .theater_address {
+    margin-left: 65px; }
 
 .upcoming {
   margin: 5px 0 20px 20px;
@@ -321,13 +336,18 @@ body {
     font-style: italic;
     font-size: .9em; }
 
-.runin.next {
-  font-size: 1.1em;
+.next {
+  font-size: 1em;
   font-weight: bold;
-  color: red; }
+  color: indigo;
+  text-transform: uppercase; }
+
+.prod {
+  font-size: 1em;
+  color: darkorchid; }
 
 .noresults {
-  font-size: .5em; }
+  font-size: 1em; }
 
 .pagination {
   display: flex;
@@ -555,7 +575,9 @@ h3.sub-column {
   background-color: white; }
   .productions .empty {
     width: 100%;
-    text-align: center; }
+    text-align: center;
+    padding: 100px 0;
+    background-color: #e7e1f1; }
   .productions.hide {
     display: none; }
   .productions .production {
