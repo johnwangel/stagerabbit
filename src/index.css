@@ -307,27 +307,29 @@ body {
     background-color: #EEE; }
 
 .searchContent {
-  width: 100%;
-  padding: 50px; }
+  width: 100%; }
   .searchContent .searchResults {
     width: 100%; }
 
 .search_result {
   width: 100%;
-  margin: 25px 10px 10px;
+  padding: 25px 0;
   font-size: 1.2em;
-  text-align: left; }
+  text-align: left;
+  background-color: #e7e1f1; }
+  .search_result:nth-child(even) {
+    background-color: #F5F5F5; }
   .search_result .number_long {
     font-size: 2em;
     font-weight: bold;
-    min-width: 50px;
+    min-width: 75px;
     color: indigo;
-    margin-top: 0; }
+    text-align: center; }
   .search_result .theater_address {
     margin-left: 65px; }
 
 .upcoming {
-  margin: 5px 0 20px 20px;
+  margin-top: 15px;
   font-size: .9em; }
   .upcoming .runin {
     font-size: .9em; }
@@ -337,13 +339,13 @@ body {
     font-size: .9em; }
 
 .next {
-  font-size: 1em;
+  font-size: .8em;
   font-weight: bold;
   color: indigo;
   text-transform: uppercase; }
 
 .prod {
-  font-size: 1em;
+  font-size: 1.2em;
   color: darkorchid; }
 
 .noresults {
