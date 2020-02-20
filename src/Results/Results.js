@@ -26,7 +26,7 @@ class Results extends Component {
                               </td>
                             </tr>
                             <tr>
-                              <td><div className='number_long'>{this.props.number}</div></td>
+                              <td></td>
                               <td>{ (this.props.prod.length > 0)
                                     ? <div className="upcoming">
                                           <div className="next">Up Next:</div>

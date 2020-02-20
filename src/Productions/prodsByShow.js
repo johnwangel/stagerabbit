@@ -80,7 +80,7 @@ class ProdByShow extends Component {
                           })
                       }
                   </div>
-                : null
+                : <div className="noresults">No upcoming productions found.</div>
                 }
                 { ( this.props.Prods && this.props.Prods.previous && this.props.Prods.previous.length>0)
                   ? <div className={ (this.state.show_prods===1) ? 'searchContent main-column' : 'searchContent main-column hide' } >
@@ -108,7 +108,7 @@ class ProdByShow extends Component {
                           })
                         }
                     </div>
-                  : null
+                  : <div className="noresults">No previous productions found.</div>
                 }
                 { ( this.props.Prods && this.props.Prods.upcoming && this.props.Prods.upcoming.length===0 && this.props.Prods.previous && this.props.Prods.previous.length===0 )
                   ? <div className="noresults">No productions found.</div>
