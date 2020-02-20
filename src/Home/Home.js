@@ -261,7 +261,7 @@ class Home extends Component {
                       { ( this.props.SearchResults &&
                           this.props.SearchResults.results &&
                           this.props.SearchResults.type === 0 )
-                        ? <div className='error'>No results</div>
+                        ? <div className='noresults'>No results</div>
                         : null
                       }
                     </div>
