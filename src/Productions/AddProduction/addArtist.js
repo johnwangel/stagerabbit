@@ -26,10 +26,12 @@ class AddArtist extends Component {
     this.inputname = this.inputname.bind(this);
     this.selectname = this.selectname.bind(this);
     this.removeArtist = this.removeArtist.bind(this);
+    this.findArtist = this.findArtist.bind(this);
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.newArtist && !prevProps.newArtist && this.props.newArtist.aid === this.state.itemid ){
+    if (this.props.newArtist && this.props.newArtist !== prevProps.newArtist &&
+        this.props.newArtist.aid === this.state.itemid ){
       this.setState( { defaultvalue: `${this.props.newArtist.nid}` } );
     }
   }
@@ -60,6 +62,18 @@ class AddArtist extends Component {
                 editmode : this.props.editmode,
                 artist_id: this.state.defaultvalue
               };
+
+    let existing_artist=this.findArtist(data)
+    if(existing_artist) {
+      this.setState({
+                      defaultvalue: existing_artist,
+                      show_field : false,
+                      show_select : true,
+                      error: null
+                    });
+      return;
+    }
+
     this.props.addArtistCB( data );
     this.setState({ show_field : false, show_select : true, error: null });
   }
@@ -78,7 +92,6 @@ class AddArtist extends Component {
                     artist_id : this.state.defaultvalue,
                     type : this.props.type
                   };
-
     if (this.props.pid){
       data.assoc='production';
       data.assoc_id=this.props.pid.production_id;
@@ -91,7 +104,18 @@ class AddArtist extends Component {
 
   }
 
+  findArtist(data){
+    let all=this.props.sel;
+    let val=null;
+    all.forEach( item => {
+      if (item.props.children[2]===data.fname && item.props.children[0]===data.lname) val=item.props.value
+    });
+    return val;
+  }
+
   render() {
+    //console.log('props in add artist',this.props.sel)
+
     return ( <div className="subform-wrapper">
               { (this.state.show_select)
                ? <div id={this.state.itemid} className="form-group">

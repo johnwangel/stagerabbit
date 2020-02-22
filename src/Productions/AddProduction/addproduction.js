@@ -23,8 +23,6 @@ class AddProd extends Component {
     var a = (p && p.artists) ? p.artists : null;
     var sd=new Date(), ed=new Date();
 
-    console.log('artists in const',a);
-
     if(p && p.start_date) {
       sd = parseISO(Moment.utc(p.start_date).format('YYYY-MM-DD'));
       ed = parseISO(Moment.utc(p.end_date).format('YYYY-MM-DD'));
@@ -135,28 +133,6 @@ class AddProd extends Component {
         return;
     }
   }
-
-  // removeItem(data){
-  //   let items,count;
-  //   switch (data.type){
-  //     case 'dir':
-  //         items=[ ...this.state.directors].splice(data.number,1);
-  //         count=(this.state.dirChildren===1) ? 1 : this.state.dirChildren-1;
-  //         this.setState( { directors: items, dirChildren: count  } );
-  //       break;
-  //     case 'chor':
-  //         items=[...this.state.choreographers].splice(data.number,1);
-  //         count=(this.state.chorChildren===1) ? 1 : this.state.dirChildren-1;
-  //         this.setState( { choreographers: items, chorChildren: count  } );
-  //       break;
-  //     case 'md':
-  //         items=[...this.state.mds].splice(data.number,1);
-  //         count=(this.state.mdChildren===1) ? 1 : this.state.dirChildren-1;
-  //         this.setState( { mds: items, mdChildren: count } );
-  //       break;
-  //   }
-  //   this.forceUpdate();
-  // }
 
   onDropdownSelected( e ) {
     this.setState({ [e.target.name] : e.target.value } );
