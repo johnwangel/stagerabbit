@@ -21,7 +21,7 @@ const bg = {
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state={
+    this.state={  selectedOption: 'location',
                   searchType: '1',
                   pages: 0,
                   startPage: 0,
@@ -39,6 +39,7 @@ class Home extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.newlist1 = this.newlist1.bind(this);
     this.newlist2 = this.newlist2.bind(this);
+    this.handleOptionChange = this.handleOptionChange.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -70,6 +71,12 @@ class Home extends Component {
     body.startAt=this.state.startPage;
     this.setState({search:body});
     this.props.search(body);
+  }
+
+  handleOptionChange(e) {
+    this.setState({
+      selectedOption: e.target.value
+    });
   }
 
   handleSubmit(e){
@@ -144,20 +151,36 @@ class Home extends Component {
 
             <div className='searchContent main-column'>
               <form ref={this.errorRef}>
-                <div className='form-group'>
-                  <div className="search-label">Select Search Type:</div>
-                  <select
-                    className="form-select wide"
-                    id="searchType"
-                    type="searchType"
-                    name="searchType"
-                    value={ this.state.searchType }
-                    onChange={ this.handleChange }>
-                      <option key='search-1' value='1'>Search by Location</option>
-                      <option key='search-2' value='2'>Search by Theater Company</option>
-                      <option key='search-3' value='3'>Search by Show</option>
-                  </select>
-                </div>
+                    <div className='form-group radio'>
+                      <div className="search-label">Select Search Type:</div>
+                        <div className="radio-group">
+                        <span className="radio-label">Location</span>
+                        <input  type="radio"
+                                id="acct-gen"
+                                name='search_type'
+                                checked={ this.state.selectedOption === 'location' }
+                                value='location'
+                                onChange={this.handleOptionChange} />
+                        </div>
+                        <div className="radio-group">
+                          <span className="radio-label">Theater Company</span>
+                          <input  type="radio"
+                                id="acct-admin"
+                                name="search_type"
+                                value='company'
+                                checked= { this.state.selectedOption === 'company' }
+                                onChange={this.handleOptionChange} />
+                        </div>
+                        <div className="radio-group">
+                          <span className="radio-label">Show</span>
+                          <input  type="radio"
+                                id="acct-admin"
+                                name="search_type"
+                                value='show'
+                                checked= { this.state.selectedOption === 'show' }
+                                onChange={this.handleOptionChange} />
+                        </div>
+                      </div>
               </form>
 
               { (this.state.error)
@@ -165,7 +188,7 @@ class Home extends Component {
                 : null
               }
 
-              { ( this.state.searchType === '1')
+              { ( this.state.selectedOption === 'location')
                 ? <form onSubmit={this.handleSubmit}>
                         <div className='form-group'>
                           <div className="search-label">Find shows within:</div>
@@ -200,7 +223,7 @@ class Home extends Component {
                 : null
               }
 
-              { ( this.state.searchType === '2')
+              { ( this.state.selectedOption === 'company')
                 ? <form onSubmit={this.handleSubmit}>
                     <input  type="text"
                             id="theater"
@@ -212,7 +235,7 @@ class Home extends Component {
                 : null
               }
 
-              { ( this.state.searchType === '3')
+              { ( this.state.selectedOption === 'show')
                 ? <form onSubmit={this.handleSubmit}>
                     <input type="text" id="show" name="show" ref={this.show} placeholder="SHOW TITLE"/>
                     <input className='form-button' id='st-3' type="submit" value="Go!"/>
