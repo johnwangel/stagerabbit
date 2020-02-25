@@ -245,7 +245,7 @@ class AddShow extends Component {
                                             assoc="show"
                                             type="pw"
                                             title="Playwright"
-                                            item={(this.state.pw && this.state.pw.length) ? this.state.pw[i] : null}
+                                            item={(this.state.playwright && this.state.playwright.length) ? this.state.playwright[i] : null}
                                             sel={this.props.artists}
                                             addArtistCB={ this.props.addArtistCB }
                                             removeArtistCB={ this.props.removeArtistShowCB }
