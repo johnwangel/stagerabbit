@@ -85,10 +85,6 @@ class AddShow extends Component {
   }
 
   render() {
-
-    console.log(this.state);
-    //let c = (this.props.creatives) ? this.props.creatvives : null;
-
     return (<div className='overlay' style={{height: this.state.height + 'px'}}>
             <div className="overlay-container" style={{marginTop: this.state.scroll + 'px'}}>
               <div className="close" onClick={() => { this.props.show_form() }} >&times;</div>

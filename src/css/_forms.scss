@@ -70,6 +70,15 @@ h4.form-title {
   align-items: flex-start;
   margin-bottom: 5px;
 
+  &.subform {
+    background-color: $altrow;
+    padding: 10px 2px;
+    border-radius: 5px;
+    .label {
+      color: $main;
+    }
+  }
+
   &.radio {
     width: 100%;
     flex-direction: row;

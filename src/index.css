@@ -832,6 +832,12 @@ h4.form-title {
   justify-content: flex-start;
   align-items: flex-start;
   margin-bottom: 5px; }
+  .form-group.subform {
+    background-color: #e7e1f1;
+    padding: 10px 2px;
+    border-radius: 5px; }
+    .form-group.subform .label {
+      color: indigo; }
   .form-group.radio {
     width: 100%;
     flex-direction: row;

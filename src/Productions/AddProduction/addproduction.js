@@ -6,6 +6,9 @@ import parseISO from 'date-fns/parseISO'
 import { process_submit } from '../../constants/constants';
 import { getPosition } from '../../constants/helpers';
 import { updateProds } from '../actions';
+
+import { newShow} from '../../Shows/actions';
+
 import "react-datepicker/dist/react-datepicker.css";
 
 import AddArtist from "./addArtist";
@@ -17,6 +20,7 @@ class AddProd extends Component {
     super(props);
 
     const errRef=createRef();
+    const errRef2=createRef();
 
     var c = (this.props.specs) ? this.props.specs : null;
     var p = (this.props.production) ? this.props.production : null;
@@ -31,6 +35,8 @@ class AddProd extends Component {
     this.state = {
       pid: (p && p.production_id) ? p.production_id : null,
       editmode: (c) ? true : false,
+      show_title: '',
+      genre: 0,
       formTitle: (c) ? 'Update Production' : 'Add Production',
       start : sd,
       end:  ed,
@@ -52,7 +58,9 @@ class AddProd extends Component {
       expand_cast: false,
       expand_dir: false,
       expand_chor: false,
-      expand_md: false
+      expand_md: false,
+      input_show: false,
+      new_show_error: null
     };
 
     this.handleNew = this.handleNew.bind(this);
@@ -60,9 +68,19 @@ class AddProd extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleStartDateChange = this.handleStartDateChange.bind(this);
     this.handleEndDateChange = this.handleEndDateChange.bind(this);
-    this.handleExpand = this.handleExpand.bind(this)
+    this.handleExpand = this.handleExpand.bind(this);
     this.onDropdownSelected = this.onDropdownSelected.bind(this);
     this.scrollToMyRef = this.scrollToMyRef.bind(this);
+    this.inputshow = this.inputshow.bind(this);
+    this.submitshow = this.submitshow.bind(this);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.Shows &&
+        this.props.Shows.new_show &&
+        this.props.Shows.new_show !== prevProps.Shows.new_show ){
+      this.setState( { show_id: `${ this.props.Shows.new_show.id }` } );
+    }
   }
 
   componentDidMount() {
@@ -112,6 +130,27 @@ class AddProd extends Component {
     this.setState({ end : date } );
   }
 
+  inputshow() {
+    this.setState({ input_show : !this.state.input_show } );
+  }
+
+  submitshow(){
+    var new_show_error='';
+    if (this.state.show_title==='') new_show_error+='<li>You must provide a title.</li>';
+    if (this.state.genre==='0') new_show_error+='<li>You must provide a genre.</li>';
+    if ( new_show_error !== '' ){
+      new_show_error='<h4>Errors</h4><ol>'+new_show_error+'</ol>';
+      this.setState({ new_show_error });
+      this.errorRef.current.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      return;
+    }
+    this.props.newShow({ show_title_1: this.state.show_title, genre_1: this.state.genre  });
+    this.setState( { input_show: !this.state.input_show } );
+  }
+
   handleExpand(id){
     switch (id){
       case 1:
@@ -139,6 +178,9 @@ class AddProd extends Component {
   }
 
   render() {
+
+    //console.log('props in add prod',this.props);
+
     return (
       <div ref={ this.errRef } className='overlay' style={{height: this.state.height + 'px'}}>
         <div className="overlay-container" style={{marginTop: this.state.scroll + 'px'}}>
@@ -163,21 +205,74 @@ class AddProd extends Component {
                   </div>
                 : null
               }
-            <div className='form-group'>
+            <div className='form-group' ref={ this.errRef2 }>
               <div className="label">Show Title:</div>
               { (this.state.show_error)
                 ? <div className='error'>You must select a show.</div>
                 : null
               }
-              <select
-                    className="form-select wide"
-                    id="show_select"
-                    type="select"
-                    name="show_id"
-                    value={this.state.show_id}
-                    onChange={this.onDropdownSelected}>
-                {this.props.Shows.shows}
-              </select>
+
+              { (this.state.input_show)
+                ? <div className='form-group subform'>
+                        { (this.state.new_show_error)
+                            ? <div className='error'>{ this.state.new_show_error }</div>
+                            : null
+                        }
+                        <input
+                          key="show-title-1"
+                          id="show_title_1"
+                          type="text"
+                          name="show_title"
+                          placeholder='Show Title'
+                          value={this.state.show_title}
+                          onChange={this.handleChange}
+                          required />
+                        <div className="label">Genre:</div>
+                        <select
+                              className="form-select wide"
+                              id="genre_1"
+                              key="genre-1"
+                              type="select"
+                              name="genre"
+                              value={this.state.genre_1}
+                              onChange={this.onDropdownSelected}
+                              required >
+                          <option key="genre-0" value="0">Select one...</option>
+                          <option key="genre-1" value="2">musical, comedy</option>
+                          <option key="genre-2" value="3">musical, drama</option>
+                          <option key="genre-3" value="4">musical, revue</option>
+                          <option key="genre-4" value="5">play, comedy</option>
+                          <option key="genre-5" value="6">play, drama</option>
+                        </select>
+                        <div className='edit_buttons'>
+                          <span className="form-button-2"
+                                onClick={() => { this.inputshow() }}>
+                            Back to Select
+                          </span>
+                          <span className="form-button-2"
+                                onClick={() => { this.submitshow() }}>
+                            Submit Show
+                          </span>
+                        </div>
+                  </div>
+                : <div>
+                    <select
+                          className="form-select wide"
+                          id="show_select"
+                          type="select"
+                          name="show_id"
+                          value={this.state.show_id}
+                          onChange={this.onDropdownSelected}>
+                      {this.props.Shows.shows}
+                    </select>
+                    <div className='edit_buttons'>
+                      <span className="form-button-2"
+                            onClick={() => { this.inputshow() }}>
+                        Create a New Show
+                      </span>
+                    </div>
+                  </div>
+              }
             </div>
             <div className='form-group'>
               <div className="label">Start Date:</div>
@@ -345,6 +440,9 @@ const mapDispatchToProps = dispatch => {
   return {
     updateProds: theaterid => {
       dispatch( updateProds(theaterid) )
+    },
+    newShow: body => {
+      dispatch( newShow(body) )
     }
   }
 }

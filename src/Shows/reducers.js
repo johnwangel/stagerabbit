@@ -10,7 +10,7 @@
  } from './actions';
  import { makeArray } from '../constants/constants';
 
-const ShowsReducers = (state = { shows: [], artists: [],  new_artist: null, removed_artist: null }, action) => {
+const ShowsReducers = (state = { shows: [], artists: [],  new_show: null, new_artist: null, removed_artist: null }, action) => {
   switch (action.type){
     case ALL_SHOWS:
       return allShows(state,action);
@@ -30,23 +30,48 @@ const ShowsReducers = (state = { shows: [], artists: [],  new_artist: null, remo
 }
 
 function allShows(state,action){
-  return { shows: do_shows(action.payload), artists: state.artists, new_artist: null, removed_artist: null };
+  return {  shows: do_shows(action.payload),
+            artists: state.artists,
+            new_artist: null,
+            removed_artist: null,
+            new_show: null
+          };
 }
 
 function allArtists(state,action){
-  return { shows: state.shows, artists: do_artists(action.payload), new_artist: null, removed_artist: null  };
+  return {  shows: state.shows,
+            artists: do_artists(action.payload),
+            new_artist: null,
+            removed_artist: null,
+            new_show: null
+          };
 }
 
 function showAdded(state,action){
-  return { shows: do_shows(action.payload.shows), artists: do_artists(action.payload.artists), new_artist: null, removed_artist: null  };
+  return {  shows: do_shows(action.payload.shows),
+            artists: do_artists(action.payload.artists),
+            new_artist: null,
+            removed_artist: null,
+            new_show: action.payload.new_show
+          };
 }
 
 function artistAdded(state,action){
-  return { shows: state.shows, artists: do_artists(action.payload.artists), new_artist: action.payload.new_artist, removed_artist: null  };
+  return {  shows: state.shows,
+            artists: do_artists(action.payload.artists),
+            new_artist: action.payload.new_artist,
+            removed_artist: null,
+            new_show: null
+          };
 }
 
 function removeArtist(state,action){
-  return { shows: state.shows, artists: do_artists(action.payload.data.artists), new_artist: null, removed_artist: action.payload.data.artists.body.artist_id  };
+  return {  shows: state.shows,
+            artists: do_artists(action.payload.data.artists),
+            new_artist: null,
+            removed_artist: action.payload.data.artists.body.artist_id,
+            new_show: null
+          };
 }
 
 function do_artists(artists){

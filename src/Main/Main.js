@@ -119,7 +119,8 @@ class Main extends Component {
     }
 
     if (prevProps.location.pathname !== this.props.location.pathname){
-      this.update_theater_details(this.props.match.params.id);
+      this.setState( { current_id: this.props.match.params.id } );
+      //this.update_theater_details(this.props.match.params.id);
     }
 
   }

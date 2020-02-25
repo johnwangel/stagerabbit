@@ -154,7 +154,7 @@ class Home extends Component {
                     value={ this.state.searchType }
                     onChange={ this.handleChange }>
                       <option key='search-1' value='1'>Search by Location</option>
-                      <option key='search-2' value='2'>Search by Theater</option>
+                      <option key='search-2' value='2'>Search by Theater Company</option>
                       <option key='search-3' value='3'>Search by Show</option>
                   </select>
                 </div>
@@ -206,7 +206,7 @@ class Home extends Component {
                             id="theater"
                             name="theater"
                             ref={this.theater}
-                            placeholder="THEATER NAME"/>
+                            placeholder="THEATER COMPANY NAME"/>
                     <input className='form-button' id='st-2' type="submit" value="Go!" />
                   </form>
                 : null
