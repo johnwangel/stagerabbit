@@ -152,34 +152,39 @@ class Home extends Component {
             <div className='searchContent main-column'>
               <form ref={this.errorRef}>
                     <div className='form-group radio'>
+
                       <div className="search-label">Select Search Type:</div>
+
                         <div className="radio-group">
-                        <span className="radio-label">Location</span>
-                        <input  type="radio"
+                          <input  type="radio"
                                 id="acct-gen"
                                 name='search_type'
                                 checked={ this.state.selectedOption === 'location' }
                                 value='location'
                                 onChange={this.handleOptionChange} />
+                          <span className="radio-label">Location</span>
                         </div>
+
                         <div className="radio-group">
-                          <span className="radio-label">Theater Company</span>
                           <input  type="radio"
                                 id="acct-admin"
                                 name="search_type"
                                 value='company'
                                 checked= { this.state.selectedOption === 'company' }
                                 onChange={this.handleOptionChange} />
+                          <span className="radio-label">Theater Company</span>
                         </div>
+
                         <div className="radio-group">
-                          <span className="radio-label">Show</span>
                           <input  type="radio"
                                 id="acct-admin"
                                 name="search_type"
                                 value='show'
                                 checked= { this.state.selectedOption === 'show' }
                                 onChange={this.handleOptionChange} />
+                          <span className="radio-label">Show</span>
                         </div>
+
                       </div>
               </form>
 
@@ -225,6 +230,7 @@ class Home extends Component {
 
               { ( this.state.selectedOption === 'company')
                 ? <form onSubmit={this.handleSubmit}>
+                    <div className="search-label">Search Theater Companies:</div>
                     <input  type="text"
                             id="theater"
                             name="theater"
@@ -237,6 +243,7 @@ class Home extends Component {
 
               { ( this.state.selectedOption === 'show')
                 ? <form onSubmit={this.handleSubmit}>
+                    <div className="search-label">Search Shows:</div>
                     <input type="text" id="show" name="show" ref={this.show} placeholder="SHOW TITLE"/>
                     <input className='form-button' id='st-3' type="submit" value="Go!"/>
                   </form>
