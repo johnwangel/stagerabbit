@@ -106,22 +106,24 @@ class Register extends Component {
                     <div className='form-group radio'>
                       <div className="search-label">Account Type:</div>
                         <div className="radio-group">
-                        <span className="radio-label">General</span>
-                        <input  type="radio"
+                          <input  type="radio"
                                 id="acct-gen"
                                 name='account_type'
                                 checked={ this.state.selectedOption === 'general' }
                                 value='general'
                                 onChange={this.handleOptionChange} />
+                          <span className="custom-radio"></span>
+                          <label htmlFor='acct-gen' className="radio-label">General</label>
                         </div>
                         <div className="radio-group">
-                          <span className="radio-label">Admin</span>
                           <input  type="radio"
                                 id="acct-admin"
                                 name="account_type"
                                 value='admin'
                                 checked= { this.state.selectedOption === 'admin' }
                                 onChange={this.handleOptionChange} />
+                          <span htmlFor='acct-admin' className="custom-radio"></span>
+                          <span className="radio-label">Admin</span>
                         </div>
                       </div>
                       <div className='form-group'>

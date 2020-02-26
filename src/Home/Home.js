@@ -74,6 +74,7 @@ class Home extends Component {
   }
 
   handleOptionChange(e) {
+    console.log('clicked');
     this.setState({
       selectedOption: e.target.value
     });
@@ -155,34 +156,37 @@ class Home extends Component {
 
                       <div className="search-label">Select Search Type:</div>
 
-                        <div className="radio-group">
+                        <div className="radio-group" onClick={this.handleOptionChange}>
                           <input  type="radio"
-                                id="acct-gen"
+                                id="location"
                                 name='search_type'
                                 checked={ this.state.selectedOption === 'location' }
                                 value='location'
                                 onChange={this.handleOptionChange} />
-                          <span className="radio-label">Location</span>
+                          <span className="custom-radio"></span>
+                          <label className="radio-label">Location</label>
                         </div>
 
                         <div className="radio-group">
                           <input  type="radio"
-                                id="acct-admin"
+                                id="company"
                                 name="search_type"
                                 value='company'
                                 checked= { this.state.selectedOption === 'company' }
                                 onChange={this.handleOptionChange} />
-                          <span className="radio-label">Theater Company</span>
+                          <span className="custom-radio"></span>
+                          <label className="radio-label">Theater Company</label>
                         </div>
 
                         <div className="radio-group">
-                          <input  type="radio"
-                                id="acct-admin"
-                                name="search_type"
-                                value='show'
-                                checked= { this.state.selectedOption === 'show' }
-                                onChange={this.handleOptionChange} />
-                          <span className="radio-label">Show</span>
+                          <input type="radio"
+                              id="show"
+                              name="search_type"
+                              value='show'
+                              checked= { this.state.selectedOption === 'show' }
+                              onChange={this.handleOptionChange} />
+                          <span className="custom-radio"></span>
+                          <label className="radio-label">Show</label>
                         </div>
 
                       </div>

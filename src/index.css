@@ -840,19 +840,44 @@ h4.form-title {
       color: indigo; }
   .form-group.radio {
     width: 100%;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center; }
-    @media only screen and (max-width: 600px) {
-      .form-group.radio {
-        flex-direction: column;
-        align-items: flex-start; } }
+    align-items: flex-start; }
     .form-group.radio .radio-group {
+      position: relative;
       display: flex;
       justify-content: flex-start;
-      align-items: center; }
+      align-items: center;
+      height: 30px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      /* Hide the browser's default radio button */
+      /* Create a custom radio button */
+      /* When the radio button is checked, add a  background */ }
+      .form-group.radio .radio-group:hover input ~ .custom-radio {
+        background-color: darkgray; }
       .form-group.radio .radio-group .radio-label {
-        margin-right: 15px; }
+        margin-left: 25px; }
+      .form-group.radio .radio-group input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        z-index: 5; }
+      .form-group.radio .radio-group .custom-radio {
+        position: absolute;
+        top: 5px;
+        left: 0;
+        height: 18px;
+        width: 18px;
+        background-color: lightgray;
+        border-radius: 50%;
+        z-index: 4; }
+      .form-group.radio .radio-group input:checked ~ .custom-radio {
+        background-color: #FFFFFF;
+        border: 6px solid indigo;
+        box-sizing: border-box; }
   .form-group .label {
     color: white;
     font-weight: bold;
