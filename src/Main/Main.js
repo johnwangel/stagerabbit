@@ -95,6 +95,11 @@ class Main extends Component {
   componentDidUpdate(prevProps) {
     let tid = this.props.Theater[0].id;
 
+    if (this.props.User.level !== prevProps.User.level && this.props.User.level>2){
+      let admin=(this.props.User.token===this.props.Theater[0].token) ? true : false;
+      this.setState({ admin } );
+    }
+
     if (this.props.Theater[0].id !== prevProps.Theater[0].id){
       this.setState({ current_id: this.props.Theater[0].id, delete_id: this.props.Theater[0].id });
       this.update_theater_details(tid);

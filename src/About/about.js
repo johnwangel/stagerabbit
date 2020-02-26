@@ -32,7 +32,7 @@ class AboutUs extends Component {
           <p>At StageRabbit we not only have the theatergoer in mind, but also all the various types of
           theaters across the country:
             <ul>
-              <li>sit-down productions</li>
+              <li>open-ended productions</li>
               <li>larger touring houses</li>
               <li>professional regional companies</li>
               <li>non-professional community theaters</li>
