@@ -74,7 +74,6 @@ class Home extends Component {
   }
 
   handleOptionChange(e) {
-    console.log('clicked');
     this.setState({
       selectedOption: e.target.value
     });
@@ -94,19 +93,19 @@ class Home extends Component {
 
     var error='';
     body.startAt=0;
-    switch (this.state.searchType){
-      case "1":
+    switch (this.state.selectedOption){
+      case "location":
         if (!body.city) error+='<li>You must provide a city.</li>';
         if (!body.state) error+='<li>You must provide a state.</li>';
         body.type=1;
         body.searchType='ByCity';
         break;
-      case "2":
+      case "company":
         if (!body.theater) error+='<li>You must provide a theater name.</li>';
         body.type=2;
         body.searchType='ByTheater';
         break;
-      case "3":
+      case "show":
         if (!body.show) error+='<li>You must provide a show title.</li>';
         body.type=3;
         body.searchType='ByShow';
