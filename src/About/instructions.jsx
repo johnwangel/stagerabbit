@@ -19,7 +19,7 @@ class Instructions extends Component {
             <ul>
               <li>Company/Troupe name is preferred over the name of a theater (which will be provided in venues)</li>
               <li>Provide a physical address if possible, for accurate mapping in the future </li>
-              <li></li>
+              <li>To facilitate discovery, select a Specialty if your company specializes in a certain type of theater (Shakespeare, Childrens, LGBT, etc.)</li>
               <li></li>
               <li></li>
               <li></li>
@@ -29,7 +29,8 @@ class Instructions extends Component {
 
           To edit: Click the pencil icon next to the item that needs to be revised.
           Make the edit in the input box.
-          Click the
+          Click the Check Mark to commit your changes.
+          To exit without saving, click the circular arrow.
 
 
           <h1>Step 2: Add Venues</h1>

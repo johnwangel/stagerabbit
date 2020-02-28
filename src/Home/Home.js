@@ -40,6 +40,7 @@ class Home extends Component {
     this.newlist1 = this.newlist1.bind(this);
     this.newlist2 = this.newlist2.bind(this);
     this.handleOptionChange = this.handleOptionChange.bind(this);
+    this.changeSelect = this.changeSelect.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -76,6 +77,12 @@ class Home extends Component {
   handleOptionChange(e) {
     this.setState({
       selectedOption: e.target.value
+    });
+  }
+
+  changeSelect(opt) {
+    this.setState({
+      selectedOption: opt
     });
   }
 
@@ -127,7 +134,7 @@ class Home extends Component {
   }
 
   render() {
-    //console.log('PROPS IN HOME',this.props);
+    console.log('PROPS IN HOME',this.props);
     //console.log(typeof this.props.SearchResults.type, this.props.SearchResults.type)
     //console.log(this.state)
 
@@ -155,7 +162,7 @@ class Home extends Component {
 
                       <div className="search-label">Select Search Type:</div>
 
-                        <div className="radio-group" onClick={this.handleOptionChange}>
+                        <div className="radio-group" onClick={ () => { this.changeSelect('location') } }>
                           <input  type="radio"
                                 id="location"
                                 name='search_type'
@@ -166,7 +173,7 @@ class Home extends Component {
                           <label className="radio-label">Location</label>
                         </div>
 
-                        <div className="radio-group">
+                        <div className="radio-group" onClick={ () => { this.changeSelect('company') } }>
                           <input  type="radio"
                                 id="company"
                                 name="search_type"
@@ -177,7 +184,7 @@ class Home extends Component {
                           <label className="radio-label">Theater Company</label>
                         </div>
 
-                        <div className="radio-group">
+                        <div className="radio-group" onClick={ () => { this.changeSelect('show') } }>
                           <input type="radio"
                               id="show"
                               name="search_type"
@@ -254,8 +261,10 @@ class Home extends Component {
               }
             </div>
 
-            { ( this.props.SearchResults && this.props.SearchResults.results )
-                ? <h2 className="main-page main-column" ref={this.resultRef}>Results</h2>
+            <div ref={this.resultRef}></div>
+
+            { ( this.props.SearchResults && this.props.SearchResults.results && this.props.SearchResults.results.theaters && this.props.SearchResults.results.theaters.length )
+                ? <h2 className="main-page main-column">Results</h2>
                 : null
             }
 
