@@ -12,6 +12,12 @@ class Instructions extends Component {
           <p>To ensure that our information is as accurate as possible, we have made
           it easy for theater companies to correct and add details themselves. You can
           edit your company details in four simple steps.</p>
+          <p>You can easily get to the editing page for your company:
+            <ul>
+              <li>Select 'Edit' from the Menu in the top navigation bar</li>
+              <li>Or, select the 'Pencil' icon from the top navigation bar (non available on mobile devices)</li>
+            </ul>
+          </p>
 
 
           <h2 className='main-page'>Step 1: Edit Company Details</h2>
