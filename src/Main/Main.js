@@ -499,13 +499,13 @@ class Main extends Component {
           ?  <div className='toolbar'>
               <div className='head'>Tools</div>
               <div className="tool"
-                   onClick={() => { this.venue_form('add') }}>Add Venue</div>
-              <div className="tool"
                    onClick={() => { this.venue_form('associate') }}>Associate Venue</div>
               <div className="tool"
-                   onClick={() => { this.show_form() }}>Add Show</div>
+                   onClick={() => { this.venue_form('add') }}>Add Venue</div>
               <div className="tool"
                    onClick={() => { this.prod_form() }}>Add Production</div>
+              <div className="tool"
+                   onClick={() => { this.show_form() }}>Add Show</div>
               { (this.props.User.level === 3) ? <div className="tool" onClick={() => { this.theater_form() }}>Add Theater</div> : null }
               { (this.props.User.level === 3) ? <div className="tool" onClick={() => { this.delete_theater_form() }}>Delete Theater</div> : null }
             </div>

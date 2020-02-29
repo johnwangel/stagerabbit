@@ -68,6 +68,10 @@ class Header extends Component {
                   ? <Link className="menu_item" to={`/theater/${ this.props.User.tid }`}>Edit</Link>
                   : null
                 }
+                { ( this.props.User.level>1 )
+                  ? <Link className="menu_item" to={`/instructions`}>Instructions</Link>
+                  : null
+                }
                 { ( this.state.loggedin)
                   ? <div className="menu_item" onClick={this.handleLogout}>Logout</div>
                   : <Link className="menu_item" onClick={ this.ToggleMenu } to="/login">Log In</Link>

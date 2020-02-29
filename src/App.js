@@ -9,6 +9,7 @@ import  { getProfileFetch } from './Register/actions';
 import Main from './Main/Main';
 import Home from './Home/Home';
 import Header from "./Header/header";
+import Instructions from './About/instructions';
 import Login from './Register/login';
 import Reset from './Register/reset';
 import Password from './Register/password';
@@ -43,6 +44,7 @@ class App extends Component {
                   <Route exact path="/" component={Home} />
                   <Route path="/edit" component={Main} />
                   <Route path="/theater/:id" component={Main} />
+                  <Route path="/instructions" component={Instructions} />
                   <Route path="/login" component={Login} />
                   <Route path="/password" component={Password} />
                   <Route path="/register" component={Register} />
