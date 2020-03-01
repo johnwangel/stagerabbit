@@ -46,7 +46,7 @@ class Main extends Component {
     super(props);
 
     this.state={  current_id: this.props.Theater[0].id,
-                  admin: false,
+                  admin: (this.props.User && this.props.User.token && this.props.User.token===this.props.Theater[0].token) ? true : false,
                   hide_production_form: true,
                   hide_add_venue_form: true,
                   hide_edit_venue_form: true,
@@ -95,7 +95,7 @@ class Main extends Component {
   componentDidUpdate(prevProps) {
     let tid = this.props.Theater[0].id;
 
-    if (this.props.User.level !== prevProps.User.level && this.props.User.level>2){
+    if (this.props.User.level !== prevProps.User.level && this.props.User.level>1){
       let admin=(this.props.User.token===this.props.Theater[0].token) ? true : false;
       this.setState({ admin } );
     }
@@ -354,7 +354,6 @@ class Main extends Component {
   }
 
   render() {
-    //console.log('Props in Main',this.props);
     const d = this.props.Theater[0];
     const p = this.props.Prods;
     const v = (this.props.VenuesByTheater.venues) ? this.props.VenuesByTheater.venues : null;
