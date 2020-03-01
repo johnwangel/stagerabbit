@@ -800,6 +800,12 @@ h3.sub-column {
     padding: 10px 0;
     margin-bottom: 15px; }
 
+.note {
+  margin: 20px;
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.5em; }
+
 .form-group {
   width: 100%; }
 
