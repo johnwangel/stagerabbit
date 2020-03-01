@@ -67,7 +67,7 @@ class Theater extends Component {
 
 
               <h3 className="sub-column">Edit Company Details</h3>
-              <div className="note">For instructions go to: <Link className="basic_link" target="_blank" to={`/instructions`}>stagerabbit.com/instructions</Link></div>
+              <div className="note">For editing tips go to: <Link className="basic_link" target="_blank" to={`/instructions`}>stagerabbit.com/instructions</Link></div>
               <table className="theater-info-table">
                   { keys.map((keyname, keyindex ) => {
                       const _id = `${keyname}_t1`;
