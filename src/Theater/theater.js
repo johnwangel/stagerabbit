@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import TheaterInfo from "./theaterInfo";
 
@@ -66,6 +67,7 @@ class Theater extends Component {
 
 
               <h3 className="sub-column">Edit Company Details</h3>
+              <div>For instructions go to: <Link className="basic_link" target="_blank" to={`/instructions`}>stagerabbit.com/instructions</Link></div>
               <table className="theater-info-table">
                   { keys.map((keyname, keyindex ) => {
                       const _id = `${keyname}_t1`;

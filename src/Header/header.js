@@ -78,7 +78,7 @@ class Header extends Component {
                 }
                 { ( this.state.loggedin)
                   ? null
-                  : <Link className="menu_item" onClick={ this.ToggleMenu } to="/register">Register</Link>
+                  : <Link className="menu_item" onClick={ this.ToggleMenu } to="/register/0">Register</Link>
                 }
                 <Link className="menu_item" onClick={ this.ToggleMenu } to="/aboutus">About Us</Link>
                 <Link className="menu_item" onClick={ this.ToggleMenu } to="/contact">Contact</Link>

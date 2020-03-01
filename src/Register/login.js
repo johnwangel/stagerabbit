@@ -75,7 +75,7 @@ class Login extends Component {
                 </form>
                 <div className="links">
                   <Link className="link" to="/password">Forgot Password</Link>
-                  <Link className="link" to="/register">Register</Link>
+                  <Link className="link" to="/register/0">Register</Link>
                 </div>
               </div>
             </div>

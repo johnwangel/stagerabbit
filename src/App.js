@@ -47,7 +47,7 @@ class App extends Component {
                   <Route path="/instructions" component={Instructions} />
                   <Route path="/login" component={Login} />
                   <Route path="/password" component={Password} />
-                  <Route path="/register" component={Register} />
+                  <Route path="/register/:token" component={Register} />
                   <Route path="/prodsbyshow/:id" component={ProdByShow} />
                   <Route path="/emails" component={TheaterEmails} />
                   <Route path="/contact" component={Contact} />

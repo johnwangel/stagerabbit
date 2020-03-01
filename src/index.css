@@ -436,6 +436,9 @@ body {
       min-width: 100%;
       max-width: 100%; } }
 
+.basic_link {
+  color: indigo; }
+
 .admin-theater {
   background-color: white;
   display: flex;

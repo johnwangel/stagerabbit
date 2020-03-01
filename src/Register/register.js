@@ -9,8 +9,16 @@ import  { register_user } from '../Register/actions';
 class Register extends Component {
   constructor(props) {
     super(props);
-    this.state={  selectedOption: 'general',
-                  token: null,
+
+    let token= (this.props.match &&
+                this.props.match.params &&
+                this.props.match.params.token &&
+                this.props.match.params.token !== '0')
+                ? this.props.match.params.token
+                : null;
+
+    this.state={  selectedOption: (token) ? 'admin' :'general',
+                  token: (token) ? token : null,
                   username: null,
                   password: null,
                   fname: null,
@@ -56,6 +64,7 @@ class Register extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <div className='loginPage'>
           <h2 className="main-page main-column">Register</h2>

@@ -15,7 +15,7 @@ class Instructions extends Component {
           <p>You can easily get to the editing page for your company:
             <ul>
               <li>Select 'Edit' from the Menu in the top navigation bar</li>
-              <li>Or, select the 'Pencil' icon from the top navigation bar (non available on mobile devices)</li>
+              <li>Or, select the 'Pencil' icon from the top navigation bar (not available on mobile devices)</li>
             </ul>
           </p>
 
