@@ -45,7 +45,7 @@ class Main extends Component {
   constructor(props) {
     super(props);
 
-    this.state={  current_id: this.props.Theater[0].id,
+    this.state={  current_id: this.props.match.params.id,
                   admin: (this.props.User && this.props.User.token && this.props.User.token===this.props.Theater[0].token) ? true : false,
                   hide_production_form: true,
                   hide_add_venue_form: true,
@@ -62,6 +62,8 @@ class Main extends Component {
                   scroll: null,
                   height: null
                 };
+
+    this.update_theater_details(this.props.match.params.id);
 
     //console.log('params',this.props.match.params)
     if (this.props.match.params.id) this.update_theater_details(this.props.match.params.id);
@@ -93,7 +95,7 @@ class Main extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    let tid = this.props.Theater[0].id;
+    let tid = this.props.match.params.id;
 
     if (this.props.User.level !== prevProps.User.level && this.props.User.level>1){
       let admin=(this.props.User.token===this.props.Theater[0].token) ? true : false;
@@ -125,7 +127,7 @@ class Main extends Component {
 
     if (prevProps.location.pathname !== this.props.location.pathname){
       this.setState( { current_id: this.props.match.params.id } );
-      //this.update_theater_details(this.props.match.params.id);
+      this.update_theater_details(this.props.match.params.id);
     }
 
   }
