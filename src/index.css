@@ -984,12 +984,40 @@ input[type='text'], input[type='email'], input[type='password'] {
     width: 100px; }
 
 .loginPage form .optin {
+  position: relative;
+  margin: 15px 0;
   display: flex;
-  margin: 15px 0; }
+  justify-content: flex-start;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Create a custom checkbox */
+  /* When the radio button is checked, add a  background */ }
   .loginPage form .optin input {
-    margin-right: 8px; }
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 5; }
   .loginPage form .optin .agree {
-    font-size: .8rem; }
+    font-size: .8rem;
+    margin-left: 25px; }
+  .loginPage form .optin:hover input ~ .custom-checkbox {
+    background-color: darkgray; }
+  .loginPage form .optin .custom-checkbox {
+    position: absolute;
+    top: 5px;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    background-color: lightgray;
+    border-radius: 50%;
+    z-index: 4; }
+  .loginPage form .optin input:checked ~ .custom-checkbox {
+    background-color: #FFFFFF;
+    border: 6px solid indigo;
+    box-sizing: border-box; }
 
 .venues {
   background-color: white; }

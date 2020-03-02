@@ -93,12 +93,6 @@ h4.form-title {
     align-items: flex-start;
 
 
-
-
-
-
-
-
     .radio-group {
       position: relative;
       display: flex;
@@ -271,10 +265,48 @@ input[type='text'],input[type='email'],input[type='password'] {
 }
 
 .loginPage form .optin {
-  display: flex;
+  position: relative;
   margin: 15px 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
   input {
-    margin-right: 8px;
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 5;
   }
-  .agree { font-size: .8rem; }
+  .agree {
+    font-size: .8rem;
+    margin-left: 25px;
+  }
+
+  &:hover input ~ .custom-checkbox {
+    background-color: darkgray;
+  }
+
+  /* Create a custom checkbox */
+  .custom-checkbox {
+    position: absolute;
+    top: 5px;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    background-color: lightgray;
+    border-radius: 50%;
+    z-index: 4;
+  }
+
+  /* When the radio button is checked, add a  background */
+  input:checked ~ .custom-checkbox {
+    background-color: $white;
+    border: 6px solid $main;
+    box-sizing: border-box;
+  }
+
 }

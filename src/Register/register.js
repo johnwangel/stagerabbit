@@ -26,11 +26,13 @@ class Register extends Component {
                   role: null,
                   email: null,
                   phone: null,
-                  loggedin: false
+                  loggedin: false,
+                  optin: false
                 };
     this.handleChange = this.handleChange.bind(this);
     this.handleOptionChange = this.handleOptionChange.bind(this);
     this.handleRegSubmit = this.handleRegSubmit.bind(this);
+    this.handleOptin = this.handleOptin.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -48,6 +50,10 @@ class Register extends Component {
     this.setState({
       selectedOption: e.target.value
     });
+  }
+
+  handleOptin(){
+    this.setState({optin: !this.state.optin });
   }
 
   handleRegSubmit(e){
@@ -220,11 +226,12 @@ class Register extends Component {
                               />
                       </div>
 
-                      <div className="optin">
+                      <div className="optin" onClick={ () => { this.handleOptin() } } >
                         <input  type="checkbox"
                                 id="optin"
                                 name="optin"
-                                value="false" />
+                                checked={ this.state.optin } />
+                        <span className="custom-checkbox"></span>
                         <div className="agree">By checking this box, you give permission for the StageRabbit to
                               periodically send emails to the address associated with this account regarding
                               site enhancements and account update reminders.</div>
