@@ -55,7 +55,7 @@ class Theater extends Component {
                   { (this.props.theater.address1) ? <div> {this.props.theater.address2}</div> : null }
                   <div> {this.props.theater.city}, { this.props.theater.theater_state } { this.props.theater.zip }</div>
                   <div>{this.props.theater.phone}</div>
-                  <div><a href={this.props.theater.website} target='_blank' className='website'>{  this.props.theater.website.replace(/(^\w+:|^)\/\//, '').replace(/\/$/,'') }</a></div>
+                  <div><a href={this.props.theater.website} target='_blank' className='website'>{ (this.props.theater.website) ? this.props.theater.website.replace(/(^\w+:|^)\/\//, '').replace(/\/$/,'') : null }</a></div>
                 </div>
 
                 { (this.props.theater.specialty)
@@ -120,7 +120,7 @@ class Theater extends Component {
                 { (this.props.theater.address1) ? <div> {this.props.theater.address2}</div> : null }
                 <div> {this.props.theater.city}, { this.props.theater.theater_state } { this.props.theater.zip }</div>
                 <div>{this.props.theater.phone}</div>
-                <div><a href={this.props.theater.website} target='_blank' className='website'>{  this.props.theater.website.replace(/(^\w+:|^)\/\//, '').replace(/\/$/,'') }</a></div>
+                <div><a href={this.props.theater.website} target='_blank' className='website'>{ (this.props.theater.website) ? this.props.theater.website.replace(/(^\w+:|^)\/\//, '').replace(/\/$/,'') : null }</a></div>
               </div>
                 { (this.props.theater.specialty)
                   ? <div className="specialty">{this.props.theater.specialty}</div>
