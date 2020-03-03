@@ -215,7 +215,7 @@ class Home extends Component {
                                 <option key="1" value="25">25 miles</option>
                                 <option key="2" value="50">50 miles</option>
                                 <option key="3" value="100">100 miles</option>
-                                <option key="4" value="100">200 miles</option>
+                                <option key="4" value="200">200 miles</option>
                           </select>
                         </div>
                         <div className='form-group'>
