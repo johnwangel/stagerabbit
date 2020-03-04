@@ -34,7 +34,7 @@ class App extends Component {
                 <div className='MainBody'>
                   <Helmet>
                     <title>StageRabbit</title>
-                    <meta name="keywords" content="Find Productions Theatre Company Theater Amateur Professional Community Summer Stock Children's Regional High School College Shows Drama Musicals Revues Near Me Comedy Plays" />
+                    <meta name="keywords" content="Find Search Stage Live Productions Theatre Company Theater Amateur Entertainment Professional Community Summer Stock Children's Regional High School College Shows Drama Musicals Revues Near Me Comedy Plays" />
                     <meta
                       name="description"
                       content="Free searchable database of community theaters and productions across the United States" />
