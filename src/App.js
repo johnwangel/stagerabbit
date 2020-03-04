@@ -33,12 +33,12 @@ class App extends Component {
               <Router basename="/">
                 <div className='MainBody'>
                   <Helmet>
+                    <script data-ad-client="ca-pub-9593088864998919" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                     <title>StageRabbit</title>
                     <meta name="keywords" content="Find Search Stage Live Productions Theatre Company Theater Amateur Entertainment Professional Community Summer Stock Children's Regional High School College Shows Drama Musicals Revues Near Me Comedy Plays" />
                     <meta
                       name="description"
                       content="Free searchable database of community theaters and productions across the United States" />
-                    <script data-ad-client="ca-pub-9593088864998919" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                   </Helmet>
                   <Header />
                   <Route exact path="/" component={Home} />
