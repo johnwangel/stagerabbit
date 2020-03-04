@@ -26,6 +26,11 @@ class App extends Component {
 
   componentDidMount(){
     this.props.getProfileFetch();
+    const script = document.createElement("script");
+    script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
+    script.setAttribute('data-ad-client', 'ca-pub-9593088864998919');
+    script.async = true;
+    document.head.appendChild(script);
   }
 
   render() {
@@ -33,7 +38,6 @@ class App extends Component {
               <Router basename="/">
                 <div className='MainBody'>
                   <Helmet>
-                    <script data-ad-client="ca-pub-9593088864998919" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                     <title>StageRabbit</title>
                     <meta name="keywords" content="Find Search Stage Live Productions Theatre Company Theater Amateur Entertainment Professional Community Summer Stock Children's Regional High School College Shows Drama Musicals Revues Near Me Comedy Plays" />
                     <meta
