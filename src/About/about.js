@@ -54,7 +54,7 @@ class AboutUs extends Component {
           <p>We look forward to building this new experience with you. And we welcome any feedback or suggestions you might have.
           Just drop us a line at <a className="inline" href="mailto:info@stagerabbit.com">info@stagerabbit.com</a></p>
 
-          <div className='mytheaters'><SanitizedHTML html={ ALL_THEATERS } /></div>
+          //<div className='mytheaters'><SanitizedHTML html={ ALL_THEATERS } /></div>
         </div>
       </div>
    );
