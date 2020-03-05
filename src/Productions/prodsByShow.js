@@ -27,7 +27,6 @@ class ProdByShow extends Component {
         this.setState({name:p.previous[0].title});
       }
     }
-
   }
 
   toggleProds(number){

@@ -6,6 +6,7 @@ export const UPDATE_PRODS = 'UPDATE_PRODS';
 export const NEW_PROD = 'NEW_PROD';
 export const EDIT_PROD = 'EDIT_PROD';
 export const PROD_BY_SHOW = 'PROD_BY_SHOW';
+export const PROD_BY_SHOW_GROUP = 'PROD_BY_SHOW_GROUP';
 export const REMOVE_ARTIST_FROM_PROD = 'REMOVE_ARTIST_FROM_PROD';
 
 export function updateProds ( theaterid ){
@@ -65,6 +66,18 @@ const prods_by_show = data => ({
   payload : data
 });
 
+export function prodsByShowGroup(id){
+  return dispatch => {
+    fetch(`${URL}productions/byShowGroup?id=${id}`, GET_HEADER )
+    .then(response => response.json())
+    .then(data => dispatch(prods_by_show_group(data)))
+    .catch( err => console.log(err.message));
+  };
+}
+const prods_by_show_group = data => ({
+  type : PROD_BY_SHOW_GROUP,
+  payload : data
+});
 
 export function removeArtistFromProd ( body ){
   body.fromWhere='prod';

@@ -1,0 +1,24 @@
+
+.article {
+
+  .subttl {
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .show_item {
+    margin-bottom: 20px;
+  }
+
+
+    .show_item:first-child:before {
+      content: "Upcoming Productions";
+      font-weight: bold;
+      font-size: 1.2em;
+      line-height: 2.5em;
+    }
+
+
+}

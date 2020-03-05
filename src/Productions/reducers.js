@@ -3,6 +3,7 @@
   NEW_PROD,
   EDIT_PROD,
   PROD_BY_SHOW,
+  PROD_BY_SHOW_GROUP,
   REMOVE_ARTIST_FROM_PROD
  } from './actions';
 
@@ -19,6 +20,8 @@ const ProductionsReducer = (state={ upcoming: [], previous: [] }, action) => {
         return editProduction(state,action);
       case PROD_BY_SHOW:
         return prodByShow(state,action);
+      case PROD_BY_SHOW_GROUP:
+        return prodByShowGroup(state,action);
       case REMOVE_ARTIST_FROM_PROD:
         return editProduction(state,action);
       default:
@@ -53,6 +56,10 @@ function prodByShow(state,action){
   return parseProds(action.payload.data);
 }
 
+function prodByShowGroup(state,action){
+  return parseProds(action.payload.data);
+}
+
 function parseProds(prods){
   const upcoming=[], previous=[];
   prods.forEach( item => {
@@ -61,7 +68,5 @@ function parseProds(prods){
   })
   return { upcoming, previous };
 }
-
-
 
 export default ProductionsReducer;

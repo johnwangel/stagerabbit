@@ -1056,6 +1056,21 @@ input[type='text'], input[type='email'], input[type='password'] {
       font-size: 1.8em;
       margin-left: 10px; } }
 
+.article .subttl {
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 20px; }
+
+.article .show_item {
+  margin-bottom: 20px; }
+
+.article .show_item:first-child:before {
+  content: "Upcoming Productions";
+  font-weight: bold;
+  font-size: 1.2em;
+  line-height: 2.5em; }
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace; }
 

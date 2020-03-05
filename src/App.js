@@ -18,6 +18,8 @@ import About from './About/about';
 import Contact from './Contact/contact';
 import ProdByShow from './Productions/prodsByShow';
 import TheaterEmails from './Theater/theaterEmails';
+import RandH from './Articles/randh';
+
 
 class App extends Component {
   constructor(props) {
@@ -57,6 +59,7 @@ class App extends Component {
                   <Route path="/contact" component={Contact} />
                   <Route path="/aboutus" component={About} />
                   <Route path="/reset" component={Reset} />
+                  <Route path="/randh" component={RandH} />
                   <div className='footer'>StageRabbit, Jersey City, NJ&nbsp;&nbsp;<a href='mailto:info@stagerabbit.com'>info@stagerabbit.com</a></div>
                 </div>
               </Router>
