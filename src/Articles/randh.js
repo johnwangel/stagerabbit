@@ -49,7 +49,7 @@ class RandH extends Component {
             </p>
             <div>
               { (p)
-                ? p.map( (item, idx) => (item.title==='The Sound of Music') ? <ShowItem key={idx} item={idx}/> : null )
+                ? p.map( (item, idx) => (item.title==='The Sound of Music') ? <ShowItem key={idx} item={item}/> : null )
                 : null
               }
             </div>
@@ -104,7 +104,7 @@ class RandH extends Component {
             Dance', 'Something Wonderful'. </p>
             <div>
               { (p)
-                ? p.map( (item, idx) => (item.title==='The King and I') ? <ShowItem key={idx} number={idx}  item={item}/> : null )
+                ? p.map( (item, idx) => (item.title==='The King and I') ? <ShowItem key={idx} item={item}/> : null )
                 : null
               }
             </div>
@@ -117,7 +117,7 @@ class RandH extends Component {
             </p>
             <div>
               { (p)
-                ? p.map( (item, idx) => (item.title==='Cinderella') ? <ShowItem key={idx} number={idx} item={item}/> : null )
+                ? p.map( (item, idx) => (item.title==='Cinderella') ? <ShowItem key={idx} item={item}/> : null )
                 : null
               }
             </div>
@@ -130,7 +130,7 @@ class RandH extends Component {
             </p>
             <div>
               { (p)
-                ? p.map( (item, idx) => (item.title==='State Fair') ? <ShowItem key={idx} number={idx}  item={item}/> : null )
+                ? p.map( (item, idx) => (item.title==='State Fair') ? <ShowItem key={idx} item={item}/> : null )
                 : null
               }
             </div>
@@ -142,7 +142,7 @@ class RandH extends Component {
             </p>
             <div>
               { (p)
-                ? p.map( (item, idx) => (item.title==='A Grand Night for Singing') ? <ShowItem key={idx} number={idx}  item={item}/> : null )
+                ? p.map( (item, idx) => (item.title==='A Grand Night for Singing') ? <ShowItem key={idx} item={item}/> : null )
                 : null
               }
             </div>
@@ -160,7 +160,7 @@ class RandH extends Component {
             </p>
             <div>
               { (p)
-                ? p.map( (item, idx) => (item.title==='Flower Drum Song') ? <ShowItem key={idx} number={idx}  item={item}/> : null )
+                ? p.map( (item, idx) => (item.title==='Flower Drum Song') ? <ShowItem key={idx} item={item}/> : null )
                 : null
               }
             </div>
@@ -173,7 +173,7 @@ class RandH extends Component {
             </p>
             <div>
              { (p)
-                ? p.map( (item, idx) => (item.title==='Allegro') ? <ShowItem key={idx} number={idx} item={item}/> : null )
+                ? p.map( (item, idx) => (item.title==='Allegro') ? <ShowItem key={idx} item={item}/> : null )
                 : null
               }
             </div>
@@ -187,7 +187,7 @@ class RandH extends Component {
             </p>
             <div>
               { (p)
-                ? p.map( (item, idx) => (item.title==='Pipe Dream') ? <ShowItem key={idx} number={idx} item={item}/> : null )
+                ? p.map( (item, idx) => (item.title==='Pipe Dream') ? <ShowItem key={idx} item={item}/> : null )
                 : null
               }
             </div>
@@ -200,7 +200,7 @@ class RandH extends Component {
             </p>
             <div>
               { (p)
-                ? p.map( (item, idx) => (item.title==='Me and Juliet') ? <ShowItem key={idx} number={idx} item={item}/> : null )
+                ? p.map( (item, idx) => (item.title==='Me and Juliet') ? <ShowItem key={idx} item={item}/> : null )
                 : null
               }
             </div>
