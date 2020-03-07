@@ -334,14 +334,14 @@ class Home extends Component {
             : null
         }
 
-        <div className='recentUpdates'>
+
           <h2 className="main-page main-column">Suggestions</h2>
           <div className='searchContent main-column'>
             <Article key='1' number='1' title='Rodgers and Hammerstein Musicals' id='randh' />
           </div>
-        </div>
 
-        <div className='articles'>
+
+
           <h2 className="main-page main-column">Recent Additions</h2>
           <div className='searchContent main-column'>
             { ( this.props.Recents && this.props.Recents.length)
@@ -349,7 +349,7 @@ class Home extends Component {
               : null
             }
           </div>
-        </div>
+
 
       </div>)
   }
