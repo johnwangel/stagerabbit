@@ -2,11 +2,12 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import SanitizedHTML from 'react-sanitized-html';
 
-
+import { recentUpdates } from '../Recent/actions';
 import { getStates } from '../Main/statesActions';
 import { search } from '../Results/actions';
 
 import Results from "../Results/Results";
+import Recent from "../Recent/recent";
 
 const curtain = require('../Assets/curtain.jpg');
 //const stage = require('../Assets/stage.jpg');
@@ -29,6 +30,9 @@ class Home extends Component {
                   scroll: false,
                   error: null
                };
+
+    this.props.recentUpdates();
+
     this.errorRef = React.createRef();
     this.resultRef = React.createRef();
     this.props.getStates();
@@ -134,7 +138,7 @@ class Home extends Component {
   }
 
   render() {
-    //console.log('PROPS IN HOME',this.props);
+    console.log('PROPS IN HOME',this.props);
     //console.log(typeof this.props.SearchResults.type, this.props.SearchResults.type)
     //console.log(this.state)
 
@@ -328,6 +332,18 @@ class Home extends Component {
             </div>
             : null
         }
+
+        <div className='recentUpdates'>
+          <h2 className="main-page main-column">Recent Additions</h2>
+          <div className='searchContent main-column'>
+            { ( this.props.Recents && this.props.Recents.length)
+              ? this.props.Recents.map( (item, idx) => <Recent key={idx} number={idx+1} item={item} />)
+              : null
+            }
+          </div>
+        </div>
+
+
       </div>)
   }
 }
@@ -343,6 +359,9 @@ const mapDispatchToProps = dispatch => {
     },
     search : data => {
       dispatch( search(data) )
+    },
+    recentUpdates : () => {
+      dispatch( recentUpdates() )
     }
   }
 }

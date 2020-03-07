@@ -24,18 +24,18 @@ class RandH extends Component {
             <div className='subttl'>Fathers of the Modern Musical</div>
             <p>Just about everyone knows Rodgers and Hammerstein.
               Starting with their first collaboration, <i>Oklahoma!</i>, in 1943,
-              they transformed the musical from a light, trivial entertainment into
+              they transformed the musical from a light, frivolous entertainment into
               the more substantial works of art that continues to this day.
             </p>
             <p>
-              Perhaps the sentimentality of Oscar Hammerstein II feels as corny as Kansas in August
+              Perhaps the sentimentality of Oscar Hammerstein II feels as &ldquo;corny as Kansas in August&rdquo;
               today, but these stories are still some of our most beloved stage shows. And there are
               few composers as gifted as Richard Rodgers in creating a melody that lingers in the memory
               and the heart. They were unafraid to tackle tough stories, from a lecherous farmhand in Oklahoma
-              to an abusive theif in Carousel, from racism in South Pacific to fascism in The Sound of Music.
+              to an abusive theif in New England, from racism in the South Pacific to fascism in Austria.
             </p>
             <p>
-              Following is a complete list of Rodgers and Hammerstein&rsquo;s collaborations.
+              Here is a complete list of Rodgers and Hammerstein&rsquo;s collaborations.
             </p>
 
 
