@@ -9,7 +9,7 @@ export function recentUpdates(){
     fetch(`${URL}productions/recentprods`, GET_HEADER)
     .then(response => response.json())
     .then(data => {
-      console.log('prods',data);
+      //console.log('prods',data);
       dispatch(recents_updates(data));
     })
     .catch( err => console.log(err.message));

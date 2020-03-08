@@ -139,7 +139,7 @@ class Home extends Component {
   }
 
   render() {
-    console.log('PROPS IN HOME',this.props);
+    //console.log('PROPS IN HOME',this.props);
     //console.log(typeof this.props.SearchResults.type, this.props.SearchResults.type)
     //console.log(this.state)
 
