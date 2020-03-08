@@ -15,7 +15,7 @@ class JHW extends Component {
   }
 
   render() {
-    console.log(this.props);
+    //console.log(this.props);
     let p = (this.props && this.props.Prods && this.props.Prods.upcoming) ? this.props.Prods.upcoming : null;
     return (
       <div className="aboutus">
@@ -169,7 +169,7 @@ class JHW extends Component {
             <h2>Doublewide, Texas, Christmas</h2>
             <div>
               { (p)
-                ? p.map( (item, idx) => (item.title==="Doublewide, Texas, Christmas") ? <ShowItem key={idx} item={item}/> : null )
+                ? p.map( (item, idx) => (item.title==="A Doublewide, Texas, Christmas") ? <ShowItem key={idx} item={item}/> : null )
                 : null
               }
             </div>

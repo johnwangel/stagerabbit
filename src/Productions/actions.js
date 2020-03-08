@@ -71,7 +71,7 @@ export function prodsByShowGroup(id){
     fetch(`${URL}productions/byShowGroup?id=${id}`, GET_HEADER )
     .then(response => response.json())
     .then(data => {
-      console.log(data);
+      //console.log(data);
       dispatch(prods_by_show_group(data))
     })
     .catch( err => console.log(err.message));
