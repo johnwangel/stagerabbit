@@ -15,7 +15,7 @@ class JHW extends Component {
   }
 
   render() {
-    //console.log(this.props);
+    console.log(this.props);
     let p = (this.props && this.props.Prods && this.props.Prods.upcoming) ? this.props.Prods.upcoming : null;
     return (
       <div className="aboutus">

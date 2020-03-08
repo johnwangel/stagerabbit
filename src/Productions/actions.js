@@ -70,7 +70,10 @@ export function prodsByShowGroup(id){
   return dispatch => {
     fetch(`${URL}productions/byShowGroup?id=${id}`, GET_HEADER )
     .then(response => response.json())
-    .then(data => dispatch(prods_by_show_group(data)))
+    .then(data => {
+      console.log(data);
+      dispatch(prods_by_show_group(data))
+    })
     .catch( err => console.log(err.message));
   };
 }

@@ -19,5 +19,3 @@ class ShowItem extends Component {
   }
 }
 export default ShowItem;
-
-
