@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import React, {Component} from 'react';
 
 import SanitizedHTML from 'react-sanitized-html';
 import { Link } from "react-router-dom";
@@ -6,6 +7,7 @@ const moment = require('moment');
 
 class ShowItem extends Component {
   render() {
+    console.log(this.props.number);
     let item = this.props.item;
     return (
       <div className='show_item'>

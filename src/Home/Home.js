@@ -338,6 +338,7 @@ class Home extends Component {
           <h2 className="main-page main-column">Suggestions</h2>
           <div className='searchContent main-column'>
             <Article key='1' number='1' title='Rodgers and Hammerstein Musicals' id='randh' />
+            <Article key='2' number='2' title='Jones Hope Wooten' id='jhw' />
           </div>
 
 

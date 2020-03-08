@@ -13,7 +13,7 @@ class Article extends Component {
                                 <div className='number_long'>{this.props.number}</div>
                               </td>
                               <td>
-                                <Link className='website' to={`/randh`}>{this.props.title}</Link>
+                                <Link className='website' to={`/${this.props.id}`}>{this.props.title}</Link>
                               </td>
                             </tr>
                           </tbody>
