@@ -16,7 +16,7 @@ class JHW extends Component {
 
   render() {
     console.log(this.props);
-    let p = (this.props && this.props.Prods && this.props.Prods.previous) ? this.props.Prods.previous : null;
+    let p = (this.props && this.props.Prods && this.props.Prods.upcoming) ? this.props.Prods.upcoming : null;
     return (
       <div className="aboutus">
         <div className="aboutus_column article">
