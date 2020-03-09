@@ -339,6 +339,7 @@ class Home extends Component {
           <div className='searchContent main-column'>
             <Article key='1' number='1' title='Rodgers and Hammerstein Musicals' id='randh' />
             <Article key='2' number='2' title='Jones Hope Wooten' id='jhw' />
+            <Article key='3' number='3' title='Neil Simon' id='ns' />
           </div>
 
 
