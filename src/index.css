@@ -1066,12 +1066,6 @@ input[type='text'], input[type='email'], input[type='password'] {
   margin-left: 50px;
   margin-bottom: 20px; }
 
-.article .show_item:first-child:before {
-  content: "Upcoming Productions";
-  font-weight: bold;
-  font-size: 1.2em;
-  line-height: 2.5em; }
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace; }
 

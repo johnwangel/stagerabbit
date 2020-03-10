@@ -341,6 +341,7 @@ class Home extends Component {
             <Article key='2' number='2' title='Jones Hope Wooten' id='jhw' />
             <Article key='3' number='3' title='Neil Simon' id='ns' />
             <Article key='4' number='3' title='Sondheim' id='sondheim' />
+            <Article key='5' number='5' title='Shakespeare' id='shakespeare' />
           </div>
 
           <h2 className="main-page main-column">Recent Additions</h2>

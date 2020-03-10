@@ -22,7 +22,7 @@ import RandH from './Articles/randh';
 import JHW from './Articles/jhw';
 import NS from './Articles/ns';
 import SOND from './Articles/sondheim';
-
+import SHK from './Articles/shakespeare';
 
 class App extends Component {
   constructor(props) {
@@ -66,6 +66,7 @@ class App extends Component {
                   <Route path="/jhw" component={JHW} />
                   <Route path="/ns" component={NS} />
                   <Route path="/sondheim" component={SOND} />
+                  <Route path="/shakespeare" component={SHK} />
                   <div className='footer'>StageRabbit, Jersey City, NJ&nbsp;&nbsp;<a href='mailto:info@stagerabbit.com'>info@stagerabbit.com</a></div>
                 </div>
               </Router>
