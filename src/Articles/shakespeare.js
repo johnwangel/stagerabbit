@@ -44,14 +44,14 @@ class Shakespeare extends Component {
             <h2>As You Like It</h2>
                 <div>
                   { (p)
-                    ? p.map( (item, idx) => (item.title.includes("Road Show")) ? <ShowItem key={idx} item={item}/> : null )
+                    ? p.map( (item, idx) => (item.title.includes("As You Like It")) ? <ShowItem key={idx} item={item}/> : null )
                     : null
                   }
                 </div>
             <h2>Love&rsquo;s Labour&rsquo;s Lost</h2>
                 <div>
                   { (p)
-                    ? p.map( (item, idx) => (item.title.includes("As You Like It")) ? <ShowItem key={idx} item={item}/> : null )
+                    ? p.map( (item, idx) => (item.title.includes("Labour")) ? <ShowItem key={idx} item={item}/> : null )
                     : null
                   }
                 </div>
