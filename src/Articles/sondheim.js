@@ -102,6 +102,14 @@ class Sondheim extends Component {
                 : null
               }
             </div>
+        <h2>Side by Side by Sondheim</h2>
+            <div>
+              { (p)
+                ? p.map( (item, idx) => (item.title.includes("Side by Side by Sondheim")) ? <ShowItem key={idx} item={item}/> : null )
+                : null
+              }
+            </div>
+
         <h2>Sondheim on Sondheim</h2>
             <div>
               { (p)
