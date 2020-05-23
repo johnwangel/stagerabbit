@@ -4,7 +4,8 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
 
-import  { getProfileFetch } from './Register/actions';
+import { getProfileFetch } from './Register/actions';
+import { IP_KEY } from './constants/constants.js';
 
 import Main from './Main/Main';
 import Home from './Home/Home';
@@ -27,6 +28,8 @@ import SHK from './Articles/shakespeare';
 class App extends Component {
   constructor(props) {
     super(props);
+    this.state = { ip: undefined };
+    this.setIP();
   }
 
   componentDidMount(){
@@ -37,6 +40,25 @@ class App extends Component {
     script.async = true;
     document.head.appendChild(script);
   }
+
+  setIP() {
+    fetch(`https://geoip-db.com/json/${IP_KEY}`)
+     .then(res => res.json())
+     .then(json => {
+      console.log('json',json);
+      this.setState({ ip: json });
+      });
+
+      // IPv4: "72.90.159.41"
+      // city: "Hoboken"
+      // country_code: "US"
+      // country_name: "United States"
+      // latitude: 40.7445
+      // longitude: -74.0329
+      // postal: "07030"
+      // state: "New Jersey"
+
+  };
 
   render() {
     return (
