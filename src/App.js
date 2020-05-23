@@ -45,7 +45,7 @@ class App extends Component {
     fetch(`https://geoip-db.com/json/${IP_KEY}`)
      .then(res => res.json())
      .then(json => {
-      console.log('json',json);
+      //console.log('json',json);
       this.setState({ ip: json });
       });
 
