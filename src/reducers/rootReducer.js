@@ -1,5 +1,6 @@
 import {combineReducers} from "redux";
 
+import Admin from "../Admin/reducers.js";
 import ProdArtists from "../Artists/reducers.js";
 import Prods from "../Productions/reducers.js";
 import Recents from "../Recent/reducers.js";
@@ -12,6 +13,7 @@ import User from "../Register/reducers.js";
 import VenuesByTheater from "../Venues/reducers.js";
 
 const rootReducer = combineReducers({
+    Admin,
     Prods,
     ProdArtists,
     Recents,

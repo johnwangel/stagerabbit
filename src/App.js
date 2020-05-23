@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet";
 import { getProfileFetch, log_ip } from './Register/actions';
 import { IP_KEY } from './constants/constants.js';
 
+import Admin from './Admin/Stats';
 import Main from './Main/Main';
 import Home from './Home/Home';
 import Header from "./Header/header";
@@ -70,6 +71,7 @@ class App extends Component {
                   <Route path="/ns" component={NS} />
                   <Route path="/sondheim" component={SOND} />
                   <Route path="/shakespeare" component={SHK} />
+                  <Route path="/stats" component={Admin} />
                   <div className='footer'>StageRabbit, Jersey City, NJ&nbsp;&nbsp;<a href='mailto:info@stagerabbit.com'>info@stagerabbit.com</a></div>
                 </div>
               </Router>

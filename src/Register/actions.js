@@ -15,10 +15,7 @@ export function log_ip( body ){
   return dispatch => {
     fetch(`${URL}locations/logip`, GET_POST_HEADER )
     .then(response => response.json())
-    .then(data => {
-        console.log(data);
-        dispatch(logIP(data));
-    })
+    .then(data => dispatch(logIP(data)))
     .catch( err => console.log('THERE WAS AN ERROR'))
   }
 }
