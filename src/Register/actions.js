@@ -2,10 +2,31 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { GET_HEADER, GET_POST_HEADER, URL } from '../constants/constants.js';
 
+
+export const  LOGIP = 'LOGIP';
 export const  REGISTER = 'REGISTER';
 export const  LOGIN = 'LOGIN';
 export const  LOGOUT = 'LOGOUT';
 export const  LOGINERROR = 'LOGINERROR';
+
+
+export function log_ip( body ){
+  GET_POST_HEADER.body=JSON.stringify(body);
+  return dispatch => {
+    fetch(`${URL}locations/logip`, GET_POST_HEADER )
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        dispatch(logIP(data));
+    })
+    .catch( err => console.log('THERE WAS AN ERROR'))
+  }
+}
+
+const logIP = data => ({
+  type : LOGIP,
+  payload : data
+});
 
 export function register_user( body ){
   GET_POST_HEADER.body=JSON.stringify(body);
