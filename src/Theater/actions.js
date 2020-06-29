@@ -32,9 +32,9 @@ const all_theaters = theater => ({
   payload : { theater }
 });
 
-export function updateTheater ( theaterid ){
+export function updateTheater ( theaterid, client ){
   return dispatch => {
-    fetch(`${URL}?type=theater&id=${theaterid}`, GET_HEADER)
+    fetch(`${URL}?type=theater&id=${theaterid}&client=${client}`, GET_HEADER)
     .then(response => response.json())
     .then(data => dispatch(addTheaterSuccess(data.data)))
     .catch( err => console.log(err.message));

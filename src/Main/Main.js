@@ -172,9 +172,10 @@ class Main extends Component {
   }
 
   update_theater_details(tid){
-    this.setState({ hide_new_theater_form : true })
-    //(tid.charAt(0)===':') ? tid=tid.substr(1) : tid=tid;
-    this.props.updateTheater(tid);
+    this.setState({ hide_new_theater_form : true });
+    let client;
+    if (this.props && this.props.User && this.props.User.client) client=this.props.User.client;
+    this.props.updateTheater(tid,client);
     this.props.updateProds(tid);
     this.props.getVenuesByTheater(tid);
     this.props.getAllShows();
@@ -586,8 +587,8 @@ const mapDispatchToProps = dispatch => {
     updateTheaterID: theaterid => {
       dispatch( updateTheaterID(theaterid) )
     },
-    updateTheater: theaterid => {
-      dispatch( updateTheater(theaterid) )
+    updateTheater: (theaterid,client) => {
+      dispatch( updateTheater(theaterid,client) )
     },
     getStates : () => {
       dispatch( getStates() )
