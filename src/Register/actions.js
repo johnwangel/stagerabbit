@@ -8,6 +8,7 @@ export const  REGISTER = 'REGISTER';
 export const  LOGIN = 'LOGIN';
 export const  LOGOUT = 'LOGOUT';
 export const  LOGINERROR = 'LOGINERROR';
+export const  LOGIN_RESULTS = 'LOGIN_RESULTS';
 
 
 export function log_ip( body ){
@@ -15,13 +16,21 @@ export function log_ip( body ){
   return dispatch => {
     fetch(`${URL}locations/logip`, GET_POST_HEADER )
     .then(response => response.json())
-    .then(data => dispatch(logIP(data)))
+    .then(data => {
+      if (data.results && data.results.count>0) dispatch( init_search_results(data.results) );
+      dispatch(logIP(data));
+    })
     .catch( err => console.log('THERE WAS AN ERROR'))
   }
 }
 
 const logIP = data => ({
   type : LOGIP,
+  payload : data
+});
+
+const init_search_results = data => ({
+  type : LOGIN_RESULTS,
   payload : data
 });
 

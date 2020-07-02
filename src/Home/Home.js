@@ -49,10 +49,18 @@ class Home extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    let scrollme=true;
     if (this.props.SearchResults.results !== prevProps.SearchResults.results && this.props.SearchResults.results.count){
-      this.setState({ pages: Math.ceil(this.props.SearchResults.results.count/25), startPage: this.props.SearchResults.results.startAt +1 });
+      if (this.props.SearchResults.results.search) {
+        this.setState({ search: this.props.SearchResults.results.search });
+        scrollme=false;
+      }
+      this.setState({
+        pages: Math.ceil(this.props.SearchResults.results.count/25),
+        startPage: this.props.SearchResults.results.startAt +1
+      });
     }
-    if (this.props.SearchResults.results !== prevProps.SearchResults.results) {
+    if (this.props.SearchResults.results !== prevProps.SearchResults.results && scrollme) {
         this.resultRef.current.scrollIntoView({
           behavior: 'smooth',
           block: 'start'
