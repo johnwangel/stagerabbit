@@ -887,6 +887,46 @@ h4.form-title {
         background-color: #FFFFFF;
         border: 6px solid indigo;
         box-sizing: border-box; }
+  .form-group.form-group.datetime .date-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center; }
+    .form-group.form-group.datetime .date-info div:first-child {
+      margin-right: 20px; }
+  .form-group.form-group.datetime .react-time-picker {
+    height: 35px;
+    max-height: 35px;
+    cursor: pointer; }
+    .form-group.form-group.datetime .react-time-picker > * {
+      background-color: white;
+      padding: 0 5px; }
+  .form-group.form-group.datetime .react-time-picker__wrapper {
+    border-radius: 5px; }
+  .form-group.form-group.datetime .react-time-picker__clear-button {
+    display: none; }
+  .form-group.form-group.datetime .react-time-picker__inputGroup__amPm {
+    margin-right: 0; }
+  .form-group.form-group.datetime .timezone-picker {
+    width: 300px;
+    min-width: 150px;
+    max-width: 100%; }
+    .form-group.form-group.datetime .timezone-picker input {
+      border-radius: 5px;
+      padding: 8px;
+      font-size: 1.1em;
+      font-family: 'Raleway', sans-serif;
+      cursor: pointer; }
+    .form-group.form-group.datetime .timezone-picker ul {
+      background-color: white; }
+  .form-group.form-group.datetime .time {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start; }
+    .form-group.form-group.datetime .time > .form-select.wide {
+      min-width: unset;
+      font-size: 14px; }
   .form-group .label {
     color: white;
     font-weight: bold;
@@ -983,7 +1023,7 @@ input[type='text'], input[type='email'], input[type='password'] {
   input[type='text'].person, input[type='email'].person, input[type='password'].person {
     width: 100px; }
 
-.loginPage form .optin {
+.loginPage form .optin, .datetime .optin, .free .optin {
   position: relative;
   margin: 15px 0;
   display: flex;
@@ -995,17 +1035,24 @@ input[type='text'], input[type='email'], input[type='password'] {
   user-select: none;
   /* Create a custom checkbox */
   /* When the radio button is checked, add a  background */ }
-  .loginPage form .optin input {
+  .loginPage form .optin input, .datetime .optin input, .free .optin input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
     z-index: 5; }
-  .loginPage form .optin .agree {
+  .loginPage form .optin .agree, .datetime .optin .agree, .free .optin .agree {
     font-size: .8rem;
     margin-left: 25px; }
-  .loginPage form .optin:hover input ~ .custom-checkbox {
+  .loginPage form .optin .label, .datetime .optin .label, .free .optin .label {
+    color: white;
+    font-weight: bold;
+    white-space: nowrap;
+    margin: 10px 0 5px;
+    margin-left: 25px;
+    line-height: 10px; }
+  .loginPage form .optin:hover input ~ .custom-checkbox, .datetime .optin:hover input ~ .custom-checkbox, .free .optin:hover input ~ .custom-checkbox {
     background-color: darkgray; }
-  .loginPage form .optin .custom-checkbox {
+  .loginPage form .optin .custom-checkbox, .datetime .optin .custom-checkbox, .free .optin .custom-checkbox {
     position: absolute;
     top: 5px;
     left: 0;
@@ -1014,7 +1061,7 @@ input[type='text'], input[type='email'], input[type='password'] {
     background-color: lightgray;
     border-radius: 50%;
     z-index: 4; }
-  .loginPage form .optin input:checked ~ .custom-checkbox {
+  .loginPage form .optin input:checked ~ .custom-checkbox, .datetime .optin input:checked ~ .custom-checkbox, .free .optin input:checked ~ .custom-checkbox {
     background-color: #FFFFFF;
     border: 6px solid indigo;
     box-sizing: border-box; }
@@ -1270,7 +1317,7 @@ a {
     color: darkorchid; }
 
 .overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -1279,7 +1326,10 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center; }
+  align-items: center;
+  overflow: scroll;
+  z-index: 1000000000;
+  padding-top: 20px; }
   .overlay.hide {
     display: none; }
 

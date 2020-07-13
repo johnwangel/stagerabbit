@@ -182,8 +182,8 @@ class AddProd extends Component {
     //console.log('props in add prod',this.props);
 
     return (
-      <div ref={ this.errRef } className='overlay' style={{height: this.state.height + 'px'}}>
-        <div className="overlay-container" style={{marginTop: this.state.scroll + 'px'}}>
+      <div ref={ this.errRef } className='overlay'>
+        <div className="overlay-container">
           <div className="close" onClick={() => { this.props.prod_form() }} >&times;</div>
           <h2 className="form-title">{this.state.formTitle}</h2>
           <form id="form-1" onSubmit={this.handleSubmit}>

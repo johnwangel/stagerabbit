@@ -56,8 +56,8 @@ class AddTheater extends Component {
   }
 
   render() {
-    return (<div className='overlay' style={{height: this.state.height + 'px'}}>
-            <div class="overlay-container" style={{marginTop: this.state.scroll + 'px'}} ref={this.errorRef}>
+    return (<div className='overlay'>
+            <div class="overlay-container" ref={this.errorRef}>
                 <div class="close" onClick={() => { this.props.theater_form() }} >&times;</div>
                 <h2 className='form-title'>Add Theater</h2>
                 { (this.state.error)

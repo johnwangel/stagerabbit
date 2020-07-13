@@ -40,13 +40,7 @@ class Header extends Component {
           <span className="title">StageRabbit</span>
           <span className="subtitle">.&nbsp;.&nbsp;.&nbsp;great theater is just a hop away!</span>
         </div>
-{/*        <ul>
 
-          { ( this.props.User.level>1 )
-            ? <li><Link to={`/emails`}>Emails</Link></li>
-            : null
-          }
-        </ul>*/}
         { (this.props.User.level > 1)
           ? <div className="welcome">
              <div className="marquee">Welcome, {this.props.User.name}!</div>

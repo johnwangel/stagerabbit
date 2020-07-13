@@ -143,6 +143,71 @@ h4.form-title {
 
   }
 
+  &.form-group.datetime {
+
+    .date-info {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      div:first-child { margin-right: 20px; }
+    }
+
+    .react-time-picker {
+      height: 35px;
+      max-height: 35px;
+
+      cursor: pointer;
+
+
+
+      &>* {
+        background-color: white;
+        padding: 0 5px;
+      }
+    }
+
+    .react-time-picker__wrapper { border-radius: 5px; }
+    .react-time-picker__clear-button { display: none; }
+    .react-time-picker__inputGroup__amPm { margin-right: 0; }
+
+    .timezone-picker {
+      width: 300px;
+      min-width: 150px;
+      max-width: 100%;
+
+      input {
+        border-radius: 5px;
+        padding: 8px;
+        font-size: 1.1em;
+        font-family: 'Raleway', sans-serif;
+        cursor: pointer;
+      }
+
+      ul {
+        background-color: white;
+
+      }
+
+    }
+
+    .time {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+
+      &>.form-select.wide {
+        min-width: unset;
+        font-size: 14px;
+      }
+
+
+
+    }
+
+  }
+
   .label {
     color: white;
     font-weight: bold;
@@ -264,49 +329,61 @@ input[type='text'],input[type='email'],input[type='password'] {
 
 }
 
-.loginPage form .optin {
-  position: relative;
-  margin: 15px 0;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+.loginPage form, .datetime, .free {
 
-  input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    z-index: 5;
-  }
-  .agree {
-    font-size: .8rem;
-    margin-left: 25px;
-  }
+  .optin {
+    position: relative;
+    margin: 15px 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 
-  &:hover input ~ .custom-checkbox {
-    background-color: darkgray;
-  }
+    input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      z-index: 5;
+    }
+    .agree {
+      font-size: .8rem;
+      margin-left: 25px;
+    }
 
-  /* Create a custom checkbox */
-  .custom-checkbox {
-    position: absolute;
-    top: 5px;
-    left: 0;
-    height: 18px;
-    width: 18px;
-    background-color: lightgray;
-    border-radius: 50%;
-    z-index: 4;
-  }
+    .label {
+      color: white;
+      font-weight: bold;
+      white-space: nowrap;
+      margin: 10px 0 5px;
+      margin-left: 25px;
+      line-height: 10px;
+    }
 
-  /* When the radio button is checked, add a  background */
-  input:checked ~ .custom-checkbox {
-    background-color: $white;
-    border: 6px solid $main;
-    box-sizing: border-box;
+    &:hover input ~ .custom-checkbox {
+      background-color: darkgray;
+    }
+
+    /* Create a custom checkbox */
+    .custom-checkbox {
+      position: absolute;
+      top: 5px;
+      left: 0;
+      height: 18px;
+      width: 18px;
+      background-color: lightgray;
+      border-radius: 50%;
+      z-index: 4;
+    }
+
+    /* When the radio button is checked, add a  background */
+    input:checked ~ .custom-checkbox {
+      background-color: $white;
+      border: 6px solid $main;
+      box-sizing: border-box;
+    }
   }
 
 }

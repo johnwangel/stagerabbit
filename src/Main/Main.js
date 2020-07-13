@@ -29,6 +29,10 @@ import {  getAllShows,
           editShow,
           removeArtistFromShow } from '../Shows/actions';
 
+import {  newEvent,
+          editEvent,
+          getEvents } from '../Events/actions';
+
 import { getPosition } from '../constants/helpers';
 
 import { GET_POST_HEADER, URL, process_submit } from '../constants/constants.js';
@@ -36,8 +40,10 @@ import { GET_POST_HEADER, URL, process_submit } from '../constants/constants.js'
 import Theater from "../Theater/theater";
 import AddTheater from "../Theater/theaterAdd";
 import Venues from "../Venues/venues";
+import Event from "../Events/event";
 import AddVenue from "../Venues/AddVenue/addvenue";
 import AddShow from "../Shows/addshow";
+import AddEvent from "../Events/addEvent";
 import Productions from "../Productions/productions";
 import AddProd from "../Productions/AddProduction/addproduction";
 
@@ -52,6 +58,7 @@ class Main extends Component {
                   hide_edit_venue_form: true,
                   hide_assoc_venue_form: true,
                   hide_new_show_form: true,
+                  hide_new_event_form: true,
                   hide_new_theater_form: true,
                   hide_delete_theater_form: true,
                   venue: { venue_id : 0 },
@@ -59,17 +66,11 @@ class Main extends Component {
                   clear_edit: false,
                   delete_id: this.props.Theater[0].id,
                   show_prods: 0,
+                  show_events: 0,
                   scroll: null,
                   height: null
                 };
 
-    this.update_theater_details(this.props.match.params.id);
-
-    //console.log('params',this.props.match.params)
-    if (this.props.match.params.id) this.update_theater_details(this.props.match.params.id);
-    this.props.getStates();
-    this.props.getSpecialties();
-    this.props.getAllArtists();
     this.update_theater_details = this.update_theater_details.bind(this);
     this.handleIDSubmit = this.handleIDSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -81,17 +82,30 @@ class Main extends Component {
     this.addArtistCallback = this.addArtistCallback.bind(this);
     this.removeArtistFromProdCallback = this.removeArtistFromProdCallback.bind(this);
     this.removeArtistFromShowCallback = this.removeArtistFromShowCallback.bind(this);
+    this.toggle_forms = this.toggle_forms.bind(this);
     this.add_show = this.add_show.bind(this);
     this.edit_show = this.edit_show.bind(this);
     this.edit_prod = this.edit_prod.bind(this);
+    this.edit_event = this.edit_event.bind(this);
     this.new_prod_cb = this.new_prod_cb.bind(this);
+    this.new_event_cb = this.new_event_cb.bind(this);
     this.show_form = this.show_form.bind(this);
     this.prod_form = this.prod_form.bind(this);
+    this.event_form = this.event_form.bind(this);
     this.theater_form = this.theater_form.bind(this);
     this.add_theater = this.add_theater.bind(this);
     this.delete_theater = this.delete_theater.bind(this);
-    this.toggleProds = this.toggleProds.bind(this);
-    this.handleScroll = this.handleScroll.bind(this);
+    this.toggleTime = this.toggleTime.bind(this);
+    //this.handleScroll = this.handleScroll.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.props.match.params.id) this.update_theater_details(this.props.match.params.id);
+    this.update_theater_details(this.props.match.params.id);
+    this.props.getStates();
+    this.props.getSpecialties();
+    this.props.getAllArtists();
+    //window.addEventListener('scroll', this.handleScroll);
   }
 
   componentDidUpdate(prevProps) {
@@ -132,43 +146,20 @@ class Main extends Component {
 
   }
 
-  componentDidMount() {
-    window.addEventListener('scroll', this.handleScroll);
-   }
 
-  handleScroll(){
-    this.setState(getPosition());
-  }
 
-  handleChange(e) {
-    this.setState({ delete_id : e.target.value });
-  }
-
-  handleIDChange(e) {
-    this.setState({ current_id : e.target.value });
-    //this.props.updateTheaterID(e.target.value);
-  }
+  //handleScroll(){ this.setState(getPosition()); }
+  handleChange(e) { this.setState({ delete_id : e.target.value }); }
+  handleIDChange(e) { this.setState({ current_id : e.target.value }); }
+  alterTheaterCallback(newData) { this.props.alterTheater(newData); }
+  addArtistCallback(newData) { this.props.newArtist(newData); }
+  removeArtistFromProdCallback(newData) { this.props.removeArtistFromProd(newData); }
+  removeArtistFromShowCallback(newData) { this.props.removeArtistFromShow(newData); }
 
   handleIDSubmit(e) {
     e.preventDefault();
     let tid = this.state.current_id;
     this.update_theater_details(tid);
-  }
-
-  alterTheaterCallback(newData) {
-    this.props.alterTheater(newData);
-  }
-
-  addArtistCallback(newData) {
-    this.props.newArtist(newData);
-  }
-
-  removeArtistFromProdCallback(newData) {
-    this.props.removeArtistFromProd(newData);
-  }
-
-  removeArtistFromShowCallback(newData) {
-    this.props.removeArtistFromShow(newData);
   }
 
   update_theater_details(tid){
@@ -181,6 +172,7 @@ class Main extends Component {
     this.props.getAllShows();
     this.props.getAllArtists();
     this.props.getAllVenues();
+    this.props.getEvents(tid);
   }
 
   venue_form(type,id){
@@ -196,39 +188,17 @@ class Main extends Component {
         item='hide_edit_venue_form';
         if (id){
           v = this.props.VenuesByTheater.venues;
-          d = v.find( item =>  (item.venue_id===id) ? item : null );
+          d = v.find( _item =>  (_item.venue_id===id) ? _item : null );
         }
         break;
     }
-
-    this.setState(
-      {
-        hide_add_venue_form: (item==='hide_add_venue_form') ? !this.state.hide_add_venue_form : true,
-        hide_edit_venue_form: (item==='hide_edit_venue_form') ? !this.state.hide_edit_venue_form : true,
-        hide_assoc_venue_form: (item==='hide_assoc_venue_form') ? !this.state.hide_assoc_venue_form : true,
-        venue: d,
-        hide_new_show_form: true,
-        hide_production_form: true,
-        hide_new_theater_form: true,
-        hide_delete_theater_form: true
-      }
-    );
+    this.toggle_forms(item,!this.state[item],d);
   }
 
   update_venue(body){
     body.tid=this.props.Theater[0].id;
     this.props.updateVenues(body);
-    this.setState( {
-        hide_new_show_form: true,
-        hide_add_venue_form: true,
-        hide_edit_venue_form: true,
-        venue: {venue_id: 0},
-        hide_assoc_venue_form: true,
-        hide_production_form: true,
-        hide_new_theater_form: true,
-        hide_delete_theater_form: true
-      }
-    );
+    this.toggle_forms();
   }
 
   deleteVenueCallback(id) {
@@ -236,89 +206,61 @@ class Main extends Component {
     this.props.updateVenues(body);
   }
 
-  show_form(){
+  toggle_forms(form_name,form_state,venue){
     this.setState({
-        hide_new_show_form: !this.state.hide_new_show_form,
-        hide_add_venue_form: true,
-        hide_edit_venue_form: true,
-        venue: {venue_id: 0},
-        hide_assoc_venue_form: true,
-        hide_production_form: true,
-        hide_new_theater_form: true,
-        hide_delete_theater_form: true
-      }
-    );
+        hide_production_form: (form_name && form_name==='hide_production_form') ? form_state : true,
+        hide_new_show_form: (form_name && form_name==='hide_new_show_form') ? form_state : true,
+        hide_add_venue_form: (form_name && form_name==='hide_add_venue_form') ? form_state : true,
+        hide_new_event_form: (form_name && form_name==='hide_new_event_form') ? form_state : true,
+        hide_edit_venue_form: (form_name && form_name==='hide_edit_venue_form') ? form_state : true,
+        hide_assoc_venue_form: (form_name && form_name==='hide_assoc_venue_form') ? form_state : true,
+        hide_new_theater_form: (form_name && form_name==='hide_new_theater_form') ? form_state : true,
+        hide_delete_theater_form: (form_name && form_name==='hide_delete_theater_form') ? form_state : true,
+        venue: (venue) ? venue : { venue_id : 0 }
+      });
   }
 
-  prod_form(){
-    this.setState({
-        hide_production_form: !this.state.hide_production_form,
-        hide_new_show_form: true,
-        hide_add_venue_form: true,
-        hide_edit_venue_form: true,
-        venue: {venue_id: 0},
-        hide_assoc_venue_form: true,
-        hide_new_theater_form: true,
-        hide_delete_theater_form: true
-      }
-    );
-  }
-
+  show_form(){ this.toggle_forms('hide_new_show_form',!this.state.hide_new_show_form); }
+  prod_form(){ this.toggle_forms('hide_production_form',!this.state.hide_production_form); }
+  event_form(){ this.toggle_forms('hide_new_event_form',!this.state.hide_new_event_form); }
 
   add_theater(body){
-    this.setState(
-      {
-        hide_production_form: true,
-        hide_new_show_form: true,
-        hide_add_venue_form: true,
-        hide_edit_venue_form: true,
-        venue: {venue_id: 0},
-        hide_assoc_venue_form: true,
-        hide_new_theater_form: true,
-        hide_delete_theater_form: true
-      });
-      this.props.addTheater( body );
+    this.toggle_forms();
+    this.props.addTheater( body );
   }
 
-  delete_theater_form(){
-    this.setState(
-      {
-        hide_production_form: true,
-        hide_new_show_form: true,
-        hide_add_venue_form: true,
-        hide_edit_venue_form: true,
-        venue: {venue_id: 0},
-        hide_assoc_venue_form: true,
-        hide_new_theater_form: true,
-        hide_delete_theater_form: !this.state.hide_delete_theater_form
-      });
+  theater_form(){ this.toggle_forms('hide_new_theater_form',!this.state.hide_new_theater_form); }
+  delete_theater_form(){ this.toggle_forms('hide_delete_theater_form',!this.state.hide_delete_theater_form); }
+
+  add_show(body){
+    this.props.newShow(body);
+    this.toggle_forms();
   }
 
   new_prod_cb(body){
     this.props.newProd(body);
-    this.setState( { hide_production_form : true } );
+    this.toggle_forms();
   }
 
-  edit_show(body){
-    this.props.editShow( body );
+  new_event_cb(body){
+    this.props.newEvent(body);
+    this.toggle_forms();
   }
 
-  edit_prod(body){
-    this.props.editProd( body );
-  }
+  edit_show(body) { this.props.editShow(body); }
+  edit_prod(body) { this.props.editProd(body); }
+  edit_event(body) { this.props.editEvent(body); }
 
-  theater_form(){
-    this.setState(
-      {
-        hide_production_form: true,
-        hide_new_show_form: true,
-        hide_add_venue_form: true,
-        hide_edit_venue_form: true,
-        venue: {venue_id: 0},
-        hide_assoc_venue_form: true,
-        hide_new_theater_form: !this.state.hide_new_theater_form,
-        hide_delete_theater_form: true
-      });
+  toggleTime(which,number){
+    switch (which){
+      case 1:
+        this.setState({show_prods:number});
+        break;
+      case 2:
+        this.setState({show_events:number});
+        break;
+    }
+
   }
 
   delete_theater(e){
@@ -331,29 +273,10 @@ class Main extends Component {
     .catch( err => console.log(err.message));
   }
 
-  add_show(body){
-    this.props.newShow( body );
-    this.setState(
-      {
-        hide_new_show_form: true,
-        hide_add_venue_form: true,
-        hide_edit_venue_form: true,
-        venue: {venue_id: 0},
-        hide_assoc_venue_form: true,
-        hide_new_theater_form: true,
-        hide_delete_theater_form: true
-      }
-    );
-  }
-
   handleGeo(e){
     e.preventDefault();
     let body = process_submit(e.target.elements);
     this.props.updateGeo(body);
-  }
-
-  toggleProds(number){
-    this.setState({show_prods:number});
   }
 
   render() {
@@ -361,6 +284,8 @@ class Main extends Component {
     const p = this.props.Prods;
     const v = (this.props.VenuesByTheater.venues) ? this.props.VenuesByTheater.venues : null;
     const s = (this.props.Shows.shows) ? this.props.Shows.shows : null;
+    const e = this.props.Events.events;
+
 
     return (
       <div className="theaters">
@@ -482,6 +407,17 @@ class Main extends Component {
               show_form={ this.show_form }
             />
         }
+
+        { (this.state.hide_new_event_form)
+          ? null
+          : <AddEvent
+              theaterid={ d.id }
+              addShowCB={ this.add_show }
+              newEventCB={ this.new_event_cb }
+              event_form={ this.event_form }
+            />
+        }
+
         { (this.state.hide_production_form)
           ? null
           : <AddProd
@@ -508,6 +444,8 @@ class Main extends Component {
                    onClick={() => { this.prod_form() }}>Add Production</div>
               <div className="tool"
                    onClick={() => { this.show_form() }}>Add Show</div>
+              <div className="tool"
+                   onClick={() => { this.event_form() }}>Add Web Event</div>
               { (this.props.User.level === 3) ? <div className="tool" onClick={() => { this.theater_form() }}>Add Theater</div> : null }
               { (this.props.User.level === 3) ? <div className="tool" onClick={() => { this.delete_theater_form() }}>Delete Theater</div> : null }
             </div>
@@ -518,12 +456,12 @@ class Main extends Component {
         <div className="toggle">
           <div  id="upcoming1"
                 className={ (this.state.show_prods===0) ? "toggle-button active" : "toggle-button" }
-                onClick={() => { this.toggleProds(0) } }>
+                onClick={() => { this.toggleTime(1,0) } }>
               Upcoming
           </div>
           <div  id="previous1"
                 className={ (this.state.show_prods===1) ? "toggle-button active" : "toggle-button" }
-                onClick={() => { this.toggleProds(1) } }>
+                onClick={() => { this.toggleTime(1,1) } }>
               Previous
           </div>
         </div>
@@ -573,6 +511,67 @@ class Main extends Component {
             </div>
           : <div className={ (this.state.show_prods===1) ? 'productions main-column' : 'productions main-column hide' }><div className="empty">No previous productions available.</div></div>
         }
+
+
+
+
+
+
+        <h2 className="main-page main-column">Events</h2>
+        <div className="toggle">
+          <div  id="upcoming2"
+                className={ (this.state.show_events===0) ? "toggle-button active" : "toggle-button" }
+                onClick={() => { this.toggleTime(2,0) } }>
+              Upcoming
+          </div>
+          <div  id="previous2"
+                className={ (this.state.show_events===1) ? "toggle-button active" : "toggle-button" }
+                onClick={() => { this.toggleTime(2,1) } }>
+              Previous
+          </div>
+        </div>
+        { (e && e.upcoming && e.upcoming.length > 0)
+          ? <div className={ (this.state.show_events===0) ? 'productions main-column' : 'productions main-column hide' }>
+              { e.upcoming.map( ( item, index ) => {
+                return <Event
+                    idx={ index }
+                    key={ `ev-${index}` }
+                    event={ item }
+                    shows={ this.props.Shows }
+                    addShowCB={ this.add_show }
+                    removeArtistShowCB={ this.removeArtistFromShowCallback }
+                    removeArtistProdCB={ this.removeArtistFromProdCallback }
+                    newArtist={ this.props.Shows.new_artist }
+                    edit_event={ this.edit_event }
+                    event_form={ this.event_form }
+                    perm={ (this.props.User.level===3 || this.state.admin ) ? true : false }
+                  />
+                })
+              }
+            </div>
+          : <div className={ (this.state.show_events===0) ? 'productions main-column' : 'productions main-column hide' }><div className="empty">No upcoming events listed.</div></div>
+        }
+        { (e && e.previous && e.previous.length > 0)
+          ? <div className={ (this.state.show_events===1) ? 'productions main-column' : 'productions main-column hide' }>
+              { e.previous.map( ( item, index ) => {
+                return <Event
+                    idx={ index }
+                    key={ `ev-${index}` }
+                    event={ item }
+                    shows={ this.props.Shows }
+                    addShowCB={ this.add_show }
+                    addArtistCB={ this.addArtistCallback }
+                    removeArtistShowCB={ this.removeArtistFromShowCallback }
+                    newArtist={ this.props.Shows.new_artist }
+                    edit_event={ this.edit_event }
+                    event_form={ this.event_form }
+                    perm={ (this.props.User.level===3 || this.state.admin ) ? true : false }
+                  />
+                })
+              }
+            </div>
+          : <div className={ (this.state.show_events===1) ? 'productions main-column' : 'productions main-column hide' }><div className="empty">No previous events available.</div></div>
+        }
        </div>
     );
   }
@@ -611,6 +610,9 @@ const mapDispatchToProps = dispatch => {
     getAllVenues: () => {
       dispatch( getAllVenues() )
     },
+    getEvents: (tid) => {
+      dispatch( getEvents(tid) )
+    },
     updateVenues: (body) => {
       dispatch( updateVenues(body) )
     },
@@ -620,6 +622,9 @@ const mapDispatchToProps = dispatch => {
     newShow: body => {
       dispatch( newShow( body ) )
     },
+    newEvent: body => {
+      dispatch( newEvent( body ) )
+    },
     newArtist: body => {
       dispatch( newArtist( body ) )
     },
@@ -628,6 +633,9 @@ const mapDispatchToProps = dispatch => {
     },
     editProd: body => {
       dispatch( editProd(body) )
+    },
+    editEvent: body => {
+      dispatch( editEvent(body) )
     },
     removeArtistFromProd: body => {
       dispatch( removeArtistFromProd(body) )

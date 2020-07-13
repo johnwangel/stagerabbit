@@ -95,8 +95,8 @@ class AddVenue extends Component {
 
   render() {
     return (
-      <div className='overlay' style={{height: this.state.height + 'px'}}>
-        <div className="overlay-container" style={{marginTop: this.state.scroll + 'px'}}  ref={this.myRef}>
+      <div className='overlay'>
+        <div className="overlay-container" ref={this.myRef}>
           <div  className="close"
                 onClick={() => { this.props.venue_form( this.state.type ) } }>
               &times;
