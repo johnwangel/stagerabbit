@@ -11,7 +11,7 @@ import { newShow } from '../Shows/actions';
 
 import AddArtist from "../Productions/AddProduction/addArtist";
 
-var Moment = require('moment-timezone');
+var Moment = require('moment');
 
 const timezones = ['EST','EDT','CST','CDT','MST','MDT','PST','PDT','AKST','AKDT','HST'];
 const hours = [1,2,3,4,5,6,7,8,9,10,11,12];
