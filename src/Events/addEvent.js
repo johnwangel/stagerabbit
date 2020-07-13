@@ -1,9 +1,6 @@
 import React, { Component, createRef } from 'react';
 import { connect } from 'react-redux';
 import DatePicker from "react-datepicker";
-import TimePicker from "react-time-picker";
-import TimezonePicker from 'react-bootstrap-timezone-picker';
-
 import parseISO from 'date-fns/parseISO'
 
 import { process_submit } from '../constants/constants';
@@ -11,9 +8,6 @@ import { getPosition } from '../constants/helpers';
 import { getEventTypes } from './actions';
 
 import { newShow } from '../Shows/actions';
-
-import 'react-bootstrap-timezone-picker/dist/react-bootstrap-timezone-picker.min.css';
-import "react-datepicker/dist/react-datepicker.css";
 
 import AddArtist from "../Productions/AddProduction/addArtist";
 
