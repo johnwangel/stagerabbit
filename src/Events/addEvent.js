@@ -19,23 +19,10 @@ import AddArtist from "../Productions/AddProduction/addArtist";
 
 var Moment = require('moment-timezone');
 
-const timezones = {
-  'Eastern Standard Time [-05:00]': 'EST',
-  'Eastern Daylight Time [-04:00]': 'EDT',
-  'Central Standard Time [-06:00]': 'CST',
-  'Central Daylight Time [-05:00]': 'CDT',
-  'Mountain Standard Time [-07:00]': 'MST',
-  'Mountain Daylight Time [-06:00]': 'MDT',
-  'Pacific Standard Time [-08:00]': 'PST',
-  'Pacific Daylight Time [-07:00]': 'PDT',
-  'Alaska Standard Time [-09:00]': 'AKST',
-  'Alaska Daylight Time [-08:00]': 'AKDT',
-  'Hawaii Standard Time [-10:00]': 'HST'
-}
-
+const timezones = ['EST','EDT','CST','CDT','MST','MDT','PST','PDT','AKST','AKDT','HST'];
 const hours = [1,2,3,4,5,6,7,8,9,10,11,12];
 const minutes = ['00','15','30','45'];
-const day = ['am','pm'];
+const period = ['am','pm'];
 
 class AddEvent extends Component {
   constructor(props) {
@@ -44,14 +31,19 @@ class AddEvent extends Component {
     const errRef=createRef();
     const errRef2=createRef();
 
-    var s = (this.props.specs) ? this.props.spec : null;
+    var s = (this.props.specs) ? this.props.specs : null;
+    var t = (s && s.time) ? s.time : null;
     var e = (this.props.event) ? this.props.event : null;
-
 
     this.state = {
       eid: (e && e.event_id) ? e.event_id : null,
       editmode: (s) ? true : false,
-      formTitle: (s) ? 'Update Web Evemt' : 'Add Web Event',
+      formTitle: (s) ? 'Update Web Event' : 'Add Web Event',
+      title: (e && e.title) ? e.title : '',
+      free: (e && e.is_free) ? e.is_free : false,
+      website: (e && e.website) ? e.website : null,
+      more_info: (e && e.more_info) ? e.more_info : null,
+      event_type: (e && e.event_type_id) ? e.event_type_id.toString() : '0',
       start : (e && e.date_start)
         ? parseISO(Moment.utc(e.date_start).format('YYYY-MM-DD'))
         : parseISO(Moment.utc(new Date()).format('YYYY-MM-DD')),
@@ -59,28 +51,31 @@ class AddEvent extends Component {
         ? parseISO(Moment.utc(e.date_end).format('YYYY-MM-DD'))
         : null,
       show_error: false,
+      show_title: '',
       height: null,
       scroll: null,
+      show_id: (e && e.show_id) ? e.show_id : 0,
       input_show: false,
       new_show_error: null,
       onetime: (e && e.no_repeat) ? e.no_repeat : false,
-      free: (e && e.is_free) ? e.is_free : false,
-      time: null,
-      timezone: null
+      hour: (t)?t.hour:'0',
+      minutes: (t)?t.minutes:'0',
+      period: (t)?t.period:'0',
+      timezone: (t)?t.zone:'0',
+      description: (e && e.description) ? e.description: '',
+      title_error: false,
+      type_error: false,
+      desc_error: false,
+      website_error: false
     };
 
     this.props.getEventTypes();
-
     this.handleNew = this.handleNew.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleStartDateChange = this.handleStartDateChange.bind(this);
-    this.handleTimeChange = this.handleTimeChange.bind(this);
-    this.handleTimezoneChange = this.handleTimezoneChange.bind(this);
     this.handleEndDateChange = this.handleEndDateChange.bind(this);
-    this.handleExpand = this.handleExpand.bind(this);
     this.onDropdownSelected = this.onDropdownSelected.bind(this);
-    this.scrollToMyRef = this.scrollToMyRef.bind(this);
     this.inputshow = this.inputshow.bind(this);
     this.submitshow = this.submitshow.bind(this);
     this.createList = this.createList.bind(this);
@@ -104,9 +99,12 @@ class AddEvent extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    if ( this.state.venue_id==='0' ) this.setState( { venue_error : true } );
-    if ( this.state.show_id==='0' ) this.setState( { show_error : true } );
-    if ( this.state.venue_error || this.state.show_error ) {
+    if ( this.state.title==='' ) this.setState( { title_error : true } );
+    if ( this.state.type==='0' ) this.setState( { type_error : true } );
+    if ( this.state.description==='' ) this.setState( { desc_error : true } );
+    if ( this.state.website==='' ) this.setState( { website_error : true } );
+
+    if ( this.state.title_error || this.state.type_error || this.state.desc_error || this.state.website_error ) {
       this.errRef.current.scrollIntoView({
         behavior: 'smooth',
         block: 'start',
@@ -115,12 +113,8 @@ class AddEvent extends Component {
     }
 
     let body = process_submit(e.target.elements);
-    if (this.state.time) {
-      let zone='EST';
-      if (this.state.timezone) {
-        zone=this.state.timezone;
-      }
-      body.time = `${this.state.time} ${zone}`
+    if (body.hour_1 && body.minutes_1 && body.period_1 && body.zone_1) {
+      body.time=`${body.hour_1}:${body.minutes_1} ${body.period_1} ${body.zone_1}`;
     }
 
     body.free=this.state.free;
@@ -146,10 +140,6 @@ class AddEvent extends Component {
     return list;
   }
 
-  scrollToMyRef(){
-   window.scrollTo(0, this.errRef.offsetTop);
-  }
-
   handleChange(e) {
     const n = e.target.name;
     this.setState({ [n] : e.target.value});
@@ -157,14 +147,6 @@ class AddEvent extends Component {
 
   handleStartDateChange( date ) {
     this.setState({ start : date, end: date } );
-  }
-
-  handleTimeChange( time ){
-    this.setState({ time : time });
-  }
-
-  handleTimezoneChange( timezone ){
-    this.setState({ timezone : timezone });
   }
 
   handleEndDateChange( date ) {
@@ -182,10 +164,10 @@ class AddEvent extends Component {
     if ( new_show_error !== '' ){
       new_show_error='<h4>Errors</h4><ol>'+new_show_error+'</ol>';
       this.setState({ new_show_error });
-      this.errorRef.current.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
+      // this.errRef2.current.scrollIntoView({
+      //     behavior: 'smooth',
+      //     block: 'start'
+      //   });
       return;
     }
     this.props.newShow({ show_title_1: this.state.show_title, genre_1: this.state.genre  });
@@ -204,65 +186,48 @@ class AddEvent extends Component {
 
   }
 
-  handleExpand(id){
-    switch (id){
-      case 1:
-        this.setState({ expand_desc: !this.state.expand_desc });
-        break;
-      case 2:
-        this.setState({ expand_cast: !this.state.expand_cast });
-        break;
-      case 3:
-        this.setState({ expand_dir: !this.state.expand_dir });
-        break;
-      case 4:
-        this.setState({ expand_chor: !this.state.expand_chor });
-        break;
-      case 5:
-        this.setState({ expand_md: !this.state.expand_md });
-        break;
-      default:
-        return;
-    }
-  }
-
   onDropdownSelected( e ) {
     this.setState({ [e.target.name] : e.target.value } );
   }
 
   render() {
     let e=(this.props.event) ? this.props.event : null;
-    console.log('props in add event',e);
-
     return (
       <div ref={ this.errRef } className='overlay'>
         <div className="overlay-container">
           <div className="close" onClick={() => { this.props.event_form() }} >&times;</div>
           <h2 className="form-title">{this.state.formTitle}</h2>
           <form id="form-1" onSubmit={this.handleSubmit}>
-
             <div className='form-group'>
               <div className="label">Event Title (required):</div>
+              { (this.state.title_error)
+                ? <div className='error'>You must include a title for the event.</div>
+                : null
+              }
               <input
                 key="event-title-1"
                 id="event_title_1"
                 type="text"
-                name="event_title"
+                name="title"
                 placeholder='Web Event Title'
-                value={(e && e.title)? e.title : null}
+                value={ this.state.title }
                 onChange={this.handleChange}
                 required />
             </div>
 
             <div className='form-group'>
               <div className="label">Event Type (required):</div>
+              { (this.state.type_error)
+                ? <div className='error'>You must select an event type.</div>
+                : null
+              }
               <select
                     className="form-select wide"
                     id="eventtype_1"
                     key="eventtype_1"
                     type="select"
-                    name="eventtype"
-                    value={(e && e.event_type_id) ? e.event_type_id : 0 }
+                    name="event_type"
+                    value={this.state.event_type}
                     onChange={this.onDropdownSelected}
                     required >
                   {this.props.Events.types}
@@ -274,7 +239,7 @@ class AddEvent extends Component {
                 <input  type="checkbox"
                         id="free"
                         name="free"
-                        defaultChecked={ this.state.is_free }
+                        defaultChecked={ this.state.free }
                 />
                 <span className="custom-checkbox"></span>
                 <div className="label">Check if event is Free</div>
@@ -283,13 +248,17 @@ class AddEvent extends Component {
 
             <div className='form-group'>
               <div className="label">Direct Link to Event (optional):</div>
+              { (this.state.website_error)
+                ? <div className='error'>You must include a link to the event.</div>
+                : null
+              }
               <input
                 key="event_link_1"
                 id="event_link_1"
                 type="text"
-                name="event_link"
+                name="website"
                 placeholder='Event URL'
-                value={ (e && e.website ) ? e.website : null }
+                value={ this.state.website }
                 onChange={this.handleChange}
                 required />
             </div>
@@ -302,7 +271,7 @@ class AddEvent extends Component {
                 type="text"
                 name="event_info_link"
                 placeholder='More Info URL'
-                value={(e && e.more_info) ? e.more_info : null }
+                value={this.state.more_info}
                 onChange={this.handleChange} />
             </div>
 
@@ -362,7 +331,7 @@ class AddEvent extends Component {
                           id="show_select"
                           type="select"
                           name="show_id"
-                          value={(e && e.show_id) ? `${e.show_id}` : '0'}
+                          value={this.state.show_id}
                           onChange={this.onDropdownSelected}>
                       {this.props.Shows.shows}
                     </select>
@@ -407,10 +376,10 @@ class AddEvent extends Component {
                     key="hour_1"
                     type="select"
                     name="hour"
-                    value={(this.props.specs && this.props.specs.time)?this.props.specs.time.hour:0}
+                    value={this.state.hour}
                     onChange={this.onDropdownSelected}
                     required >
-                  { this.createList(hours,'Hour')}
+                  { this.createList(hours,'HOUR')}
               </select>
               <select
                     className="form-select wide"
@@ -418,10 +387,10 @@ class AddEvent extends Component {
                     key="minutes_1"
                     type="select"
                     name="minutes"
-                    value={(this.props.specs && this.props.specs.time)?this.props.specs.minute:0}
+                    value={this.state.minutes}
                     onChange={this.onDropdownSelected}
                     required >
-                  { this.createList(minutes,'Minutes')}
+                  { this.createList(minutes,'MINUTES')}
               </select>
               <select
                     className="form-select wide"
@@ -429,19 +398,22 @@ class AddEvent extends Component {
                     key="period_1"
                     type="select"
                     name="period"
-                    value={(this.props.specs && this.props.specs.time)?this.props.specs.time.day:0}
+                    value={this.state.period}
                     onChange={this.onDropdownSelected}
                     required >
-                  { this.createList(day,'Period')}
+                  { this.createList(period,'PERIOD')}
               </select>
-
-              <TimezonePicker
-                absolute      = {false}
-                defaultValue  = "Eastern Standard Time [-05:00]"
-                placeholder   = "Select timezone..."
-                timezones     = { timezones }
-                onChange      = { this.handleTimezoneChange }
-              />
+              <select
+                    className="form-select wide"
+                    id="zone_1"
+                    key="zone_1"
+                    type="select"
+                    name="timezone"
+                    value={this.state.timezone}
+                    onChange={this.onDropdownSelected}
+                    required >
+                  { this.createList(timezones,'TIMEZONE')}
+              </select>
             </div>
           </div>
 
@@ -459,11 +431,15 @@ class AddEvent extends Component {
               <h4 className="form-title expand">
                   Description (required):
               </h4>
+              { (this.state.desc_error)
+                ? <div className='error'>You must include a description of the event.</div>
+                : null
+              }
               <div id="desc-display" className="add_artist show">
                 <textarea
                       id="description_1"
                       name="description"
-                      value={(e && e.description)?e.description:null}
+                      value={this.state.description}
                       onChange={this.handleChange} />
               </div>
             </div>

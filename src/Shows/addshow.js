@@ -85,8 +85,8 @@ class AddShow extends Component {
   }
 
   render() {
-    return (<div className='overlay' style={{height: this.state.height + 'px'}}>
-            <div className="overlay-container" style={{marginTop: this.state.scroll + 'px'}}>
+    return (<div className='overlay'>
+            <div className="overlay-container">
               <div className="close" onClick={() => { this.props.show_form() }} >&times;</div>
               <h2 className='form-title'>{this.state.formTitle}</h2>
               <form id="form-1" onSubmit={this.handleSubmit}>

@@ -30,6 +30,7 @@ import {  getAllShows,
           removeArtistFromShow } from '../Shows/actions';
 
 import {  newEvent,
+          editEvent,
           getEvents } from '../Events/actions';
 
 import { getPosition } from '../constants/helpers';
@@ -70,13 +71,6 @@ class Main extends Component {
                   height: null
                 };
 
-    this.update_theater_details(this.props.match.params.id);
-
-    //console.log('params',this.props.match.params)
-    if (this.props.match.params.id) this.update_theater_details(this.props.match.params.id);
-    this.props.getStates();
-    this.props.getSpecialties();
-    this.props.getAllArtists();
     this.update_theater_details = this.update_theater_details.bind(this);
     this.handleIDSubmit = this.handleIDSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -92,6 +86,7 @@ class Main extends Component {
     this.add_show = this.add_show.bind(this);
     this.edit_show = this.edit_show.bind(this);
     this.edit_prod = this.edit_prod.bind(this);
+    this.edit_event = this.edit_event.bind(this);
     this.new_prod_cb = this.new_prod_cb.bind(this);
     this.new_event_cb = this.new_event_cb.bind(this);
     this.show_form = this.show_form.bind(this);
@@ -101,7 +96,16 @@ class Main extends Component {
     this.add_theater = this.add_theater.bind(this);
     this.delete_theater = this.delete_theater.bind(this);
     this.toggleTime = this.toggleTime.bind(this);
-    this.handleScroll = this.handleScroll.bind(this);
+    //this.handleScroll = this.handleScroll.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.props.match.params.id) this.update_theater_details(this.props.match.params.id);
+    this.update_theater_details(this.props.match.params.id);
+    this.props.getStates();
+    this.props.getSpecialties();
+    this.props.getAllArtists();
+    //window.addEventListener('scroll', this.handleScroll);
   }
 
   componentDidUpdate(prevProps) {
@@ -142,11 +146,9 @@ class Main extends Component {
 
   }
 
-  componentDidMount() {
-    window.addEventListener('scroll', this.handleScroll);
-  }
 
-  handleScroll(){ this.setState(getPosition()); }
+
+  //handleScroll(){ this.setState(getPosition()); }
   handleChange(e) { this.setState({ delete_id : e.target.value }); }
   handleIDChange(e) { this.setState({ current_id : e.target.value }); }
   alterTheaterCallback(newData) { this.props.alterTheater(newData); }
@@ -247,6 +249,8 @@ class Main extends Component {
 
   edit_show(body) { this.props.editShow(body); }
   edit_prod(body) { this.props.editProd(body); }
+  edit_event(body) { this.props.editEvent(body); }
+
   toggleTime(which,number){
     switch (which){
       case 1:
@@ -539,6 +543,7 @@ class Main extends Component {
                     removeArtistProdCB={ this.removeArtistFromProdCallback }
                     newArtist={ this.props.Shows.new_artist }
                     edit_event={ this.edit_event }
+                    event_form={ this.event_form }
                     perm={ (this.props.User.level===3 || this.state.admin ) ? true : false }
                   />
                 })
@@ -559,6 +564,7 @@ class Main extends Component {
                     removeArtistShowCB={ this.removeArtistFromShowCallback }
                     newArtist={ this.props.Shows.new_artist }
                     edit_event={ this.edit_event }
+                    event_form={ this.event_form }
                     perm={ (this.props.User.level===3 || this.state.admin ) ? true : false }
                   />
                 })
@@ -627,6 +633,9 @@ const mapDispatchToProps = dispatch => {
     },
     editProd: body => {
       dispatch( editProd(body) )
+    },
+    editEvent: body => {
+      dispatch( editEvent(body) )
     },
     removeArtistFromProd: body => {
       dispatch( removeArtistFromProd(body) )

@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import {
   EVENT_TYPES,
   NEW_EVENT,
-  GET_EVENTS
+  GET_EVENTS,
+  EDIT_EVENT
 } from './actions';
 
 const moment = require('moment');
@@ -15,6 +16,9 @@ const Events = (state={ types: [], events: { upcoming: [], previous: []  } }, ac
     case NEW_EVENT:
       return { types: state.types, events: parseEvents(action.payload) };
     case GET_EVENTS:
+      return { types: state.types, events: parseEvents(action.payload) };
+    case EDIT_EVENT:
+      console.log('event',action.payload);
       return { types: state.types, events: parseEvents(action.payload) };
     default:
       return state;

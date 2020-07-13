@@ -10,35 +10,37 @@ import AddEvent from "./addEvent";
 
 const moment = require('moment');
 
+const set_time = (time) => {
+    let timeonly=time.split(' ')[0];
+    let period=time.split(' ')[1];
+    let zone=time.split(' ')[2];
+    let hour=timeonly.split(':')[0];
+    let minutes=timeonly.split(':')[1];
+    let new_time= {
+      hour: hour,
+      minutes: minutes,
+      period: period,
+      zone: zone,
+      full: `${hour}:${minutes} ${period} ${zone}`
+    };
+    return new_time;
+}
+
 class Event extends Component {
   constructor(props) {
     super(props);
-
-    let _time = null;
-    if (this.props.event.time_start) {
-      let time=this.props.event.time_start;
-      let timeonly=time.split(' ')[0];
-      let zone=time.split(' ')[1];
-      let hour=parseInt(timeonly.split(':')[0]);
-      let minute=parseInt(timeonly.split(':')[1]);
-      let day='am'
-      if (hour > 12){
-        day='pm';
-        hour=hour-12;
-      }
-      let new_time= {
-        hour: hour,
-        minute: minute,
-        day: day,
-        zone: zone,
-        full: `${hour}:${minute} ${day} ${zone}`
-      };
-      _time = new_time;
-    }
-
-    this.state = { edit_event: false, time: _time };
     this.event_form = this.event_form.bind(this);
     this.create_URL = this.create_URL.bind(this);
+    let time = (this.props.event.time_start) ? set_time(this.props.event.time_start) : null;
+    this.state = {  edit_event: false, time };
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.event &&
+        this.props.event.time_start &&
+        this.props.event.time_start !== prevProps.event.time_start ){
+      this.setState( { time: set_time(this.props.event.time_start) } );
+    }
   }
 
   event_form(){
@@ -53,7 +55,6 @@ class Event extends Component {
 
   render() {
     let e = this.props.event;
-
     return ( <div key={e.event_id+'-event'}
                   id={e.event_id}
                   className="production">
@@ -62,7 +63,15 @@ class Event extends Component {
 
                 <table className="details-table"><tbody>
                   <tr><td>Event Type:</td><td>{e.event_type}</td></tr>
-                  <tr><td>Description:</td><td>{ e.description }</td></tr>
+                  { (e.show_title)
+                    ? <tr><td>Production:</td><td>{e.show_title}</td></tr>
+                    : null
+                  }
+                  { (e.genre_name)
+                    ? <tr><td>Genre:</td><td>{e.genre_name}</td></tr>
+                    : null
+                  }
+                  <tr><td>Description:</td><td><SanitizedHTML html={ e.description } /></td></tr>
                   <tr><td>Event URL:</td><td>{ this.create_URL(e.website) }</td></tr>
                   <tr><td>Cost:</td><td>{ (e.is_free) ? 'FREE' : '$' }</td></tr>
                   <tr><td>{ (e.no_repeat) ? 'Date:' : 'Start Date:'}</td><td>{moment.utc(e.date_start).format('MMMM D, YYYY')}</td></tr>
