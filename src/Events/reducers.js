@@ -18,7 +18,6 @@ const Events = (state={ types: [], events: { upcoming: [], previous: []  } }, ac
     case GET_EVENTS:
       return { types: state.types, events: parseEvents(action.payload) };
     case EDIT_EVENT:
-      console.log('event',action.payload);
       return { types: state.types, events: parseEvents(action.payload) };
     default:
       return state;
@@ -26,9 +25,16 @@ const Events = (state={ types: [], events: { upcoming: [], previous: []  } }, ac
 };
 
 function updateEventTypes(state,action){
+  var label = `Select an event type...`;
+  switch (action.payload.label){
+    case 1:
+      label = `Any event type`;
+      break;
+  }
+
   const items=[];
-  items.push(<option key="et_0" value="0">Select an event type...</option>);
-  action.payload.forEach( x => items.push(<option key={x.event_type_id} value={x.event_type_id}>{x.label}</option>) )
+  items.push(<option key="et_0" value="0">{label}</option>);
+  action.payload.data.forEach( x => items.push(<option key={x.event_type_id} value={x.event_type_id}>{x.label}</option>) )
   return { types: items, events: state.events }
 }
 

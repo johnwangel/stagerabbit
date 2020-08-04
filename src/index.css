@@ -954,6 +954,19 @@ h4.form-title {
     border-radius: 10px;
     border-color: gray; }
 
+.form-group.date_search, .form-group.event_search {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center; }
+  .form-group.date_search .label, .form-group.event_search .label {
+    color: indigo;
+    margin-right: 15px; }
+  .form-group.date_search select, .form-group.event_search select {
+    width: 100%;
+    padding: 5px;
+    border-radius: 10px; }
+
 .form-button {
   width: 100%;
   font-size: 1.2em;

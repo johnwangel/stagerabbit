@@ -92,7 +92,6 @@ h4.form-title {
     justify-content: space-between;
     align-items: flex-start;
 
-
     .radio-group {
       position: relative;
       display: flex;
@@ -158,8 +157,6 @@ h4.form-title {
       max-height: 35px;
 
       cursor: pointer;
-
-
 
       &>* {
         background-color: white;
@@ -242,6 +239,22 @@ h4.form-title {
     width: 100%;
     border-radius: 10px;
     border-color: gray;
+  }
+}
+
+.form-group.date_search, .form-group.event_search {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  .label {
+    color: $main;
+    margin-right: 15px;
+  }
+  select {
+    width: 100%;
+    padding: 5px;
+    border-radius: 10px;
   }
 }
 

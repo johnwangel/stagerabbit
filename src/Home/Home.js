@@ -1,14 +1,19 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import DatePicker from "react-datepicker";
+import parseISO from 'date-fns/parseISO'
 import SanitizedHTML from 'react-sanitized-html';
 
 import { recentUpdates } from '../Recent/actions';
 import { getStates } from '../Main/statesActions';
 import { search } from '../Results/actions';
+import { getEventTypes } from '../Events/actions';
 
 import Results from "../Results/Results";
 import Recent from "../Recent/recent";
 import Article from "../Articles/article";
+
+var Moment = require('moment');
 
 const curtain = require('../Assets/curtain.jpg');
 //const stage = require('../Assets/stage.jpg');
@@ -29,10 +34,15 @@ class Home extends Component {
                   startPage: 0,
                   search: null,
                   scroll: false,
-                  error: null
+                  error: null,
+                  event_start: new Date(),
+                  event_end: parseISO(Moment.utc(new Date()).add(7,'days').format('YYYY-MM-DD')),
+                  free_only: false,
+                  event_type: '0'
                };
 
     this.props.recentUpdates();
+    this.props.getEventTypes(1);
 
     this.errorRef = React.createRef();
     this.resultRef = React.createRef();
@@ -46,6 +56,10 @@ class Home extends Component {
     this.newlist2 = this.newlist2.bind(this);
     this.handleOptionChange = this.handleOptionChange.bind(this);
     this.changeSelect = this.changeSelect.bind(this);
+    this.handleStartDateChange = this.handleStartDateChange.bind(this);
+    this.handleEndDateChange = this.handleEndDateChange.bind(this);
+    this.handleFreeChange = this.handleFreeChange.bind(this);
+    this.onEventTypeChange = this.onEventTypeChange.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -70,7 +84,7 @@ class Home extends Component {
 
   handleChange(e){
     e.preventDefault();
-    this.setState({ searchType: e.target.value })
+    this.setState({ searchType: e.target.value });
   }
 
   newlist1(){
@@ -97,6 +111,23 @@ class Home extends Component {
     this.setState({
       selectedOption: opt
     });
+  }
+
+  handleStartDateChange(e) {
+    this.setState({ event_start : e, event_end : e });
+  }
+
+  handleEndDateChange(e) {
+    this.setState({ event_end : e });
+  }
+
+  handleFreeChange() {
+    this.setState({ free_only : !this.state.free_only });
+  }
+
+  onEventTypeChange(e){
+    e.preventDefault();
+    this.setState({ event_type: e.target.value });
   }
 
   handleSubmit(e){
@@ -130,6 +161,11 @@ class Home extends Component {
         body.type=3;
         body.searchType='ByShow';
         break;
+      case "event":
+        body.type=4;
+        body.searchType='ByEvent';
+        body.free_only=this.state.free_only;
+        break;
     }
 
     if ( error !== '' ){
@@ -147,7 +183,7 @@ class Home extends Component {
   }
 
   render() {
-    //console.log('PROPS IN HOME',this.props);
+    console.log('PROPS IN HOME',this.props);
     //console.log(typeof this.props.SearchResults.type, this.props.SearchResults.type)
     //console.log(this.state)
 
@@ -206,6 +242,17 @@ class Home extends Component {
                               onChange={this.handleOptionChange} />
                           <span className="custom-radio"></span>
                           <label className="radio-label">Show</label>
+                        </div>
+
+                        <div className="radio-group" onClick={ () => { this.changeSelect('event') } }>
+                          <input type="radio"
+                              id="event"
+                              name="search_type"
+                              value='event'
+                              checked= { this.state.selectedOption === 'event' }
+                              onChange={this.handleOptionChange} />
+                          <span className="custom-radio"></span>
+                          <label className="radio-label">Online Events</label>
                         </div>
 
                       </div>
@@ -272,6 +319,64 @@ class Home extends Component {
                   </form>
                 : null
               }
+
+              { ( this.state.selectedOption === 'event')
+                ? <form onSubmit={this.handleSubmit}>
+                    <div className="search-label">Search Onine Events:</div>
+
+                    <div className='form-group date_search'>
+                      <div className="label">Starts by:</div>
+                      <DatePicker
+                        id="start_date_1"
+                        name="start_date"
+                        selected={this.state.event_start}
+                        onChange={this.handleStartDateChange}
+                      />
+                    </div>
+
+                    <div className='form-group date_search'>
+                      <div className="label">Ends by:</div>
+                      <DatePicker
+                        id="end_date_1"
+                        name="end_date"
+                        selected={this.state.event_end}
+                        onChange={this.handleEndDateChange}
+                      />
+                    </div>
+
+                    <div className='form-group radio' onClick={ this.handleFreeChange }>
+                      <div className="radio-group">
+                        <input type="radio"
+                              id="free-1"
+                              name="free"
+                              value='free'
+                              checked={ this.state.free_only }
+                            />
+                        <span className="custom-radio"></span>
+                        <label className="radio-label">Free Events Only</label>
+                      </div>
+                    </div>
+
+                    <div className='form-group event_search'>
+                      <div className="label">Event Type:</div>
+                      <select
+                            className="form-select"
+                            id="eventtype_1"
+                            key="eventtype_1"
+                            type="select"
+                            name="event_type"
+                            value={this.state.event_type}
+                            onChange={this.onEventTypeChange}
+                          >
+                          {this.props.Events.types}
+                      </select>
+                    </div>
+
+                    <input className='form-button' id='st-4' type="submit" value="Go!"/>
+                  </form>
+                : null
+              }
+
             </div>
 
             <div ref={this.resultRef}></div>
@@ -315,6 +420,21 @@ class Home extends Component {
                             </div>
                           : null
                       }
+
+
+                      { ( this.props.SearchResults &&
+                          this.props.SearchResults.type === 4 &&
+                          this.props.SearchResults.results &&
+                          this.props.SearchResults.results.theaters &&
+                          this.props.SearchResults.results.theaters.length )
+                          ? <div className="searchResults">
+                              { this.props.SearchResults.results.theaters.map( (item, idx) => <Results key={`search-${idx}`} number={idx+1} type='4' item={item} idx={idx} />) }
+                            </div>
+                          : null
+                      }
+
+
+
                   </div>
                 : <div className='searchContent main-column'>
                       { ( this.props.SearchResults &&
@@ -378,6 +498,9 @@ const mapDispatchToProps = dispatch => {
     },
     recentUpdates : () => {
       dispatch( recentUpdates() )
+    },
+    getEventTypes: (data) => {
+      dispatch( getEventTypes(data) )
     }
   }
 }

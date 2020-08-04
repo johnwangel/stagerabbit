@@ -11,6 +11,7 @@ class Results extends Component {
   }
 
   render() {
+    console.log('props',this.props)
         return   ( <div className="search_result" key={this.props.idx} id={this.props.item.id}>
 
                     { (this.props.type==='1')
@@ -73,6 +74,39 @@ class Results extends Component {
                         </table>
                         : null
                     }
+
+                    { (this.props.type==='4')
+                      ? <table>
+                          <tbody>
+                            <tr>
+                              <td>
+                                <div className='number_long'>{this.props.number}</div>
+                              </td>
+                              <td>
+                                <Link className='website' to={`/theater/${this.props.item.theater_id}`}>
+                                  <SanitizedHTML html={this.props.item.title}/>
+                                </Link>
+                                <div className='theater_name'><SanitizedHTML html={this.props.item.theater_name}/>
+                                {this.props.item.theater_city}, {this.props.item.state_abbr}</div>
+                                { (this.props.item.no_repeat)
+                                    ? <div className="dates">{moment.utc(this.props.item.date_start).format('MMM Do')}</div>
+                                    : <div className="dates">{moment.utc(this.props.item.date_start).format('MMM Do')} to {moment.utc(this.props.item.date_end).format('MMM Do')}</div>
+                                }
+                                { (this.props.item.time_start)
+                                  ? <div className='time'>{ this.props.item.time_start }</div>
+                                  : null
+                                }
+
+
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        : null
+                    }
+
+
+
                   </div>
                 )
     }

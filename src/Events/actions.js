@@ -7,11 +7,16 @@ export const NEW_EVENT = 'NEW_EVENT';
 export const GET_EVENTS = 'GET_EVENTS';
 export const EDIT_EVENT ='EDIT_EVENT';
 
-export function getEventTypes (){
+export function getEventTypes (label=0){
+
+  console.log('label',label)
   return dispatch => {
     fetch(`${URL}events/types/`, GET_HEADER)
     .then(response => response.json())
-    .then(data => dispatch(EventTypes(data)))
+    .then(data => {
+      var items={ label, data };
+      dispatch(EventTypes(items));
+    })
     .catch( err => console.log(err.message));
   };
 }
