@@ -41,8 +41,9 @@ function updateEventTypes(state,action){
 function parseEvents(events){
   const upcoming=[], previous=[];
   events.forEach( item => {
-    let end=moment.utc(item.end_date).format('YYYY-MM-DD');
-    let old = (today>end) ? previous.push(item) : upcoming.push(item);
+    let start=moment.utc(item.date_start).format('YYYY-MM-DD');
+    let end=moment.utc(item.date_end).format('YYYY-MM-DD');
+    let old = ( (item.no_repeat && today>start) || today>end ) ? previous.push(item) : upcoming.push(item);
   })
   return { upcoming, previous };
 }
