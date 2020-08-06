@@ -11,7 +11,7 @@ class Results extends Component {
   }
 
   render() {
-    console.log('props',this.props)
+    //console.log('props',this.props)
         return   ( <div className="search_result" key={this.props.idx} id={this.props.item.id}>
 
                     { (this.props.type==='1')
