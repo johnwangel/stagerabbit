@@ -76,7 +76,7 @@ class Register extends Component {
           <h2 className="main-page main-column">Register</h2>
           { (this.state.loggedin)
             ? (this.props.User.level===2)
-              ? <Redirect to={ `/theater/${this.props.User.tid}`}/>
+              ? <Redirect to={ `/theater/${this.props.User.tid}/0`}/>
               :<Redirect to='/'/>
             : <div className='login-form main-column'>
                   <p>

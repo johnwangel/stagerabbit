@@ -22,7 +22,7 @@ class Results extends Component {
                                 <div className='number_long'>{this.props.number}</div>
                               </td>
                               <td>
-                                <Link className='website' to={`/theater/${this.props.item.id}`}>{this.props.item.name}</Link>
+                                <Link className='website' to={`/theater/${this.props.item.id}/0`}>{this.props.item.name}</Link>
                                 <div className="address">{this.props.item.city}, {this.props.item.abbr} ({parseInt(this.props.item.distance)} miles)</div>
                               </td>
                             </tr>
@@ -51,7 +51,7 @@ class Results extends Component {
                                 <div className='number_long'>{this.props.number}</div>
                               </td>
                               <td>
-                                <Link className='website' to={`/theater/${this.props.item.id}`}><SanitizedHTML html={this.props.item.name}/></Link>{this.props.item.city}, {this.props.item.abbr}
+                                <Link className='website' to={`/theater/${this.props.item.id}/2`}><SanitizedHTML html={this.props.item.name}/></Link>{this.props.item.city}, {this.props.item.abbr}
                               </td>
                             </tr>
                           </tbody>

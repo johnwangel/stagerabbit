@@ -9,7 +9,7 @@ class ShowItem extends Component {
     let item = this.props.item;
     return (
       <div className='show_item'>
-        <Link className='website' to={`/theater/${item.theater_id}`}>
+        <Link className='website' to={`/theater/${item.theater_id}/2`}>
           <SanitizedHTML html={item.theater_name} />
         </Link>
         <SanitizedHTML html={ `${item.city_name}, ${item.state_abbr}` } />

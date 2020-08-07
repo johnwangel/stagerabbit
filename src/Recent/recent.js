@@ -13,7 +13,7 @@ class Recent extends Component {
                                 <div className='number_long'>{this.props.number}</div>
                               </td>
                               <td>
-                                <Link className='website' to={`/theater/${this.props.item.id}`}>{this.props.item.name}</Link>
+                                <Link className='website' to={`/theater/${this.props.item.id}/0`}>{this.props.item.name}</Link>
                                 <div className="address">{this.props.item.city}, {this.props.item.state_abbr}</div>
                               </td>
                             </tr>
