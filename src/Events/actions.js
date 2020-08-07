@@ -8,8 +8,6 @@ export const GET_EVENTS = 'GET_EVENTS';
 export const EDIT_EVENT ='EDIT_EVENT';
 
 export function getEventTypes (label=0){
-
-  console.log('label',label)
   return dispatch => {
     fetch(`${URL}events/types/`, GET_HEADER)
     .then(response => response.json())

@@ -83,7 +83,7 @@ class Results extends Component {
                                 <div className='number_long'>{this.props.number}</div>
                               </td>
                               <td>
-                                <Link className='website' to={`/theater/${this.props.item.theater_id}`}>
+                                <Link className='website' to={`/theater/${this.props.item.theater_id}/4`}>
                                   <SanitizedHTML html={this.props.item.title}/>
                                 </Link>
                                 <div className='theater_name'><SanitizedHTML html={this.props.item.theater_name}/>
@@ -96,7 +96,6 @@ class Results extends Component {
                                   ? <div className='time'>{ this.props.item.time_start }</div>
                                   : null
                                 }
-
 
                               </td>
                             </tr>

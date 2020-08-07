@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
 import { Redirect } from "react-router";
+import { useLocation } from "react-router-dom";
+
 
 import {  getSpecialties } from '../Specialties/actions';
 
@@ -71,6 +73,8 @@ class Main extends Component {
                   height: null
                 };
 
+    this.eventScroll = React.createRef();
+
     this.update_theater_details = this.update_theater_details.bind(this);
     this.handleIDSubmit = this.handleIDSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -101,6 +105,12 @@ class Main extends Component {
 
   componentDidMount() {
     if (this.props.match.params.id) this.update_theater_details(this.props.match.params.id);
+    if (this.props.match.params.from && this.props.match.params.from==='4'){
+        this.eventScroll.current.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+    }
     this.update_theater_details(this.props.match.params.id);
     this.props.getStates();
     this.props.getSpecialties();
@@ -145,8 +155,6 @@ class Main extends Component {
     }
 
   }
-
-
 
   //handleScroll(){ this.setState(getPosition()); }
   handleChange(e) { this.setState({ delete_id : e.target.value }); }
@@ -285,7 +293,6 @@ class Main extends Component {
     const v = (this.props.VenuesByTheater.venues) ? this.props.VenuesByTheater.venues : null;
     const s = (this.props.Shows.shows) ? this.props.Shows.shows : null;
     const e = this.props.Events.events;
-
 
     return (
       <div className="theaters">
@@ -512,12 +519,7 @@ class Main extends Component {
           : <div className={ (this.state.show_prods===1) ? 'productions main-column' : 'productions main-column hide' }><div className="empty">No previous productions available.</div></div>
         }
 
-
-
-
-
-
-        <h2 className="main-page main-column">Events</h2>
+        <h2 className="main-page main-column" ref={this.eventScroll}>Events</h2>
         <div className="toggle">
           <div  id="upcoming2"
                 className={ (this.state.show_events===0) ? "toggle-button active" : "toggle-button" }

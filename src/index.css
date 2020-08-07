@@ -1180,7 +1180,9 @@ code {
           top: 0;
           right: unset;
           left: 0;
-          background-color: rgba(0, 0, 0, 0.2); } }
+          background-color: rgba(0, 0, 0, 0.2); }
+          .body .main .intro .content {
+            padding: 20px; } }
 
 .group {
   margin: 25px 0; }
