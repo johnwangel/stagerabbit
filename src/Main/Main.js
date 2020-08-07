@@ -105,12 +105,6 @@ class Main extends Component {
 
   componentDidMount() {
     if (this.props.match.params.id) this.update_theater_details(this.props.match.params.id);
-    if (this.props.match.params.from && this.props.match.params.from==='4'){
-        this.eventScroll.current.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-    }
     this.update_theater_details(this.props.match.params.id);
     this.props.getStates();
     this.props.getSpecialties();
@@ -120,6 +114,14 @@ class Main extends Component {
 
   componentDidUpdate(prevProps) {
     let tid = this.props.match.params.id;
+
+    if (this.props.match.params.from && this.props.match.params.from==='4'){
+        this.eventScroll.current.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+    }
+
 
     if (this.props.User.level !== prevProps.User.level && this.props.User.level>1){
       let admin=(this.props.User.token===this.props.Theater[0].token) ? true : false;
