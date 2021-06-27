@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
 import { Redirect } from "react-router";
-import { useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 
 import {  getSpecialties } from '../Specialties/actions';
@@ -41,6 +41,7 @@ import { GET_POST_HEADER, URL, process_submit } from '../constants/constants.js'
 
 import Theater from "../Theater/theater";
 import AddTheater from "../Theater/theaterAdd";
+import ChangeTheater from "../Theater/changeTheater";
 import Venues from "../Venues/venues";
 import Event from "../Events/event";
 import AddVenue from "../Venues/AddVenue/addvenue";
@@ -168,8 +169,8 @@ class Main extends Component {
 
   handleIDSubmit(e) {
     e.preventDefault();
-    let tid = this.state.current_id;
-    this.update_theater_details(tid);
+    //let tid = this.state.current_id;
+    //this.update_theater_details(tid);
   }
 
   update_theater_details(tid){
@@ -300,17 +301,14 @@ class Main extends Component {
       <div className="theaters">
         { (this.props.User.level===3)
           ? <div className="admin-theater main-column">
-              <form onSubmit={this.handleIDSubmit}>
-                <label>
-                  <span className='runin'>Theater ID:</span>
-                  <input  type="text"
-                          name="id" value={ this.state.current_id }
-                          onChange={this.handleIDChange} />
-                </label>
-                <input  type="submit"
-                        value="Submit"
-                        className="form-button" />
-              </form>
+              <label>
+                <span className='runin'>Theater ID:</span>
+                <input  type="text"
+                        name="id" value={ this.state.current_id }
+                        onChange={this.handleIDChange} />
+              </label>
+              <ChangeTheater theater_id={this.state.current_id}/>
+
               <form onSubmit={this.handleGeo.bind(this)}>
                 <button id="geo"
                         type="submit"

@@ -26,7 +26,7 @@ const EventTypes = types => ({
 
 export function editEvent ( body ){
   GET_POST_HEADER.body=JSON.stringify(body);
-  console.log('update event',body);
+  //console.log('update event',body);
   return dispatch => {
     fetch(`${URL}events/editevent`, GET_POST_HEADER )
     .then(response => response.json())
@@ -54,8 +54,6 @@ const addTheEvent = event => ({
   type : NEW_EVENT,
   payload : event
 });
-
-
 
 export function getEvents ( theaterid ){
   return dispatch => {
