@@ -7,6 +7,7 @@ import Artists from "../Artists/artists";
 import Venue from "../Venues/this_venue";
 import AddShow from "../Shows/addshow";
 import AddProd from "./AddProduction/addproduction";
+import Favorite from "../Favorite/favorite";
 
 const moment = require('moment');
 
@@ -34,6 +35,11 @@ class Productions extends Component {
     return ( <div key={this.props.id+'-prod'}
                   id={this.props.prod.production_id}
                   className="production">
+
+                <Favorite
+                    pid={this.props.prod.production_id}
+                    uid={this.props.uid}
+                  ></Favorite>
 
                 <div className="show_title"><SanitizedHTML html={ p.title } /></div>
 

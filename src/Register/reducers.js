@@ -1,7 +1,7 @@
 import { LOGIP, REGISTER, LOGIN, LOGOUT, LOGINERROR } from './actions';
 import React from 'react';
 
-const User = ( state = { level: 1, name: 'guest', token: null, loggedin: false, tid: null, message: null, client: null }, action ) => {
+const User = ( state = { level: 1, name: 'guest', token: null, loggedin: false, tid: null, message: null, client: null, uid: null }, action ) => {
   switch (action.type){
     case LOGIP:
       return log_ip(state,action);
@@ -34,11 +34,13 @@ function register(state,action){
 }
 
 function login(state,action){
+  //console.log(action);
   let user=action.payload;
   let name=`${user.fname} ${user.lname}`;
   let token=(user.token !=='')?user.token : null;
   let tid=user.tid;
-  let item={ level: user.level, name: name, token: token, loggedin: true, tid: tid, message: null, client: state.client };
+  let uid=user.id;
+  let item={ level: user.level, name: name, token: token, loggedin: true, tid: tid, message: null, client: state.client, uid };
   return item;
 }
 

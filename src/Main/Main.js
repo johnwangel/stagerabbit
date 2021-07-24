@@ -291,6 +291,7 @@ class Main extends Component {
   }
 
   render() {
+    //console.log(this.props);
     const d = this.props.Theater[0];
     const p = this.props.Prods;
     const v = (this.props.VenuesByTheater.venues) ? this.props.VenuesByTheater.venues : null;
@@ -477,6 +478,7 @@ class Main extends Component {
               { p.upcoming.map( ( item, index ) => {
                 return <Productions
                     idx={ index }
+                    uid={ this.props.User.uid }
                     key={ `pr-${index}` }
                     prod={ item }
                     shows={ this.props.Shows }
@@ -500,6 +502,7 @@ class Main extends Component {
               { p.previous.map( ( item, index ) => {
                 return <Productions
                     idx={ index }
+                    uid={ this.props.User.uid }
                     key={ `pr-${index}` }
                     prod={ item }
                     shows={ this.props.Shows }

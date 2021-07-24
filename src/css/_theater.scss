@@ -218,6 +218,7 @@ h3.sub-column {
   }
 
   .production {
+    position: relative;
     padding-top: 40px;
     width: 100%;
     border-bottom: 2px solid $main;
@@ -226,6 +227,49 @@ h3.sub-column {
     &:nth-child(odd){
       background-color: $altrow;
     }
+
+    .favorite {
+      font-size: 1.6em;
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      cursor: pointer;
+
+      &.false {
+        color: $gray;
+        &:hover {
+          color: pink;
+        }
+      }
+
+      &.true {
+        color: red;
+        &:hover {
+          color: lightgray;
+        }
+      }
+
+      .login_message {
+        position: absolute;
+        display: none;
+        width: 200px;
+        height: 80px;
+        top: -110px;
+        right: 0;
+        font-size: 14px;
+        color: black;
+        background-color: white;
+        padding: 15px;
+        border: $main 1px solid;
+        box-shadow: 3px 3px 3px lightgray;
+      }
+
+      &.noreg:hover .login_message {
+        display: block;
+      }
+
+    }
+
 
     .details-table {
       margin: 50px auto 30px;

@@ -592,12 +592,42 @@ h3.sub-column {
   .productions.hide {
     display: none; }
   .productions .production {
+    position: relative;
     padding-top: 40px;
     width: 100%;
     border-bottom: 2px solid indigo;
     background-color: #F5F5F5; }
     .productions .production:nth-child(odd) {
       background-color: #e7e1f1; }
+    .productions .production .favorite {
+      font-size: 1.6em;
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      cursor: pointer; }
+      .productions .production .favorite.false {
+        color: #505050; }
+        .productions .production .favorite.false:hover {
+          color: pink; }
+      .productions .production .favorite.true {
+        color: red; }
+        .productions .production .favorite.true:hover {
+          color: lightgray; }
+      .productions .production .favorite .login_message {
+        position: absolute;
+        display: none;
+        width: 200px;
+        height: 80px;
+        top: -110px;
+        right: 0;
+        font-size: 14px;
+        color: black;
+        background-color: white;
+        padding: 15px;
+        border: indigo 1px solid;
+        box-shadow: 3px 3px 3px lightgray; }
+      .productions .production .favorite.noreg:hover .login_message {
+        display: block; }
     .productions .production .details-table {
       margin: 50px auto 30px;
       padding: 0 20px; }
