@@ -243,14 +243,14 @@ h3.sub-column {
 
       &.false {
         color: $gray;
-        &:hover {
+        &:hover, &:active {
           color: pink;
         }
       }
 
       &.true {
         color: red;
-        &:hover {
+        &:hover, &:active {
           color: lightgray;
         }
       }
@@ -270,7 +270,7 @@ h3.sub-column {
         box-shadow: 3px 3px 3px lightgray;
       }
 
-      &.noreg:hover .login_message {
+      &.noreg:hover .login_message, &.noreg:active .login_message {
         display: block;
       }
 

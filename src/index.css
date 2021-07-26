@@ -611,11 +611,11 @@ h3.sub-column {
       cursor: pointer; }
       .productions .production .favorite.false {
         color: #505050; }
-        .productions .production .favorite.false:hover {
+        .productions .production .favorite.false:hover, .productions .production .favorite.false:active {
           color: pink; }
       .productions .production .favorite.true {
         color: red; }
-        .productions .production .favorite.true:hover {
+        .productions .production .favorite.true:hover, .productions .production .favorite.true:active {
           color: lightgray; }
       .productions .production .favorite .login_message {
         position: absolute;
@@ -630,7 +630,7 @@ h3.sub-column {
         padding: 15px;
         border: indigo 1px solid;
         box-shadow: 3px 3px 3px lightgray; }
-      .productions .production .favorite.noreg:hover .login_message {
+      .productions .production .favorite.noreg:hover .login_message, .productions .production .favorite.noreg:active .login_message {
         display: block; }
     .productions .production .details-table {
       margin: 50px auto 30px;
