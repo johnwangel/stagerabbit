@@ -28,7 +28,7 @@ const FavePage = (props) => {
         <div class="theater main-column">
         {(user.uid)
           ? <div className="description">Click the {heart} in the top right corner of any Production to add to your favorites list.</div>
-          : <div className="description">Register your <b>free</b> account and you will be able to save productions that interest you to list list by clicking the {heart} in the top right corner of any production to add to your favorites list.</div>
+          : <div className="description">Register your <b>free</b> account and you will be able to save productions that interest you to this list by clicking the {heart} in the top right corner of any Production.</div>
         }
         </div>
         <Productions
