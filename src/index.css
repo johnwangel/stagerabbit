@@ -491,6 +491,10 @@ h3.sub-column {
 
 .theater {
   background-color: white; }
+  .theater .description {
+    border-left: 2px solid darkorchid;
+    border-right: 2px solid darkorchid;
+    padding: 20px; }
 
 .theaters {
   position: relative;

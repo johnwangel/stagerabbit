@@ -75,6 +75,12 @@ h3.sub-column {
 .theater {
   background-color: white;
 
+  .description {
+    border-left: 2px solid $accent;
+    border-right: 2px solid $accent;
+    padding: 20px;
+
+  }
 }
 
 .theaters {

@@ -47,8 +47,8 @@ import Event from "../Events/event";
 import AddVenue from "../Venues/AddVenue/addvenue";
 import AddShow from "../Shows/addshow";
 import AddEvent from "../Events/addEvent";
-import Productions from "../Productions/productions";
 import AddProd from "../Productions/AddProduction/addproduction";
+import Productions from "../Productions/prod_list";
 
 class Main extends Component {
   constructor(props) {
@@ -68,7 +68,6 @@ class Main extends Component {
                   newArtistID: null,
                   clear_edit: false,
                   delete_id: this.props.Theater[0].id,
-                  show_prods: 0,
                   show_events: 0,
                   scroll: null,
                   height: null
@@ -100,7 +99,6 @@ class Main extends Component {
     this.theater_form = this.theater_form.bind(this);
     this.add_theater = this.add_theater.bind(this);
     this.delete_theater = this.delete_theater.bind(this);
-    this.toggleTime = this.toggleTime.bind(this);
     //this.handleScroll = this.handleScroll.bind(this);
   }
 
@@ -262,18 +260,6 @@ class Main extends Component {
   edit_prod(body) { this.props.editProd(body); }
   edit_event(body) { this.props.editEvent(body); }
 
-  toggleTime(which,number){
-    switch (which){
-      case 1:
-        this.setState({show_prods:number});
-        break;
-      case 2:
-        this.setState({show_events:number});
-        break;
-    }
-
-  }
-
   delete_theater(e){
     e.preventDefault();
     let body = process_submit(e.target.elements);
@@ -293,7 +279,6 @@ class Main extends Component {
   render() {
     //console.log(this.props);
     const d = this.props.Theater[0];
-    const p = this.props.Prods;
     const v = (this.props.VenuesByTheater.venues) ? this.props.VenuesByTheater.venues : null;
     const s = (this.props.Shows.shows) ? this.props.Shows.shows : null;
     const e = this.props.Events.events;
@@ -460,67 +445,21 @@ class Main extends Component {
           : null
         }
 
-        <h2 className="main-page main-column">Productions</h2>
-        <div className="toggle">
-          <div  id="upcoming1"
-                className={ (this.state.show_prods===0) ? "toggle-button active" : "toggle-button" }
-                onClick={() => { this.toggleTime(1,0) } }>
-              Upcoming
-          </div>
-          <div  id="previous1"
-                className={ (this.state.show_prods===1) ? "toggle-button active" : "toggle-button" }
-                onClick={() => { this.toggleTime(1,1) } }>
-              Previous
-          </div>
-        </div>
-        { (p.upcoming.length > 0)
-          ? <div className={ (this.state.show_prods===0) ? 'productions main-column' : 'productions main-column hide' }>
-              { p.upcoming.map( ( item, index ) => {
-                return <Productions
-                    idx={ index }
-                    uid={ this.props.User.uid }
-                    key={ `pr-${index}` }
-                    prod={ item }
-                    shows={ this.props.Shows }
-                    addShowCB={ this.add_show }
-                    addArtistCB={ this.addArtistCallback }
-                    removeArtistShowCB={ this.removeArtistFromShowCallback }
-                    removeArtistProdCB={ this.removeArtistFromProdCallback }
-                    newArtist={ this.props.Shows.new_artist }
-                    edit_show={ this.edit_show }
-                    edit_prod={ this.edit_prod }
-                    clear_edit={ this.state.clear_edit }
-                    perm={ (this.props.User.level===3 || this.state.admin ) ? true : false }
-                  />
-                })
-              }
-            </div>
-          : <div className={ (this.state.show_prods===0) ? 'productions main-column' : 'productions main-column hide' }><div className="empty">No upcoming productions listed.</div></div>
-        }
-        { (p.previous.length > 0)
-          ? <div className={ (this.state.show_prods===1) ? 'productions main-column' : 'productions main-column hide' }>
-              { p.previous.map( ( item, index ) => {
-                return <Productions
-                    idx={ index }
-                    uid={ this.props.User.uid }
-                    key={ `pr-${index}` }
-                    prod={ item }
-                    shows={ this.props.Shows }
-                    addShowCB={ this.add_show }
-                    addArtistCB={ this.addArtistCallback }
-                    removeArtistShowCB={ this.removeArtistFromShowCallback }
-                    removeArtistProdCB={ this.removeArtistFromProdCallback }
-                    newArtist={ this.props.Shows.new_artist }
-                    edit_show={ this.edit_show }
-                    edit_prod={ this.edit_prod }
-                    clear_edit={ this.state.clear_edit }
-                    perm={ (this.props.User.level===3 || this.state.admin ) ? true : false }
-                  />
-                })
-              }
-            </div>
-          : <div className={ (this.state.show_prods===1) ? 'productions main-column' : 'productions main-column hide' }><div className="empty">No previous productions available.</div></div>
-        }
+        <Productions
+          title='Productions'
+          Prods={ this.props.Prods }
+          User={this.props.User}
+          Shows={this.props.Shows}
+          addShowCB={ this.add_show }
+          addArtistCB={ this.addArtistCallback }
+          removeArtistShowCB={ this.removeArtistFromShowCallback }
+          removeArtistProdCB={ this.removeArtistFromProdCallback }
+          newArtist={ this.props.Shows.new_artist }
+          edit_show={ this.edit_show }
+          edit_prod={ this.edit_prod }
+          clear_edit={ this.state.clear_edit }
+          perm={ (this.props.User.level===3 || this.state.admin ) ? true : false }
+        />
 
         <h2 className="main-page main-column" ref={this.eventScroll}>Events</h2>
         <div className="toggle">

@@ -57,6 +57,7 @@ class Header extends Component {
           <div className='menu'>
               <div className="dm icon">&#9776;</div>
               <div className='dropdown_menu' >
+                <Link className="menu_item" onClick={ this.ToggleMenu } to="/favorites/">My Stuff</Link>
                 <Link className="menu_item" onClick={ this.ToggleMenu } to="/">Search</Link>
                 { ( this.props.User.level>1 )
                   ? <Link className="menu_item" to={`/theater/${ this.props.User.tid }/0`}>Edit</Link>

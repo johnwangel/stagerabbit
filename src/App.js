@@ -17,6 +17,7 @@ import Password from './Register/password';
 import Register from './Register/register';
 import About from './About/about';
 import Contact from './Contact/contact';
+import Faves from './Favorite/favorite_page';
 import ProdByShow from './Productions/prodsByShow';
 import TheaterEmails from './Theater/theaterEmails';
 import RandH from './Articles/randh';
@@ -61,6 +62,7 @@ class App extends Component {
                   <Route path="/login" component={Login} />
                   <Route path="/password" component={Password} />
                   <Route path="/register/:token" component={Register} />
+                  <Route path="/favorites" component={Faves} />
                   <Route path="/prodsbyshow/:id" component={ProdByShow} />
                   <Route path="/emails" component={TheaterEmails} />
                   <Route path="/contact" component={Contact} />
