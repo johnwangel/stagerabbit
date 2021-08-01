@@ -17,6 +17,8 @@ class Shakespeare extends Component {
   render() {
     //console.log(this.props);
     let p = (this.props && this.props.Prods && this.props.Prods.upcoming) ? this.props.Prods.upcoming : null;
+    console.log(p);
+
     return (
       <div className="aboutus">
         <div className="aboutus_column article">
