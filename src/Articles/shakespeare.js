@@ -202,7 +202,7 @@ class Shakespeare extends Component {
             <h2>The Tempest</h2>
                 <div>
                   { (p)
-                    ? p.map( (item, idx) => (item.title.includes("The Tempest")) ? <ShowItem key={idx} item={item}/> : null )
+                    ? p.map( (item, idx) => (item.title==="The Tempest") ? <ShowItem key={idx} item={item}/> : null )
                     : null
                   }
                 </div>
