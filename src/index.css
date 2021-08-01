@@ -609,14 +609,16 @@ h3.sub-column {
       top: 5px;
       right: 10px;
       cursor: pointer; }
-      .productions .production .favorite.false {
-        color: #505050; }
-        .productions .production .favorite.false:hover, .productions .production .favorite.false:active {
-          color: pink; }
-      .productions .production .favorite.true {
+      .productions .production .favorite.false:after {
+        content: '\2661';
+        color: gray; }
+      .productions .production .favorite.false:hover, .productions .production .favorite.false:active {
+        color: pink; }
+      .productions .production .favorite.true:after {
+        content: '\2665';
         color: red; }
-        .productions .production .favorite.true:hover, .productions .production .favorite.true:active {
-          color: lightgray; }
+      .productions .production .favorite.true:hover, .productions .production .favorite.true:active {
+        color: lightgray; }
       .productions .production .favorite .login_message {
         position: absolute;
         display: none;

@@ -27,7 +27,6 @@ const Favorite = (props) => {
   return (
       <div className={`favorite ${fave.curr} ${reg}`}
            onClick={ () => setFave( prevState => { return { prev: prevState.curr , curr: !prevState.curr,  }} ) } >
-              &#9829;
           <div className='login_message'>You will need to create a free account to favorite a production. Then your favorite productions can be found on the menu under My Stuff.</div>
       </div>
     )

@@ -242,14 +242,21 @@ h3.sub-column {
       cursor: pointer;
 
       &.false {
-        color: $gray;
+        &:after {
+          content: '\2661';
+          color: gray;
+        }
         &:hover, &:active {
           color: pink;
         }
       }
 
       &.true {
-        color: red;
+        &:after {
+          content: '\2665';
+          color: red;
+        }
+
         &:hover, &:active {
           color: lightgray;
         }
