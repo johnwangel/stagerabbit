@@ -29,9 +29,9 @@ class ProdList extends Component {
         prod={ item }
         shows={ this.props.Shows }
         addShowCB={ this.props.add_show }
-        addArtistCB={ this.props.addArtistCallback }
-        removeArtistShowCB={ this.props.removeArtistFromShowCallback }
-        removeArtistProdCB={ this.props.removeArtistFromProdCallback }
+        addArtistCB={ this.props.addArtistCB }
+        removeArtistShowCB={ this.props.removeArtistShowCB }
+        removeArtistProdCB={ this.props.removeArtistProdCB }
         newArtist={ this.props.Shows.new_artist }
         edit_show={ this.props.edit_show }
         edit_prod={ this.props.edit_prod }
